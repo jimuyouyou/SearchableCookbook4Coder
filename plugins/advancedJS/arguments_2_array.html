@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>arguments_2_array</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function multiMax(multi){
+		return multi * Math.max.apply(Math, arguments.slice(1));
+	}
+	//assert(multiMax(3, 1, 2, 3) == 9, "3*3=9 (First arg, by largest 1.)");
+
+	function multiMax2(multi){
+		return multi * Math.max.apply(Math,
+			Array.prototype.slice.call(arguments, 1));
+	}
+	assert(multiMax2(3, 1, 2, 3) == 9, "3*3=9 (First arg, by largest 2.)");
+	</script>
+
+	<pre>
+	function multiMax(multi){
+		return multi * Math.max.apply(Math, arguments.slice(1));
+	}
+	assert(multiMax(3, 1, 2, 3) == 9, "3*3=9 (First arg, by largest.)");
+	<b>arguments is not a true array, so this fails</b>
+
+	function multiMax(multi){
+		return multi * Math.max.apply(Math,
+			Array.prototype.slice.call(arguments, 1));
+	}
+	assert(multiMax(3, 1, 2, 3) == 9, "3*3=9 (First arg, by largest.)");
+	<b>Array.prototype.slice.call(arguments, 1)); makes arguments array function ability</b>
+	</pre>
+</body>
+</html>

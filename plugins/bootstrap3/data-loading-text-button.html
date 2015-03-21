@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Example of Bootstrap 3 Stateful Buttons</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">  
+$(function() { 
+    $(".btn").click(function(){
+        $(this).button('loading').delay(1000).queue(function() {
+            $(this).button('reset');
+            $(this).dequeue();
+        });        
+    });
+});   
+</script>
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="bs-example">
+    <button type="button" class="btn btn-default" data-loading-text="Loading ...">Default</button>
+    <button type="button" class="btn btn-primary" data-loading-text="Loading...">Primary</button>
+    <button type="button" class="btn btn-info" data-loading-text="Loading...">Info</button>
+    <button type="button" class="btn btn-success" data-loading-text="Loading...">Success</button>
+    <button type="button" class="btn btn-warning" data-loading-text="Loading...">Warning</button>
+    <button type="button" class="btn btn-danger" data-loading-text="Loading...">Danger</button>
+    <button type="button" class="btn btn-link" data-loading-text="Loading...">Link</button>
+</div>
+</body>
+</html>                                		

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>precedence_initialize</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function Ninja(){
+		this.swung = false;
+		this.swingSword = function(){
+			return !this.swung;
+		};
+	}
+
+	Ninja.prototype.swingSword = function(){
+		return this.swung;
+	};
+
+	var ninja = new Ninja();
+	assert(ninja.swingSword(),
+		"Called the instance method, not the prototype method.");
+	</script>
+
+	<pre>
+	function Ninja(){
+		this.swung = false;
+		this.swingSword = function(){
+			return !this.swung;
+		};
+	}
+
+	Ninja.prototype.swingSword = function(){
+		return this.swung;
+	};
+
+	var ninja = new Ninja();
+	assert(ninja.swingSword(),
+		"Called the instance method, not the prototype method.");
+
+	#1 Creates an instance variable
+	#2 Creates an instance method
+	#3 Defines a prototypes method
+	#4 Constructs a Ninja
+
+	The precedence of the initialization operations is important and goes as such:
+	<b>1. Properties are bound to the object instance from the prototype.</b>
+	<b>2. Properties are bound to the object instance within the constructor function.</b>
+
+	</pre>
+	
+</body>
+</html>

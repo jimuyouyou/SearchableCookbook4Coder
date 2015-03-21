@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>closure_timer</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<div id="box"> ボックス</div>
+	<ul id="results"></ul>
+	<script type="text/javascript">
+	var elem = document.getElementById("box");
+	var tick = 0;
+
+	var timer = setInterval(function(){
+		if (tick < 100) {
+			elem.style.left = elem.style.top = tick + "px";
+			tick++;
+		}
+		else {
+			clearInterval(timer);
+			assert(tick == 100, "Tick accessed via a closure.");
+			assert(elem, "Element also accessed via a closure.");
+			assert(timer, "Timer reference also obtained via a closure." );
+		}
+	}, 10);
+	</script>
+
+<pre>
+	var elem = document.getElementById("box");
+	var tick = 0;
+
+	var timer = setInterval(function(){
+		if (tick < 100) {
+			elem.style.left = elem.style.top = tick + "px";
+			tick++;
+		}
+		else {
+			clearInterval(timer);
+			assert(tick == 100, "Tick accessed via a closure.");
+			assert(elem, "Element also accessed via a closure.");
+			assert(timer, "Timer reference also obtained via a closure." );
+		}
+	}, 10);
+
+	#1 Creates element to be animated
+	#2 References animation element
+	#3 Counts animation ticks
+	#4 Creates and starts timer
+	#5 Tests closure
+
+</pre>
+	
+</body>
+</html>

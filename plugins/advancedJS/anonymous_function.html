@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>anonymous_function</title>
+</head>
+<body>
+	<div>
+		So when invoked as ninja.chirp() ,this refers to ninja , but when invoked by samurai.chirp() , this refers to samurai and all is well.<p>
+		Using the function context ( this ) makes our chirp() method much more robust, and is
+		the way that the method should have been declared in the first place.
+		<pre>
+			window.onload = function(){ assert(true, 'power!'); }; 
+			
+			var ninja = {
+				shout: function(){
+					assert(true,"Ninja");
+				}
+			}; 
+			ninja.shout();
+
+			setTimeout(
+				function(){ assert(true,'Forever!'); }, 500);
+		</pre>
+	</div>
+</body>
+</html>

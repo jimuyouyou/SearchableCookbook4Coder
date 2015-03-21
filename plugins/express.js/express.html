@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>express</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<table>
+		<tr>
+			<th>name</th>
+			<th>example</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>app.use</td>
+			<td>
+				<pre>
+app.use("/about", function(request, response, next) {
+	response.writeHead(200, { "Content-Type": "text/plain" });
+	response.end("Welcome to the about page!\n");
+});
+				</pre>
+			</td>
+		<td>call midleware</td>
+	</tr>
+	<tr>
+		<td>app.all</td>
+		<td>
+			<pre>
+app.all("*", function(request, response, next) {
+	response.writeHead(200, { "Content-Type": "text/plain" });
+	next();
+})
+			</pre>
+		</td>
+		<td>text for all pages</td>
+	</tr>
+	<tr>
+		<td>app.get</td>
+		<td>
+			<pre>
+app.get("/", function(request, response) {
+	response.end("Welcome to the homepage!");
+});
+			</pre>
+		</td>
+		<td>default welcome page</td>
+	</tr>
+	<tr>
+		<td>app.get</td>
+		<td>
+			<pre>
+app.get("/about", function(request, response) {
+	response.end("Welcome to the about page!");
+});
+			</pre>
+		</td>
+		<td>about page</td>
+	</tr>
+	<tr>
+		<td>simple filter pattern</td>
+		<td>
+			<pre>
+app.get('/hello/:who?',function(req,res) {
+	if(req.params.id) {
+	    res.end("Hello, " + req.params.who + ".");
+	}
+	else {
+	    res.send("Hello, Guest.");
+	}
+});
+			</pre>
+		</td>
+		<td>
+<pre>
+fileter hello/alice or hello/michael,	
+and the alice/michael is optional,
+return only when id exists
+</pre>
+		</td>
+	</tr>
+	<tr>
+		<td>complex filter pattern</td>
+		<td>
+			<pre>
+app.get('/forum/:fid/thread/:tid', middleware)
+
+// /commits/71dbb9c
+// or /commits/71dbb9c..4c084f9 (git like links)
+app.get(/^\/commits\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
+	var from = req.params[0];
+	var to = req.params[1] || 'HEAD';
+	res.send('commit range ' + from + '..' + to);
+});
+			</pre>
+		</td>
+		<td>pages and git links</td>
+	</tr>
+	<tr>
+		<td>regular router</td>
+		<td>router.get('/:page([a-zA-Z]+)', routes.anypage);</td>
+		<td>word pattern</td>
+	</tr>
+	<tr>
+		<td>optional router</td>
+		<td>
+			<pre>
+router.get('/:page/:admin((add|delete))', function (req, res) {
+	res.send('So you want to ' + req.params.admin + ' ' +
+	req.params.page + '?');
+});				
+			</pre>
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>wildcards</td>
+		<td>
+			<pre>
+router.get('/:page/*', function (req, res) {
+	var child = req.params[0],
+	parent = child ? ' of the ' + req.params.page + ' page' : '';
+	res.send('Welcome to the ' + (child || req.params.page) + ' page' + parent);
+});				
+			</pre>
+		</td>
+		<td>
+			<pre>
+localhost:3000/foo/bar
+localhost:3000/foo				
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>app.set</td>
+		<td>
+			<pre>
+app.set("views", __dirname + "/views");
+app.set("view engine", "jade");
+			</pre>
+		</td>
+		<td>set views path and the view engine</td>
+	</tr>
+	<tr>
+		<td>response.redirect</td>
+		<td>
+			<pre>
+response.redirect("/hello/anime");
+response.redirect("http://www.example.com");
+response.redirect(301, "http://www.example.com");
+			</pre>
+		</td>
+		<td>redirect to absolute or relative pages</td>
+	</tr>
+	<tr>
+		<td>response.sendFile</td>
+		<td>response.sendFile("/path/to/anime.mp4");</td>
+		<td>send file directly</td>
+	</tr>
+	<tr>
+		<td>response.render</td>
+		<td>
+			<pre>
+app.get("/", function(request, response) {
+	response.render("index", { message: "Hello World" });
+});
+			</pre>
+		</td>
+		<td>render template index<br> and return message variable</td>
+	</tr>
+	<tr>
+		<td>request</td>
+		<td>request.ip and request.files</td>
+		<td>get ip and uploaded files</td>
+	</tr>
+	<tr>
+		<td>router</td>
+		<td>
+			<pre>
+var router = express.Router();
+
+router.get('/', function(req, res) {
+    res.send('home');    
+});
+
+router.get('/about', function(req, res) {
+    res.send('about');    
+});
+
+app.use('/', router);
+			</pre>
+		</td>
+		<td>router module</td>
+	</tr>
+	<tr>
+		<td>router.route</td>
+		<td>
+			<pre>
+var router = express.Router();
+
+router.route('/api')
+    .post(function(req, res) {
+        // ...
+    })
+    .get(function(req, res) {
+        Bear.find(function(err, bears) {
+            if (err) res.send(err);
+            res.json(bears);
+        });
+    });
+
+app.use('/', router);
+			</pre>
+		</td>
+		<td>route get/post method</td>
+	</tr>
+	<tr>
+		<td>router.use</td>
+		<td>
+			<pre>
+router.use(function(req, res, next) {
+    console.log(req.method, req.url);
+    next();  
+});				
+			</pre>
+		</td>
+		<td>router middleware</td>
+	</tr>
+	<tr>
+		<td>router.param</td>
+		<td>
+			<pre>
+router.param('name', function(req, res, next, name) {
+    // validation for name field or anything else
+    console.log(name);
+    req.name = name;
+    next();  
+});
+
+router.get('/hello/:name', function(req, res) {
+    res.send('hello ' + req.name + '!');
+});				
+			</pre>
+		</td>
+		<td>router field validation</td>
+	</tr>
+	<tr>
+		<td>app.route</td>
+		<td>
+			<pre>
+app.route('/login')
+.get(function(req, res) {
+    res.send('this is the login form');
+})
+.post(function(req, res) {
+    console.log('processing');
+    res.send('processing the login form!');
+});				
+			</pre>
+		</td>
+		<td>app.route === express.Router()</td>
+	</tr>
+	<tr>
+		<td>express.static</td>
+		<td>
+			<pre>
+app.use(express.static('public'));
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">				
+			</pre>
+		</td>
+		<td>path like public/bootstrap</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+</body>
+</html>

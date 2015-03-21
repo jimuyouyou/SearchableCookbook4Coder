@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>express_flash</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<pre>
+		The express-flash module provides a simple interface for session-based flash
+		messages. A flash message is held in a session object for one request and then disappears.
+		It's an easy way to generate one-time request associated information, such as an error
+		message.		
+	</pre>
+	<table>
+		<tr>
+			<th>code</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>npm install express-flash --save</td>
+			<td>adds the dep to package.json</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+cookieParser = require('cookie-parser');
+bodyParser = require('body-parser');
+methodOverride = require('method-override');
+session = require('express-session');
+flash = require('express-flash');					
+				</pre>
+			</td>
+			<td>import flash to app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+app.use(cookieParser());
+app.use(session({secret:'koobkooC edoN'}));
+app.use(flash());
+app.use(require('./login'));
+app.use(function (req, res, next) {
+	res.locals.flash = req.flash();
+	next();
+});
+app.use(express.static(path.join(__dirname, 'public')));					
+				</pre>
+			</td>
+			<td>use flash in app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+if (login) {
+	var valid = Object.keys(users).some(function (name) {
+		return (user.name === name && user.pwd === users[name]);
+	});
+
+	if (valid) {
+		req.session.user = {
+			name: req.body.user.name,
+			pwd: req.body.user.pwd
+		};
+	} else {
+		req.flash('error','Login details invalid!');
+	}
+}					
+				</pre>
+			</td>
+			<td>login.js</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

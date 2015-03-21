@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>command</title>
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<link rel="stylesheet" href="../../css/main.css"> 
+</head>
+<body>
+	<h1>Common command for linux:</h1>
+	Search By <input type='text' id='table_search' size='40' onkeyup='table_search();'><p>
+
+	<table>
+		<tr>
+			<th>name</th>
+			<th>example</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>which</td>
+			<td>which node</td>
+			<td>find command location</td>
+		</tr>
+		<tr>
+			<td>printenv</td>
+			<td>printenv | grep HOME</td>
+			<td>show all env contains HOME</td>
+		</tr>
+		<tr>
+			<td>env</td>
+			<td>env | grep HOME</td>
+			<td>show all env contains HOME</td>
+		</tr>
+
+		<tr>
+			<td>export</td>
+			<td>export NODE_ENV=staging</td>
+			<td>changle env permenantly</td>
+		</tr>
+		<tr>
+			<td>set environment</td>
+			<td>NODE_ENV=staging</td>
+			<td>set environment</td>
+		</tr>
+		<tr>
+			<td>echo</td>
+			<td>echo $NODE_ENV</td>
+			<td>view environment variable</td>
+		</tr>
+		<tr>
+			<td>less</td>
+			<td>less app.js</td>
+			<td>
+				<pre>
+					q: quit
+					/use: search down keyword use
+					?use: search up keyword use
+					space: next page
+					u: previous half page
+					d: next half page
+					PageDown: next page
+					PageUp: previous page
+					Enter: next line
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>ln</td>
+			<td>ln -s  ~/Apps/eclipse_node/eclipse node_eclipse</td>
+			<td>create shortcut from the 1st to 2nd path</td>
+		</tr>
+		<tr>
+			<td>zip</td>
+			<td>zip -r think.zip think/</td>
+			<td>zip to a folder</td>
+		</tr>
+		<tr>
+			<td>unzip</td>
+			<td>unzip think.zip</td>
+			<td>unzip</td>
+		</tr>
+		<tr>
+			<td>df</td>
+			<td>df -h</td>
+			<td>display disk usage</td>
+		</tr>
+		<tr>
+			<td>du </td>
+			<td>du -sh thinkfree</td>
+			<td>display file size</td>
+		</tr>
+		<tr>
+			<td>curl</td>
+			<td>curl -O http://nodejs.org/dist/node-latest.tar.gz</td>
+			<td>get remote file</td>
+		</tr>
+		<tr>
+			<td>tar unzip</td>
+			<td>tar -zxvf /tmp/etc.tar.gz</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>tar zip</td>
+			<td>tar -cvf file2.tar /home/usr2/file2</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>jar current folder to uar.jar</td>
+			<td>jar cvf uar.jar .</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+</body>
+</html>

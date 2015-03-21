@@ -1,0 +1,12 @@
+li.pass { color: green; }
+li.fail { color: red; }
+b {color: blue}
+
+table{
+	border-collapse: collapse;
+	border: none;
+}
+
+td,th{
+	border: solid #000 1px;
+}

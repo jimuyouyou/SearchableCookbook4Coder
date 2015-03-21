@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>function_memoization</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	Function.prototype.memoized = function(key){
+		this._values = this._values || {};
+		return this._values[key] !== undefined ?
+		this._values[key] :
+		this._values[key] = this.apply(this, arguments);
+	};
+
+	function isPrime( num ) {
+		var prime = num != 1;
+		for ( var i = 2; i < num; i++ ) {
+			if ( num % i == 0 ) {
+				prime = false;
+				break;
+			}
+		}
+		return prime;
+	}
+
+	assert(isPrime.memoized(5), "The function works; 5 is prime.");
+	assert(isPrime._values[5], "The answer has been cached.");
+	</script>
+
+	<pre>
+		
+		Function.prototype.memoized = function(key){
+			this._values = this._values || {};
+			return this._values[key] !== undefined ?
+			this._values[key] :
+			this._values[key] = this.apply(this, arguments);
+		};
+
+		function isPrime( num ) {
+			var prime = num != 1;
+			for ( var i = 2; i < num; i++ ) {
+				if ( num % i == 0 ) {
+					prime = false;
+					break;
+				}
+			}
+			return prime;
+		}
+
+		assert(isPrime.memoized(5), "The function works; 5 is prime.");
+		assert(isPrime._values[5], "The answer has been cached.");
+		
+		#1 Creates cache if non exists
+		#2 Returns cached or computer value
+		#3 Defines memoizable functions
+		#4 Tests the function and cache
+
+	</pre>
+</body>
+</html>

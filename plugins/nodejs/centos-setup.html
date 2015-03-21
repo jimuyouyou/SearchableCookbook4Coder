@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>centos-setup</title>
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+	<h1>centos-setup-node</h1>
+	Search By <input type='text' id='table_search' size='40' onkeyup='table_search();'><p>
+	<table>
+		<tr>
+			<th>Explanation</th>
+			<th>Command</th>
+		</tr>
+		<tr>
+			<td>prerequisites</td>
+			<td>sudo yum groupinstall 'Development Tools'</td>
+		</tr>
+		<tr>
+			<td>prerequisites</td>
+			<td>sudo yum install openssl-devel</td>
+		</tr>
+		<tr>
+			<td>mkdir tmp</td>
+			<td>mkdir tmp</td>
+		</tr>
+		<tr>
+			<td>download node</td>
+			<td>curl -O http://nodejs.org/dist/node-latest.tar.gz</td>
+		</tr>
+		<tr>
+			<td>unzip the tar</td>
+			<td>tar zxvf node-latest.tar.gz</td>
+		</tr>
+		<tr>
+			<td>to node folder</td>
+			<td>cd node-v0.6.1</td>
+		</tr>
+		<tr>
+			<td>make</td>
+			<td>./configure make</td>
+		</tr>
+		<tr>
+			<td>install</td>
+			<td>sudo make install</td>
+		</tr>
+		<tr>
+			<td>check node version</td>
+			<td>node -v</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>function</title>
+</head>
+<body>
+	<div>
+		Functions are first class objects that are treated just like any other objects within
+		JavaScript. Just like any other object type, they can be:
+		<ul>
+			<li>Created via literals</li>
+			<li>Assigned to variables</li>
+			<li>Passed as parameters</li>
+			<li>Returned as function results</li>
+			<li>Possess properties and methods</li>
+		</ul>
+	</div>
+	<div>
+		The scope of declaration within a function differs from that of most other languages.
+		Specifically:
+		<ul>
+			<li>Variables within a function are in scope from their point of declaration to
+				the end of the function, spanning block boundaries.
+			</li>
+			<li>Inner named functions are available anywhere within the enclosing
+				function; even as forward references.
+			</li>
+		</ul>
+	</div>
+	<div>
+		The parameter list of a function and its actual argument list can be different lengths.
+		<ul>
+			<li>Unassigned parameters evaluate as undefined .</li>
+			<li>Extra arguments are simply not bound to parameter names.</li>
+		</ul>
+	</div>
+	<div>
+		Each function invocation is passed two implicit parameters:
+		<ul>
+			<li>arguments , a collection of the actual passed arguments.</li>
+			<li>this , a reference to the object serving as the function context</li>
+		</ul>
+	</div>
+	<div>
+		unctions can be invoked in various ways, and the invocation method determines the
+		function context value:
+		<ul>
+			<li>When invoked as a simple function, the context is the global object - window</li>
+			<li>When invoked as a method, the context is the object owning the method.</li>
+			<li>When invoked as a constructor, the context is a newly allocated object.</li>
+			<li>
+				When invoked via the apply() or call() methods of the function, the
+				context can be whatever the heck we want.
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

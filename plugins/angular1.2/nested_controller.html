@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>nested_controller</title>
+</head>
+<body>
+	<textarea name="" id="" cols="100" rows="20">
+		<div ng-controller="ParentController">
+			<div ng-controller="ChildController">...</div>
+		</div>
+		Though we express this as nested controllers, the actual nesting happens in scopes. The
+		$scope passed to a nested controller prototypically inherits from its parent controller’s
+		$scope . In this case, this means that the $scope passed to ChildController will have
+		access to all the properties of the $scope passed to ParentController .
+
+	</textarea>
+</body>
+</html>

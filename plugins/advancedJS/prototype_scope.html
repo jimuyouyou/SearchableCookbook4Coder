@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype_scope</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function Ninja(){
+		this.swung = true;
+	} 
+
+	var ninja = new Ninja(); 
+	Ninja.prototype.swingSword = function(){
+		return this.swung;
+	}; 
+
+	assert(ninja.swingSword(),
+		"Method exists, even out of order."); 
+	</script>
+	<pre>
+	function Ninja(){
+		this.swung = true;
+	} 
+
+	var ninja = new Ninja(); 
+	Ninja.prototype.swingSword = function(){
+		return this.swung;
+	}; 
+
+	assert(ninja.swingSword(),
+		"Method exists, even out of order."); 
+	
+	#1 Defines constructor
+	#2 Instantiates object
+	#3 Adds a prototyped method
+	#4 Tests if method was applied
+
+
+
+
+	<b>
+		1. When a property reference to an object is made, first the object itself is checked to
+		see if the property exists. If it does, the value is taken. If not...
+	</b>
+	<b>
+		2. The prototype associated with the object is located and it is checked for the property.
+		If it exists, the value is take. If not...
+	</b>
+	<b>
+		3. The value is undefined
+	</b>
+		Each object in JavaScript has an implicit property named constructor that references the
+		constructor that was used to create the object. And because the prototype is a property of
+		the constructor, each object has a way to find its prototype.
+	</pre>
+</body>
+</html>

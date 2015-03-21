@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>arguments_callee</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	var ninja = {
+		chirp: function(n) {//#1
+			return n > 1 ? arguments.callee(n - 1) + "-chirp" : "chirp";
+		}
+	};
+	
+	assert(ninja.chirp(3) == "chirp-chirp-chirp","arguments.callee is the function itself.");
+	</script>
+
+	<div>
+		<pre>
+		var ninja = {
+			chirp: function(n) {//#1
+				return n > 1 ? arguments.callee(n - 1) + "-chirp" : "chirp";
+			}
+		};
+		
+		assert(ninja.chirp(3) == "chirp-chirp-chirp","arguments.callee is the function itself.");
+	</pre>
+	</div>
+
+	<div>
+		<ul>
+			<li>the arguments parameter is implicitly passed to every function</li>
+			<li>and arguments has a property named callee that refers to the currently executing function.</li>
+		</ul>
+	</div>
+
+</body>
+</html>

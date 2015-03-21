@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>another-closure-inner</title>
+</head>
+<body>
+	<script type="text/javascript">
+	document.write("Avoiding a memory leak by adding another closure");
+ 	window.onload=function outerFunction(){
+		var anotherObj = function innerFunction(){
+			alert("Hi! I have avoided the leak");
+		};
+	
+		(function anotherInnerFunction(){
+			var obj =  document.getElementById("element");
+			obj.onclick=anotherObj })();
+	};
+	</script>
+	<button id="element">"Click Here"</button>
+</body>
+</html>

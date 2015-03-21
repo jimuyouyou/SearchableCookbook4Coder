@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Jade</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<table>
+		<tr>
+			<th>command</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+- var headers = ['Name', 'Irc', 'Twitter', 'Github', 'Location','Description'];
+table#profiles
+	tr
+		each header in headers
+			th= header
+		each profile, id in profiles
+			tr(id=id)
+				each val in profile
+					td #{val}					
+				</pre>
+			</td>
+			<td>literal javascript</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+h1= title
+p Welcome to #{title}
+include profiles					
+				</pre>
+			</td>
+			<td>jade include profiles.jade</td>
+		</tr>
+		<tr>
+			<td>app.set('viewoptions', {layout:false})</td>
+			<td>use layout or not</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

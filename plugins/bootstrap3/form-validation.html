@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Example of Bootstrap 3 Forms Validation States</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script> 
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="bs-example">
+    <form class="form-horizontal">
+        <div class="form-group has-success">
+            <label class="col-xs-2 control-label" for="inputSuccess">Username</label>
+            <div class="col-xs-10">
+                <input type="text" id="inputSuccess" class="form-control" placeholder="Input with success">
+                <span class="help-block">Username is available</span>
+            </div>
+        </div>
+        <div class="form-group has-warning">
+            <label class="col-xs-2 control-label" for="inputWarning">Password</label>
+            <div class="col-xs-10">
+                <input type="password" id="inputWarning" class="form-control" placeholder="Input with warning">
+                <span class="help-block">Password strength: Weak</span>
+            </div>
+        </div>
+        <div class="form-group has-error">
+            <label class="col-xs-2 control-label" for="inputError">Email</label>
+            <div class="col-xs-10">
+                <input type="email" id="inputError" class="form-control" placeholder="Input with error">
+                <span class="help-block">Please enter a valid email address</span>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>                                		                                		

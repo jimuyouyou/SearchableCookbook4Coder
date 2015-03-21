@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>EJS</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<table>
+		<tr>
+			<th>command</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>express -e ejs thinker</td>
+			<td>using ejs as template</td>
+		</tr>
+		<tr>
+			<td>npm install</td>
+			<td>install modules inside the project</td>
+		</tr>
+		<tr>
+			<td>npm uninstall jade --save</td>
+			<td>uninstall jade</td>
+		</tr>
+		<tr>
+			<td>npm install ejs@~0.8.5 --save</td>
+			<td>install ejs</td>
+		</tr>
+		<tr>
+			<td>app.set('view engine', 'ejs');</td>
+			<td>altering the template</td>
+		</tr>
+	</table>
+
+	<p>views/index.js:<br>
+	<textarea name="" id="" cols="100" rows="20">
+<h1> <%= title %></h1>
+<p> Welcome to <%= title %></p>
+<table>
+	<tr>
+		<th>Name</th><th>Irc</th><th>Twitter</th>
+		<th>Github</th><th>Location</th><th>Description</th>
+	</tr>
+	<% Object.keys(profiles).forEach(function (id) {%>
+	<tr>
+	<% Object.keys(profiles[id]).forEach(function (val) { %>
+	<td><%= profiles[id][val]; %></td>
+	<% }); %>
+	</tr>
+	<% }); %>
+</table>
+
+<h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre>
+	</textarea>
+</body>
+</html>

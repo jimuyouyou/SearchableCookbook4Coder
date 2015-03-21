@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript-memory-leak</title>
+</head>
+<body>
+	<h1>General solution for avoiding Javascript memory leak</h1>
+	<div>
+		For some devices, like mobile phone, pad and TV, there are many reasons that can crash your web pages:
+		<ul>
+			<li>Multile loading of static files
+<pre>
+	common static files includes: javascript, css and pictures
+	Almost all browsers will automatically cache these files and they will not download static files for the second time. However, some apps would like to add a mark to url link for forcing the browser to load the latest static files. This is not necessary. 
+
+	examples: good.jpg?v=34, main.css?date=04, dashboard.js?20150506
+	Solution: remove all the characters after '?'
+</pre>
+			</li>
+			<li>javascript memory leak</li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	cirular reference > set obj = null to break the reference
+	ajax > set obj = null to break the global reference 
+	setInterval then clearInterval
+	outer calls inner function set outer = null as early as possible
+	jQuery.cache data persists removeData() detach() 
+	event handling with colure causes obj and dom circular reference
+	jQuery Check the size of $.cache
+	remove an object before reusing it; obj = null; obj = new Obj;
+http://stackoverflow.com/questions/3573252/tools-for-debugging-memory-leaks-in-javascript
+http://www.ibm.com/developerworks/library/wa-memleak/index.html
+</body>
+</html>

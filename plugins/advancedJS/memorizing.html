@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>memorizing</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function isPrime(value) {
+		if (!isPrime.anwers) isPrime.answers = {};
+		if (isPrime.answers[value] != null) {
+			return isPrime.answers[value];
+		}
+	
+		var prime = value != 1; // 1 can never be prime
+		
+		for (var i = 2; i < value; i++) {
+			if (value % i == 0) {
+				prime = false;
+				break;
+			}
+		}
+		
+		return isPrime.answers[value] = prime;
+	}
+
+	assert(isPrime(5), "5 is prime!" );
+	assert(isPrime.answers[5], "The answer was cached!" );
+	</script>
+
+	<pre>
+		function isPrime(value) {
+			if (!isPrime.anwers) isPrime.answers = {};
+			if (isPrime.answers[value] != null) {
+				return isPrime.answers[value];
+			}
+		
+			var prime = value != 1; // 1 can never be prime
+			
+			for (var i = 2; i < value; i++) {
+				if (value % i == 0) {
+					prime = false;
+					break;
+				}
+			}
+			
+			return isPrime.answers[value] = prime;
+		}
+		
+		assert(isPrime(5), "5 is prime!" );
+		assert(isPrime.answers[5], "The answer was cached!" );
+
+		#1 Creates the cache
+		#2 Checks for cached values
+		#3 Stores the computed value
+		#4 Tests that it all works
+	</pre>
+
+	<pre>
+		Another example of caching dom:
+
+		function getElements(name) {
+			if (!getElements.cache) getElements.cache = {};
+				return getElements.cache[name] =
+			getElements.cache[name] || document.getElementsByTagName(name);
+		}
+	</pre>
+
+</body>
+</html>

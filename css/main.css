@@ -1,0 +1,37 @@
+textarea {display: none; 
+	width:800px;
+	height:100px;
+	overflow:auto;
+}
+
+h3,span {text-decoration: underline; color: blue; cursor:pointer; width:400px;}
+
+A:link,A:visited {
+	color: blue;
+	text-decoration: underline;
+}
+
+A:hover, A:active {
+	COLOR: #ff7f24;
+	text-decoration: underline;
+}
+
+
+li.pass { color: green; }
+li.fail { color: red; }
+b {color: blue}
+
+table{
+	border-collapse: collapse;
+	border: none;
+}
+
+td{
+	border: solid #000 1px;
+}
+
+textarea {
+	width: 800px;
+	height:70px;
+	overflow:auto;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>services</title>
+</head>
+<body>
+	<pre>
+		
+		Services are singleton (single-instance) objects that carry out the tasks necessary to
+		support your application’s functionality.
+
+		Services can be shared across any controllers that need them
+
+		$location , for interacting with the browser’s location, 
+		$route , for switching views based on location (URL) changes, and 
+		$http , for communicating with servers.
+
+		provider(name, Object OR constructor() ) A configurable service with complex creation logic. If you pass an Object, it should have a function named $get that returns an instance of the service. Otherwise, Angular assumes you’ve passed a constructor that, when called, creates the instance.
+
+		factory(name, $getFunction() ) A non-configurable service with complex creation logic. You specify a function that, when
+		called, returns the service instance. You could think of this as provider(name, { $get:$getFunction() } ) .
+
+		service(name, constructor() ) A non-configurable service with simple creation logic. Like the constructor option with provider,
+
+	</pre>
+</body>
+</html>

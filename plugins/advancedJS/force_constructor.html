@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>force_constructor</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function User(first, last) {
+		if (!(this instanceof arguments.callee)) {
+			return new User(first,last);
+		}
+		this.name = first + " " + last;
+	}
+
+	var name = "Rukia";
+	var user = User("Ichigo", "Kurosaki"); 
+	
+	assert(name == "Rukia","Name was set to Rukia.");
+	assert(user instanceof User, "User instantiated");
+	assert(user.name == "Ichigo Kurosaki", "User name correctly assigned"); 
+	</script>
+
+	<pre>
+	function User(first, last) {
+		if (!(this instanceof arguments.callee)) {
+			return new User(first,last);
+		}
+		this.name = first + " " + last;
+	}
+
+	var name = "Rukia";
+	var user = User("Ichigo", "Kurosaki"); 
+	
+	assert(name == "Rukia","Name was set to Rukia.");
+	assert(user instanceof User, "User instantiated");
+	assert(user.name == "Ichigo Kurosaki", "User name correctly assigned"); 
+
+	#1 Fixes things up
+	#2 Calls constructor incorrectly
+	#3 tests everything
+
+	<b>
+		force constructor: // otherwise, this.name == window.name instead of user.name
+		if (!(this instanceof arguments.callee)) {
+			return new User(first,last);
+		}
+	</b>
+	</pre>
+</body>
+</html>

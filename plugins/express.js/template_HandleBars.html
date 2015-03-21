@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HandleBars</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<table>
+		<tr>
+			<th>name</th>
+			<th>example</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>install</td>
+			<td>npm install hbs --save-dev</td>
+			<td>save to dev</td>
+		</tr>
+		<tr>
+			<td>dependencies</td>
+			<td>
+				<pre>
+"devDependencies": {
+	"hbs": "~2.3.1"
+}					
+				</pre>
+			</td>
+			<td>devDependencies</td>
+		</tr>
+		<tr>
+			<td>template engine</td>
+			<td>
+				<pre>
+var hbs = require('hbs');
+app.set('view engine', 'html');
+app.engine('html', hbs.__express);					
+				</pre>
+			</td>
+			<td>handler template engine</td>
+		</tr>
+		<tr>
+			<td>iteration</td>
+			<td>
+				<pre>
+{{#each entries}}
+		a href="/article/{{id}}">{{title}}
+		Published: {{published}}
+{{/each}}					
+				</pre>
+			</td>
+			<td>iteration</td>
+		</tr>
+		<tr>
+			<td>object</td>
+			<td>
+				<pre>
+Title: {{blog.title}}
+Published: {{blog.published}}	
+Body: {{blog.body}}				
+				</pre>
+			</td>
+			<td>object properties</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

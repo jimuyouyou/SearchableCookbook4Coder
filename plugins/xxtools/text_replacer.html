@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text_replacer</title>
+</head>
+<body>
+	<div>
+		From<input name='from' type="text"  style='width:400px' value=''> to<input name='to' type="text" style='width:200px'> Iterate <input type='checkbox' id='iterateCheck'><p>
+		From<input name='from' type="text"  style='width:400px' value=''> to<input name='to' type="text" style='width:200px' value=''> <p>
+		From<input name='from' type="text"  style='width:400px'> to<input name='to' type="text" style='width:200px'> <p>
+		From<input name='from' type="text"  style='width:400px'> to<input name='to' type="text" style='width:200px'> <p>
+		From<input name='from' type="text"  style='width:400px'> to<input name='to' type="text" style='width:200px'> <p>
+		From<input name='from' type="text"  style='width:400px'> to<input name='to' type="text" style='width:200px'> <p>
+	</div>
+	<div>
+		<input type='button' onclick='addMode()' value='AddMode'> 
+		<input type='button' onclick='process()' value='Add'><p>
+		Resource:<br>
+		<textarea id='src' style='width:1000px;height:150px' onchange='process();'></textarea>	
+		<br>Destination:<br>
+		<textarea id='dest' style='width:1000px;height:400px'></textarea>	
+	</div>
+</body>
+<script src='lib/jquery.min.js'></script>
+<script>
+var cfg = {mode: 'modify'};
+
+function changeMode(mode) {
+	cfg.mode = mode;
+}
+
+function addMode() {
+	changeMode('add');
+}
+
+function process() {
+	var sResult = $('#src').val();
+	var fs = $("input[name='from']");
+	var ts = $("input[name='to']");
+	for(var i = 0; i < fs.length; i++) {
+		var v1 = $(fs[i]).val();
+		var v2 = $(ts[i]).val();
+		if (!v2 || v2.length == 0) {
+			v2 = '';
+		}
+		if (v1.length > 0) {
+			var iterateCheck = $('#iterateCheck').prop('checked');
+			if (cfg.mode === 'add' && iterateCheck) {
+				var ar = v2.split(','); // iteration split by ,
+				for(var p =0; p < ar.length; p++) {
+					var srcValue = $('#src').val();
+					sResult += srcValue.replace(new RegExp(v1, 'g'), ar[p]);
+				}
+			} else {
+				sResult = sResult.replace(new RegExp(v1, 'g'), v2);
+			}
+		}
+	}
+
+	if (cfg.mode === 'modify') {
+		$('#src').val(sResult);
+	} else if  (cfg.mode === 'add') {
+		sResult = $('#dest').val() + sResult;
+		$('#dest').val(sResult);
+	}
+}
+</script>
+</html>

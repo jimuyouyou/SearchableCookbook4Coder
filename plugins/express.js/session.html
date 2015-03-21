@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>session</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	official url: <a href="https://www.npmjs.com/package/express-session">https://www.npmjs.com/package/express-session</a><p>
+	<table>
+		<tr>
+			<th>code</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+npm install express-session@1.x --save
+npm install method-override @1.x --save					
+				</pre>
+			</td>
+			<td>install</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+cookieParser = require('cookie-parser');
+bodyParser = require('body-parser');
+methodOverride = require('method-override');
+session = require('express-session');					
+				</pre>
+			</td>
+			<td>import modules in app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+app.use(methodOverride());
+app.use(cookieParser());
+app.use(session({secret:'koobkooC edoN'}));
+app.use(express.static(path.join(__dirname, 'public')));					
+				</pre>
+			</td>
+			<td>use modules in app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+var express = require('express');
+var router = express.Router();
+var users = {'dave' : 'expressrocks'}; //fake user db
+function index(req, res) {
+	res.render('index', { title: 'Express',
+	user: req.session.user});
+}
+
+router.route('/')
+	.get(index)
+	.post(function login(req, res) {
+		var user = req.body.user;
+		if (user) {
+			Object.keys(users).forEach(function (name) {
+				if (user.name === name && user.pwd === users[name]) {
+					req.session.user = {
+					name: user.name,
+					pwd: user.pwd
+				};
+			}
+		});
+		}
+		index(req, res);
+	})
+	.delete(function logout(req, res) {
+		delete req.session.user;
+		index(req, res);
+});
+
+module.exports = router;					
+				</pre>
+			</td>
+			<td>routes/index.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+var users = {'dave' : 'expressrocks'};
+module.exports = function (req, res, next) {
+var method = req.method.toLowerCase(), //cache the method
+user = req.body.user,
+logout = (method === 'delete'),
+login = (user && method === 'post');
+
+if (logout) { delete req.session.user; }
+
+if (login) {
+	Object.keys(users).forEach(function (name) {
+		if (user.name === name && user.pwd === users[name]) {
+		req.session.user = {
+			name: user.name,
+			pwd: user.pwd
+		};
+	}
+});
+}
+
+if (!req.session.user) { return next(); }
+	res.locals.user = req.session.user;
+	next();
+};					
+				</pre>
+			</td>
+			<td>login.js router</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+app.use(session({secret:'koobkooC edoN'}));
+app.use(require('./login'));
+app.use(express.static(path.join(__dirname, 'public')));					
+				</pre>
+			</td>
+			<td>import login.js in app.js</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+	
+</body>
+</html>

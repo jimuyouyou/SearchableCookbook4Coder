@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stylus</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<table>
+		<tr>
+			<th>command</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>express -c stylus ourNewAppNam</td>
+			<td>css use stylus</td>
+		</tr>
+		<tr>
+			<td>app.use(require('stylus').middleware(path.join(__dirname,'public')));</td>
+			<td>config stylus in app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+"dependencies": {
+	"express": "~4.0.0-rc2",
+	"static-favicon": "~1.0.0",
+	"morgan": "~1.0.0",
+	"cookie-parser": "~1.0.1",
+	"body-parser": "~1.0.0",
+	"debug": "~0.7.4",
+	"jade": "~1.3.0",
+	"stylus": "~0.42.3"
+}					
+				</pre>
+			</td>
+			<td>add stylus dependency</td>
+		</tr>
+		<tr>
+			<td>npm install</td>
+			<td>install new middleware</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+app.use(cookieParser());
+app.use(require('stylus').middleware({
+	src: __dirname + '/views',
+	dest: __dirname + '/public'
+}));
+app.use(express.static(path.join(__dirname, 'public')));					
+				</pre>
+			</td>
+			<td>import style module in app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+body {
+	padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+	color: #00b7ff;
+}					
+				</pre>
+			</td>
+			<td>style.styl files in views/stylesheets</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+body
+	padding 50px
+	font 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+a
+	color #00B7FF					
+				</pre>
+			</td>
+			<td>indentation-based format</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+.pad
+	padding 0.5em
+#profiles
+	@extend .pad
+	th
+		@extend .pad
+	td
+		@extend .pad					
+				</pre>
+			</td>
+			<td>@extend</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

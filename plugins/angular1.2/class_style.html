@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>class_style</title>
+</head>
+<style type="text/css">
+.error {
+	background-color: red;
+}
+.warning {
+	background-color: yellow;
+}
+</style>
+<script src='lib/angular1.2.js'></script>
+<body>
+	<div ng-controller='HeaderController'>
+		<div ng-class='{error: isError, warning: isWarning}'>Hello {{messageText}}</div>
+		<button ng-click='showError()'>Simulate Error</button>
+		<button ng-click='showWarning()'>Simulate Warning</button>
+	</div>
+
+	<script>
+	function HeaderController($scope) {
+		$scope.isError = false;
+		$scope.isWarning = false;
+
+		$scope.showError = function() {
+			$scope.messageText = 'This is an error!';
+			$scope.isError = true;
+			$scope.isWarning = false;
+		};
+		$scope.showWarning = function() {
+			$scope.messageText = 'Just a warning.';
+			$scope.isWarning = true;
+			$scope.isError = false;
+		};
+	}
+	</script>
+</body>
+</html>

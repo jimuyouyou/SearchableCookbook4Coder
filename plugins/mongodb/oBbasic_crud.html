@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>basic_crud</title>
+</head>
+<link rel="stylesheet" href="lib/main.css">
+<body>
+	<div>
+		<pre>
+JSON data preparation:
+{
+	name: 'sue',
+	age: '26',
+	status: 'A',
+	groups: ['news', 'sports']
+}
+	</pre>
+</div>
+
+<div>
+	<table>
+		<tr>
+			<th>name</th>
+			<th>example</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>greater than</td>
+			<td>db.users.find( { age: { $gt: 18 } }, { name: 1, address: 1 } ).limit(5)</td>
+			<td>select from where limit</td>
+		</tr>
+		<tr>
+			<td>little than</td>
+			<td>db.records.find( { "user_id": { $lt: 42 } }, { "history": 0 } )</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>db.records.find( { "user_id": { $lt: 42 } }, { "name": 1, "email": 1 } )</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>db.records.find( { "user_id": { $lt: 42} }, { "_id": 0, "name": 1 , "email": 1 } )</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>insert</td>
+			<td>
+<pre>
+db.users.insert(
+   {
+      name: "sue",
+      age: 26,
+      status: "A"
+   }
+)
+</pre>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>update</td>
+			<td>
+				<pre>
+db.users.update(
+   { age: { $gt: 18 } },
+   { $set: { status: "A" } },
+   { multi: true }
+)					
+				</pre>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>update_insert</td>
+			<td>
+				<pre>
+db.people.update(
+   { name: "Andy" },
+   {
+      name: "Andy",
+      rating: 1,
+      score: 1
+   },
+   { upsert: true }
+)					
+				</pre>
+			</td>
+			<td>update, if no record found then insert</td>
+		</tr>
+		<tr>
+			<td>update specific fields</td>
+			<td>
+				<pre>
+db.books.update(
+   { _id: 1 },
+   {
+     $inc: { stock: 5 },
+     $set: {
+       item: "ABC123",
+       "info.publisher": "2222",
+       tags: [ "software" ],
+       "ratings.1": { by: "xyz", rating: 3 }
+     }
+   }
+)					
+				</pre>
+			</td>
+			<td>
+				<pre>
+the $inc operator to increment the stock field; and
+the $set operator to replace the value of the item field, 
+the publisher field in the info embedded document, 
+the tags field, and the second element in the ratings array.
+
+Results:
+{
+  "_id" : 1,
+  "item" : "ABC123",
+  "stock" : 5,
+  "info" : { "publisher" : "2222", "pages" : 430 },
+  "tags" : [ "software" ],
+  "ratings" : [ { "by" : "ijk", "rating" : 4 }, { "by" : "xyz", "rating" : 3 } ],
+  "reorder" : false
+}
+
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td>db.books.update( { _id: 1 }, { $unset: { tags: 1 } } )</td>
+			<td>$unset operator to remove the tags field</td>
+		</tr>
+		<tr>
+			<td>repalce all fields</td>
+			<td>
+				<pre>
+db.books.update(
+   { item: "XYZ123" },
+   {
+     item: "XYZ123",
+     stock: 10,
+     info: { publisher: "2255", pages: 150 },
+     tags: [ "baking", "cooking" ]
+   }
+)					
+				</pre>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>update multiple documents</td>
+			<td>
+				<pre>
+db.books.update(
+   { stock: { $lte: 10 } },
+   { $set: { reorder: true } },
+   { multi: true }
+)					
+				</pre>
+			</td>
+			<td>$lte little or equal</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</div>
+
+</body>
+</html>

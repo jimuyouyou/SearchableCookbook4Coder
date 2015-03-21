@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html_element_prototype</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<div id="a">I'm going to be removed.</div>
+	<div id="b">Me too!</div>
+	<script>
+	HTMLElement.prototype.remove = function() {
+		if (this.parentNode)
+			this.parentNode.removeChild(this);
+	};
+
+	var a = document.getElementById("a");
+	a.parentNode.removeChild(a); 
+	document.getElementById("b").remove(); 
+	
+	assert(!document.getElementById("a"),"a is gone.");
+	assert(!document.getElementById("b"),"b is gone too.");
+	</script>
+
+	<pre>
+	HTMLElement.prototype.remove = function() {
+		if (this.parentNode)
+			this.parentNode.removeChild(this);
+	};
+
+	var a = document.getElementById("a");
+	a.parentNode.removeChild(a); 
+	document.getElementById("b").remove(); 
+	
+	assert(!document.getElementById("a"),"a is gone.");
+	assert(!document.getElementById("b"),"b is gone too.");
+
+	#1 Adds a new method to all elements
+	#2 Does it the old-fashioned way
+	#3 Uses the new method
+
+	<b>all DOM elements inherit from an HTMLElement constructor</b>
+	</pre>
+</body>
+</html>

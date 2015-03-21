@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>another-function</title>
+</head>
+<script type="text/javascript">
+document.write("Avoid leaks by avoiding closures!");
+window.onload=function()
+{
+	var obj = document.getElementById("element");
+	obj.onclick = doesNotLeak;
+}
+function doesNotLeak()
+{
+		//Your Logic here
+		alert("Hi! I have avoided the leak");
+	}
+
+	</script>
+</head>
+<body>
+	<button id="element">"Click Here"</button>
+</body>
+</html>

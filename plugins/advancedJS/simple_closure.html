@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>simple_closure</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	var outerValue = 'ninja';
+	var later; 
+	function outerFunction() {
+		var innerValue = 'samurai';
+		function innerFunction() {
+			assert(outerValue,"I can see the ninja.");
+			assert(innerValue,"I can see the samurai");
+			assert(lt,"later join");
+		} 
+		later = innerFunction;
+	}
+
+	var lt = 'later join';
+	outerFunction(); 
+	later(); 
+	</script>
+
+	<pre>
+	var outerValue = 'ninja';
+	var later; 
+	function outerFunction() {
+		var innerValue = 'samurai';
+		function innerFunction() {
+			assert(outerValue,"I can see the ninja.");
+			assert(innerValue,"I can see the samurai");
+			assert(lt,"later join");
+		} 
+		later = innerFunction;
+	}
+
+	var lt = 'later join';
+	outerFunction(); 
+	later(); 
+
+	#1 Declares an empty variable
+	#2 Declares a value inside the function
+	#3 Declares an inner function
+	#4 Invokes the outer function
+	#5 Invokes the inner function
+
+	1. Function parameters are included in the closure of that function.
+	2. All variables in an outer scope, even those declared after the function declaration, are	included.
+	3. Within the same scope, variables not yet defined cannot be forward referenced.
+	</pre>
+</body>
+</html>

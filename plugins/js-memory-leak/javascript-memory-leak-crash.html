@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript-memory-leak-crash</title>
+</head>
+<body>
+	<pre>
+Solutions for the dashboard crash issue:
+Generally speaking, I would prefer to use ajax call instead of page refreshing. 
+Although, you can try to implement #1 step first to view whether it works. 
+If #1 doesn't work, then implement #2. If both don't work, implement all steps listed below.
+
+1. Remove all marks after static files
+examples: good.jpg?v=34, main.css?date=04, dashboard.js?20150506
+Solution: remove all the character after '?'
+
+2. Avoid using iframe
+Many person complains that iframe can cause circular reference, so avoid using it
+
+3. make ajax call and page refresh work together
+ajax calls can avoid unnecessary loading of both static resources and data,
+while page refresh will enable the browser to release memory current page owns.
+But both of these two mechnism don't work well on all browsers. 
+So ideal solution is: 
+a. use ajax call as the main method, say 30 seconds per call, 
+b. and then after 10 minutes, make a completely refresh of the page, say refresh to dashboard.action
+Note: make sure to avoid using iframe, as it may not be released by some portable device browsers
+
+4. javascript leak
+a. avoid event handler caused object circular reference
+Example:
+var obj = $('#id');
+$(obj).onclick(function(){}) // event handler onclick is dom Object, circular reference with javascript object obj
+obj = null; // this is very important for breaking the cicular reference
+
+b. release ajax object itself
+$.ajax({ 
+url: "http://www.jb51.net", 
+data: { name: "xxxx" }, 
+dataType: "xml", 
+success: function (data, textStatus) { 
+//do something... 
+}, 
+complete: function (XHR, TS) { XHR = null }  //  this is very important for breaking the cicular reference
+
+});
+
+c. use setInterval instead of setTimeout
+Do remember to clearInterval first, example good code:
+clearInterval(obj); //  this is very important
+ar obj =self.setInterval("clock()",50)
+
+d. drop jquery element and cache
+$.removeData('div', 'hello');
+$( "div" ).remove( ".hello" );
+
+avoiding memory leaks: http://www.ibm.com/developerworks/library/wa-memleak/index.html
+tools for detecting memory issue:  http://stackoverflow.com/questions/3573252/tools-for-debugging-memory-leaks-in-javascript
+	</pre>
+</body>
+</html>
+
+
