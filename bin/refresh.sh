@@ -44,11 +44,11 @@ init_head_plugin() { # initial header of index.html for each plugin
 
 process_files_plugin() { # inside index.html of each plugin add the individual file links
 	echo "processing $1 $2" # 1 is the basename, and 2 is the filepath
-	plugin_html=$plugin_html"<textarea tt='"
+	plugin_html=$plugin_html"<a href='"
 	plugin_html=$plugin_html$1
 	plugin_html=$plugin_html"'>"
-	#plugin_html=$plugin_html$(<"$2") # not include file content
-	plugin_html=$plugin_html"</textarea>"
+	plugin_html=$plugin_html$1
+	plugin_html=$plugin_html"</a><p>"
 }
 
 end_foot_plugin() { # output each plugin-name/index.html 
@@ -61,7 +61,7 @@ link_add_plugins() { # add each plugin link to the left panel
 	links=$links"<a target='right' href='" 
 	links=$links"$1/index.html'>"
 	links=$links"$pname"
-	links=$links"</a><p/>"
+	links=$links"</a><p>"
 	echo "links: $links"
 }
 
