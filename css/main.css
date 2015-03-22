@@ -1,7 +1,6 @@
-textarea {display: none; 
+textarea {
 	width:800px;
 	height:100px;
-	overflow:auto;
 }
 
 h3,span {text-decoration: underline; color: blue; cursor:pointer; width:400px;}
@@ -30,8 +29,7 @@ td{
 	border: solid #000 1px;
 }
 
-textarea {
-	width: 800px;
-	height:70px;
-	overflow:auto;
+pre {
+	font-family: courrier,monospace;
+	background-color: #F5F5F5;
 }
