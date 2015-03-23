@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>annotation-ref</title>
+<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+</head>
+<body>
+	<h2>Annotations:</h2>
+	Search By <input type='text' id='table_search' size='40' onkeyup='table_search();'><p>
+<table>
+		<tr>
+			<td>hibernate.cache.default_cache_concurrency_strategy</td>
+			<td>
+				<xmp>Setting used to give the name of the default org.hibernate.annotations.CacheConcurrencyStrategy to use
+when either @Cacheable @Cache} is used. @Cache(strategy="..") is used to override this default.</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>hibernate.id.new_generator_mappings</td>
+			<td>
+				<xmp>
+We recommend all new projects to use hibernate.id.new_generator_mappings=true as the new generators
+ are more efficient and closer to the JPA 2 specification semantic.
+true or false. Setting which indicates whether or not the new IdentifierGenerator implementations are used
+for AUTO, TABLE and SEQUENCE. Default to false to keep backward compatibility.</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Entity @Id</td>
+			<td>
+				<xmp>
+@Entity
+public class Flight implements Serializable {
+    Long id;
+    @Id
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+}    					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Table</td>
+			<td>
+				<xmp>
+@Entity
+@Table(name="tbl_sky")
+public class Sky implements Serializable {
+   ...
+} 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@UniqueConstraint</td>
+			<td>
+				<xmp>
+@Table(name="tbl_sky",
+    uniqueConstraints = {@UniqueConstraint(columnNames={"month", "day"})}
+)		
+public class Sky implements Serializable {
+   ...
+}			
+:: columnNames array refers to the logical column names			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Version</td>
+			<td>
+				<xmp>
+@Entity
+public class Flight implements Serializable {
+...
+   @Version
+	@Column(name = "OPTLOCK")
+	public Integer getVersion() {
+		return this.version;
+	}
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+}      		
+The version property will be mapped to the OPTLOCK column, and the entity manager will use it to detect 
+conflicting updates (preventing lost updates you might otherwise see with the last-commit-wins strategy).
+The version column may be a numeric (the recommended solution) or a timestamp			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Transient</td>
+			<td>
+				<xmp>
+public transient int counter; //transient property
+@Transient
+String getLengthInMeter() { ... } //transient property
+:: counter, a transient field, and lengthInMeter, a method annotated as @Transient, and will be ignored by the entity manager
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Basic</td>
+			<td>
+				<xmp>
+private String firstname; //persistent property
+@Basic
+int getLength() { ... } // persistent property
+@Basic(fetch = FetchType.LAZY)
+String getDetailedComment() { ... } // persistent property
+name, length, and firstname properties are mapped persistent and eagerly fetched (the default for simple properties). 
+The detailedComment property value will be lazily fetched from the database once a lazy property of the entity is 
+accessed for the first time. Usually you don't need to lazy simple properties (not to be confused with lazy association fetching).					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Temporal</td>
+			<td>
+				<xmp>
+@Temporal(TemporalType.TIME)
+java.util.Date getDepartureTime() { ... } // persistent property 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Enumerated</td>
+			<td>
+				<xmp>
+@Enumerated(EnumType.STRING)
+Starred getNote() { ... } //enum persisted as String in database					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Lob</td>
+			<td>
+				<xmp>
+@Lob
+public String getFullText() {
+    return fullText;
+}
+@Lob 
+public byte[] getFullCode() {
+    return fullCode;
+}
+@Lob indicates that the property should be persisted in a Blob or a Clob 
+depending on the property type: java.sql.Clob, Character[], char[] and 
+java.lang.String will be persisted in a Clob. java.sql.Blob, 
+Byte[], byte[] and serializable type will be persisted in a Blob.
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Access @Embedded</td>
+			<td>
+				<xmp>
+@Entity
+public class Order {
+   @Id private Long id;
+   public Long getId() { return id; }
+   public void setId(Long id) { this.id = id; }
+   @Embedded private Address address;
+   public Address getAddress() { return address; }
+   public void setAddress() { this.address = address; }
+}
+@Entity
+public class User {
+   private Long id;
+   @Id public Long getId() { return id; }
+   public void setId(Long id) { this.id = id; }
+   private Address address;
+   @Embedded public Address getAddress() { return address; }
+   public void setAddress() { this.address = address; }
+}
+@Embeddable
+@Access(AcessType.PROPERTY)
+public class Address {
+   private String street1;
+   public String getStreet1() { return street1; }
+   public void setStreet1() { this.street1 = street1; }
+   private hashCode; //not persistent
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>column attributes</td>
+			<td>
+				<xmp>
+annotation at the property level for properties that are:
+not annotated at all
+annotated with @Basic
+annotated with @Version
+annotated with @Lob
+annotated with @Temporal
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Column</td>
+			<td>
+				<xmp>
+@Column(updatable = false, name = "flight_name", nullable = false, length=50)
+public String getName() { ... }
+This annotation can be applied to regular properties as well as @Id or @Version properties.
+@Column(
+    name="columnName";
+    boolean unique() default false;
+    boolean nullable() default true;
+    boolean insertable() default true;
+    boolean updatable() default true;
+    String columnDefinition() default "";
+    String table() default "";
+    int length() default 255;
+    int precision() default 0; // decimal precision
+    int scale() default 0; // decimal scale
+    )
+name (optional): the column name (default to the property name)
+unique (optional): set a unique constraint on this column or not (default false)
+nullable (optional): set the column as nullable (default true).
+insertable (optional): whether or not the column will be part of the insert statement (default true)
+updatable (optional): whether or not the column will be part of the update statement (default true)
+columnDefinition (optional): override the sql DDL fragment for this particular column (non portable)
+table (optional): define the targeted table (default primary table)
+length (optional): column length (default 255)
+precision (optional): column decimal precision (default 0)
+scale (optional): column decimal scale if useful (default 0)					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td> @Embedded and @AttributeOverride</td>
+			<td>
+				<xmp>
+It is possible to declare an embedded component inside an entity and even override its column mapping. 
+Component classes have to be annotated at the class level with the @Embeddable annotation. 
+It is possible to override the column mapping of an embedded object for a particular entity using 
+the @Embedded and @AttributeOverride annotation in the associated property:
+@Entity
+public class Person implements Serializable {
+    // Persistent component using defaults
+    Address homeAddress;
+    @Embedded
+    @AttributeOverrides( {
+            @AttributeOverride(name="iso2", column = @Column(name="bornIso2") ),
+            @AttributeOverride(name="name", column = @Column(name="bornCountryName") )
+    } )
+    Country bornIn;
+    ...
+}          
+@Embeddable
+public class Address implements Serializable {
+    String city;
+    Country nationality; //no overriding here
+}            
+@Embeddable
+public class Country implements Serializable {
+    private String iso2;
+    @Column(name="countryName") private String name;
+    public String getIso2() { return iso2; }
+    public void setIso2(String iso2) { this.iso2 = iso2; }
+    
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    ...
+}            
+An embeddable object inherits the access type of its owning entity (note that you can override that using the
+ @Access annotation).
+The Person entity has two component properties, homeAddress and bornIn. homeAddress property has not been annotated,
+ but Hibernate will guess that it is a persistent component by looking for the @Embeddable annotation in the Address
+  class. We also override the mapping of a column name (to bornCountryName) with the @Embedded and @AttributeOverride
+   annotations for each mapped attribute of Country. As you can see, Country is also a nested component of Address, 
+   again using auto-detection by Hibernate and JPA defaults. Overriding columns of embedded objects of embedded objects
+    is through dotted expressions.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>property defaults</td>
+			<td>
+				<xmp>
+If a property is not annotated, the following rules apply:
+	If the property is of a single type, it is mapped as @Basic
+	Otherwise, if the type of the property is annotated as @Embeddable, it is mapped as @Embedded
+	Otherwise, if the type of the property is Serializable, it is mapped as @Basic in a column holding the object in its serialized version
+	Otherwise, if the type of the property is java.sql.Clob or java.sql.Blob, it is mapped as @Lob with the appropriate LobType					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@GeneratedValue - identifier property</td>
+			<td>
+				<xmp>
+JPA defines five types of identifier generation strategies:
+	AUTO - either identity column, sequence or table depending on the underlying DB
+	TABLE - table holding the id
+	IDENTITY - identity column
+	SEQUENCE - sequence
+	identity copy - the identity is copied from another entity	
+@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_STORE")				
+public Integer getId() { ... }  
+@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+public Long getId() { ... } 
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@javax.persistence.TableGenerator</td>
+			<td>
+				<xmp>
+@javax.persistence.TableGenerator(
+    name="EMP_GEN",
+    table="GENERATOR_TABLE",
+    pkColumnName = "key",
+    valueColumnName = "hi"
+    pkColumnValue="EMP",
+    allocationSize=20
+)
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@javax.persistence.SequenceGenerator</td>
+			<td>
+				<xmp>
+@javax.persistence.SequenceGenerator(
+    name="SEQ_GEN",
+    sequenceName="my_sequence",
+    allocationSize=20
+)
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@JoinColumn @MapsId</td>
+			<td>
+				<xmp>
+@Entity
+class MedicalHistory implements Serializable {
+  @Id @OneToOne
+  @JoinColumn(name = "person_id")
+  Person patient;
+}
+@Entity
+public class Person implements Serializable {
+  @Id @GeneratedValue Integer id;
+}
+Or alternatively
+@Entity
+class MedicalHistory implements Serializable {
+  @Id Integer id;
+  @MapsId @OneToOne
+  @JoinColumn(name = "patient_id")
+  Person patient;
+}
+@Entity
+class Person {
+  @Id @GeneratedValue Integer id;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Embeddable</td>
+			<td>
+				<xmp>
+While not supported in JPA, Hibernate lets you place your association directly in the embedded id
+ component (instead of having to use the @MapsId annotation).
+@Entity
+class Customer {
+  @EmbeddedId CustomerId id;
+  boolean preferredCustomer;
+}
+@Embeddable
+class CustomerId implements Serializable {
+  @OneToOne
+  @JoinColumns({
+    @JoinColumn(name="userfirstname_fk", referencedColumnName="firstName"),
+    @JoinColumn(name="userlastname_fk", referencedColumnName="lastName")
+  }) 
+  User user;
+  String customerNumber;
+}
+@Entity 
+class User {
+  @EmbeddedId UserId id;
+  Integer age;
+}
+@Embeddable
+class UserId implements Serializable {
+  String firstName;
+  String lastName;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Inheritance</td>
+			<td>
+				<xmp>
+Single table per class hierarchy
+All properties of all super- and subclasses are mapped into the same table, instances are distinguished by a special discriminator column:
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name="planetype",
+    discriminatorType=DiscriminatorType.STRING
+)
+@DiscriminatorValue("Plane")
+public class Plane { ... }
+@Entity
+@DiscriminatorValue("A320")
+public class A320 extends Plane { ... }          
+Plane is the superclass, it defines the inheritance strategy InheritanceType.SINGLE_TABLE. It also defines the discriminator column through the @DiscriminatorColumn annotation, a discriminator column can also define the discriminator type. Finally, the @DiscriminatorValue annotation defines the value used to differentiate a class in the hierarchy. All of these attributes have sensible default values. The default name of the discriminator column is DTYPE. The default discriminator value is the entity name (as defined in @Entity.name) for DiscriminatorType.STRING. A320 is a subclass; you only have to define discriminator value if you don't want to use the default value. The strategy and the discriminator type are implicit.
+@Inheritance and @DiscriminatorColumn should only be defined at the top of the entity hierarchy.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@PrimaryKeyJoinColumn  @PrimaryKeyJoinColumns</td>
+			<td>
+				<xmp>
+Joined subclasses
+The @PrimaryKeyJoinColumn and @PrimaryKeyJoinColumns annotations define the primary key(s) of the joined subclass table:
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+public class Boat implements Serializable { ... }
+@Entity
+public class Ferry extends Boat { ... }
+@Entity
+@PrimaryKeyJoinColumn(name="BOAT_ID")
+public class AmericaCupClass  extends Boat { ... }            
+All of the above entities use the JOINED strategy, the Ferry table is joined with the Boat table using the same primary key names. The AmericaCupClass table is joined with Boat using the join condition Boat.id = AmericaCupClass.BOAT_ID.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@MappedSuperclass</td>
+			<td>
+				<xmp>
+Inherit properties from superclasses
+This is sometimes useful to share common properties through a technical or a business superclass without including it as a regular mapped entity (ie no specific table for this entity). For that purpose you can map them as @MappedSuperclass.
+@MappedSuperclass
+public class BaseEntity {
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getLastUpdate() { ... }
+    public String getLastUpdater() { ... }
+    ...
+}
+@Entity class Order extends BaseEntity {
+    @Id public Integer getId() { ... }
+    ...
+}
+In database, this hierarchy will be represented as an Order table having the id, lastUpdate and lastUpdater columns. The embedded superclass property mappings are copied into their entity subclasses. Remember that the embeddable superclass is not the root of the hierarchy though.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@OneToOne shared primary keys</td>
+			<td>
+				<xmp>
+@Entity
+public class Body {
+    @Id
+    public Long getId() { return id; }
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    public Heart getHeart() {
+        return heart;
+    }
+    ...
+}            
+@Entity
+public class Heart {
+    @Id
+    public Long getId() { ...}
+}            
+The @PrimaryKeyJoinColumn annotation does say that the primary key of the entity is used as the foreign key value to the associated entity.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td> @OneToOne  foreign key</td>
+			<td>
+				<xmp>
+@Entity
+public class Customer implements Serializable {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="passport_fk")
+    public Passport getPassport() {
+        ...
+    }
+@Entity
+public class Passport implements Serializable {
+    @OneToOne(mappedBy = "passport")
+    public Customer getOwner() {
+    ...
+}            
+A Customer is linked to a Passport, with a foreign key column named passport_fk in the Customer table. The join column is declared with the @JoinColumn annotation which looks like the @Column annotation. It has one more parameters named referencedColumnName. This parameter declares the column in the targeted entity that will be used to the join. Note that when using referencedColumnName to a non primary key column, the associated class has to be Serializable. Also note that the referencedColumnName to a non primary key column has to be mapped to a property having a single column (other cases might not work).
+The association may be bidirectional. In a bidirectional relationship, one of the sides (and only one) has to be the owner: the owner is responsible for the association column(s) update. To declare a side as not responsible for the relationship, the attribute mappedBy is used. mappedBy refers to the property name of the association on the owner side. In our case, this is passport. As you can see, you don't have to (must not) declare the join column since it has already been declared on the owners side.
+If no @JoinColumn is declared on the owner side, the defaults apply. A join column(s) will be created in the owner table and its name will be the concatenation of the name of the relationship in the owner side, _ (underscore), and the name of the primary key column(s) in the owned side. In this example passport_id because the property name is passport and the column id of Passport is id					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@ManyToOne</td>
+			<td>
+				<xmp>
+Many-to-one associations are declared at the property level with the annotation @ManyToOne:
+@Entity()
+public class Flight implements Serializable {
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name="COMP_ID")
+    public Company getCompany() {
+        return company;
+    }
+    ...
+}            
+The @JoinColumn attribute is optional, the default value(s) is like in one to one, the concatenation of the name of the relationship in the owner side, _ (underscore), and the name of the primary key column in the owned side. In this example company_id because the property name is company and the column id of Company is id.
+@ManyToOne has a parameter named targetEntity which describes the target entity name. You usually don't need this parameter since the default value (the type of the property that stores the association) is good in almost all cases. However this is useful when you want to use interfaces as the return type instead of the regular entity.
+@Entity
+public class Flight implements Serializable {
+    @ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=CompanyImpl.class )
+    @JoinColumn(name="COMP_ID")
+    public Company getCompany() {
+        return company;
+    }
+    ...
+}
+public interface Company {
+    ...
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Bidirectional @ManyToOne @OneToMany</td>
+			<td>
+				<xmp>
+Since many to one are (almost) always the owner side of a bidirectional relationship in the JPA spec, the one to many association is annotated by @OneToMany(mappedBy=...)
+@Entity
+public class Troop {
+    @OneToMany
+    @JoinColumn(name="troop_fk") //we need to duplicate the physical information
+    public Set<Soldier> getSoldiers() {
+    ...
+}
+@Entity
+public class Soldier {
+    @ManyToOne
+    @JoinColumn(name="troop_fk", insertable=false, updatable=false)
+    public Troop getTroop() {
+    ...
+}           
+Troop has a bidirectional one to many relationship with Soldier through the troop property. You don't have to (must not) define any physical mapping in the mappedBy side.
+To map a bidirectional one to many, with the one-to-many side as the owning side, you have to remove the mappedBy element and set the many to one @JoinColumn as insertable and updatable to false. This solution is not optimized and will produce some additional UPDATE statements.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@OneToMany Unidirectional with @JoinTable</td>
+			<td>
+				<xmp>
+A unidirectional one to many with join table is much preferred. This association is described through an @JoinTable.
+@Entity
+public class Trainer {
+    @OneToMany
+    @JoinTable(
+            name="TrainedMonkeys",
+            joinColumns = @JoinColumn( name="trainer_id"),
+            inverseJoinColumns = @JoinColumn( name="monkey_id")
+    )
+    public Set<Monkey> getTrainedMonkeys() {
+    ...
+}
+@Entity
+public class Monkey {
+    ... //no bidir
+}         
+Trainer describes a unidirectional relationship with Monkey using the join table TrainedMonkeys, with a foreign key trainer_id to Trainer (joinColumns) and a foreign key monkey_id to Monkey (inversejoinColumns).	
+=====================================================================================================
+Without describing any physical mapping, a unidirectional one to many with join table is used. The table name is the concatenation of the owner table name, _, and the other side table name. The foreign key name(s) referencing the owner table is the concatenation of the owner table, _, and the owner primary key column(s) name. The foreign key name(s) referencing the other side is the concatenation of the owner property name, _, and the other side primary key column(s) name. A unique constraint is added to the foreign key referencing the other side table to reflect the one to many.
+@Entity
+public class Trainer {
+    @OneToMany
+    public Set<Tiger> getTrainedTigers() {
+    ...
+}
+@Entity
+public class Tiger {
+    ... //no bidir
+}               
+Trainer describes a unidirectional relationship with Tiger using the join table Trainer_Tiger, with a foreign key trainer_id to Trainer (table name, _, trainer id) and a foreign key trainedTigers_id to Monkey (property name, _, Tiger primary column)				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@ManyToMany @JoinTable</td>
+			<td>
+				<xmp>
+A many-to-many association is defined logically using the @ManyToMany annotation. You also have to describe the association table and the join conditions using the @JoinTable annotation. If the association is bidirectional, one side has to be the owner and one side has to be the inverse end (ie. it will be ignored when updating the relationship values in the association table):
+@Entity
+public class Employer implements Serializable {
+    @ManyToMany(
+        targetEntity=org.hibernate.test.metadata.manytomany.Employee.class,
+        cascade={CascadeType.PERSIST, CascadeType.MERGE}
+    )
+    @JoinTable(
+        name="EMPLOYER_EMPLOYEE",
+        joinColumns=@JoinColumn(name="EMPER_ID"),
+        inverseJoinColumns=@JoinColumn(name="EMPEE_ID")
+    )
+    public Collection getEmployees() {
+        return employees;
+    }
+    ...
+}               
+@Entity
+public class Employee implements Serializable {
+    @ManyToMany(
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+        mappedBy = "employees",
+        targetEntity = Employer.class
+    )
+    public Collection getEmployers() {
+        return employers;
+    }
+}               
+We've already shown the many declarations and the detailed attributes for associations. We'll go deeper in the @JoinTable description, it defines a name, an array of join columns (an array in annotation is defined using { A, B, C }), and an array of inverse join columns. The latter ones are the columns of the association table which refer to the Employee primary key (the "other side").
+As seen previously, the other side don't have to (must not) describe the physical mapping: a simple mappedBy argument containing the owner side property name bind the two.
+2.2.5.3.2.2. Default values
+As any other annotations, most values are guessed in a many to many relationship. Without describing any physical mapping in a unidirectional many to many the following rules applied. The table name is the concatenation of the owner table name, _ and the other side table name. The foreign key name(s) referencing the owner table is the concatenation of the owner table name, _ and the owner primary key column(s). The foreign key name(s) referencing the other side is the concatenation of the owner property name, _, and the other side primary key column(s). These are the same rules used for a unidirectional one to many relationship.
+@Entity
+public class Store {
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    public Set<City> getImplantedIn() {
+        ...
+    }
+}
+@Entity
+public class City {
+    ... //no bidirectional relationship
+}
+               
+A Store_City is used as the join table. The Store_id column is a foreign key to the Store table. The implantedIn_id column is a foreign key to the City table.
+Without describing any physical mapping in a bidirectional many to many the following rules applied. The table name is the concatenation of the owner table name, _ and the other side table name. The foreign key name(s) referencing the owner table is the concatenation of the other side property name, _, and the owner primary key column(s). The foreign key name(s) referencing the other side is the concatenation of the owner property name, _, and the other side primary key column(s). These are the same rules used for a unidirectional one to many relationship.
+@Entity
+public class Store {
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    public Set<Customer> getCustomers() {
+        ...
+    }
+}
+@Entity
+public class Customer {
+    @ManyToMany(mappedBy="customers")
+    public Set<Store> getStores() {
+        ...
+    }
+}               
+A Store_Customer is used as the join table. The stores_id column is a foreign key to the Store table. The customers_id column is a foreign key to the Customer table.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@ElementCollection</td>
+			<td>
+				<xmp>
+In some simple situation, do don't need to associate two entities but simply create a collection of basic types or embeddable objects. Use the @ElementCollection in this case.
+@Entity
+public class User {
+   [...]
+   public String getLastname() { ...}
+   @ElementCollection
+   @CollectionTable(name="Nicknames", joinColumns=@JoinColumn(name="user_id"))
+   @Column(name="nickname")
+   public Set<String> getNicknames() { ... } 
+}
+The collection table holding the collection data is set using the @CollectionTable annotation. If omitted the collection table name default to the concatenation of the name of the containing entity and the name of the collection attribute, separated by an underscore: in our example, it would be User_nicknames.
+The column holding the basic type is set using the @Column annotation. If omitted, the column name defaults to the property name: in our example, it would be nicknames.
+But you are not limited to basic types, the collection type can be any embeddable object. To override the columns of the embeddable object in the collection table, use the @AttributeOverride annotation.
+@Entity
+public class User {
+   [...]
+   public String getLastname() { ...}
+   @ElementCollection
+   @CollectionTable(name="Addresses", joinColumns=@JoinColumn(name="user_id"))
+   @AttributeOverrides({
+      @AttributeOverride(name="street1", column=@Column(name="fld_street"))
+   })
+   public Set<Address> getAddresses() { ... } 
+}
+@Embeddable
+public class Address {
+   public String getStreet1() {...}
+   [...]
+}
+Such an embeddable object cannot contains a collection itself.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@OrderBy</td>
+			<td>
+				<xmp>
+Lists can be mapped in two different ways:
+as ordered lists, the order is not materialized in the database
+as indexed lists, the order is materialized in the database
+To order lists in memory, add @javax.persistence.OrderBy to your property. This annotation takes into parameter a list of comma separated properties (of the target entity) and order the collection accordingly (eg firstname asc, age desc), if the string is empty, the collection will be ordered by the primary key of the target entity.
+@Entity
+public class Customer {
+   @Id @GeneratedValue public Integer getId() { return id; }
+   public void setId(Integer id) { this.id = id; }
+   private Integer id;
+   @OneToMany(mappedBy="customer")
+   @OrderBy("number")
+   public List<Order> getOrders() { return orders; }
+   public void setOrders(List<Order> orders) { this.orders = orders; }
+   private List<Order> orders;
+}
+@Entity
+public class Order {
+   @Id @GeneratedValue public Integer getId() { return id; }
+   public void setId(Integer id) { this.id = id; }
+   private Integer id;
+   public String getNumber() { return number; }
+   public void setNumber(String number) { this.number = number; }
+   private String number;
+   @ManyToOne
+   public Customer getCustomer() { return customer; }
+   public void setCustomer(Customer customer) { this.customer = customer; }
+   private Customer number;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@OrderColumn - persist</td>
+			<td>
+				<xmp>
+To store the index value in a dedicated column, use the @javax.persistence.OrderColumn annotation on your property. This annotations describes the column name and attributes of the column keeping the index value. This column is hosted on the table containing the association foreign key. If the column name is not specified, the default is the name of the referencing property, followed by underscore, followed by ORDER (in the following example, it would be orders_ORDER).
+@Entity
+public class Customer {
+   @Id @GeneratedValue public Integer getId() { return id; }
+   public void setId(Integer id) { this.id = id; }
+   private Integer id;
+   @OneToMany(mappedBy="customer")
+   @OrderColumn(name"orders_index")
+   public List<Order> getOrders() { return orders; }
+   public void setOrders(List<Order> orders) { this.orders = orders; }
+   private List<Order> orders;
+}
+@Entity
+public class Order {
+   @Id @GeneratedValue public Integer getId() { return id; }
+   public void setId(Integer id) { this.id = id; }
+   private Integer id;
+   public String getNumber() { return number; }
+   public void setNumber(String number) { this.number = number; }
+   private String number;
+   @ManyToOne
+   public Customer getCustomer() { return customer; }
+   public void setCustomer(Customer customer) { this.customer = customer; }
+   private Customer number;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@MapKey</td>
+			<td>
+				<xmp>
+To use one of the target entity property as a key of the map, use @MapKey(name="myProperty") (myProperty is a property name in the target entity). When using @MapKey (without property name), the target entity primary key is used. The map key uses the same column as the property pointed out: there is no additional column defined to hold the map key, and it does make sense since the map key actually represent a target property. Be aware that once loaded, the key is no longer kept in sync with the property, in other words, if you change the property value, the key will not change automatically in your Java model.
+@Entity
+public class Customer {
+   @Id @GeneratedValue public Integer getId() { return id; }
+   public void setId(Integer id) { this.id = id; }
+   private Integer id;
+   @OneToMany(mappedBy="customer")
+   @MapKey(name"number")
+   public Map<String,Order> getOrders() { return orders; }
+   public void setOrders(Map<String,Order> order) { this.orders = orders; }
+   private Map<String,Order> orders;
+}
+@Entity
+public class Order {
+   @Id @GeneratedValue public Integer getId() { return id; }
+   public void setId(Integer id) { this.id = id; }
+   private Integer id;
+   public String getNumber() { return number; }
+   public void setNumber(String number) { this.number = number; }
+   private String number;
+   @ManyToOne
+   public Customer getCustomer() { return customer; }
+   public void setCustomer(Customer customer) { this.customer = customer; }
+   private Customer number;
+}
+Otherwise, the map key is mapped to a dedicated column or columns. To customize things, use one of the following annotations:
+@MapKeyColumn if the map key is a basic type, if you don't specify the column name, the name of the property followed by underscore followed by KEY is used (for example orders_KEY).
+@MapKeyEnumerated / @MapKeyTemporal if the map key type is respectively an enum or a Date.
+@MapKeyJoinColumn/@MapKeyJoinColumns if the map key type is another entity.
+@AttributeOverride/@AttributeOverrides when the map key is a embeddable object. Use key. as a prefix for your embeddable object property names.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Collections semantics</td>
+			<td>
+				<xmp>
+Bag semantic	java.util.List, java.util.Collection	@ElementCollection or @OneToMany or @ManyToMany
+Bag semantic with primary key (without the limitations of Bag semantic)	java.util.List, java.util.Collection	(@ElementCollection or @OneToMany or @ManyToMany) and @CollectionId
+List semantic	java.util.List	(@ElementCollection or @OneToMany or @ManyToMany) and (@OrderColumn or @org.hibernate.annotations.IndexColumn)
+Set semantic	java.util.Set	@ElementCollection or @OneToMany or @ManyToMany
+Map semantic	java.util.Map	(@ElementCollection or @OneToMany or @ManyToMany) and ((nothing or @MapKeyJoinColumn/@MapKeyColumn for true map support) OR @javax.persistence.MapKey)					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>CascadeType</td>
+			<td>
+				<xmp>
+You probably have noticed the cascade attribute taking an array of CascadeType as a value. The cascade concept in JPA is very is similar to the transitive persistence and cascading of operations in Hibernate, but with slightly different semantics and cascading types:
+CascadeType.PERSIST: cascades the persist (create) operation to associated entities persist() is called or if the entity is managed
+CascadeType.MERGE: cascades the merge operation to associated entities if merge() is called or if the entity is managed
+CascadeType.REMOVE: cascades the remove operation to associated entities if delete() is called
+CascadeType.REFRESH: cascades the refresh operation to associated entities if refresh() is called
+CascadeType.DETACH: cascades the detach operation to associated entities if detach() is called
+CascadeType.ALL: all of the above
+Note
+CascadeType.ALL also covers Hibernate specific operations like save-update, lock etc... Check Section 2.4.7, “Cascade” for more information					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>FetchType</td>
+			<td>
+				<xmp>
+The fetch parameter can be set to FetchType.LAZY or FetchType.EAGER. EAGER will try to use an outer join select to retrieve the associated object, while LAZY will only trigger a select when the associated object is accessed for the first time. @OneToMany and @ManyToMany associations are defaulted to LAZY and @OneToOne and @ManyToOne are defaulted to EAGER					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@SecondaryTables</td>
+			<td>
+				<xmp>
+You can map a single entity to several tables using the @SecondaryTable or @SecondaryTables class level annotations. To express that a column is in a particular table, use the table parameter of @Column or @JoinColumn.
+@Entity
+@Table(name="MainCat")
+@SecondaryTables({
+    @SecondaryTable(name="Cat1", pkJoinColumns={
+        @PrimaryKeyJoinColumn(name="cat_id", referencedColumnName="id")
+    ),
+    @SecondaryTable(name="Cat2", uniqueConstraints={@UniqueConstraint(columnNames={"storyPart2"})})
+})
+public class Cat implements Serializable {
+    private Integer id;
+    private String name;
+    private String storyPart1;
+    private String storyPart2;
+    @Id @GeneratedValue
+    public Integer getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    
+    @Column(table="Cat1")
+    public String getStoryPart1() {
+        return storyPart1;
+    }
+    @Column(table="Cat2")
+    public String getStoryPart2() {
+        return storyPart2;
+    }
+}
+In this example, name will be in MainCat. storyPart1 will be in Cat1 and storyPart2 will be in Cat2. Cat1 will be joined to MainCat using the cat_id as a foreign key, and Cat2 using id (ie the same column name, the MainCat id column has). Plus a unique constraint on storyPart2 has been set.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Caching entities</td>
+			<td>
+				<xmp>
+Hibernate offers naturally a first level cache for entities called a persistence context via the notion of Session. This cache is contextual to the use case at hand. Some entities however are shared by many different use cases and are barely changed. You can cache these in what is called the second level cache.
+By default, entities are not part of the second level cache. While we do not recommend that, you can override this by setting the shared-cache-mode element in your persistence.xml file or by using the javax.persistence.sharedCache.mode property. The following values are possible:
+ENABLE_SELECTIVE (Default and recommended value): entities are not cached unless explicitly marked as cacheable.
+DISABLE_SELECTIVE: entities are cached unless explicitly marked as not cacheable.
+ALL: all entities are always cached even if marked as non cacheable.
+NONE: no entity are cached even if marked as cacheable. This option can make sense to disable second-level cache altogether.
+The cache concurrency strategy used by default can be set with the hibernate.cache.default_cache_concurrency_strategy property:
+read-only
+read-write
+nonstrict-read-write
+transactional
+Note
+It is recommended to define the cache concurrency strategy per entity rather than using a global one. Use the @org.hibernate.annotations.Cache annotation for that.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Cache @Cacheable</td>
+			<td>
+				<xmp>
+@Entity @Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class Forest { ... }	
+
+Hibernate also let's you cache the content of a collection or the identifiers if the collection contains other entities. Use the @Cache annotation on the collection property.
+
+@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+
+@JoinColumn(name="CUST_ID")
+
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
+public SortedSet<Ticket> getTickets() {
+
+    return tickets;
+
+}
+@org.hibernate.annotations.Cache defines the caching strategy and region of a given second level cache.
+
+@Cache(
+    CacheConcu(1)rrencyStrategy usage();
+    String reg(2)ion() default "";
+    String inc(3)lude() default "all";
+)
+1
+
+usage: the given cache concurrency strategy (NONE, READ_ONLY, NONSTRICT_READ_WRITE, READ_WRITE, TRANSACTIONAL)
+
+2
+
+region (optional): the cache region (default to the fqcn of the class or the fq role name of the collection)
+
+3
+
+include (optional): all to include all properties, non-lazy to only include non lazy properties (default all).				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@NamedQuery</td>
+			<td>
+				<xmp>
+@Entity
+
+@NamedQuery(name="night.moreRecentThan", query="select n from Night n where n.date >= :date")
+
+public class Night {
+
+    ...
+
+}
+
+
+public class MyDao {
+
+    doStuff() {
+
+        Query q = s.getNamedQuery("night.moreRecentThan");
+
+        q.setDate( "date", aMonthAgo );
+
+        List results = q.list();
+
+        ...
+
+    }
+
+    ...
+
+}      
+You can also provide some hints to a query through an array of QueryHint through a hints attribute.
+
+The available Hibernate hints are
+
+Table 2.2. Query hints
+
+hint	description
+org.hibernate.cacheable	Whether the query should interact with the second level cache (defualt to false)
+org.hibernate.cacheRegion	Cache region name (default used otherwise)
+org.hibernate.timeout	Query timeout
+org.hibernate.fetchSize	resultset fetch size
+org.hibernate.flushMode	Flush mode used for this query
+org.hibernate.cacheMode	Cache mode used for this query
+org.hibernate.readOnly	Entities loaded by this query should be in read only mode or not (default to false)
+org.hibernate.comment	Query comment added to the generated SQL
+
+You can also define the lock mode by which the returned entities should be locked using the lockMode property. This is equivalent to the optional lock mode of the entitymanager lookup operations.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td> @NamedNativeQuery</td>
+			<td>
+				<xmp>
+As we will see, a resultSetMapping parameter is defined in @NamedNativeQuery, it represents the name of a defined @SqlResultSetMapping. The resultset mapping declares the entities retrieved by this native query. Each field of the entity is bound to an SQL alias (or column name). All fields of the entity including the ones of subclasses and the foreign key columns of related entities have to be present in the SQL query. Field definitions are optional provided that they map to the same column name as the one declared on the class property.
+
+@NamedNativeQuery(name="night&area", query="select night.id nid, night.night_duration, "
+
+    + " night.night_date, area.id aid, night.area_id, area.name "
+
+    + "from Night night, Area area where night.area_id = area.id", 
+
+                  resultSetMapping="joinMapping")
+
+@SqlResultSetMapping(name="joinMapping", entities={
+
+    @EntityResult(entityClass=Night.class, fields = {
+
+        @FieldResult(name="id", column="nid"),
+
+        @FieldResult(name="duration", column="night_duration"),
+
+        @FieldResult(name="date", column="night_date"),
+
+        @FieldResult(name="area", column="area_id"),
+
+        discriminatorColumn="disc"
+
+    }),
+
+    @EntityResult(entityClass=org.hibernate.test.annotations.query.Area.class, fields = {
+
+        @FieldResult(name="id", column="aid"),
+
+        @FieldResult(name="name", column="name")
+
+    })
+
+    }
+
+)
+In the above example, the night&area named query use the joinMapping result set mapping. This mapping returns 2 entities, Night and Area, each property is declared and associated to a column name, actually the column name retrieved by the query. Let's now see an implicit declaration of the property / column.
+
+@Entity
+
+@SqlResultSetMapping(name="implicit",
+
+                     entities=@EntityResult(entityClass=SpaceShip.class))
+
+@NamedNativeQuery(name="implicitSample", 
+
+                  query="select * from SpaceShip", 
+
+                  resultSetMapping="implicit")
+
+public class SpaceShip {
+
+    private String name;
+
+    private String model;
+
+    private double speed;
+
+
+    @Id
+
+    public String getName() {
+
+        return name;
+
+    }
+
+
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
+
+
+    @Column(name="model_txt")
+
+    public String getModel() {
+
+        return model;
+
+    }
+
+
+    public void setModel(String model) {
+
+        this.model = model;
+
+    }
+
+
+    public double getSpeed() {
+
+        return speed;
+
+    }
+
+
+    public void setSpeed(double speed) {
+
+        this.speed = speed;
+
+    }
+
+}
+In this example, we only describe the entity member of the result set mapping. The property / column mappings is done using the entity mapping values. In this case the model property is bound to the model_txt column. If the association to a related entity involve a composite primary key, a @FieldResult element should be used for each foreign key column. The @FieldResult name is composed of the property name for the relationship, followed by a dot ("."), followed by the name or the field or property of the primary key.
+
+@Entity
+
+@SqlResultSetMapping(name="compositekey",
+
+        entities=@EntityResult(entityClass=SpaceShip.class,
+
+            fields = {
+
+                    @FieldResult(name="name", column = "name"),
+
+                    @FieldResult(name="model", column = "model"),
+
+                    @FieldResult(name="speed", column = "speed"),
+
+                    @FieldResult(name="captain.firstname", column = "firstn"),
+
+                    @FieldResult(name="captain.lastname", column = "lastn"),
+
+                    @FieldResult(name="dimensions.length", column = "length"),
+
+                    @FieldResult(name="dimensions.width", column = "width")
+
+                    }),
+
+        columns = { @ColumnResult(name = "surface"),
+
+                    @ColumnResult(name = "volume") } )
+
+
+@NamedNativeQuery(name="compositekey",
+
+    query="select name, model, speed, lname as lastn, fname as firstn, length, width, length * width as surface from SpaceShip", 
+
+    resultSetMapping="compositekey")
+
+} )
+
+public class SpaceShip {
+
+    private String name;
+
+    private String model;
+
+    private double speed;
+
+    private Captain captain;
+
+    private Dimensions dimensions;
+
+
+    @Id
+
+    public String getName() {
+
+        return name;
+
+    }
+
+
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
+
+
+    @ManyToOne(fetch= FetchType.LAZY)
+
+    @JoinColumns( {
+
+            @JoinColumn(name="fname", referencedColumnName = "firstname"),
+
+            @JoinColumn(name="lname", referencedColumnName = "lastname")
+
+            } )
+
+    public Captain getCaptain() {
+
+        return captain;
+
+    }
+
+
+    public void setCaptain(Captain captain) {
+
+        this.captain = captain;
+
+    }
+
+
+    public String getModel() {
+
+        return model;
+
+    }
+
+
+    public void setModel(String model) {
+
+        this.model = model;
+
+    }
+
+
+    public double getSpeed() {
+
+        return speed;
+
+    }
+
+
+    public void setSpeed(double speed) {
+
+        this.speed = speed;
+
+    }
+
+
+    public Dimensions getDimensions() {
+
+        return dimensions;
+
+    }
+
+
+    public void setDimensions(Dimensions dimensions) {
+
+        this.dimensions = dimensions;
+
+    }
+
+}
+
+
+@Entity
+
+@IdClass(Identity.class)
+
+public class Captain implements Serializable {
+
+    private String firstname;
+
+    private String lastname;
+
+
+    @Id
+
+    public String getFirstname() {
+
+        return firstname;
+
+    }
+
+
+    public void setFirstname(String firstname) {
+
+        this.firstname = firstname;
+
+    }
+
+
+    @Id
+
+    public String getLastname() {
+
+        return lastname;
+
+    }
+
+
+    public void setLastname(String lastname) {
+
+        this.lastname = lastname;
+
+    }
+
+}
+If you retrieve a single entity and if you use the default mapping, you can use the resultClass attribute instead of resultSetMapping:
+
+@NamedNativeQuery(name="implicitSample", query="select * from SpaceShip",
+
+    resultClass=SpaceShip.class)
+
+public class SpaceShip {
+In some of your native queries, you'll have to return scalar values, for example when building report queries. You can map them in the @SqlResultsetMapping through @ColumnResult. You actually can even mix, entities and scalar returns in the same native query (this is probably not that common though).
+
+@SqlResultSetMapping(name="scalar", columns=@ColumnResult(name="dimension"))
+
+@NamedNativeQuery(name="scalar", query="select length*width as dimension from SpaceShip", resultSetMapping="scalar")
+An other query hint specific to native queries has been introduced: org.hibernate.callable which can be true or false depending on whether the query is a stored procedure or not.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Index</td>
+			<td>
+				<xmp>
+You can define an index on a particular column using the @Index annotation on a one column property, the columnNames attribute will then be ignored
+
+@Column(secondaryTable="Cat1")
+
+@Index(name="story1index")
+
+public String getStoryPart1() {
+
+    return storyPart1;
+
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Parent</td>
+			<td>
+				<xmp>
+When inside an embeddable object, you can define one of the properties as a pointer back to the owner element.
+
+@Entity
+
+public class Person {
+
+    @Embeddable public Address address;
+
+    ...
+
+}
+
+
+@Embeddable
+
+public class Address {
+
+    @Parent public Person owner;
+
+    ...
+
+}
+
+
+
+person == person.address.owner					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td> @Generated</td>
+			<td>
+				<xmp>
+Some properties are generated at insert or update time by your database. Hibernate can deal with such properties and triggers a subsequent select to read these properties.
+
+@Entity
+
+public class Antenna {
+
+    @Id public Integer id;
+
+    @Generated(GenerationTime.ALWAYS) 
+
+    @Column(insertable = false, updatable = false)
+
+    public String longitude;
+
+
+    @Generated(GenerationTime.INSERT) @Column(insertable = false)
+
+    public String latitude;
+
+}
+Annotate your property as @Generated You have to make sure your insertability or updatability does not conflict with the generation strategy you have chosen. When GenerationTime.INSERT is chosen, the property must not contains insertable columns, when GenerationTime.ALWAYS is chosen, the property must not contains insertable nor updatable columns.
+
+@Version properties cannot be @Generated(INSERT) by design, it has to be either NEVER or ALWAYS.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td> @Target</td>
+			<td>
+				<xmp>
+Sometimes, the type guessed by reflection is not the one you want Hibernate to use. This is especially true on components when an interface is used. You can use @Target to by pass the reflection guessing mechanism (very much like the targetEntity attribute available on associations.
+
+    @Embedded
+
+    @Target(OwnerImpl.class)
+
+    public Owner getOwner() {
+
+        return owner;
+
+    }					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@OptimisticLock</td>
+			<td>
+				<xmp>
+It is sometimes useful to avoid increasing the version number even if a given property is dirty (particularly collections). You can do that by annotating the property (or collection) with @OptimisticLock(excluded=true).
+
+More formally, specifies that updates to this property do not require acquisition of the optimistic lock.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Inheritance</td>
+			<td>
+				<xmp>
+SINGLE_TABLE is a very powerful strategy but sometimes, and especially for legacy systems, you cannot add an additional discriminator column. For that purpose Hibernate has introduced the notion of discriminator formula: @DiscriminatorFormula is a replacement of @DiscriminatorColumn and use a SQL fragment as a formula for discriminator resolution (no need to have a dedicated column).
+
+@Entity
+
+@DiscriminatorFormula("case when forest_type is null then 0 else forest_type end")
+
+public class Forest { ... }
+By default, when querying the top entities, Hibernate does not put a restriction clause on the discriminator column. This can be inconvenient if this column contains values not mapped in your hierarchy (through @DiscriminatorValue). To work around that you can use @ForceDiscriminator (at the class level, next to @DiscriminatorColumn). Hibernate will then list the available values when loading the entities.
+
+You can define the foreign key name generated by Hibernate for subclass tables in the JOINED inheritance strategy.
+
+@Entity
+
+@Inheritance(strategy = InheritanceType.JOINED)
+
+public abstract class File { ... }
+
+
+@Entity
+
+@ForeignKey(name = "FK_DOCU_FILE")
+
+public class Document extends File {
+The foreign key from the Document table to the File table will be named FK_DOCU_FILE.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@NotFound</td>
+			<td>
+				<xmp>
+@Entity
+
+public class Child {
+
+    ...
+
+    @ManyToOne
+
+    @NotFound(action=NotFoundAction.IGNORE)
+
+    public Parent getParent() { ... }
+
+    ...
+
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td> @OnDelete</td>
+			<td>
+				<xmp>
+Sometimes you want to delegate to your database the deletion of cascade when a given entity is deleted.
+
+@Entity
+
+public class Child {
+
+    ...
+
+    @ManyToOne
+
+    @OnDelete(action=OnDeleteAction.CASCADE)
+
+    public Parent getParent() { ... }
+
+    ...
+
+}
+In this case Hibernate generates a cascade delete constraint at the database level.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@ForeignKey</td>
+			<td>
+				<xmp>
+Foreign key constraints, while generated by Hibernate, have a fairly unreadable name. You can override the constraint name by use @ForeignKey.
+
+@Entity
+
+public class Child {
+
+    ...
+
+    @ManyToOne
+
+    @ForeignKey(name="FK_PARENT")
+
+    public Parent getParent() { ... }
+
+    ...
+
+}
+
+
+alter table Child add constraint FK_PARENT foreign key (parent_id) references Parent					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Lazy and fetch options equivalent</td>
+			<td>
+				<xmp>
+Lazy and fetch options equivalent
+
+Annotations	Lazy	Fetch
+@[One|Many]ToOne](fetch=FetchType.LAZY)	@LazyToOne(PROXY)	@Fetch(SELECT)
+@[One|Many]ToOne](fetch=FetchType.EAGER)	@LazyToOne(FALSE)	@Fetch(JOIN)
+@ManyTo[One|Many](fetch=FetchType.LAZY)	@LazyCollection(TRUE)	@Fetch(SELECT)
+@ManyTo[One|Many](fetch=FetchType.EAGER)	@LazyCollection(FALSE)	@Fetch(JOIN)					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Collection related annotations</td>
+			<td>
+				<xmp>
+It is possible to set
+
+the batch size for collections using @BatchSize
+
+the where clause, using @Where (applied on the target entity) or @WhereJoinTable (applied on the association table)
+
+the check clause, using @Check
+
+the SQL order by clause, using @OrderBy
+
+the delete cascade strategy through @OnDelete(action=OnDeleteAction.CASCADE)
+
+the collection immutability using @Immutable: if set specifies that the elements of the collection never change (a minor performance optimization in some cases)
+
+a custom collection persister (ie the persistence strategy used) using @Persister: the class must implement org.hibernate.persister.collectionCollectionPersister
+
+You can also declare a sort comparator. Use the @Sort annotation. Expressing the comparator type you want between unsorted, natural or custom comparator. If you want to use your own comparator implementation, you'll also have to express the implementation class using the comparator attribute. Note that you need to use either a SortedSet or a SortedMap interface.
+
+    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+
+    @JoinColumn(name="CUST_ID")
+
+    @Sort(type = SortType.COMPARATOR, comparator = TicketComparator.class)
+
+    @Where(clause="1=1")
+
+    @OnDelete(action=OnDeleteAction.CASCADE)
+
+    public SortedSet<Ticket> getTickets() {
+
+        return tickets;
+
+    }					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>@Filters</td>
+			<td>
+				<xmp>
+Hibernate has the ability to apply arbitrary filters on top of your data. Those filters are applied at runtime on a given session. First, you need to define them.
+
+@org.hibernate.annotations.FilterDef or @FilterDefs define filter definition(s) used by filter(s) using the same name. A filter definition has a name() and an array of parameters(). A parameter will allow you to adjust the behavior of the filter at runtime. Each parameter is defined by a @ParamDef which has a name and a type. You can also define a defaultCondition() parameter for a given @FilterDef to set the default condition to use when none are defined in each individual @Filter. A @FilterDef(s) can be defined at the class or package level.
+
+We now need to define the SQL filter clause applied to either the entity load or the collection load. @Filter is used and placed either on the entity or the collection element
+
+@Entity
+
+@FilterDef(name="minLength", parameters=@ParamDef( name="minLength", type="integer" ) )
+
+@Filters( {
+
+    @Filter(name="betweenLength", condition=":minLength <= length and :maxLength >= length"),
+
+    @Filter(name="minLength", condition=":minLength <= length")
+
+} )
+
+public class Forest { ... }
+When the collection use an association table as a relational representation, you might want to apply the filter condition to the association table itself or to the target entity table. To apply the constraint on the target entity, use the regular @Filter annotation. However, if you wan to target the association table, use the @FilterJoinTable annotation.
+
+    @OneToMany
+
+    @JoinTable
+
+    //filter on the target entity table
+
+    @Filter(name="betweenLength", condition=":minLength <= length and :maxLength >= length")
+
+    //filter on the association table
+
+    @FilterJoinTable(name="security", condition=":userlevel >= requredLevel")
+
+    public Set<Forest> getForests() { ... }					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Custom SQL for CRUD operations</td>
+			<td>
+				<xmp>
+Hibernate gives you the ability to override every single SQL statement generated. We have seen native SQL query usage already, but you can also override the SQL statement used to load or change the state of entities.
+
+@Entity
+
+@Table(name="CHAOS")
+
+@SQLInsert( sql="INSERT INTO CHAOS(size, name, nickname, id) VALUES(?,upper(?),?,?)")
+
+@SQLUpdate( sql="UPDATE CHAOS SET size = ?, name = upper(?), nickname = ? WHERE id = ?")
+
+@SQLDelete( sql="DELETE CHAOS WHERE id = ?")
+
+@SQLDeleteAll( sql="DELETE CHAOS")
+
+@Loader(namedQuery = "chaos")
+
+@NamedNativeQuery(name="chaos", query="select id, size, name, lower( nickname ) as nickname from CHAOS where id= ?", resultClass = Chaos.class)
+
+public class Chaos {
+
+    @Id
+
+    private Long id;
+
+    private Long size;
+
+    private String name;
+
+    private String nickname;
+@SQLInsert, @SQLUpdate, @SQLDelete, @SQLDeleteAll respectively override the INSERT statement, UPDATE statement, DELETE statement, DELETE statement to remove all entities.
+
+If you expect to call a store procedure, be sure to set the callable attribute to true (@SQLInsert(callable=true, ...)).
+
+To check that the execution happens correctly, Hibernate allows you to define one of those three strategies:
+
+NONE: no check is performed: the store procedure is expected to fail upon issues
+
+COUNT: use of rowcount to check that the update is successful
+
+PARAM: like COUNT but using an output parameter rather that the standard mechanism
+
+To define the result check style, use the check parameter (@SQLUpdate(check=ResultCheckStyle.COUNT, ...)).
+
+You can also override the SQL load statement by a native SQL query or a HQL query. You just have to refer to a named query with the @Loader annotation.
+
+You can use the exact same set of annotations to override the collection related statements.
+
+@OneToMany
+
+@JoinColumn(name="chaos_fk")
+
+@SQLInsert( sql="UPDATE CASIMIR_PARTICULE SET chaos_fk = ? where id = ?")
+
+@SQLDelete( sql="UPDATE CASIMIR_PARTICULE SET chaos_fk = null where id = ?")
+
+private Set<CasimirParticle> particles = new HashSet<CasimirParticle>();
+The parameters order is important and is defined by the order Hibernate handle properties. You can see the expected order by enabling debug logging for the org.hibernate.persister.entity level. With this level enabled Hibernate will print out the static SQL that is used to create, update, delete etc. entities. (To see the expected sequence, remember to not include your custom SQL through annotations as that will override the Hibernate generated static sql.)
+
+Overriding SQL statements for secondary tables is also possible using @org.hibernate.annotations.Table and either (or all) attributes sqlInsert, sqlUpdate, sqlDelete:
+
+@Entity
+
+@SecondaryTables({
+
+    @SecondaryTable(name = "`Cat nbr1`"),
+
+    @SecondaryTable(name = "Cat2"})
+
+@org.hibernate.annotations.Tables( {
+
+    @Table(appliesTo = "Cat", comment = "My cat table" ),
+
+    @Table(appliesTo = "Cat2", foreignKey = @ForeignKey(name="FK_CAT2_CAT"), fetch = FetchMode.SELECT,
+
+        sqlInsert=@SQLInsert(sql="insert into Cat2(storyPart2, id) values(upper(?), ?)") )
+
+} )
+
+public class Cat implements Serializable {
+The previous example also show that you can give a comment to a given table (promary or secondary): This comment will be used for DDL generation.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>	
+</body>
+</html>
