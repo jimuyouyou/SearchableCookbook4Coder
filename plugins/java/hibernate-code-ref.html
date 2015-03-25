@@ -1083,7 +1083,7 @@ org.hibernate.cache.spi.UpdateTimestampsCache holds timestamps of the most recen
 			
 		</tr>
 		<tr>
-			<td>Query cache regions</td>
+			<td>HQL Query cache regions</td>
 			<td>
 				<pre>
 Example 6.1. Method setCacheRegion
@@ -1238,7 +1238,7 @@ National Language Support enables you retrieve data or insert data into a databa
 			
 		</tr>
 		<tr>
-			<td>UPDATE query statements</td>
+			<td>HQL UPDATE query statements</td>
 			<td>
 				<xmp>
 String hqlUpdate =
@@ -1270,7 +1270,7 @@ int updatedEntities = s.createQuery( hqlUpdate )
 			
 		</tr>
 		<tr>
-			<td>inner join</td>
+			<td>HQL inner join</td>
 			<td>
 				<xmp>
 select c
@@ -1287,7 +1287,7 @@ where ceo.age < 25
 			
 		</tr>
 		<tr>
-			<td>left (outer) join examples</td>
+			<td>HQL left (outer) join examples</td>
 			<td>
 				<xmp>
 // get customers who have orders worth more than $5000
@@ -1309,7 +1309,7 @@ where o.value > 5000.00
 			
 		</tr>
 		<tr>
-			<td>Fetch join - lazy</td>
+			<td>HQL Fetch join - lazy</td>
 			<td>
 				<xmp>
 select c
@@ -1337,7 +1337,7 @@ HQL also defines a WITH clause to qualify the join conditions. Again, this is sp
 			
 		</tr>
 		<tr>
-			<td>Collection member references - join</td>
+			<td>HQL Collection member references - join</td>
 			<td>
 				<xmp>
 select c
@@ -1360,7 +1360,7 @@ where o.status = 'pending'
 			
 		</tr>
 		<tr>
-			<td>Qualified collection references example</td>
+			<td>HQL Qualified collection references example</td>
 			<td>
 				<xmp>
 / Product.images is a Map<String,String> : key = a name, value = file path
@@ -1396,7 +1396,7 @@ where c.id = 123
 			
 		</tr>
 		<tr>
-			<td>String literal escape</td>
+			<td>HQL String literal escape</td>
 			<td>
 				<xmp>
 select c
@@ -1410,7 +1410,7 @@ where c.name = 'Acme''s Pretzel Logic'
 			
 		</tr>
 		<tr>
-			<td>Numeric literal</td>
+			<td>HQL Numeric literal</td>
 			<td>
 				<xmp>
 // simple integer literal
@@ -1442,7 +1442,7 @@ where o.total > 5e+3F
 			
 		</tr>
 		<tr>
-			<td>Named parameter</td>
+			<td>HQL Named parameter</td>
 			<td>
 				<xmp>
 String queryString =
@@ -1463,7 +1463,7 @@ List<Customer> customers = entityManager.createQuery( queryString, Customer.clas
 			
 		</tr>
 		<tr>
-			<td>Positional (JPQL) parameter</td>
+			<td>HQL Positional (JPQL) parameter</td>
 			<td>
 				<xmp>
 String queryString =
@@ -1485,7 +1485,7 @@ List<Customer> customers = entityManager.createQuery( queryString, Customer.clas
 			
 		</tr>
 		<tr>
-			<td>Numeric arithmetic</td>
+			<td>HQL Numeric arithmetic</td>
 			<td>
 				<xmp>
 select year( current_date() ) - year( c.dateOfBirth )
@@ -1500,7 +1500,7 @@ from Order o
 			
 		</tr>
 		<tr>
-			<td>Concatenation</td>
+			<td>HQL Concatenation</td>
 			<td>
 				<xmp>
 select 'Mr. ' || c.name.first || ' ' || c.name.last
@@ -1538,7 +1538,7 @@ EXTRACT SECOND MINUTE HOUR DAY MONTH YEAR STR
 			
 		</tr>
 		<tr>
-			<td>Collection-related expressions</td>
+			<td>HQL Collection-related expressions</td>
 			<td>
 				<xmp>
 SIZE
@@ -1589,7 +1589,7 @@ where 'fizard' in indices(show.acts)
 			
 		</tr>
 		<tr>
-			<td>Index operator</td>
+			<td>HQL Index operator</td>
 			<td>
 				<xmp>
 Elements of indexed collections (arrays, lists, and maps) can be referred to by index operator.
@@ -1615,7 +1615,7 @@ where o.items[ size(o.items) - 1 ] = i
 			</td>
 		</tr>
 		<tr>
-			<td>Entity type</td>
+			<td>HQL Entity type</td>
 			<td>
 				<xmp>
 select p
@@ -1707,7 +1707,7 @@ from DomesticCat as mother
 			</td>
 		</tr>
 		<tr>
-			<td>Dynamic instantiation example - map</td>
+			<td>HQL Dynamic instantiation example - map</td>
 			<td>
 				<xmp>
 select new map( mother as mother, offspr as offspr, mate as mate )
@@ -1723,7 +1723,7 @@ The results from this query will be a List<Map<String,Object>> as opposed to a L
 			</td>
 		</tr>
 		<tr>
-			<td> Nullness checking </td>
+			<td>HQL  Nullness checking </td>
 			<td>
 				<xmp>
 select p
@@ -1738,7 +1738,7 @@ where p.address is null
 			</td>
 		</tr>
 		<tr>
-			<td>Like predicate</td>
+			<td>HQL Like predicate</td>
 			<td>
 				<xmp>
 select p
@@ -1757,7 +1757,7 @@ where sp.name like 'sp|_%' escape '|'
 			</td>
 		</tr>
 		<tr>
-			<td>Between predicate</td>
+			<td>HQL Between predicate</td>
 			<td>
 				<xmp>
 select p
@@ -1783,7 +1783,7 @@ where p.name between 'A' and 'E'
 			</td>
 		</tr>
 		<tr>
-			<td>In predicate</td>
+			<td>HQL In predicate</td>
 			<td>
 				<xmp>
 select p
@@ -1826,7 +1826,7 @@ where c.chiefExecutive in (
 			</td>
 		</tr>
 		<tr>
-			<td>Empty collection predicate</td>
+			<td>HQL Empty collection predicate</td>
 			<td>
 				<xmp>
 select o
@@ -1840,7 +1840,7 @@ where c.pastDueBills is not empty
 			</td>
 		</tr>
 		<tr>
-			<td>Member-of collection predicate</td>
+			<td>HQL Member-of collection predicate</td>
 			<td>
 				<xmp>
 select p
@@ -1928,7 +1928,7 @@ sess.createSQLQuery("SELECT ID, NAME, BIRTHDATE, DOG_ID FROM CATS").addEntity(Ca
 			</td>
 		</tr>
 		<tr>
-			<td>associations and collections - query</td>
+			<td>HQL associations and collections - query</td>
 			<td>
 				<xmp>
 sess.createSQLQuery("SELECT c.ID, NAME, BIRTHDATE, DOG_ID, D_ID, D_NAME FROM CATS c, DOGS d WHERE c.DOG_ID = d.D_ID")
@@ -1942,7 +1942,7 @@ sess.createSQLQuery("SELECT ID, NAME, BIRTHDATE, D_ID, D_NAME, CAT_ID FROM CATS 
 			</td>
 		</tr>
 		<tr>
-			<td>multiple entities</td>
+			<td>HQL multiple entities</td>
 			<td>
 				<xmp>
 sess.createSQLQuery("SELECT c.*, m.*  FROM CATS c, CATS m WHERE c.MOTHER_ID = c.ID")
@@ -1956,7 +1956,7 @@ sess.createSQLQuery("SELECT {cat.*}, {m.*}  FROM CATS c, CATS m WHERE c.MOTHER_I
 			</td>
 		</tr>
 		<tr>
-			<td>non-managed entities</td>
+			<td>HQL non-managed entities</td>
 			<td>
 				<xmp>
 sess.createSQLQuery("SELECT NAME, BIRTHDATE FROM CATS")
@@ -1965,7 +1965,7 @@ sess.createSQLQuery("SELECT NAME, BIRTHDATE FROM CATS")
 			</td>
 		</tr>
 		<tr>
-			<td>Native SQL Parameters</td>
+			<td>HQL Native SQL Parameters</td>
 			<td>
 				<xmp>
 Native SQL queries support positional as well as named parameters:					
@@ -1978,7 +1978,7 @@ List pusList = query.setString("name", "Pus%").list();
 			</td>
 		</tr>
 		<tr>
-			<td> Custom CRUD via annotations</td>
+			<td>JPA Custom CRUD via annotations</td>
 			<td>
 				<xmp>
 @Entity
@@ -2044,9 +2044,53 @@ public class ExampleRevEntity extends DefaultRevisionEntity {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>HQL QUERY SELECT UPDATE INSERT</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+package com.king.dao;
+
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.king.entity.Blog;
+import com.king.test.HibernateTest;
+
+public class BlogDao {
+	public Blog findBlogById(String id) {
+		Session session = HibernateTest.getSession();
+
+		String hql = "from Blog b where b.id = :id";
+		Blog blog = (Blog) (session.createQuery(hql).setString("id", id).uniqueResult());
+
+		session.close();
+		return blog;
+	}
+
+	public List<Blog> getAllBlogs() {
+		Session session = HibernateTest.getSession();
+
+		String hql = "from Blog";
+		Query qry = session.createQuery(hql);
+		List<Blog> list = qry.list();
+
+		session.close();
+		return list;
+	}
+
+	public void updateBlog(Blog blog) {
+		Session session = HibernateTest.getSession();
+		Transaction ts = session.beginTransaction();
+		session.saveOrUpdate(blog);
+		session.flush();
+		ts.commit();
+		session.close();
+	}
+}
+					
+				</xmp>
 			</td>
 		</tr>
 		<tr>

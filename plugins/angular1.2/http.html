@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>http-angularjs</title>
+</head>
+<body>
+	<xmp>
+<link rel='stylesheet' href='javascripts/bootstrap3.3.2/css/bootstrap.min.css' />
+<link rel='stylesheet' href='javascripts/bootstrap3.3.2/css/bootstrap-theme.min.css' />
+<link rel='stylesheet' href='css/main.css' />
+</head>
+<body class='mr50'>
+	<h1>Welcome to Hibernate Jersey Angular CMS</h1>
+	<div id='err'></div>
+	<a href="add.html" class='btn btn-success'>New Article</a>
+	<p>
+	<div>
+		<table id='blogList' class="table table-bordered" ng-controller='MyController'>
+			<tr>
+				<th>Latest Articles</th>
+				<th>Actions</th>
+			</tr>
+			<tr ng-repeat='elem in data'>
+				<td>{{elem.title}}</td>
+				<td><a class='btn btn-warning' href="modify.html?id={{elem.id}}">Modify</a></td>
+			</tr>
+		</table>
+	</div>
+
+
+</body>
+<script src='javascripts/jquery2.1.3/jquery.min.js'></script>
+<script src='javascripts/bootstrap3.3.2/js/bootstrap.min.js'></script>
+<script src='javascripts/angular1.2.19/angular.js'></script>
+<script src='javascripts/json/json2.js'></script>
+
+function MyController($scope, $http) {
+		//$scope.data = [{title: 'welcome hello'},{title: 'great testing'}];
+
+		$http.get("webapi/blog/list", {}).success(function(data, status, headers, config) {
+			$scope.data = data;
+		}).error(function(data, status, headers, config) {
+			alert("error");
+		})
+	}
+
+
+<form class="form-horizontal" ng-controller='MyController'>
+		<div class="form-group">
+			<label class="control-label col-xs-1" for="inputEmail">Title:</label>
+			<div class="col-xs-9">
+				<input type="text" class="form-control" name="title" id="title" ng-model="title" required placeholder='Title' />
+			</div>
+			<p>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-xs-1" for="inputEmail">Content:</label>
+			<p>
+			<div class="col-xs-9">
+				<textarea name="content" rows='5' class="form-control" id="content" ng-model="content" required placeholder='Content'
+					></textarea>
+			</div>
+		</div>
+		<p>
+			<input type="button" value="Modify" ng-click='modify();' class='btn btn-warning' /> <input type="hidden" id='id'
+				name='id' ng-model="id" />
+	</form>
+function MyController($scope, $http) {
+		$scope.add = function() {
+			$http.get("webapi/blog/create", {
+				params : {
+					title : $scope.title,
+					content : $scope.content
+				}
+			}).success(function(data, status, headers, config) {
+				if (data) {
+					$scope.data = data;
+					$('#result').html('You have just successfuly added one record!');
+					$('#result').show();
+				}
+			}).error(function(data, status, headers, config) {
+				alert("error");
+			})
+		}
+
+	}
+
+
+function getParams(name) {
+		if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+			return decodeURIComponent(name[1]);
+	}
+
+	function MyController($scope, $http) {
+		var blotId = getParams("id");
+		$http.get("webapi/blog/findById", {
+			params : {
+				id : blotId,
+			}
+		}).success(function(data, status, headers, config) {
+			if (data) {
+				$scope.id = data.id;
+				$scope.title = data.title;
+				$scope.content = data.content;
+			}
+		}).error(function(data, status, headers, config) {
+			alert("error");
+		})
+
+		$scope.modify = function() {
+			$http.get("webapi/blog/update", {
+				params : {
+					id : $scope.id,
+					title : $scope.title,
+					content : $scope.content
+				}
+			}).success(function(data, status, headers, config) {
+				if (data) {
+					$scope.data = data;
+					$('#result').html('You have just successfuly modified one record!');
+					$('#result').show();
+				}
+			}).error(function(data, status, headers, config) {
+				alert("error");
+			})
+		}
+
+	}			
+	</xmp>
+	
+</body>
+</html>
