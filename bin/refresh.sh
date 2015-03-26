@@ -67,6 +67,8 @@ link_add_plugins() { # add each plugin link to the left panel
 
 link_output_plugins() { # outpout the left panel links to plugins.html
 	links=$links"<link rel='stylesheet' href='../css/main.css'>"
+	links=$links"<script src='../lib/jquery-1.8.0.min.js'></script>"
+	links=$links"<script src='../lib/a_search.js'></script>"
 	echo "$links" > "plugins.html"
 }
 

@@ -325,57 +325,205 @@ into one application, that is, global namespace.
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>angular.module controller</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('admin-projects', [])
+	.controller('ProjectsListCtrl', function($scope) {
+		//controller's code go here
+	})
+	.controller('ProjectsEditCtrl', function($scope) {
+		//controller's code go here
+	});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>angular.module config</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('admin-projects', [])
+	.config(function() {
+		//configuration block 1
+	})
+	.config(function() {
+		//configuration block 2
+	});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$timeout $log</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('async', [])
+	.factory('asyncGreeter', function ($timeout, $log) {
+		return {
+			say:function (name, timeout) {
+				$timeout(function(){
+					$log.info("Hello, " + name + "!");
+				})
+			}
+		};
+	});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$http</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var futureResponse = $http.get('data.json');
+futureResponse.success(function (data, status, headers, config) {
+	$scope.data = data;
+});
+futureResponse.error(function (data, status, headers, config) {
+	throw new Error('Something went wrong...');
+});	
+
+$http(configObject);
+
+methods:
+•	 GET: $http.get(url, config)
+•	 POST: $http.post(url, data, config)
+•	 PUT: $http.put(url, data, config)
+•	 DELETE: $http.delete(url, config)
+•	 HEAD: $http.head
+It is also possible to trigger a JSONP request with $http.jsonp(url, config);
+
+config:
+•	 method : HTTP method to be issued
+•	 url : URL to be targeted with a request
+•	 params : parameters to be added to the URL query string
+•	 headers : additional headers to be added to a request
+•	 timeout : timeout (in milliseconds) after which a XHR request will be dropped
+•	 cache : enables XHR GET request caching
+•	 transformRequest , transformResponse : transformation functions that allows us to pre-process and post-process data exchanged with a back-end			
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$http.post</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var userToAdd = {
+	name:'AngularJS Superhero',
+	email:'superhero@angularjs.org'
+};
+$http.post('https://api.mongolab.com/api/1/databases/ascrum/collec
+	tions/users',
+	userToAdd, {
+	params:{
+		apiKey:'4fb51e55e4b02e56a67b0b66'
+	}
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>jsonp</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$http.jsonp('http://angularjs.org/greet.php?callback=JSON_CALLBACK', {
+	params:{name:'World'}
+}).success(function (data) {
+	$scope.greeting = data;
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$q $digest promise deferred.promise resolve reject</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var Restaurant = function ($q, $rootScope) {
+	var currentOrder;
+	this.takeOrder = function (orderedItems) {
+		currentOrder = {
+			deferred:$q.defer(),
+			items:orderedItems
+		};
+		return currentOrder.deferred.promise;
+	};
+
+	this.deliverOrder = function() {
+		currentOrder.deferred.resolve(currentOrder.items);
+		$rootScope.$digest();
+	};
+
+	this.problemWithOrder = function(reason) {
+		currentOrder.deferred.reject(reason);
+		$rootScope.$digest();
+	};
+}					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$http promise</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var responsePromise = $http.get('data.json');
+responsePromise.then(function (response) {
+	$scope.data = response.data;
+},function (response) {
+	throw new Error('Something went wrong...');
+});			
+Promises returned from the $http services are resolved with the response object
+which has the following properties: data , status , headers and config .
+
+Calls to the $http service methods return promises with two additional
+methods (success and error) for easy callback registration.		
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$resource</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+The $resource service is distributed in a separate file (angular-
+resource.js), and resides in a dedicated module (ngResource).
+To take advantage of the $resource service we need to include
+the angular-resource.js file and declare dependency on the
+ngResource module from our application's module.
+
+angular.module('resource', ['ngResource'])
+	.factory('Users', function ($resource) {
+		return	$resource('https://api.mongolab.com/api/1/databases/ascrum/collections/users/:id', {
+			apiKey:'4fb51e55e4b02e56a67b0b66',
+			id:'@_id.$oid'  //Dynamic parameter values are prefixed with a @ character
+		});
+})		
+
+.controller('ResourceCtrl', function($scope, Users){
+	$scope.users = Users.query();
+});	
+
+methods available:
+query, get, save and delete
+
+•	 Users.query(params, successcb, errorcb) : It issues an HTTP GET request and expects an array in the JSON response. It is used to retrieve a collection of items.
+•	 Users.get(params, successcb, errorcb) : It issues an HTTP GET request and expects an object in the JSON response. It is used to retrieve a single item.
+•	 Users.save(params, payloadData, successcb, errorcb) : It issues an HTTP POST request with request body generated from the payload.
+•	 Users.delete(params,successcb, errorcb) (and its alias: Users.remove ): It issues an HTTP DELETE request.
+
+Users.delete({}, user); === user.$delete();
+
+var user = new Users({
+	name:'Superhero'
+});
+user.$save();
+===
+var user = {
+	name:'Superhero'
+};
+Users.save(user);
+
+Users.query(function(users){
+	$scope.users = users;
+	console.log($scope.users.length);
+});
+				</xmp>
 			</td>
 		</tr>
 		<tr>
