@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0a_code-ref</title>
+	<link rel="stylesheet" href="../../css/main.css">
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+</head>
+<body>
+	<h2>AngularJS</h2>
+	<table>
+		<tr>
+			<td>official site code - modules</td>
+			<td>
+				<xmp>
+git code code: https://github.com/angular/angular.js
+module: http://ngmodules.org/
+official: http://www.angularjs.org
+sample app: https://github.com/angular-app/angular-app
+db host: https://mongolab.com/
+</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-init</td>
+			<td>
+				<xmp>
+<body ng-app ng-init="name = 'World'">
+<h1>Hello, {{name}}!</h1>
+</body>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-model</td>
+			<td>
+				<xmp>
+<body ng-app ng-init="name = 'World'">
+Say hello to: <input type="text" ng-model="name">
+<h1>Hello, {{name}}!</h1>
+</body>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-controller</td>
+			<td>
+				<xmp>
+<div ng-controller="HelloCtrl">
+Say hello to: <input type="text" ng-model="name"><br>
+<h1>Hello, {{name}}!</h1>
+</div>
+
+var HelloCtrl = function ($scope) {
+$scope.name = 'World';
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>function</td>
+			<td>
+				<xmp>
+var HelloCtrl = function ($scope) {
+	$scope.getName = function() {
+		return $scope.name;
+	};
+}
+
+<h1>Hello, {{getName()}}!</h1>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-repeat</td>
+			<td>
+				<xmp>
+<ul ng-controller="WorldCtrl">
+	<li ng-repeat="country in countries">
+	{{country.name}} has population of {{country.population}}
+	</li>
+	<hr>
+	World's population: {{population}} millions
+</ul>
+
+var WorldCtrl = function ($scope) {
+	$scope.population = 7000;
+	$scope.countries = [
+		{name: 'France', population: 63.1},
+		{name: 'United Kingdom', population: 61.8},
+	];
+};					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>function Scopes hierarchy</td>
+			<td>
+				<xmp>
+<li ng-repeat="country in countries">
+	{{country.name}} has population of {{country.population}},
+	{{worldsPercentage(country.population)}} % of the World's population
+</li>
+
+$scope.worldsPercentage = function (countryPopulation) {
+	return (countryPopulation / $scope.population)*100;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>inheritance scope parent</td>
+			<td>
+				<xmp>
+<div ng-app ng-init="name='World'">
+	<h1>Hello, {{name}}</h1>
+	<div ng-controller="HelloCtrl">
+		Say hello to: <input type="text" ng-model="name">
+		<input type="text" ng-model="$parent.name">
+		<h2>Hello, {{name}}!</h2>
+	</div>
+</div>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>property object</td>
+			<td>
+				<xmp>
+<body ng-app ng-init="thing = {name : 'World'}">
+	<h1>Hello, {{thing.name}}</h1>
+	<div ng-controller="HelloCtrl">
+		Say hello to: <input type="text" ng-model="thing.name">
+		<h2>Hello, {{thing.name}}!</h2>
+	</div>
+</body>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>global events</td>
+			<td>
+				<xmp>
+three events being emitted: ( $includeContentRequested ,$includeContentLoaded , $viewContentLoaded )
+seven events being broadcasted: ( $locationChangeStart , $locationChangeSuccess , $routeUpdate ,
+$routeChangeStart , $routeChangeSuccess , $routeChangeError , $destroy )
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Scopes lifecycle destroy clear</td>
+			<td>
+				<xmp>
+$new() and $destroy() methods, respectively (both methods are defined on the Scope type).			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-disabled</td>
+			<td>
+				<xmp>
+<button ng-disabled="!hasValidLength()"...>Send</button>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-class</td>
+			<td>
+				<xmp>
+<span ng-class="{'text-warning' : shouldWarn()}">
+	Remaining: {{remaining()}}
+</span>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>modules</td>
+			<td>
+				<xmp>
+<body ng-app="hello">					
+angular.module('hello', [])
+	.controller('HelloCtrl', function($scope){
+	$scope.name = 'World';
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>service injection registration</td>
+			<td>
+				<xmp>
+myMod.service('notificationsService', NotificationsService);
+var NotificationsService = function (notificationsArchive) {
+	this.notificationsArchive = notificationsArchive;
+};					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>factory injection registration</td>
+			<td>
+				<xmp>
+myMod.factory('notificationsService',function(notificationsArchive){
+	var MAX_LEN = 10;
+	var notifications = [];
+	return {
+		push:function (notification) {
+			var notificationToArchive;
+			var newLen = notifications.unshift(notification);
+			//push method can rely on the closure scope now!
+			if (newLen > MAX_LEN) {
+				notificationToArchive = this.notifications.pop();
+				notificationsArchive.archive(notificationToArchive);
+			}
+		},
+		// other methods of the NotificationsService
+	};
+});
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>constant</td>
+			<td>
+				<xmp>
+myMod.constant('MAX_LEN', 10);
+myMod.factory('notificationsService',
+function (notificationsArchive, MAX_LEN) {
+	//creation logic doesn't change
+});
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>provider injection registration</td>
+			<td>
+				<xmp>
+myMod.provider('notificationsService', function () {
+	var config = {
+		maxLen : 10
+	};
+	var notifications = [];
+	return {
+		setMaxLen : function(maxLen) {
+			config.maxLen = maxLen || config.maxLen;
+		},
+		$get : function(notificationsArchive) {
+			return {
+				push:function (notification) {
+					...
+					if (newLen > config.maxLen) {
+					...
+					}
+				},
+			// other methods go here
+			};
+		}
+	};
+});
+
+a provider is a function that must return an object containing the $get property					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>config $rootScope</td>
+			<td>
+				<xmp>
+myMod.config(function(notificationsServiceProvider){
+	notificationsServiceProvider.setMaxLen(5);
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>run</td>
+			<td>
+				<xmp>
+Application started at: {{appStarted}}					
+angular.module('upTimeApp', []).run(function($rootScope) {
+	$rootScope.appStarted = new Date();
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>phases and registration methods</td>
+			<td>
+				<xmp>
+What gets registered? Injectable during the configuration phase? Injectable during the run phase?
+Constant Constant's value Yes Yes
+Variable Variable's value - Yes
+Service A new object created by aconstructor function - Yes
+Factory A new object returned from a factory function - Yes
+Provider A new object created by the $get factory function Yes -
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>service module dependencies</td>
+			<td>
+				<xmp>
+angular.module('app', ['engines', 'cars'])
+angular.module('cars', [])
+	.factory('car', function ($log, dieselEngine) {
+		return {
+			start: function() {
+				$log.info('Starting ' + dieselEngine.type);
+			}
+	};
+});
+angular.module('engines', [])
+	.factory('dieselEngine', function () {
+		return {
+			type: 'diesel'
+		};
+});				
+A service defined in one of the application's modules is visible to all the
+other modules. In other words, hierarchy of modules doesn't influence
+services' visibility to other modules. When AngularJS bootstraps an
+application, it combines all the services defined across all the modules
+into one application, that is, global namespace.	
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+	
+</body>
+<!--
+<script src='lib/angular1.2.js'></script>
+-->
+</html>
