@@ -1097,7 +1097,7 @@ angular.module('location', [])
 			</td>
 		</tr>
 		<tr>
-			<td>routers $watch $location.path</td>
+			<td>unofficial - routers $watch $location.path</td>
 			<td>
 				<xmp>
 <body ng-controller="NavigationCtrl">
@@ -1142,51 +1142,129 @@ declare a dependency on the ngRoute module.
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$routeProvider ng-view</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('routing_basics', [])
+	.config(function($routeProvider) {
+		$routeProvider
+			.when('/admin/users/list', {templateUrl: 'tpls/users/list.html'})
+			.when('/admin/users/*new', {templateUrl: 'tpls/users/new.html'})
+			.when('admin/users/:id', {templateUrl: 'tpls/users/edit.html'})
+			.otherwise({redirectTo: '/admin/users/list'});
+})
+
+<div class="container-fluid" ng-include="selectedRoute.templateUrl">
+	<!-- Route-dependent content goes here -->
+</div>
+===
+<div class="container-fluid" ng-view>
+	<!-- Route-dependent content goes here -->
+</div>
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$routeParams</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+/admin/users/:userid
+.controller('EditUserCtrl', function($scope, $routeParams, Users){
+	$scope.user = Users.get({id: $routeParams.userid});
+})		
+
+.when('/admin/users/:userid', {
+	templateUrl: 'tpls/users/edit.html'
+	controller: 'EditUserCtrl'}
+)			
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$route resolve UI flickering on route changes</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+.when('/admin/users/:userid', {
+	templateUrl: 'tpls/users/edit.html'
+	controller: 'EditUserCtrl',
+	resolve: {
+		user: function($route, Users) {
+			return Users.getById($route.current.params.userid);
+		}
+	}
+})					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>ng-href</td>
 			<td>
-				<xmp></xmp>
+				<xmp><a ng-href="/admin/users/{{user.$id()}}">Edit user</a></xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>route definitions among several modules</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('admin-users', [])
+	.config(function ($routeProvider) {
+		$routeProvider.when('/admin/users', {...});
+		$routeProvider.when('/admin/users/new', {...});
+		$routeProvider.when('/admin/users/:userId', {...});
+});
+
+angular.module('admin-projects', [])
+	.config(function ($routeProvider) {
+		$routeProvider.when('/admin/users', {...});
+		$routeProvider.when('/admin/users/new', {...});
+		$routeProvider.when('/admin/users/:userId', {...});
+});
+
+angular.module('admin', ['admin-projects', 'admin-users']);
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>custom routerProvider</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('admin-users', ['services.crud'])
+.config(function (crudRouteProvider) {
+	crudRouteProvider.routesFor('Users')
+		.whenList({
+			users: function(Users) { return Users.all(); }
+		})
+		.whenNew({
+			user: function(Users) { return new Users(); }
+		})
+		.whenEdit({
+			user: function ($route, Users) {
+				return Users.getById($route.current.params.itemId);
+			}
+		});
+})					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>no-cache http header</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Cache-Control: no-cache, no-store, must-revalidate
+Pragma : no-cache
+Expires : 0	
+
+Reloading the application, by refreshing the browser page, has the
+added benefit of clearing out any data that may have been cached in
+AngularJS services.				
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$templateCache</td>
 			<td>
-				<xmp></xmp>
+				<xmp>We could delete templates from the $templateCache service, either selectively or
+even completely at various points in the application</xmp>
 			</td>
 		</tr>
 		<tr>
