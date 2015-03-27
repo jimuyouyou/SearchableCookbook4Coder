@@ -28,7 +28,9 @@ db host: https://mongolab.com/
 				<xmp>
 <body ng-app ng-init="name = 'World'">
 <h1>Hello, {{name}}!</h1>
-</body>					
+</body>
+
+<form ng-init="user.hash='13513516'">					
 				</xmp>
 			</td>
 		</tr>
@@ -91,6 +93,7 @@ var WorldCtrl = function ($scope) {
 		{name: 'United Kingdom', population: 61.8},
 	];
 };					
+The ng-repeat directive creates a new scope for each element of a collection it iterates over.	
 				</xmp>
 			</td>
 		</tr>
@@ -527,21 +530,615 @@ Users.query(function(users){
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>equivalent directives</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+ng-model, ng:model, ng_model, x-ng-model,
+x-ng:model, x-ng_model, data-ng-model, data-ng:model,
+data-ng_model, x:ng-model, data_ng-model, and so on					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$interpolateProvider reconfigure custom</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+myModule.config(function($interpolateProvider) {
+	$interpolateProvider.startSymbol('[[');
+	$interpolateProvider.endSymbol(']]');
+});
+Here we are changing default {{}} to [[]] so later on we can write in the templates:
+[[expression]]					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>ng-bind</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<span ng-bind="expression"></span>
+=== {{expression}}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-bind-html-unsafe</td>
+			<td>
+				<xmp><p ng-bind-html-unsafe="msg"></p></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-bind-html</td>
+			<td>
+				<xmp>
+<p ng-bind-html="msg"></p>
+In terms of escaping the ng-bind-html directive is a compromise between behavior
+of the ng-bind-html-unsafe (allow all HTML tags) and the interpolation
+directive (allow no HTML tags at all). It might be a good alternative for cases where
+we want to allow some HTML tags entered by users.
+
+The ng-bind-html directive resides in a separate module
+(ngSanitize) and requires inclusion of an additional source
+file: angular-sanitize.js.
+
+Don't forget to declare dependency on the ngSanitize module if you plan to use the
+ng-bind-html directive:
+angular.module('expressionsEscaping', ['ngSanitize'])
+	.controller('ExpressionsEscapingCtrl', function ($scope) {
+	$scope.msg = 'Hello, <b>World</b>!';
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-show ng-hide ng-switch ng-if ng-include</td>
+			<td>
+				<xmp>
+<div ng-show="showSecret">Secret</div>
+<div ng-hide="!showSecret">Secret</div>
+
+<div ng-switch on="showSecret">
+	<div ng-switch-when="true">Secret</div>
+	<div ng-switch-default>Won't show you my secrets!</div>
+</div>	
+
+<div ng-if="showSecret">Secret</div>
+
+<div ng-include="user.admin && 'edit.admin.html' || 'edit.user.html'"></div>
+
+The ng-switch directive will add/remove DOM elements from the DOM tree while the ng-show/ng-hide will
+ simply apply style="display: none;" to hide elements. The ng-switch directive is creating a new scope.		
+ng-if  It behaves similarly to the ng-switch directive (in the sense that it adds / removes 
+elements from the DOM tree) but has very simple syntax.
+
+The ng-include directive is creating a new scope for each partial it includes.
+The ng-include directive accepts an expression as its argument,
+so you need to pass a quoted string if you plan to use a fixed value
+pointing to a partial, for example, <div ng-include="'header.tpl.html'"></div>.
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>$index $first $middle $last ng-repeat</td>
+			<td>
+				<xmp>
+<li ng-repeat="(name, value) in user">
+	Property {{$index}} with {{name}} has value {{value}}
+</li>
+
+<li ng-repeat="breadcrumb in breadcrumbs.getAll()">
+	<span class="divider">/</span>
+	<ng-switch on="$last">
+		<span ng-switch-when="true">{{breadcrumb.name}}</span>
+		<span ng-switch-default>
+			<a href="{{breadcrumb.path}}">{{breadcrumb.name}}</a>
+		</span>
+	</ng-switch>
+</li>
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Displaying only one row with details</td>
+			<td>
+				<xmp>
+<table class="table table-bordered" ng-controller="ListAndOneDetailCtrl">
+	<tbody ng-repeat="user in users" ng-click="selectUser(user)" ng-switch on="isSelected(user)">
+		<tr>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+		</tr>
+		<tr ng-switch-when="true">
+			<td colspan="2">{{user.desc}}</td>
+		</tr>
+	</tbody>
+</table>
+
+.controller('ListAndOneDetailCtrl', function ($scope, users) {
+	$scope.users = users;
+	$scope.selectUser = function (user) {
+		$scope.selectedUser = user;
+	};
+	$scope.isSelected = function (user) {
+		return $scope.selectedUser === user;
+	};
+})
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Displaying many rows with details</td>
+			<td>
+				<xmp>
+<table class="table table-bordered">
+	<tbody ng-repeat="user in users" ng-controller="UserCtrl"
+		ng-click="toggleSelected()" ng-switch on="isSelected()">
+		<tr>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+		</tr>
+		<tr ng-switch-when="true">
+			<td colspan="2">{{user.desc}}</td>
+		</tr>
+	</tbody>
+</table>		
+
+.controller('UserCtrl', function ($scope) {
+	$scope.toggleSelected = function () {
+		$scope.selected = !$scope.selected;
+	};
+	$scope.isSelected = function () {
+		return $scope.selected;
+	};
+});			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-class ng-class-even ng-class-odd Altering tables, rows, and classes</td>
+			<td>
+				<xmp>
+<tr ng-repeat="user in users" ng-class-even="'light-gray'" ng-class-odd="'dark-gray'"></tr>		
+<tr ng-repeat="user in users" ng-class="{'dark-gray' : !$index%2, 'light-gray' : $index%2}"></tr>			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>$event ng-click, ngDblClick, ngMousedown, ngMouseup, ngMouseenter, ngMouseleave, ngMousemove, ngMouseover, ngKeydown, ngKeyup, ngKeypress, ngChange</td>
+			<td>
+				<xmp>
+<input ng-model="name">
+<button ng-click="hello(name)">Say hello!<button>	
+
+<li ng-repeat="item in items" ng-click="logPosition(item, $event)">{{item}}</li>
+$scope.readPosition = function (item, $event) {
+	console.log(item + ' was clicked at: ' + $event.clientX + ',' +	$event.clientY);
+};				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-repeat 2 rows</td>
+			<td>
+				<xmp>
+<table>
+	<tbody ng-repeat="item in items">
+		<tr>
+			<td>{{item.name}}</td>
+		</tr>
+		<tr>
+			<td>{{item.description}}</td>
+		</tr>
+	</tbody>
+</table>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-repeat-start ng-repeat-end</td>
+			<td>
+				<xmp>
+<ul>
+	<li ng-repeat-start="item in items">
+		<strong>{{item.name}}</strong>
+	</li>
+	<li ng-repeat-end>{{item.description}}</li>
+</ul>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>filters: date string currency number lowercase uppercase json limitTo Filter orderBy</td>
+			<td>
+				<xmp>
+{{user.signedUp| date:'yyyy-MM-dd'}}
+{{ formatDate( user.signedUp, 'yyyy-MM-dd')}}
+{{myLongString | limitTo:80 | lowercase}}	
+{{someObject | json}}	
+
+Search for:<input type="text" ng-model="criteria">
+<tr ng-repeat="backlogItem in backlog | filter:criteria"><td>name</td><td>desc</td></tr>		
+
+ng-repeat="item in backlog | filter:{name: criteria, done: false}"
+ng-repeat="item in backlog | filter:{$: criteria, done: false}"
+a catch-all property name: $
+
+Array-transforming filters: limitTo Filter orderBy	
+
+$scope.doneAndBigEffort = function (backlogItem) {
+	return backlogItem.done && backlogItem.estimation > 20;
+};
+ng-repeat="item in backlog | filter:doneAndBigEffort"
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>count filter length alias</td>
+			<td>
+				<xmp>
+ng-repeat="item in filteredBacklog = (backlog | filter:{$: criteria,done: false})"
+Total: {{filteredBacklog.length}}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>sort orderBy</td>
+			<td>
+				<xmp>
+<thead>
+	<th ng-click="sort('name')">Name</th>
+	<th ng-click="sort('desc')">Description</th>
+	<i ng-class="{'icon-chevron-up': isSortUp('name'), 'icon-chevron-down': isSortDown('name')}"></i>
+</thead>
+<tbody>
+	<tr ng-repeat="item in filteredBacklog = (backlog | filter:criteria | orderBy:sortField:reverse)">
+		<td>{{item.name}}</td>
+		<td>{{item.desc}}</td>
+	</tr>
+</tbody>	
+
+$scope.sortField = undefined;
+$scope.reverse = false;
+$scope.sort = function (fieldName) {
+	if ($scope.sortField === fieldName) {
+		$scope.reverse = !$scope.reverse;
+	} else {
+		$scope.sortField = fieldName;
+		$scope.reverse = false;
+	}
+};	
+$scope.isSortUp = function (fieldName) {
+	return $scope.sortField === fieldName && !$scope.reverse;
+};
+$scope.isSortDown = function (fieldName) {
+	return $scope.sortField === fieldName && $scope.reverse;
+};			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>custom filters – pagination</td>
+			<td>
+				<xmp>
+<tr ng-repeat="item in filteredBacklog = (backlog | pagination:pageNo:pageSize">
+	<td>{{item.name}}</td>
+</tr>				
+angular.module('arrayFilters', [])
+	.filter('pagination', function(){
+		return function(inputArray, selectedPage, pageSize) {
+			var start = selectedPage*pageSize;
+			return inputArray.slice(start, start + pageSize);
+		};
+	});	
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>$filter access filters JavaScript</td>
+			<td>
+				<xmp>
+We can express dependency on a filter using two distinct methods,
+requiring either:
+•	 The $filter service
+•	 A filter name with the Filter suffix
+
+angular.module('trimFilter', [])
+	.filter('trim', function($filter){
+		var limitToFilter =
+		$filter('limitTo');
+		return function(input, limit) {
+			if (input.length > limit) {
+				return limitToFilter(input, limit-3) + '...';
+			}
+			return input;
+		};
+	});		
+
+===
+.filter('trim', function(limitToFilter){
+	return function(input, limit) {
+	if (input.length > limit) {
+		return limitToFilter(input, limit-3) + '...';
+	}
+		return input;
+	};
+});			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>input password ng-minlength ng-maxlength ng-pattern regular</td>
+			<td>
+				<xmp>
+<input type="password" ng-model="user.password" ng-minlength="3" ng-maxlength="10"
+ng-pattern="/^.*(?=.*\d)(?=.*[a-zA-Z]).*$/">					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>input checkbox ng-true-value ng-false-value</td>
+			<td>
+				<xmp>
+<input type="checkbox" ng-model="user.admin">
+<input type="checkbox" ng-model="user.role" ng-true-value="admin" ng-false-value="basic">
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>input radio</td>
+			<td>
+				<xmp>
+<label><input type="radio" ng-model="user.sex" value="male"> Male</label>
+<label><input type="radio" ng-model="user.sex" value="female">Female</label>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-selected ng-options</td>
+			<td>
+				<xmp>
+<select ng-model="sex">
+	<option value="m" ng-selected="sex=='m'">Male</option>
+	<option value="f" ng-selected="sex=='f'">Female</option>
+</select>	
+
+	ng-options="user.email for user in users"
+Select a user object with user.email as the label:
+
+	ng-options="getFullName(user) for user in users"
+Select a user object with a computed label (the function would be defined onthe scope):
+
+	ng-options="user.email as getFullName(user) for user in users
+Select a user's e-mail rather than the whole user object, with their full name as the label:
+
+	ng-options="getFullName(user) group by user.sex for user in users"	
+Select a user object with the list grouped by sex:
+
+$scope.countriesByCode = {
+	'AF' : 'AFGHANISTAN',
+	'AX' : 'ÅLAND ISLANDS',
+};
+$scope.countriesByName = {
+	'AFGHANISTAN' : 'AF',
+	'ÅLAND ISLANDS' : 'AX',
+};
+	ng-options="code as name for (code, name) in countriesByCode"
+To select a country code by country name, ordered by country code:
+	ng-options="code as name for (name, code) in countriesByName"			
+To select a country code by country name, ordered by country name:
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>form ng-valid.ng-pristine ng-invalid.ng-dirty class</td>
+			<td>
+				<xmp>
+.ng-valid,.ng-pristine { border: solid green 3px; }
+.ng-invalid,.ng-dirty { border: solid red 3px; }					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>form validation $invalid $error email required ng-class ng-show</td>
+			<td>
+				<xmp>
+<form name="userInfoForm">
+<div class="control-group" ng-class="getCssClasses(userInfoForm.email)">
+	<label>E-mail</label> <input type="email" ng-model="user.email"	name="email" required>
+	<span ng-show="showError(userInfoForm.email, 'email')">You must enter a valid email</span>
+	<span ng-show="showError(userInfoForm.email, 'required')">This field is required</span>
+</div>
+</form>
+
+In the controller:
+app.controller('MainCtrl', function($scope) {
+	$scope.getCssClasses = function(ngModelContoller) {
+		return {
+			error: ngModelContoller.$invalid && ngModelContoller.$dirty,
+			success: ngModelContoller.$valid && ngModelContoller.$dirty
+		};
+	};
+	$scope.showError = function(ngModelController, error) {
+		return ngModelController.$error[error];
+	};
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-disabled $dirty</td>
+			<td>
+				<xmp>
+<form name="userInfoForm">
+	<button ng-disabled="!canSave()">Save</button>
+</form>		
+
+app.controller('MainCtrl', function($scope) {
+	$scope.canSave = function() {
+		return $scope.userInfoForm.$dirty && $scope.userInfoForm.$valid;
+	};
+});			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Disabling native browser validation novalidate</td>
+			<td>
+				<xmp>
+<form name="novalidateForm" novalidate>
+This form is called novalidateForm and the novalidate attribute will tell the
+browser not to attempt the validation on any of the inputs in the form.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-form nesting ng-include novalidate</td>
+			<td>
+				<xmp>
+<script type="text/ng-template" id="password-form">
+<ng-form name="passwordForm">
+	<div ng-show="user.password != user.password2">
+		Passwords do not match
+	</div>
+	<label>Password</label>
+	<input ng-model="user.password" type="password" required>
+	<label>Confirm Password</label>
+	<input ng-model="user.password2" type="password" required>
+</ng-form>
+</script>
+
+<form name="form1" novalidate>
+	<legend>User Form</legend>
+	<label>Name</label>
+	<input ng-model="user.name" required>
+	<ng-include src="'password-form'"></ng-include>
+</form>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>repeat subform embed nest ng-form</td>
+			<td>
+				<xmp>
+Template:
+<form novalidate ng-controller="MainCtrl" name="userForm">
+	<label>Websites</label>
+	<div ng-show="userForm.$invalid">The User Form is invalid.</div>
+	<div ng-repeat="website in user.websites" ng-form="websiteForm">
+		<input type="url" name="website" ng-model="website.url" required>
+		<button ng-click="remove($index)">X</button>
+		<span ng-show="showError(websiteForm.website, 'url')">Pleae must enter a valid url</span>
+		<span ng-show="showError(websiteForm.website, 'required')">This field is required</span>
+	</div>
+	<button ng-click="addWebsite()">Add Website</button>
+</form>
+Controller:
+app.controller('MainCtrl', function($scope) {
+	$scope.showError = function(ngModelController, error) {
+		return ngModelController.$error[error];
+	};
+	$scope.user = {
+		websites: [
+			{url: 'http://www.bloggs.com'},
+			{url: 'http://www.jo-b.com'}
+		]
+	};
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-submit ng-click form</td>
+			<td>
+				<xmp>
+<form ng-submit="showAlert(q)">
+	<input ng-model="q">
+</form>			
+
+<form>
+	<input ng-model="q">
+	<button ng-click="showAlert(q)">Search</button>
+</form>		
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>$location</td>
+			<td>
+				<xmp>
+http://myhost.com/myapp/admin/users/list?active=true#bottom
+http://myhost.com/myapp#/admin/users/list?active=true#bottom
+$location.url() /admin/users/list?active=true#bottom
+$location.path() /admin/users/list
+$location.search() {active: true}
+$location.hash() Bottom
+
+All of these methods are jQuery-style getters. In other words, they can be used to
+both get and set the value of a given URL's component. For example, to read the URL
+fragment value you would use: $location.hash() , while setting the value would
+require an argument to be supplied to the same function: $location.hash('top') 
+
+The $location service offers other methods (not listed in the previous table) to
+access any part of a URL: the protocol ( protocol() ), the host ( host() ), the port
+( port() ), and the absolute URL ( absUrl() ). The methods are getters only. They
+can't be used to mutate URL
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>$locationProvider.html5Mode</td>
+			<td>
+				<xmp>
+angular.module('location', [])
+	.config(function ($locationProvider) {
+	$locationProvider.html5Mode(true);
+})					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>routers $watch $location.path</td>
+			<td>
+				<xmp>
+<body ng-controller="NavigationCtrl">
+<div class="navbar">
+	<div class="navbar-inner">
+		<ul class="nav">
+			<li><a href="#/admin/users/list">List users</a></li>
+			<li><a href="#/admin/users/new">New user</a></li>
+		</ul>
+	</div>
+</div>
+<div class="container-fluid" ng-include="selectedRoute.templateUrl">
+	<!-- Route-dependent content goes here -->
+</div>
+</body>
+
+.controller('NavigationCtrl', function ($scope, $location) {
+	var routes = {
+		'/admin/users/list': {templateUrl: 'tpls/users/list.html'},
+		'/admin/users/new': {templateUrl: 'tpls/users/new.html'},
+		'/admin/users/edit': {templateUrl: 'tpls/users/edit.html'}
+	};
+	var defaultRoute = routes['/admin/users/list'];
+}
+
+$scope.$watch(function () {
+		return $location.path();
+	}, function (newPath) {
+		$scope.selectedRoute = routes[newPath] || defaultRoute;
+})
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ngRoute</td>
+			<td>
+				<xmp>
+When working with the latest version of AngularJS, you
+will need to remember to include the angular-route.js file and
+declare a dependency on the ngRoute module.					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
