@@ -752,9 +752,11 @@ $scope.readPosition = function (item, $event) {
 			<td>
 				<xmp>
 {{user.signedUp| date:'yyyy-MM-dd'}}
+
 {{ formatDate( user.signedUp, 'yyyy-MM-dd')}}
 {{myLongString | limitTo:80 | lowercase}}	
 {{someObject | json}}	
+{{ 123 | currency }}
 
 Search for:<input type="text" ng-model="criteria">
 <tr ng-repeat="backlogItem in backlog | filter:criteria"><td>name</td><td>desc</td></tr>		
@@ -841,6 +843,11 @@ We can express dependency on a filter using two distinct methods,
 requiring either:
 •	 The $filter service
 •	 A filter name with the Filter suffix
+
+app.controller('DemoController', ['$scope', '$filter',
+	function($scope, $filter) {
+	$scope.name = $filter('lowercase')('Ari');
+}]);
 
 angular.module('trimFilter', [])
 	.filter('trim', function($filter){
@@ -1268,39 +1275,154 @@ even completely at various points in the application</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>custome button directive</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+myModule.directive('button', function() {
+	return {
+		restrict: 'E',
+		compile: function(element, attributes) {
+			element.addClass('btn');
+			if ( attributes.type === 'submit' ) {
+				element.addClass('btn-primary');
+			}
+			if ( attributes.size ) {
+				element.addClass('btn-' + attributes.size);
+			}
+		}
+	};
+})					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>custom directive pagination</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<pagination num-pages="tasks.pageCount" current-page="tasks.currentPage"></pagination>	
+<div class="pagination">
+<ul>
+	<li ng-class="{disabled: noPrevious()}"><a ng-click="selectPrevious()">Previous</a></li>
+	<li ng-repeat="page in pages" ng-class="{active: isActive(page)}"><a ng-click="selectPage(page)">{page}}</a></li>
+	<li ng-class="{disabled: noNext()}"><a ng-click="selectNext()">Next</a></li>
+</ul>
+</div>				
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>nested controller</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<div ng-controller="ParentController">
+	<div ng-controller="ChildController"><a ng-click="sayHello()">Say hello</a></div>
+	{{ person }}
+</div>
+
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>custom $parse $watch</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<div ng-controller="MyController">
+	<input ng-model="expr" type="text" placeholder="Enter an expression" />
+	<h2>{{ parsedValue }}</h2>
+</div>
+
+<script>
+angular.module("myApp", [])
+.controller('MyController',
+	function($scope, $parse) {
+		$scope.$watch('expr', function(newVal, oldVal, scope) {
+			if (newVal !== oldVal) {
+				// Let's set up our parseFun with the expression
+				var parseFun = $parse(newVal);
+				// Get the value of the parsed expression
+				scope.parsedValue = 'custom: ' + parseFun(scope);
+			}
+		});
+	});
+</script>					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>custom $interpolate $watch</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<div ng-controller="MyController">
+	<input ng-model="to" type="email" placeholder="Recipient" />
+	<textarea ng-model="emailBody"></textarea>
+	<pre>{{ previewText }}</pre>
+</div>
+
+<script>
+angular.module('myApp', [])
+	.controller('MyController',
+		function($scope, $interpolate) {
+			// Set up a watch
+			$scope.$watch('emailBody', function(body) {
+				if (body) {
+					var template = $interpolate(body);
+					$scope.previewText = template({to: $scope.to});
+			}
+	});
+});
+</script>					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>custom $interpolateProvider.startSymbol endSymbol</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<div id="emailEditor" ng-controller="MyController">
+	<div id="emailEditor">
+		<input ng-model="to" type="email" placeholder="Recipient" />
+		<textarea ng-model="emailBody"></textarea>
+	</div>
+	<div id="emailPreview">
+		<pre>__previewText__</pre>
+	</div>
+</div>
+	<script>
+angular.module('myApp', ['emailParser'])
+  .controller('MyController',
+    ['$scope', 'EmailParser',
+      function($scope, EmailParser) {
+        $scope.to = 'ari@fullstack.io';
+        $scope.emailBody = 'Hello __to__';
+        // Set up a watch
+        $scope.$watch('emailBody', function(body) {
+          if (body) {
+            $scope.previewText =
+              EmailParser.parse(body, {
+                to: $scope.to
+              });
+          }
+        });
+}]);
+
+angular.module('emailParser', [])
+  .config(['$interpolateProvider',
+    function($interpolateProvider) {
+      $interpolateProvider.startSymbol('__');
+      $interpolateProvider.endSymbol('__');
+}])
+.factory('EmailParser', ['$interpolate',
+  function($interpolate) {
+    // a service to handle parsing
+    return {
+      parse: function(text, context) {
+        var template = $interpolate(text);
+        return template(context);
+      }
+    };
+}]);	
+	</script>					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
