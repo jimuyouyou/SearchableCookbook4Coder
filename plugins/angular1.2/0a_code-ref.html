@@ -619,7 +619,7 @@ pointing to a partial, for example, <div ng-include="'header.tpl.html'"></div>.
 			</td>
 		</tr>
 		<tr>
-			<td>$index $first $middle $last ng-repeat</td>
+			<td>$index $first $middle $last $even $odd ng-repeat</td>
 			<td>
 				<xmp>
 <li ng-repeat="(name, value) in user">
@@ -635,6 +635,12 @@ pointing to a partial, for example, <div ng-include="'header.tpl.html'"></div>.
 		</span>
 	</ng-switch>
 </li>
+
+<ul ng-controller="PeopleController">
+	<li ng-repeat="person in people" ng-class="{even: !$even, odd: !$odd}">
+	{{person.name}} lives in {{person.city}}
+	</li>
+</ul>
 				</xmp>
 			</td>
 		</tr>
@@ -748,15 +754,79 @@ $scope.readPosition = function (item, $event) {
 			</td>
 		</tr>
 		<tr>
-			<td>filters: date string currency number lowercase uppercase json limitTo Filter orderBy</td>
+			<td>filters: json date string currency number lowercase uppercase json limitTo Filter orderBy</td>
 			<td>
 				<xmp>
+{{ {'name': 'Ari', 'City': 'San Francisco'} | json }} turn json into string
+{{ San Francisco is very cloudy | limitTo:3 }} <!-- San -->
+{{ San Francisco is very cloudy | limitTo:-6 }} <!-- cloudy -->
+{{ ['a', 'b', 'c', 'd', 'e', 'f'] | limitTo:1 }} <!-- ["a"] -->
+{{ "San Francisco is very cloudy" | lowercase }}
+{{ "San Francisco is very cloudy" | uppercase }}
+{{ 123456789 | number }} <!-- 1,234,567,890 -->
+{{ 1.234567 | number:2 }} <!-- 1.23 -->
+
+{{ ['Ari', 'Lerner', 'Likes', 'To', 'Eat', 'Pizza'] | filter:'e' }} elements that contain 'e'
+
 {{user.signedUp| date:'yyyy-MM-dd'}}
 
 {{ formatDate( user.signedUp, 'yyyy-MM-dd')}}
 {{myLongString | limitTo:80 | lowercase}}	
 {{someObject | json}}	
 {{ 123 | currency }}
+
+{{today | date: 'medium'}} Aug 09, 2013 12:09:02 PM
+{{today | date: 'short'}} 8/9/13 12:09 PM
+{{today | date: 'fullDate'}} Thursday, August 09, 2013
+{{today | date: 'longDate'}} August 09, 2013
+{{today | date: 'mediumDate'}} Aug 09, 2013
+{{today | date: 'shortDate'}} 8/9/13
+{{today | date: 'mediumTime'}} 12:09:02 PM
+{{today | date: 'shortTime'}} 12:09 PM
+{{ today | date:'yyyy' }} 2013
+{{ today | date:'yy' }} 13
+{{ today | date:'y' }} 2013
+{{ today | date:'MMMM' }} August
+{{ today | date:'MMM' }} Aug
+{{ today | date:'MM' }} 08
+{{ today | date:'M' }} 8
+{{ today | date:'dd' }} 09
+{{ today | date:'d' }} 9
+{{ today | date:'EEEE' }} Thursday
+{{ today | date:'hh:mm:ss.sss' }} 12:09:02.995
+
+{{ [{
+'name': 'Ari',
+'status': 'awake'
+}, {
+'name': 'Q',
+'status': 'sleeping'
+}, {
+'name': 'Nate',
+'status': 'awake'
+}] | orderBy: 'name' }}
+<!--
+[
+{"name":"Ari","status":"awake"},
+{"name":"Nate","status":"awake"},
+{"name":"Q","status":"sleeping"}
+]
+-->
+
+
+{{ [{
+'name': 'Ari',
+'City': 'San Francisco',
+'favorite food': 'Pizza'
+}, {
+'name': 'Nate',
+'City': 'San Francisco',
+'favorite food': 'indian food'
+}] | filter:{'favorite food': 'Pizza'} }}
+result: [{"name":"Ari","City":"San Francisco","favorite food":"Pizza"}] 
+
+{{ ['Ari', 'likes', 'to', 'travel'] | filter:isCapitalized }}
+$scope.isCapitalized = function(str) { return str[0] == str[0].toUpperCase(); }
 
 Search for:<input type="text" ng-model="criteria">
 <tr ng-repeat="backlogItem in backlog | filter:criteria"><td>name</td><td>desc</td></tr>		
@@ -883,11 +953,12 @@ ng-pattern="/^.*(?=.*\d)(?=.*[a-zA-Z]).*$/">
 			</td>
 		</tr>
 		<tr>
-			<td>input checkbox ng-true-value ng-false-value</td>
+			<td>input checkbox ng-true-value ng-false-value ng-checked</td>
 			<td>
 				<xmp>
 <input type="checkbox" ng-model="user.admin">
 <input type="checkbox" ng-model="user.role" ng-true-value="admin" ng-false-value="basic">
+<input type="checkbox" ng-checked="someProperty" ng-init="someProperty = true" ng-model="someProperty">
 				</xmp>
 			</td>
 		</tr>
@@ -941,7 +1012,13 @@ To select a country code by country name, ordered by country name:
 			<td>
 				<xmp>
 .ng-valid,.ng-pristine { border: solid green 3px; }
-.ng-invalid,.ng-dirty { border: solid red 3px; }					
+.ng-invalid,.ng-dirty { border: solid red 3px; }
+input.ng-invalid {
+	border: 1px solid red;
+}
+input.ng-valid {
+	border: 1px solid green;
+}					
 				</xmp>
 			</td>
 		</tr>
@@ -1204,7 +1281,7 @@ angular.module('routing_basics', [])
 			</td>
 		</tr>
 		<tr>
-			<td>ng-href</td>
+			<td>ng-href link a</td>
 			<td>
 				<xmp><a ng-href="/admin/users/{{user.$id()}}">Edit user</a></xmp>
 			</td>
@@ -1292,21 +1369,6 @@ myModule.directive('button', function() {
 		}
 	};
 })					
-				</xmp>
-			</td>
-		</tr>
-		<tr>
-			<td>custom directive pagination</td>
-			<td>
-				<xmp>
-<pagination num-pages="tasks.pageCount" current-page="tasks.currentPage"></pagination>	
-<div class="pagination">
-<ul>
-	<li ng-class="{disabled: noPrevious()}"><a ng-click="selectPrevious()">Previous</a></li>
-	<li ng-repeat="page in pages" ng-class="{active: isActive(page)}"><a ng-click="selectPage(page)">{page}}</a></li>
-	<li ng-class="{disabled: noNext()}"><a ng-click="selectNext()">Next</a></li>
-</ul>
-</div>				
 				</xmp>
 			</td>
 		</tr>
@@ -1423,6 +1485,395 @@ angular.module('emailParser', [])
 }]);	
 	</script>					
 				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>form validation fields</td>
+			<td>
+				<xmp>
+<input type="text" required />
+<input type="text" ng-minlength=5 />
+<input type="text" ng-maxlength=20 />
+<input type="text" ng-pattern="/a-zA-Z/" />
+<input type="email" name="email" ng-model="user.email" />
+<input type="number" name="age" ng-model="user.age" />
+<input type="url" name="homepage" ng-model="user.facebook_url" />					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>custom form validation uniqe user $setValidity</td>
+			<td>
+				<xmp>
+ngular.module('validationExample', [])
+	.directive('ensureUnique', function($http) {
+		return {
+			require: 'ngModel',
+			link: function(scope, ele, attrs, c) {
+			scope.$watch(attrs.ngModel, function() {
+				$http({
+					method: 'POST',
+					url: '/api/check/' + attrs.ensureUnique,
+					data: {'field': attrs.ensureUnique}
+				}).success(function(data,status,headers,cfg) {
+					c.$setValidity('unique', data.isUnique);
+				}).error(function(data,status,headers,cfg) {
+					c.$setValidity('unique', false);
+				});
+			});
+		}
+	}
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>form validation $pristine $dirty $valid $invalid $error</td>
+			<td>
+				<xmp>
+formName.inputFieldName.$pristine;
+formName.inputFieldName.$dirty
+formName.inputFieldName.$valid
+formName.inputFieldName.$invalid
+formName.inputfieldName.$error					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>custom directive </td>
+			<td>
+				<xmp>
+<my-directive></my-directive>
+
+angular.module('myApp', [])
+	.directive('myDirective', function() {
+		return {
+		restrict: 'EAC', //element ( E ), an attribute ( A ), a class ( C ), or a comment ( M )
+			replace: true,
+			template: '<a href="http://google.com">
+			Click me to go to Google</a>'
+		};
+})				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>custom Directive with Expression, parameters</td>
+			<td>
+				<xmp>
+<my-directive="someExpression"></my-directive>
+<div my-directive="someExpression"></div>
+<div class="my-directive:someExpression"></div>
+
+<div my-directive my-url="http://google.com" my-link-text="Click me to go to Google"></div>
+angular.module('myApp', [])
+	.directive('myDirective', function() {
+		return {
+			restrict: 'A',
+			replace: true,
+		scope: {
+			myUrl: '@', // binding strategy
+			myLinkText: '@' // binding strategy
+		},
+		template: '<a href="{{myUrl}}">' + '{{myLinkText}}</a>'
+	}
+})
+
+<div my-directive some-property="someProperty with @ binding"></div>
+scope: {someProperty: '@'}
+
+<div my-directive some-attr="someProperty with @ binding"></div>
+scope: {someProperty: '@someAttr'}
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-readonly</td>
+			<td>
+				<xmp>
+<input type="text" ng-readonly="someProperty" value="Some text here"/>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-selected</td>
+			<td>
+				<xmp>
+<label>Select Two Fish:</label>
+<input type="checkbox" ng-model="isTwoFish"><br/>
+<select>
+	<option>One Fish</option>
+	<option ng-selected="isTwoFish">Two Fish</option>
+</select>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-src image</td>
+			<td>
+				<xmp>
+NOT fetch the image via the given URL until all expressions provided
+to ng-src have been interpolated					
+<img ng-src="{{imgSrc}}" />					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-cloak</td>
+			<td>
+				<xmp>
+<body ng-init="greeting = 'Hello World'">
+	<p ng-cloak>{{ greeting }}</p>
+</body>		
+same with ng-cloak			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-bind-template</td>
+			<td>
+				<xmp>
+<div ng-bind-template="{{ message }} {{ name }}"></div>
+ng-bind-template				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-change</td>
+			<td>
+				<xmp>
+<div ng-controller="EquationController">
+	<input type="text" ng-model="equation.x" ng-change="change()" />
+	<code>{{ equation.output }}</code>
+</div>	
+
+angular.module('myApp', [])
+	.controller('EquationController', function($scope) {
+		$scope.equation = {};
+		$scope.change = function() {
+			$scope.equation.output = Number($scope.equation.x) + 2;
+		};
+});				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>directive parameters option</td>
+			<td>
+				<xmp>
+angular.module('myApp', [])
+	.directive('myDirective', function() {
+		return {
+			restrict: String,
+			priority: Number,
+			terminal: Boolean,
+			template: String or Template Function:
+			function(tElement, tAttrs) {...},
+			templateUrl: String,
+			replace: Boolean or String,
+			scope: Boolean or Object,
+			transclude: Boolean,
+			controller: String or
+			function(scope, element, attrs, transclude, otherInjectables) { ... },
+			controllerAs: String,
+			require: String,
+			link: function(scope, iElement, iAttrs) { ... },
+			compile: return an Object OR
+			function(tElement, tAttrs, transclude) {
+			return {
+			pre: function(scope, iElement, iAttrs, controller) { ... },
+			post: function(scope, iElement, iAttrs, controller) { ... }
+		}
+		// or
+		return function postLink(...) { ... }
+		}
+	};
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>transclude directive html</td>
+			<td>
+				<xmp>
+<div sidebox title="Links">
+	<ul>
+		<li>First link</li>
+		<li>Second link</li>
+	</ul>
+</div>
+<div sidebox title="TagCloud">
+	<div class="tagcloud">
+		<a href="">Graphics</a>
+		<a href="">AngularJS</a>
+		<a href="">D3</a>
+		<a href="">Front-end</a>
+		<a href="">Startup</a>
+	</div>
+</div>
+
+angular.module('myApp', [])
+	.directive('sidebox', function() {
+		return {
+			restrict: 'EA',
+			scope: {
+			title: '@'
+		},
+		transclude: true,
+		template: '<div class="sidebox">\
+					<div class="content">\
+					<h2 class="header">{{ title }}</h2>\
+					<span class="content" ng-transclude>\
+					</span>\
+					</div>\
+					</div>'
+	}
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ng-view ngRoute</td>
+			<td>
+				<xmp>
+The ngView directive follows these specific steps:
+• Any time the $routeChangeSuccess event is fired, the view will update
+• If there is a template associated with the current route:
+– Create a new scope
+– Remove the last view, which cleans up the last scope
+– Link the new scope and the new template
+– Link the controller to the scope, if specified in the routes
+– Emits the $viewContentLoaded event
+– Run the onload attribute function, if provided
+
+<header>
+	<h1>Header</h1>
+</header>
+<a href="#AddNewOrder">AddNewOrder Template html</a><p>
+<a href="#ShowOrders">ShowOrders template url</a>
+<div class="content">
+	<div ng-view></div>
+</div>
+<footer>
+	<h5>Footer</h5>
+</footer>
+<script>
+angular.module('myApp', ['ngRoute']).
+config(['$routeProvider',
+	function($routeProvider) {
+		$routeProvider.
+		when('/AddNewOrder', {
+			//templateUrl: 'templates/add_order.html',
+			template: '<h1>AddNewOrder Template html</h1>',
+			controller: 'AddOrderController'
+		}).
+		when('/ShowOrders', {
+			templateUrl: 'templates/show_orders.html',
+			controller: 'ShowOrdersController'
+		}).
+		otherwise({
+			// redirectTo: '/AddNewOrder'
+		});
+
+	}]);
+</script>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>$window.location.href</td>
+			<td>
+				<xmp>$window.location.href = "/reload/page";</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
 			</td>
 		</tr>
 		<tr>

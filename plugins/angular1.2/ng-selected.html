@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>ng-selected.html</title>
+</head>
+<script src='lib/angular1.2.js'></script>
+<body>
+	<label>Select Two Fish:</label>
+<input type="checkbox" ng-model="isTwoFish"><br/>
+<select>
+	<option>One Fish</option>
+	<option ng-selected="isTwoFish">Two Fish</option>
+</select>
+</body>
+</html>

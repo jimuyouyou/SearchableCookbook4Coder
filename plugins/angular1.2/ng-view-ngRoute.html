@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-view-ngRoute.html</title>
+</head>
+<script src='lib/angular1.2.js'></script>
+<script src='lib/angular-route.js'></script>
+<body>
+	<header>
+		<h1>Header</h1>
+	</header>
+	<a href="#AddNewOrder">AddNewOrder Template html</a><p>
+	<a href="#ShowOrders">ShowOrders template url</a>
+	<div class="content">
+		<div ng-view></div>
+	</div>
+	<footer>
+		<h5>Footer</h5>
+	</footer>
+	<script>
+	angular.module('myApp', ['ngRoute']).
+	config(['$routeProvider',
+		function($routeProvider) {
+			$routeProvider.
+			when('/AddNewOrder', {
+				//templateUrl: 'templates/add_order.html',
+				template: '<h1>AddNewOrder Template html</h1>',
+				controller: 'AddOrderController'
+			}).
+			when('/ShowOrders', {
+				templateUrl: 'templates/show_orders.html',
+				controller: 'ShowOrdersController'
+			}).
+			otherwise({
+				// redirectTo: '/AddNewOrder'
+			});
+
+		}]);
+	</script>
+</body>
+</html>
