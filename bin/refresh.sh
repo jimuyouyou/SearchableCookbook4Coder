@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ignore_files=( "index.html" "conf.js" )
+ignore_files=( "index.html" "cfg.js" )
 #for igf in ${ignore_files[@]}
 #do
 #	echo "$igf"
@@ -38,7 +38,7 @@ done
 }
 
 init_head_plugin() { # initial header of index.html for each plugin
-	plugin_html=$(<"./plugin_header")"<h1>$1</h1>"
+	plugin_html=$(<"./plugin_header")"<h2>$1</h2>"
 	echo "$plugin_html" 
 }
 
@@ -52,6 +52,8 @@ process_files_plugin() { # inside index.html of each plugin add the individual f
 }
 
 end_foot_plugin() { # output each plugin-name/index.html 
+	plugin_html=$plugin_html"<script src='cfg.js'></script>"
+	plugin_html=$plugin_html"<script src='../../lib/pCfg.js'></script>"
 	plugin_html=$plugin_html$(<"./plugin_footer")
 	echo "$plugin_html" > "$1/index.html"
 }
