@@ -53,7 +53,7 @@ process_files_plugin() { # inside index.html of each plugin add the individual f
 
 end_foot_plugin() { # output each plugin-name/index.html 
 	plugin_html=$plugin_html"<script src='cfg.js'></script>"
-	plugin_html=$plugin_html"<script src='../../lib/pCfg.js'></script>"
+	#plugin_html=$plugin_html"<script src='../../lib/pCfg.js'></script>"
 	plugin_html=$plugin_html$(<"./plugin_footer")
 	echo "$plugin_html" > "$1/index.html"
 }
