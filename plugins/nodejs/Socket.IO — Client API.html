@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://socket.io/docs/client-api/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Socket.IO  —  Client API</title>
+
+<body class="page page-id-96 page-child parent-pageid-26 page-template page-template-page-siderbar-php custom-background group-blog">
+	<div id="primary" class="content-area with-sidebar">
+		<main id="main" class="site-main" role="main">
+			
+				
+<article id="post-96" class="post-96 page type-page status-publish hentry">
+	<div class="entry-content">
+		<h1 id="client-api"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#client-api" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Client API</h1>
+<h2 id="io(url:string,-opts:object):socket"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#io(url:string,-opts:object):socket" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>IO(url:String, opts:Object):Socket</h2>
+<p>Exposed as the <code>io</code> global in <code>window</code> if using the standalone build (eg: <code>/socket.io/socket.io.js</code> or the CDN), or the result of calling <code>require('socket.io-client')</code>.</p>
+<p>When called, it creates a new <code>Manager</code> for the given URL, and attempts<br>
+to reuse an existing <code>Manager</code> for subsequent calls, unless the<br>
+<code>multiplex</code> option is passed with <code>false</code>. Passing this option is the equivalent of passing <code>'force new connection': true</code>.</p>
+<p>The rest of the options are passed to the <code>Manager</code> constructor (see below<br>
+for details).</p>
+<p>A <code>Socket</code> instance is returned for the namespace specified by the<br>
+pathname in the URL, defaulting to <code>/</code>. For example, if the <code>url</code> is<br>
+<code>http://localhost/users</code>, a transport connection will be established to<br>
+<code>http://localhost</code> and a Socket.IO connection will be established to<br>
+<code>/users</code>.</p>
+<h2 id="io#protocol"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#io#protocol" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>IO#protocol</h2>
+<p>Socket.io protocol revision number this client works with.</p>
+<h2 id="io#socket"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#io#socket" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>IO#Socket</h2>
+<p>Reference to the <code>Socket</code> constructor.</p>
+<h2 id="io#manager"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#io#manager" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>IO#Manager</h2>
+<p>Reference to the <code>Manager</code> constructor.</p>
+<h2 id="io#emitter"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#io#emitter" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>IO#Emitter</h2>
+<p>Reference to the <code>Emitter</code> constructor.</p>
+<h2 id="manager(url:string,-opts:object)"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#manager(url:string,-opts:object)" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Manager(url:String, opts:Object)</h2>
+<p>A <code>Manager</code> represents a connection to a given Socket.IO server. One or<br>
+more <code>Socket</code> instances are associated with the manager. The manager<br>
+can be accessed through the <code>io</code> property of each <code>Socket</code> instance.</p>
+<p>The <code>opts</code> are also passed to <code>engine.io</code> upon initialization of the<br>
+underlying <code>Socket</code>.</p>
+<p>Options:<br>
+- <code>reconnection</code> whether to reconnect automatically (<code>true</code>)<br>
+- <code>reconnectionDelay</code> how long to wait before attempting a new<br>
+  reconnection (<code>1000</code>)<br>
+- <code>reconnectionDelayMax</code> maximum amount of time to wait between<br>
+  reconnections (<code>5000</code>). Each attempt increases the reconnection by<br>
+  the amount specified by <code>reconnectionDelay</code>.<br>
+- <code>timeout</code> connection timeout before a <code>connect_error</code><br>
+  and <code>connect_timeout</code> events are emitted (<code>20000</code>)</p>
+<h3>Events</h3>
+<ul>
+<li><code>connect</code>. Fired upon a successful connection.</li>
+<li><code>connect_error</code>. Fired upon a connection error.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Object</code> error object</li>
+</ul>
+</li>
+<li><code>connect_timeout</code>. Fired upon a connection timeout.</li>
+<li><code>reconnect</code>. Fired upon a successful reconnection.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Number</code> reconnection attempt number</li>
+</ul>
+</li>
+<li><code>reconnect_attempt</code>. Fired upon an attempt to reconnect.</li>
+<li><code>reconnecting</code>. Fired upon an attempt to reconnect.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Number</code> reconnection attempt number</li>
+</ul>
+</li>
+<li><code>reconnect_error</code>. Fired upon a reconnection attempt error.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Object</code> error object</li>
+</ul>
+</li>
+<li><code>reconnect_failed</code>. Fired when couldn’t reconnect within <code>reconnectionAttempts</code></li>
+</ul>
+<p>The events above are also emitted on the individual sockets that<br>
+reconnect that depend on this <code>Manager</code>.</p>
+<h2 id="manager#reconnection(v:boolean):manager"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#manager#reconnection(v:boolean):manager" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Manager#reconnection(v:Boolean):Manager</h2>
+<p>Sets the <code>reconnection</code> option, or returns it if no parameters<br>
+are passed.</p>
+<h2 id="manager#reconnectionattempts(v:boolean):manager"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#manager#reconnectionattempts(v:boolean):manager" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Manager#reconnectionAttempts(v:Boolean):Manager</h2>
+<p>Sets the <code>reconnectionAttempts</code> option, or returns it if no parameters<br>
+are passed.</p>
+<h2 id="manager#reconnectiondelay(v:boolean):manager"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#manager#reconnectiondelay(v:boolean):manager" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Manager#reconnectionDelay(v:Boolean):Manager</h2>
+<p>Sets the <code>reconectionDelay</code> option, or returns it if no parameters<br>
+are passed.</p>
+<h2 id="manager#reconnectiondelaymax(v:boolean):manager"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#manager#reconnectiondelaymax(v:boolean):manager" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Manager#reconnectionDelayMax(v:Boolean):Manager</h2>
+<p>Sets the <code>reconectionDelayMax</code> option, or returns it if no parameters<br>
+are passed.</p>
+<h2 id="manager#timeout(v:boolean):manager"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#manager#timeout(v:boolean):manager" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Manager#timeout(v:Boolean):Manager</h2>
+<p>Sets the <code>timeout</code> option, or returns it if no parameters<br>
+are passed.</p>
+<h2 id="socket"><a class="icon-link deep-link" href="http://socket.io/docs/client-api/#socket" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Socket</h2>
+<h3>Events</h3>
+<ul>
+<li><code>connect</code>. Fired upon connecting.</li>
+<li><code>error</code>. Fired upon a connection error<br>
+Parameters:<p></p>
+<ul>
+<li><code>Object</code> error data</li>
+</ul>
+</li>
+<li><code>disconnect</code>. Fired upon a disconnection.</li>
+<li><code>reconnect</code>. Fired upon a successful reconnection.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Number</code> reconnection attempt number</li>
+</ul>
+</li>
+<li><code>reconnect_attempt</code>. Fired upon an attempt to reconnect.</li>
+<li><code>reconnecting</code>. Fired upon an attempt to reconnect.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Number</code> reconnection attempt number</li>
+</ul>
+</li>
+<li><code>reconnect_error</code>. Fired upon a reconnection attempt error.<br>
+Parameters:<p></p>
+<ul>
+<li><code>Object</code> error object</li>
+</ul>
+</li>
+<li><code>reconnect_failed</code>. Fired when couldn’t reconnect within <code>reconnectionAttempts</code></li>
+</ul>
+			</div><!-- .entry-content -->
+	<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+			
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info">
+			<span class="footer-left">SOCKET.IO IS OPEN-SOURCE (MIT). RUN BY <a href="https://github.com/Automattic/socket.io/graphs/contributors">CONTRIBUTORS</a>. <a href="https://twitter.com/socketio" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @socketio</a></span>
+			<span class="footer-right"><a href="http://automattic.com/">SUPPORTED BY<div id="a8c-image"></div></a></span>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+
+
+
+
+</body></html>
