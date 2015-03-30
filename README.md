@@ -1,6 +1,7 @@
 # SearchableCookbook4Coder
 SearchableCookbook4Coder
 
+<h3>Background</h3>
 Computer techonolgies are growing fast, and there are at least 5 skills are needed in one real project. As a coder, it would be difficult for you to remember all statements exactly for one specified language. This may even worse when two programming languages have similar statements, but with huge differences in detail. <p>
 
 I build this simple app to provide pluginable, searchable, runnable and copiable statements for coders.<p> 
@@ -22,7 +23,7 @@ I build this simple app to provide pluginable, searchable, runnable and copiable
 4. Mobile development<p>
 ...<p>
 
-<h3>Note: You can also add/refine any documents to project.</h3><p>
+<h3>Note: You can also add/refine any documents to this project.</h3><p>
 
 
 <h3>Setup:</h3><p>
@@ -38,7 +39,7 @@ Screen shot:<p>
 2. Add any pages to PhoneGap folder, preferabley html, but you can put any format<p>
 3. cd ../bin<p>
 4. ./refresh.sh <p>
-This simple linux script will link PhoneGap as a new plugin listed as left bar, and all pages under PhongeGap will be composed to one file named PhoneGap/index.html as a link. Of course, it is searchable!
+This simple linux script will link PhoneGap as a new plugin listed as left bar, and all pages under PhongeGap will be composed to one file named PhoneGap/index.html as a link. Of course, it is searchable!<p>
 5. open index.html page again and you will be able to search what you have just created rapidly<p>
 
 <h3>Toolsets already implemented:</h3><p>
