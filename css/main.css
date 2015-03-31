@@ -3,7 +3,8 @@ textarea {
 	height:100px;
 }
 
-h3,span {text-decoration: underline; color: blue; cursor:pointer; width:400px;}
+span {text-decoration: underline; color: blue; cursor:pointer;}
+h3 {text-decoration: underline; color: blue; cursor:pointer;}
 
 A:link,A:visited {
 	color: blue;
