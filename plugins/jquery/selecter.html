@@ -37,6 +37,32 @@
 		$(Obj).next("div");//获取$Obj标签的后面紧邻的一个div，nextAll获取所有
 		$('parent > child')，只选择 parent 的子元素（下一级元素），不对子元素以下的元素进行选择
 		$(Obj).children("input").length; //获得$Obj下一级节点的input个数
+
+	function loadMsg() {
+		$('#m1').val(localStorage.getItem("m1-1"));
+		$('#m2').val(localStorage.getItem("m2-1"));
+	}
+
+	function regEvents() {
+		$('input[type="radio"]').click(function(){
+			var id = $(this).attr('name');
+			var val = localStorage.getItem($(this).attr("id"));
+			$("#" + id).val(val);
+		});
+
+		$('textarea[name="tv"]').change(function(){
+			var nm = 'input[name="' + $(this).attr("id") + '"]:checked';
+			var key = $(nm).attr('id');
+			localStorage.setItem(key, $(this).val());
+		});
+	}
+
+
+	$(document).ready(function(){
+		regEvents();
+		loadMsg();
+	});
+
 	</pre>
 </body>
 </html>

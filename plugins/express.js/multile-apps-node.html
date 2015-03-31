@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>multile-apps-node.html</title>
+</head>
+<body>
+
+<h3>project structure</h3>
+	<xmp>
+--mysite.com   
+--mainserver.js  
+-----mysite.com/project1  
+-----server.js  
+-----mysite.com/project2  
+-----server.js
+</xmp>
+
+<h3>project1/index.js</h3>
+<xmp>
+var express = require('express');
+var router = express.Router();
+
+router.get('/', function(req, res) {
+  return res.send('project 1');
+});
+
+Project2 could be set up similarly.
+	</xmp>
+
+	<h3>mainserver.js </h3>
+	<xmp>	
+var express = require('express');
+var app = express();
+
+app.use('/project1', require('./project1'));
+
+app.use('/project2', require('./project2'));
+
+var port = Number(process.env.PORT || 5000);
+app.listen(port);		
+	</xmp>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>local storage</title>
+	<link rel="stylesheet" href="../../css/main.css">
+<script src='../../lib/jquery-1.8.0.min.js'></script>
+<script src='../../lib/table_search.js'></script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>check for HTML5 Storage</td>
+			<td>
+				<xmp>
+function supports_html5_storage() {
+  try {
+    return 'localStorage' in window && window['localStorage'] !== null;
+  } catch (e) {
+    return false;
+  }
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>basic</td>
+			<td>
+				<xmp>
+interface Storage {
+  getter any getItem(in DOMString key);
+  setter creator void setItem(in DOMString key, in any data);
+  deleter void removeItem(in DOMString key);
+  void clear(); // clear all
+};
+
+var foo = localStorage.getItem("bar");
+localStorage.setItem("bar", foo);	
+
+var foo = localStorage["bar"];
+localStorage["bar"] = foo;				
+
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Tracking Changes to the HTML5 Storage Area</td>
+			<td>
+				<xmp>
+if (window.addEventListener) {
+  window.addEventListener("storage", handle_storage, false);
+} else {
+  window.attachEvent("onstorage", handle_storage);
+};
+
+function handle_storage(e) {
+  if (!e) { e = window.event; }
+}
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

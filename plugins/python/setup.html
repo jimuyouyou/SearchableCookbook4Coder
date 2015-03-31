@@ -6,48 +6,34 @@
 </head>
 <body>
 	<xmp>
-1、查看当前系统python的版本
 python -V
 
-2、下载2.7.3版本的Python
 wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
 
-3、解压和安装
 tar -jxvf Python-2.7.3.tar.bz2
 
-#进入解压后的目录
 cd Python-2.7.3
-#编译和安装
 ./configure
 make
 make install
 
-4.查看是否安装成功
 /usr/local/bin/python2.7 -V
-#如果出现如下信息代表安装成功
 Python 2.7.3
 
-5、建立软链接
-#正常情况下即使python2.7安装成功后，系统默认指向的python仍然是2.6.6版本，考虑到yum是基于python2.6.6才能正常工作，所以不建议卸载。
-#采用下面的方法把系统默认的python修改为2.7.3版本
 mv /usr/bin/python /usr/bin/python2.6.6
-ln -s /usr/local/bin/python2.7 /usr/bin/python
-#检测是否成功
-python -V
-#出现2.7.3版本信息代表成功
-Python 2.7.3
 
-6、解决修改完系统默认python版本后yum不可用的问题
-#修改yum文件
+ln -s /usr/local/bin/python2.7 /usr/bin/python
+
+python -V
+
+solve yum issue:
 vi /usr/bin/yum
 
-将文件头部的
 #!/usr/bin/python
-
-改为如下内容
+to 
 #!/usr/bin/python2.6.6
 
-整个升级过程完成了。
+Notes: keep the file there, as you might need to install bz2 module later, and at that time you need to rebuild python
 </xmp>
 </body>
 </html>
