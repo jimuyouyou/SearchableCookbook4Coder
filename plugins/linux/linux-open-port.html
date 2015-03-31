@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>linux-open-port.html</title>
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+	<table>
+		<tr>
+			<td>iptables</td>
+			<td>
+<pre>
+/sbin/iptables -I INPUT -p tcp --dport 3010 -j ACCEPT
+/etc/rc.d/init.d/iptables save 
+/etc/init.d/iptables restart
+/etc/init.d/iptables status
+
+# less /etc/sysconfig/iptables
+#service iptables restart
+#service iptables stop
+</pre>
+				</td>
+		</tr>
+		<tr>
+			<td>restart firewall</td>
+			<td>
+				<xmp>
+#chkconfig iptables on
+#chkconfig iptables off					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>
