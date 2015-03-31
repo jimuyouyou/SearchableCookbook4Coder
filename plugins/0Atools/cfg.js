@@ -1,3 +1,3 @@
 var cfg = {
-	labels: ['tinymce', 'link', 'project'] 
+	labels: ['mem', 'tinymce', 'link', 'project'] 
 };
