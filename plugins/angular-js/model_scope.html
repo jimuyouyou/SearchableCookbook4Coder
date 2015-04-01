@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>model_scope</title>
+</head>
+<body>
+	<pre>
+		There are also some indirect ways to set up the model from the template itself. You can
+		do so in the following ways:
+		1. Through an expression. Since expressions execute in the context of the controller’s
+		scope associated with their element, setting properties in expressions is the same
+		as setting a property of the controller’s scope. That is, doing this:
+		
+		2. Using ng-model on a form input. As with expressions, the model specified as the
+		argument for ng-model also works within the scope of the enclosing controller. The
+		one addition is that this creates a bi-directional data binding between the form field
+		state and your specified model.
+	</pre>
+
+	<textarea name="" id="" cols="100" rows="10">
+		<button ng-click='count=3'>Set count to three</button>
+		has the same effect as doing this:
+		<div ng-controller='CountController'>
+			<button ng-click='setCount()'>Set count to three</button>
+		</div>
+		with your CountController defined as:
+		function CountController($scope) {
+				$scope.setCount = function() {
+				$scope.count=3;
+			}
+		}
+</textarea>
+</body>
+</html>

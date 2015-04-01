@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>argument_merge</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function merge(root){
+		for (var i = 1; i < arguments.length; i++) {
+			for (var key in arguments[i]) {
+				root[key] = arguments[i][key];
+			}
+		}
+		return root;
+	}
+
+	var merged = merge(
+		{name: "Batou"},
+		{city: "Niihama"});
+	assert(merged.name == "Batou", "The original name is intact.");
+	assert(merged.city == "Niihama", "And the city has been copied over.");
+	</script>
+
+	<pre>
+		function merge(root){
+			for (var i = 1; i < arguments.length; i++) {
+				for (var key in arguments[i]) {
+					root[key] = arguments[i][key];
+				}
+			}
+			return root;
+		}
+
+		var merged = merge(
+			{name: "Batou"},
+			{city: "Niihama"});
+		assert(merged.name == "Batou", "The original name is intact.");
+		assert(merged.city == "Niihama", "And the city has been copied over.");
+	
+		#1 Implements the merge function
+		#2 Calls the implemented functions - merge all arguments to the first argument
+		#3 Tests that it did the right things
+	</pre>
+</body>
+</html>

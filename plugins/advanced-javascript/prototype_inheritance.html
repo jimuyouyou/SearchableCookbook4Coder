@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype_inheritance</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function Person(){}
+	Person.prototype.dance = function(){};
+	function Ninja(){}
+
+	Ninja.prototype = { dance: Person.prototype.dance };
+	var ninja = new Ninja();
+	
+	assert(ninja instanceof Ninja,
+		"ninja receives functionality from the Ninja prototype" );
+	assert( ninja instanceof Person, "... and the Person prototype" );
+	assert( ninja instanceof Object, "... and the Object prototype" );
+	</script>
+	<pre>
+	function Person(){}
+	Person.prototype.dance = function(){};
+	function Ninja(){}
+
+	Ninja.prototype = { dance: Person.prototype.dance };
+	var ninja = new Ninja();
+	
+	assert(ninja instanceof Ninja,
+		"ninja receives functionality from the Ninja prototype" );
+	assert( ninja instanceof Person, "... and the Person prototype" );
+	assert( ninja instanceof Object, "... and the Object prototype" );
+	
+
+	#1 Defines a dancing Person
+	#2 Defines a Ninja
+	#3 Attempt to make a Ninja a Person
+
+	<b>Ninja.prototype = new Person(); is the correct inheritance</b>
+	<b>
+		Make sure not to use the Ninja.prototype = Person.prototype;
+		When doing this, any changes to the Ninja prototype will also change the
+		Person prototype (since they're the same object) – which is bound to have undesirable
+		side effects.
+	</b>
+	</pre>
+</body>
+</html>

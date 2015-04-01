@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>custom-parse</title>
+</head>
+<script src='lib/angular1.2.js'></script>
+<body>
+	<div ng-controller="MyController">
+		<input ng-model="expr" type="text" placeholder="Enter an expression" />
+		<h2>{{ parsedValue }}</h2>
+	</div>
+
+	<script>
+	angular.module("myApp", [])
+	.controller('MyController',
+		function($scope, $parse) {
+			$scope.$watch('expr', function(newVal, oldVal, scope) {
+				if (newVal !== oldVal) {
+					// Let's set up our parseFun with the expression
+					var parseFun = $parse(newVal);
+					// Get the value of the parsed expression
+					scope.parsedValue = 'custom: ' + parseFun(scope);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css_LESS</title>
+</head>
+<link rel="stylesheet" href="../../css/main.css">
+<body>
+	url: http://lesscss.org <p>
+	<table>
+		<tr>
+			<th>code</th>
+			<th>explanation</th>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+app.use(require('less-middleware')({
+	src: __dirname + '/views',
+	dest: __dirname + '/public'
+}));					
+				</pre>
+			</td>
+			<td>import less in app.js</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+"dependencies": {
+	"express": "3.3.4",
+	"jade": "*",
+	"less-middleware": "~0.2.0"
+}					
+				</pre>
+			</td>
+			<td>add dependency in package.json</td>
+		</tr>
+		<tr>
+			<td>npm install</td>
+			<td>install dependency</td>
+		</tr>
+		<tr>
+			<td>
+				<pre>
+body { padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a { color: #00B7FF; }
+
+.pad() { padding: 0.5em; }
+
+.borderIt (@rad:0, @size:1px, @type: solid, @col: #000) {
+	border: @size @type @col;
+}
+
+.borderIt (@rad:0) when (@rad > 0) {
+	-webkit-border-radius: @rad;
+	-moz-border-radius: @rad;
+	border-radius: @rad;
+}
+
+#profiles {
+	.borderIt(20px, 2px);
+	.pad();
+	th { .pad(); }
+	td { .pad();
+		.borderIt(0,1px,solid,lighten(#000, 80%));
+	}
+}					
+				</pre>
+			</td>
+			<td>
+				<pre>
+save this to views/styles.less
+Express compiles it to public/styles.css					
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>code - ref</title>
+	<link rel="stylesheet" href="../../css/main.css">
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script type="text/javascript">
+	var cfg = {
+		labels: ['input', 'Storage', 'new', 'html', 'form', 'require', 'min', 'max', 'range', 'audio', 'video', 'ol', 'opt'] 
+	};
+	</script>
+</head>
+<body>
+	<pre>
+url: http://diveintohtml5.info/table-of-contents.htm
+url: http://www.w3school.com.cn/html5/
+	</pre>
+	<table>
+		<tr>
+			<td>supports_geolocation</td>
+			<td>
+				<xmp>
+<script src="modernizr.min.js"></script>					
+function supports_geolocation() {
+  return 'geolocation' in navigator;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>supports_canvas</td>
+			<td>
+				<xmp>
+function supports_canvas() {
+  return !!document.createElement('canvas').getContext;
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>input</td>
+			<td>
+				<xmp>
+E-mail: <input type="email" name="user_email" />
+Homepage: <input type="url" name="user_url" />
+Points: <input type="number" name="points" min="1" max="10" />
+<input type="range" name="points" min="1" max="10" />
+Date: <input type="date" name="user_date" />
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>DOCTYPE</td>
+			<td>
+				<xmp><!DOCTYPE html></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>html root</td>
+			<td>
+				<xmp>
+<html lang="en" xml:lang="en">					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>meta</td>
+			<td>
+				<xmp><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>link css</td>
+			<td>
+				<xmp><link rel="stylesheet" href="style-original.css" /></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>new Elements in HTML5</td>
+			<td>
+				<xmp>
+<section>
+<nav>
+<article>
+<aside>
+<hgroup>
+<header>
+<footer>
+<time>
+<mark>
+
+    email
+    url
+    number
+    range
+    Date pickers (date, month, week, time, datetime, datetime-local)
+    search
+    color
+
+    autocomplete
+    novalidate
+
+    autocomplete
+    autofocus
+    form
+    form overrides (formaction, formenctype, formmethod, formnovalidate, formtarget)
+    height 和 width
+    list
+    min, max 和 step
+    multiple
+    pattern (regexp)
+    placeholder
+    required
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>video</td>
+			<td>
+				<xmp>
+<video width="320" height="240" controls="controls">
+  <source src="movie.ogg" type="video/ogg">
+  <source src="movie.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>	
+The first available source will be used
+
+methods:
+play()
+pause()
+load()
+canPlayType
+
+properties:
+currentSrc
+currentTime
+videoWidth
+videoHeight
+duration
+ended
+error
+paused
+muted
+seeking
+volume
+height
+width
+
+events:
+play
+pause
+progress
+error
+timeupdate
+ended
+abort
+empty
+emptied
+waiting
+loadedmetadata			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>audio</td>
+			<td>
+				<xmp>
+<audio controls="controls">
+  <source src="song.ogg" type="audio/ogg">
+  <source src="song.mp3" type="audio/mpeg">
+Your browser does not support the audio tag.
+</audio>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>drag drop</td>
+			<td>
+				<xmp>
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+}
+
+function drop(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text");
+ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<div id="div1" ondrop="drop(event)"
+ondragover="allowDrop(event)"></div>
+<img id="drag1" src="lib/img_logo.gif" draggable="true"
+ondragstart="drag(event)" width="336" height="69" />
+
+</body>
+</html>
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>canvas</td>
+			<td>
+				<xmp>
+<canvas id="myCanvas" width="200" height="100"></canvas>
+<script type="text/javascript">
+	var c=document.getElementById("myCanvas");
+	var cxt=c.getContext("2d");
+	cxt.fillStyle="#FF0000";
+	cxt.fillRect(0,0,150,75);
+</script>
+
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #c3c3c3;">
+Your browser does not support the canvas element.
+</canvas>
+<script type="text/javascript">
+	var c=document.getElementById("myCanvas");
+	var cxt=c.getContext("2d");
+	cxt.moveTo(10,10);
+	cxt.lineTo(150,50);
+	cxt.lineTo(10,50);
+	cxt.stroke();
+</script>
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>localStorage</td>
+			<td>
+				<xmp>
+<script type="text/javascript">
+if (localStorage.pagecount)
+  {
+  localStorage.pagecount=Number(localStorage.pagecount) +1;
+  }
+else
+  {
+  localStorage.pagecount=1;
+  }
+document.write("Visits "+ localStorage.pagecount + " time(s).");
+</script>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>sessionStorage</td>
+			<td>
+				<xmp>
+<script type="text/javascript">
+if (sessionStorage.pagecount)
+  {
+  sessionStorage.pagecount=Number(sessionStorage.pagecount) +1;
+  }
+else
+  {
+  sessionStorage.pagecount=1;
+  }
+document.write("Visits "+sessionStorage.pagecount+" time(s) this session.");
+</script>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>manifest cache</td>
+			<td>
+				<xmp><html manifest="demo.appcache"></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>webWorker thread</td>
+			<td>
+				<xmp>
+<p>Count numbers: <output id="result"></output></p>
+<button onclick="startWorker()">Start Worker</button>
+<button onclick="stopWorker()">Stop Worker</button>
+<br /><br />
+
+<script>
+var w;
+
+function startWorker()
+{
+if(typeof(Worker)!=="undefined")
+{
+  if(typeof(w)=="undefined")
+    {
+    w=new Worker("demo_workers.js");
+    }
+  w.onmessage = function (event) {
+    document.getElementById("result").innerHTML=event.data;
+  };
+}
+else
+{
+document.getElementById("result").innerHTML="Sorry, your browser
+ does not support Web Workers...";
+}
+}
+
+function stopWorker()
+{
+w.terminate();
+}
+</script>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>EventSource ajax</td>
+			<td>
+				<xmp>
+var source=new EventSource("demo_sse.php");
+source.onmessage=function(event)
+  {
+  document.getElementById("result").innerHTML+=event.data + "<br />";
+  };
+
+  onopen, onmessage, onerror					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>datalist</td>
+			<td>
+				<xmp>
+Webpage: <input type="url" list="url_list" name="link" />
+<datalist id="url_list">
+<option label="W3School" value="http://www.W3School.com.cn" />
+<option label="Google" value="http://www.google.com" />
+<option label="Microsoft" value="http://www.microsoft.com" />
+</datalist>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>keygen</td>
+			<td>
+				<xmp>
+<form action="demo_form.asp" method="get">
+Username: <input type="text" name="usr_name" />
+Encryption: <keygen name="security" />
+<input type="submit" />
+</form>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>output</td>
+			<td>
+				<xmp><output id="result" onforminput="resCalc()"></output></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>autocomplete</td>
+			<td>
+				<xmp>
+<form action="demo_form.asp" method="get" autocomplete="on">
+First name: <input type="text" name="fname" /><br />
+Last name: <input type="text" name="lname" /><br />
+E-mail: <input type="email" name="email" autocomplete="off" /><br />
+<input type="submit" />
+</form>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>autofocus</td>
+			<td>
+				<xmp>User name: <input type="text" name="user_name"  autofocus="autofocus" /></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>form</td>
+			<td>
+				<xmp>
+<form action="demo_form.asp" method="get" id="user_form">
+E-mail: <input type="email" name="userid" /><br />
+<input type="submit" value="Submit" />
+<br />
+<input type="submit" formaction="demo_admin.asp" value="Submit as admin" />
+<br />
+<input type="submit" formnovalidate="true" value="Submit without validation" />
+<br />
+</form>
+
+    formaction 
+    formenctype
+    formmethod 
+    formnovalidate
+    formtarget 
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>min、max step</td>
+			<td>
+				<xmp>
+Points: <input type="number" name="points" min="0" max="10" step="3" />					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>multiple</td>
+			<td>
+				<xmp>Select images: <input type="file" name="img" multiple="multiple" /></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>novalidate</td>
+			<td>
+				<xmp>
+<form action="demo_form.asp" method="get" novalidate="true">
+E-mail: <input type="email" name="user_email" />
+<input type="submit" />
+</form>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>pattern</td>
+			<td>
+				<xmp>
+Country code: <input type="text" name="country_code"
+pattern="[A-z]{3}" title="Three letter country code" />					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>placeholder</td>
+			<td>
+				<xmp><input type="search" name="user_search"  placeholder="Search W3School" /></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>required</td>
+			<td>
+				<xmp>Name: <input type="text" name="usr_name" required="required" /></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>nav</td>
+			<td>
+				<xmp>
+<nav>
+<a href="index.asp">Home</a>
+<a href="html5_meter.asp">Previous</a>
+<a href="html5_noscript.asp">Next</a>
+</nav>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ol order list</td>
+			<td>
+				<xmp>
+<ol>
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>	
+
+<ol start="50">
+	<li>Coffee</li>
+	<li>Tea</li>
+	<li>Milk</li>
+	<li>ABC</li>
+</ol>				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>optgroup</td>
+			<td>
+				<xmp>
+<select>
+  <optgroup label="Swedish Cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+  </optgroup>
+  <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+</select>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>progress</td>
+			<td>
+				<xmp><progress value="22" max="100"></progress> </xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+		
+	
+</body>
+</html>

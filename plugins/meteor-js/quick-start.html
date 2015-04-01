@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>quick-start</title>
+  <script src='../../lib/jquery-1.8.0.min.js'></script>
+  <script src='../../lib/h_search.js'></script>
+  <script src='../../lib/a_search.js'></script>
+</head>
+<body>
+	<div class="body sidebar-closed">
+<div class="main-content">
+<div id="main">
+<div class="">
+<div class="body sidebar-closed">
+<div class="main-content">
+<div id="main">
+<div class="">
+<div id="introduction">
+<p><em><strong>Meteor is an ultra-simple environment for building modern websites. What once took weeks, even with the best tools, now takes hours with Meteor.</strong></em></p>
+<p>The web was originally designed to work in the same way that mainframes worked in the 70s. The application server rendered a screen and sent it over the network to a dumb terminal. Whenever the user did anything, that server rerendered a whole new screen. This model served the Web well for over a decade. It gave rise to LAMP, Rails, Django, PHP.</p>
+<p>But the best teams, with the biggest budgets and the longest schedules, now build applications in JavaScript that run on the client. These apps have stellar interfaces. They don't reload pages. They are reactive: changes from any client immediately appear on everyone's screen.</p>
+<p>They've built them the hard way. Meteor makes it an order of magnitude simpler, and a lot more fun. You can build a complete application in a weekend, or a sufficiently caffeinated hackathon. No longer do you need to provision server resources, or deploy API endpoints in the cloud, or manage a database, or wrangle an ORM layer, or swap back and forth between JavaScript and Ruby, or broadcast data invalidations to clients.</p>
+<h2 id="quickstart">Quick start!</h2>
+<p>The following works on all <a href="https://github.com/meteor/meteor/wiki/Supported-Platforms">supported platforms</a>.</p>
+<p>Install Meteor:</p>
+<pre><code class="hljs bash">$ curl https://install.meteor.com | /bin/sh
+</code></pre>
+<p>Create a project:</p>
+<pre><code class="hljs bash">$ meteor create myapp
+</code></pre>
+<p>Run it locally:</p>
+<pre><code class="hljs bash">$ <span class="hljs-built_in">cd</span> myapp
+$ meteor
+<span class="hljs-comment"># Meteor server running on: http://localhost:3000/</span>
+</code></pre>
+<p>Unleash it on the world (on a free server we provide):</p>
+<pre><code class="hljs bash">$ meteor deploy myapp.meteor.com
+</code></pre>
+<h2 id="sevenprinciples">Principles of Meteor</h2>
+<ul>
+<li>
+<p><em>Data on the Wire</em>. Meteor doesn't send HTML over the network. The server sends data and lets the client render it.</p>
+</li>
+<li>
+<p><em>One Language.</em> Meteor lets you write both the client and the server parts of your application in JavaScript.</p>
+</li>
+<li>
+<p><em>Database Everywhere</em>. You can use the same methods to access your database from the client or the server.</p>
+</li>
+<li>
+<p><em>Latency Compensation</em>. On the client, Meteor prefetches data and simulates models to make it look like server method calls return instantly.</p>
+</li>
+<li>
+<p><em>Full Stack Reactivity</em>. In Meteor, realtime is the default. All layers, from database to template, update themselves automatically when necessary.</p>
+</li>
+<li>
+<p><em>Embrace the Ecosystem</em>. Meteor is open source and integrates with existing open source tools and frameworks.</p>
+</li>
+<li>
+<p><em>Simplicity Equals Productivity</em>. The best way to make something seem simple is to have it actually <em>be</em> simple. Meteor's main functionality has clean, classically beautiful APIs.</p>
+</li>
+</ul>
+<h2 id="learning-resources">Learning Resources</h2>
+<p>&nbsp;</p>
+<p>There are many community resources for getting help with your app. If Meteor catches your interest, we hope you'll get involved with the project!</p>
+<p>&nbsp;</p>
+<dl class="involved">
+<dt>Tutorial</dt>
+<dd>Get started fast with the <a href="https://www.meteor.com/install">official Meteor tutorial</a>!</dd>
+</dl>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<dl class="involved">
+<dt>Stack Overflow</dt>
+<dd>The best place to ask (and answer!) technical questions is on <a href="http://stackoverflow.com/questions/tagged/meteor">Stack Overflow</a>. Be sure to add the <code>meteor</code> tag to your question.</dd>
+</dl>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<dl class="involved">
+<dt>Forums</dt>
+<dd>Visit the <a href="https://forums.meteor.com">Meteor discussion forums</a>to announce projects, get help, talk about the community, or discuss changes to core.</dd>
+</dl>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<dl class="involved">
+<dt>GitHub</dt>
+<dd>The core code is on <a href="http://github.com/meteor/meteor">GitHub</a>. If you're able to write code or file issues, we'd love to have your help. Please read <a href="https://github.com/meteor/meteor/wiki/Contributing-to-Meteor">Contributing to Meteor</a> for how to get started.</dd>
+</dl>
+<p>&nbsp;</p>
+</div>
+<h2 id="command-line">Command Line Tool</h2>
+<h4 id="meteorhelp"><code>meteor help</code></h4>
+<p>Get help on <code>meteor</code> command line usage. Running <code>meteor help</code> by itself will list the common <code>meteor</code> commands. Running <code>meteor help &lt;command&gt;</code> will print detailed help about <code>meteor &lt;command&gt;</code>.</p>
+<h4 id="meteorcreatename"><code>meteor create &lt;name&gt;</code></h4>
+<p>Make a subdirectory called <code>&lt;name&gt;</code> and create a new Meteor app there.</p>
+<h4 id="meteorrun"><code>meteor run</code></h4>
+<p>Serve the current app at <a href="http://localhost:3000">http://localhost:3000</a> using Meteor's local development server.</p>
+<h4 id="meteordebug"><code>meteor debug</code></h4>
+<p>Run the project with Node Inspector attached, so that you can step through your server code line by line. See <a href="http://localhost:3000/#/full/meteordebug"><code>meteor debug</code></a> in the full docs for more information.</p>
+<h4 id="meteordeploysite"><code>meteor deploy &lt;site&gt;</code></h4>
+<p>Bundle your app and deploy it to <code>&lt;site&gt;</code>. Meteor provides free hosting if you deploy to <code>&lt;your app&gt;.meteor.com</code> as long as <code>&lt;your app&gt;</code> is a name that has not been claimed by someone else.</p>
+<h4 id="meteorupdate"><code>meteor update</code></h4>
+<p>Update your Meteor installation to the latest released version and then (if <code>meteor update</code> was run from an app directory) update the packages used by the current app to the latest versions that are compatible with all other packages used by the app.</p>
+<h4 id="meteoradd"><code>meteor add</code></h4>
+<p>Add a package (or multiple packages) to your Meteor project. To query for available packages, use the <code>meteor search</code> command.</p>
+<h4 id="meteorremove"><code>meteor remove</code></h4>
+<p>Remove a package previously added to your Meteor project. For a list of the packages that your application is currently using, use the <code>meteor list</code> command.</p>
+<h4 id="meteormongo"><code>meteor mongo</code></h4>
+<p>Opens a MongoDB shell for viewing and/or manipulating collections stored in the database. Note that you must already be running a server for the current app (in another terminal window) in order for <code>meteor mongo</code> to connect to the app's database.</p>
+<h4 id="meteorreset"><code>meteor reset</code></h4>
+<p>Reset the current project to a fresh state. Removes all local data.</p>
+<p>If you use <code>meteor reset</code> often, but you have some initial data that you don't want to discard, consider using <a href="http://localhost:3000/#/basic/Meteor-startup"><code>Meteor.startup</code></a> to recreate that data the first time the server starts up:</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (Meteor.isServer) {
+  Meteor.startup(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> (Rooms.find().count() === <span class="hljs-number">0</span>) {
+      Rooms.insert({name: <span class="hljs-string">"Initial room"</span>});
+    }
+  });
+}
+</code></pre>
+<h2 id="filestructure">File Structure</h2>
+<p>Meteor is very flexible about how you structure the files in your app. It automatically loads all of your files, so there is no need to use <code>&lt;script&gt;</code> or <code>&lt;link&gt;</code> tags to include JavaScript or CSS.</p>
+<h3 id="defaultfileloading">Default file loading</h3>
+<p>If files are outside of the special directories listed below, Meteor does the following:</p>
+<ol>
+<li>HTML templates are compiled and sent to the client. See <a href="http://localhost:3000/#/basic/templates">the templates section</a> for more details.</li>
+<li>CSS files are sent to the client. In production mode they are automatically concatenated and minified.</li>
+<li>JavaScript is loaded on the client and the server. You can use <code>Meteor.isClient</code> and <code>Meteor.isServer</code> to control where certain blocks of code run.</li>
+</ol>
+<p>If you want more control over which JavaScript code is loaded on the client and the server, you can use the special directories listed below.</p>
+<h3 id="specialdirectories">Special directories</h3>
+<h4 id="client"><code>/client</code></h4>
+<p>Any files here are only served to the client. This is a good place to keep your HTML, CSS, and UI-related JavaScript code.</p>
+<h4 id="server"><code>/server</code></h4>
+<p>Any files in this directory are only used on the server, and are never sent to the client. Use <code>/server</code> to store source files with sensitive logic or data that should not be visible to the client.</p>
+<h4 id="public"><code>/public</code></h4>
+<p>Files in <code>/public</code> are served to the client as-is. Use this to store assets such as images. For example, if you have an image located at <code>/public/background.png</code>, you can include it in your HTML with <code>&lt;img src='/background.png'/&gt;</code> or in your CSS with <code>background-image: url(/background.png)</code>. Note that <code>/public</code> is not part of the image URL.</p>
+<h4 id="private"><code>/private</code></h4>
+<p>These files can only be accessed by server code through <a href="http://localhost:3000/#assets"><code>Assets</code></a> API and are not accessible to the client.</p>
+<p>Read more about file load order and special directories in the <a href="http://localhost:3000/#/full/structuringyourapp">Structuring Your App section</a> of the full API documentation.</p>
+<h2 id="buildingmobileapps">Building Mobile Apps</h2>
+<p>Once you've built your web app with Meteor, you can easily build a native wrapper for your app and publish it to the Google Play Store or iOS App Store with just a few commands. We've put a lot of work into making the same packages and APIs work on desktop and mobile, so that you don't have to worry about a lot of the edge cases associated with mobile app development.</p>
+<h3 id="installingmobilesdks">Installing mobile SDKs</h3>
+<p>Install the development tools for Android or iOS with one command:</p>
+<pre><code class="hljs bash">meteor install-sdk android     <span class="hljs-comment"># for Android</span>
+meteor install-sdk ios         <span class="hljs-comment"># for iOS</span>
+</code></pre>
+<h3 id="addingplatforms">Adding platforms</h3>
+<p>Add the relevant platform to your app:</p>
+<pre><code class="hljs bash">meteor add-platform android    <span class="hljs-comment"># for Android</span>
+meteor add-platform ios        <span class="hljs-comment"># for iOS</span>
+</code></pre>
+<h3 id="runningonasimulator">Running on a simulator</h3>
+<pre><code class="hljs bash">meteor run android             <span class="hljs-comment"># for Android</span>
+meteor run ios                 <span class="hljs-comment"># for iOS</span>
+</code></pre>
+<h3 id="runningonadevice">Running on a device</h3>
+<pre><code class="hljs bash">meteor run android-device      <span class="hljs-comment"># for Android</span>
+meteor run ios-device          <span class="hljs-comment"># for iOS</span>
+</code></pre>
+<h3 id="configuringappiconsandmetadata">Configuring app icons and metadata</h3>
+<p>You can configure your app's icons, title, version number, splash screen, and other metadata with the special <a href="http://localhost:3000/#/full/mobileconfigjs"><code>mobile-config.js</code> file</a>.</p>
+<p>Learn more about Meteor's mobile support on the <a href="https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration">GitHub wiki page</a>.</p>
+<h1 id="api">The Meteor API</h1>
+<p>Your JavaScript code can run in two environments: the <em>client</em> (browser), and the <em>server</em> (a <a href="http://nodejs.org/">Node.js</a> container on a server). For each function in this API reference, we'll indicate if the function is available just on the client, just on the server, or <em>Anywhere</em>.</p>
+<h2 id="templates">Templates</h2>
+<p>In Meteor, views are defined in <em>templates</em>. A template is a snippet of HTML that can include dynamic data. You can also interact with your templates from JavaScript code to insert data and listen to events.</p>
+<h3 id="defining-templates" class="api-title">Defining Templates in HTML</h3>
+<p>Templates are defined in <code>.html</code> files that can be located anywhere in your Meteor project folder except the <code>server</code>, <code>public</code>, and <code>private</code> directories.</p>
+<p>Each <code>.html</code> file can contain any number of the following top-level elements: <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, or <code>&lt;template&gt;</code>. Code in the <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> tags is appended to that section of the HTML page, and code inside <code>&lt;template&gt;</code> tags can be included using <code>{{&gt; templateName}}</code>, as shown in the example below. Templates can be included more than once &mdash; one of the main purposes of templates is to avoid writing the same HTML multiple times by hand.</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- add code to the &lt;head&gt; of the page --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>My website!<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- add code to the &lt;body&gt; of the page --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello!<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+  {{&gt; welcomePage}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- define a template called welcomePage --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">template</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"welcomePage"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Welcome to my website!<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span>
+</code></pre>
+<p>The <code>{{ ... }}</code> syntax is part of a language called Spacebars that Meteor uses to add functionality to HTML. As shown above, it lets you include templates in other parts of your page. Using Spacebars, you can also display data obtained from <em>helpers</em>. Helpers are written in JavaScript, and can be either simple values or functions.</p>
+<div class="api new-api-box">
+<h3 id="Template-helpers" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Template-helpers"><em>Template.myTemplate</em>.helpers(helpers)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Specify template helpers available to this template.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">helpers</span> <span class="type">Object</span></dt>
+<dd>
+<p>Dictionary of helper functions by name.</p>
+</dd>
+</dl>
+</div>
+<p>Here's how you might define a helper called <code>name</code> for a template called <code>nametag</code> (in JavaScript):</p>
+<pre><code class="hljs css"><span class="hljs-tag">Template</span><span class="hljs-class">.nametag</span><span class="hljs-class">.helpers</span>(<span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">name</span>:<span class="hljs-value"> <span class="hljs-string">"Ben Bitdiddle"</span>
+</span></span></span>});
+</code></pre>
+<p>And here is the <code>nametag</code> template itself (in HTML):</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- In an HTML file, display the value of the helper --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">template</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"nametag"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>My name is {{name}}.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span>
+</code></pre>
+<p>Spacebars also has a few other handy control structures that can be used to make your views more dynamic:</p>
+<ul>
+<li><code>{{#each data}} ... {{/each}}</code> - Iterate over the items in <code>data</code> and display the HTML inside the block for each one.</li>
+<li><code>{{#if data}} ... {{else}} ... {{/if}}</code> - If <code>data</code> is <code>true</code>, display the first block; if it is false, display the second one.</li>
+<li><code>{{#with data}} ... {{/with}}</code> - Set the data context of the HTML inside, and display it.</li>
+</ul>
+<p>Each nested <code>#each</code> or <code>#with</code> block has its own <em>data context</em>, which is an object whose properties can be used as helpers inside the block. For <code>#with</code> blocks, the data context is simply the value that appears after the <code>#with</code> and before the <code>}}</code> characters. For <code>#each</code> blocks, each element of the given array becomes the data context while the block is evaluated for that element.</p>
+<p>For instance, if the <code>people</code> helper has the following value</p>
+<pre><code class="hljs css"><span class="hljs-tag">Template</span><span class="hljs-class">.welcomePage</span><span class="hljs-class">.helpers</span>(<span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">people</span>:<span class="hljs-value"> [{name: <span class="hljs-string">"Bob"</span></span></span></span>}, <span class="hljs-rules">{<span class="hljs-rule"><span class="hljs-attribute">name</span>:<span class="hljs-value"> <span class="hljs-string">"Frank"</span></span></span></span>}, <span class="hljs-rules">{<span class="hljs-rule"><span class="hljs-attribute">name</span>:<span class="hljs-value"> <span class="hljs-string">"Alice"</span></span></span></span>}]
+});
+</code></pre>
+<p>then you can display every person's name as a list of <code>&lt;p&gt;</code> tags:</p>
+<pre><code class="hljs html">{{#each people}}
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>{{name}}<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+{{/each}}
+</code></pre>
+<p>or use the "nametag" template from above instead of <code>&lt;p&gt;</code> tags:</p>
+<pre><code class="hljs html">{{#each people}}
+  {{&gt; nametag}}
+{{/each}}
+</code></pre>
+<p>Remember that helpers can be functions as well as simple values. For example, to show the logged in user's username, you might define a function-valued helper called <code>username</code>:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// in your JS file</span>
+Template.profilePage.helpers({
+  username: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> Meteor.user() &amp;&amp; Meteor.user().username;
+  }
+});
+</code></pre>
+<p>Now, each time you use the <code>username</code> helper, the helper function above will be called to determine the user's name:</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- in your HTML --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">template</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"profilePage"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Profile page for {{username}}<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span>
+</code></pre>
+<p>Helpers can also take arguments. For example, here's a helper that pluralizes a word:</p>
+<pre><code class="hljs js">Template.post.helpers({
+  commentCount: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(numComments)</span> </span>{
+    <span class="hljs-keyword">if</span> (numComments === <span class="hljs-number">1</span>) {
+      <span class="hljs-keyword">return</span> <span class="hljs-string">"1 comment"</span>;
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> numComments + <span class="hljs-string">" comments"</span>;
+    }
+  }
+});
+</code></pre>
+<p>Pass in arguments by putting them inside the curly braces after the name of the helper:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>There are {{commentCount 3}}.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+</code></pre>
+<p>The helpers above have all been associated with specific templates, but you can also make a helper available in all templates by using <a href="http://localhost:3000/#template_registerhelper"><code>Template.registerHelper</code></a>.</p>
+<p>You can find detailed documentation for Spacebars in the <a href="https://github.com/meteor/meteor/blob/devel/packages/spacebars/README.md">README on GitHub</a>. Later in this documentation, the sections about <code>Session</code>, <code>Tracker</code>, <code>Collections</code>, and <code>Accounts</code> will talk more about how to add dynamic data to your templates.</p>
+<div class="api new-api-box">
+<h3 id="Template-events" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Template-events"><em>Template.myTemplate</em>.events(eventMap)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Specify event handlers for this template.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">eventMap</span> <span class="type"><a href="http://localhost:3000/#eventmaps">Event Map</a></span></dt>
+<dd>
+<p>Event handlers to associate with this template.</p>
+</dd>
+</dl>
+</div>
+<p>The event map passed into <code>Template.myTemplate.events</code> has event descriptors as its keys and event handler functions as the values. Event handlers get two arguments: the event object and the template instance. Event handlers can also access the data context of the target element in <code>this</code>.</p>
+<p>To attach event handlers to the following template</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">template</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"example"</span>&gt;</span>
+  {{#with myHelper}}
+    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"my-button"</span>&gt;</span>My button<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"myInput"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"Submit Form"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+  {{/with}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span>
+</code></pre>
+<p>you might call <code>Template.example.events</code> as follows:</p>
+<pre><code class="hljs javascript">Template.example.events({
+  <span class="hljs-string">"click .my-button"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(event, template)</span> </span>{
+    alert(<span class="hljs-string">"My button was clicked!"</span>);
+  },
+  <span class="hljs-string">"submit form"</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(event, template)</span> </span>{
+    <span class="hljs-keyword">var</span> inputValue = event.target.myInput.value;
+    <span class="hljs-keyword">var</span> helperValue = <span class="hljs-keyword">this</span>;
+    alert(inputValue, helperValue);
+  }
+});
+</code></pre>
+<p>The first part of the key (before the first space) is the name of the event being captured. Pretty much any DOM event is supported. Some common ones are: <code>click</code>, <code>mousedown</code>, <code>mouseup</code>, <code>mouseenter</code>, <code>mouseleave</code>, <code>keydown</code>, <code>keyup</code>, <code>keypress</code>, <code>focus</code>, <code>blur</code>, and <code>change</code>.</p>
+<p>The second part of the key (after the first space) is a CSS selector that indicates which elements to listen to. This can be almost any selector <a href="http://api.jquery.com/category/selectors/">supported by JQuery</a>.</p>
+<p>Whenever the indicated event happens on the selected element, the corresponding event handler function will be called with the relevant DOM event object and template instance. See the [Event Maps section](#eventmaps) for details.</p>
+<div class="api new-api-box">
+<h3 id="Template-onRendered" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Template-onRendered"><em>Template.myTemplate</em>.onRendered</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Register a function to be called when an instance of this template is inserted into the DOM.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">callback</span> <span class="type">Function</span></dt>
+<dd>
+<p>A function to be added as a callback.</p>
+</dd>
+</dl>
+</div>
+<p>The functions added with this method are called once for every instance of <em>Template.myTemplate</em> when it is inserted into the page for the first time.</p>
+<p>These callbacks can be used to integrate external libraries that aren't familiar with Meteor's automatic view rendering, and need to be initialized every time HTML is inserted into the page. You can perform initialization or clean-up on any objects in <a href="http://localhost:3000/#template_oncreated"><code>onCreated</code></a> and <a href="http://localhost:3000/#template_ondestroyed"><code>onDestroyed</code></a> callbacks.</p>
+<p>For example, to use the HighlightJS library to apply code highlighting to all <code>&lt;pre&gt;</code> elements inside the <code>codeSample</code> template, you might assign the following function to <code>Template.codeSample.rendered</code>:</p>
+<pre><code class="hljs javascript">Template.codeSample.onRendered(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+  hljs.highlightBlock(<span class="hljs-keyword">this</span>.findAll(<span class="hljs-string">'pre'</span>));
+});
+</code></pre>
+<p>In the callback function, <code>this</code> is bound to a <a href="http://localhost:3000/#template_inst">template instance</a> object that is unique to this inclusion of the template and remains across re-renderings. You can use methods like <a href="http://localhost:3000/#template_find"><code>this.find</code></a> and <a href="http://localhost:3000/#template_findAll"><code>this.findAll</code></a> to access DOM nodes in the template's rendered HTML.</p>
+<h2 id="template_inst">Template instances</h2>
+<p>A template instance object represents a single inclusion of a template in the document. It can be used to access the HTML elements inside the template and it can be assigned properties that persist as the template is reactively updated.</p>
+<p>Template instance objects can be found in several places:</p>
+<ol>
+<li>The value of <code>this</code> in the <code>created</code>, <code>rendered</code>, and <code>destroyed</code> template callbacks</li>
+<li>The second argument to event handlers</li>
+<li>As <a href="http://localhost:3000/#template_instance"><code>Template.instance()</code></a> inside helpers</li>
+</ol>
+<p>You can assign additional properties of your choice to the template instance to keep track of any state relevant to the template. For example, when using the Google Maps API you could attach the <code>map</code> object to the current template instance to be able to refer to it in helpers and event handlers. Use the <a href="http://localhost:3000/#template_onCreated"><code>onCreated</code></a> and <a href="http://localhost:3000/#template_onDestroyed"><code>onDestroyed</code></a> callbacks to perform initialization or clean-up.</p>
+<div class="api new-api-box">
+<h3 id="Blaze-TemplateInstance-findAll" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Blaze-TemplateInstance-findAll"><em>template</em>.findAll(selector)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Find all elements matching <code>selector</code> in this template instance.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">selector</span> <span class="type">String</span></dt>
+<dd>
+<p>The CSS selector to match, scoped to the template contents.</p>
+</dd>
+</dl>
+</div>
+<p><code>template.findAll</code> returns an array of DOM elements matching <code>selector</code>. You can also use <code>template.$</code>, which works exactly like the JQuery <code>$</code> function but only returns elements within <code>template</code>.</p>
+<div class="api new-api-box">
+<h3 id="Blaze-TemplateInstance-find" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Blaze-TemplateInstance-find"><em>template</em>.find(selector)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Find one element matching <code>selector</code> in this template instance.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">selector</span> <span class="type">String</span></dt>
+<dd>
+<p>The CSS selector to match, scoped to the template contents.</p>
+</dd>
+</dl>
+</div>
+<p><code>find</code> is just like <code>findAll</code> but only returns the first element found. Like <code>findAll</code>, <code>find</code> only returns elements from inside the template.</p>
+<h2 id="session">Session</h2>
+<p><code>Session</code> provides a global object on the client that you can use to store an arbitrary set of key-value pairs. Use it to store things like the currently selected item in a list.</p>
+<p>What's special about <code>Session</code> is that it's <em>reactive</em>. If you call <code>Session.get("myKey")</code> in a <a href="http://localhost:3000/#template_helpers">template helper</a> or inside <a href="http://localhost:3000/#tracker_autorun"><code>Tracker.autorun</code></a>, the relevant part of the template will be re-rendered automatically whenever <code>Session.set("myKey", newValue)</code> is called.</p>
+<div class="api new-api-box">
+<h3 id="Session-set" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Session-set">Session.set(key, value)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Set a variable in the session. Notify any listeners that the value has changed (eg: redraw templates, and rerun any <a href="http://localhost:3000/#tracker_autorun"><code>Tracker.autorun</code></a> computations, that called <a href="http://localhost:3000/#session_get"><code>Session.get</code></a> on this <code>key</code>.)</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">key</span> <span class="type">String</span></dt>
+<dd>
+<p>The key to set, eg, <code>selectedItem</code></p>
+</dd>
+<dt><span class="name">value</span> <span class="type"><a href="http://localhost:3000/#ejson">EJSON-able Object</a> or undefined</span></dt>
+<dd>
+<p>The new value for <code>key</code></p>
+</dd>
+</dl>
+</div>
+<div class="api new-api-box">
+<h3 id="Session-get" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Session-get">Session.get(key)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Get the value of a session variable. If inside a <a href="http://localhost:3000/#reactivity">reactive computation</a>, invalidate the computation the next time the value of the variable is changed by <a href="http://localhost:3000/#session_set"><code>Session.set</code></a>. This returns a clone of the session value, so if it's an object or an array, mutating the returned value has no effect on the value stored in the session.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">key</span> <span class="type">String</span></dt>
+<dd>
+<p>The name of the session variable to return</p>
+</dd>
+</dl>
+</div>
+<p>Example:</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- In your template --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">template</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"main"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>We've always been at war with {{theEnemy}}.<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span>
+</code></pre>
+<pre><code class="hljs javascript"><span class="hljs-comment">// In your JavaScript</span>
+Template.main.helpers({
+  theEnemy: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> Session.get(<span class="hljs-string">"enemy"</span>);
+  }
+});
+
+Session.set(<span class="hljs-string">"enemy"</span>, <span class="hljs-string">"Eastasia"</span>);
+<span class="hljs-comment">// Page will say "We've always been at war with Eastasia"</span>
+
+Session.set(<span class="hljs-string">"enemy"</span>, <span class="hljs-string">"Eurasia"</span>);
+<span class="hljs-comment">// Page will change to say "We've always been at war with Eurasia"</span>
+</code></pre>
+<p>Using <code>Session</code> gives us our first taste of <em>reactivity</em>, the idea that the view should update automatically when necessary, without us having to call a <code>render</code> function manually. In the next section, we will learn how to use Tracker, the lightweight library that makes this possible in Meteor.</p>
+<h2 id="tracker">Tracker</h2>
+<p>Meteor has a simple dependency tracking system which allows it to automatically rerun templates and other functions whenever <a href="http://localhost:3000/#session"><code>Session</code></a> variables, database queries, and other data sources change.</p>
+<p>Unlike most other systems, you don't have to manually declare these dependencies &mdash; it "just works." The mechanism is simple and efficient. Once you've initialized a computation with <code>Tracker.autorun</code>, whenever you call a Meteor function that returns data, <code>Tracker</code> automatically records which data were accessed. Later, when this data changes, the computation is rerun automatically. This is how a template knows how to re-render whenever its <a href="http://localhost:3000/#template_helpers">helper functions</a> have new data to return.</p>
+<div class="api new-api-box">
+<h3 id="Tracker-autorun" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Tracker-autorun">Tracker.autorun(runFunc)</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Run a function now and rerun it later whenever its dependencies change. Returns a Computation object that can be used to stop or observe the rerunning.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">runFunc</span> <span class="type">Function</span></dt>
+<dd>
+<p>The function to run. It receives one argument: the Computation object that will be returned.</p>
+</dd>
+</dl>
+</div>
+<p><code>Tracker.autorun</code> allows you to run a function that depends on reactive data sources. Whenever those data sources are updated with new data, the function will be rerun.</p>
+<p>For example, you can monitor one <code>Session</code> variable and set another:</p>
+<pre><code class="hljs javascript">Tracker.autorun(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">var</span> celsius = Session.get(<span class="hljs-string">"celsius"</span>);
+  Session.set(<span class="hljs-string">"fahrenheit"</span>, celsius * <span class="hljs-number">9</span>/<span class="hljs-number">5</span> + <span class="hljs-number">32</span>);
+});
+</code></pre>
+<p>Or you can wait for a session variable to have a certain value, and do something the first time it does. If you want to prevent further rerunning of the function, you can call <code>stop</code> on the computation object that is passed as the first parameter to the callback function:</p>
+<pre><code class="hljs cs"><span class="hljs-comment">// Initialize a session variable called "counter" to 0</span>
+Session.<span class="hljs-keyword">set</span>(<span class="hljs-string">"counter"</span>, <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">// The autorun function runs but does not alert (counter: 0)</span>
+Tracker.autorun(function (computation) {
+  <span class="hljs-keyword">if</span> (Session.<span class="hljs-keyword">get</span>(<span class="hljs-string">"counter"</span>) === <span class="hljs-number">2</span>) {
+    computation.stop();
+    alert(<span class="hljs-string">"counter reached two"</span>);
+  }
+});
+
+<span class="hljs-comment">// The autorun function runs but does not alert (counter: 1)</span>
+Session.<span class="hljs-keyword">set</span>(<span class="hljs-string">"counter"</span>, Session.<span class="hljs-keyword">get</span>(<span class="hljs-string">"counter"</span>) + <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// The autorun function runs and alerts "counter reached two"</span>
+Session.<span class="hljs-keyword">set</span>(<span class="hljs-string">"counter"</span>, Session.<span class="hljs-keyword">get</span>(<span class="hljs-string">"counter"</span>) + <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// The autorun function no longer runs (counter: 3)</span>
+Session.<span class="hljs-keyword">set</span>(<span class="hljs-string">"counter"</span>, Session.<span class="hljs-keyword">get</span>(<span class="hljs-string">"counter"</span>) + <span class="hljs-number">1</span>);
+</code></pre>
+<p>The first time <code>Tracker.autorun</code> is called, the callback function is invoked immediately, at which point it alerts and stops right away if <code>counter === 2</code> already. In this example, <code>Session.get("counter") === 0</code> when <code>Tracker.autorun</code> is called, so nothing happens the first time, and the function is run again each time <code>counter</code> changes, until <code>computation.stop()</code> is called after <code>counter</code> reaches <code>2</code>.</p>
+<p>If the initial run of an autorun throws an exception, the computation is automatically stopped and won't be rerun.</p>
+<p>To learn more about how <code>Tracker</code> works and to explore advanced ways to use it, visit the <a href="http://manual.meteor.com/#tracker">Tracker</a> chapter in the <a href="http://manual.meteor.com/">Meteor Manual</a>, which describes it in much more detail.</p>
+<h2 id="collections">Collections</h2>
+<p>Meteor stores data in <em>collections</em>. JavaScript objects stored in collections are called <code>documents</code>. To get started, declare a collection with <code>new Mongo.Collection</code>.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection">new Mongo.Collection(name, [options])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Constructor for a Collection</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">name</span> <span class="type">String</span></dt>
+<dd>
+<p>The name of the collection. If null, creates an unmanaged (unsynchronized) local collection.</p>
+</dd>
+</dl>
+</div>
+<p>Calling the <code>Mongo.Collection</code> constructor creates a collection object which acts just like a MongoDB collection. If you pass a name when you create the collection, then you are declaring a persistent collection &mdash; one that is stored on the server and can be published to clients.</p>
+<p>To allow both client code and server code to access the same collection using the same API, it's usually best to declare collections as global variables in a JavaScript file that's present on both client and server.</p>
+<p>Here's an example of declaring two named, persistent collections as global variables:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// In a JS file that's loaded on the client and the server</span>
+Posts = <span class="hljs-keyword">new</span> Mongo.Collection(<span class="hljs-string">"posts"</span>);
+Comments = <span class="hljs-keyword">new</span> Mongo.Collection(<span class="hljs-string">"comments"</span>);
+</code></pre>
+<p>If you pass <code>null</code> as the name, then you're creating a local collection. Local collections are not synchronized between the client and the server; they are just temporary collections of JavaScript objects that support Mongo-style <code>find</code>, <code>insert</code>, <code>update</code>, and <code>remove</code> operations.</p>
+<p>By default, Meteor automatically publishes every document in your collection to each connected client. To disable this behavior, you must remove the <code>autopublish</code> package:</p>
+<pre><code class="hljs ruby"><span class="hljs-variable">$ </span>meteor remove autopublish
+</code></pre>
+<p>Then, use <a href="http://localhost:3000/#meteor_publish"><code>Meteor.publish</code></a> and <a href="http://localhost:3000/#meteor_subscribe"><code>Meteor.subscribe</code></a> to specify which parts of your collection should be published to which clients.</p>
+<p>Use <code>findOne</code> or <code>find</code> to retrieve documents from a collection.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-findOne" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-findOne"><em>collection</em>.findOne([selector], [options])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Finds the first document that matches the selector, as ordered by sort and skip options.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">selector</span> <span class="type"><a href="http://localhost:3000/#selectors">Mongo Selector</a>, <a href="http://localhost:3000/#mongo_object_id">Object ID</a>, or String</span></dt>
+<dd>
+<p>A query describing the documents to find</p>
+</dd>
+</dl>
+<h4>Options</h4>
+<dl class="args">
+<dt><span class="name">sort</span> <span class="type"><a href="http://localhost:3000/#sortspecifiers">Mongo Sort Specifier</a></span></dt>
+<dd>
+<p>Sort order (default: natural order)</p>
+</dd>
+<dt><span class="name">skip</span> <span class="type">Number</span></dt>
+<dd>
+<p>Number of results to skip at the beginning</p>
+</dd>
+<dt><span class="name">fields</span> <span class="type"><a href="http://localhost:3000/#fieldspecifiers">Mongo Field Specifier</a></span></dt>
+<dd>
+<p>Dictionary of fields to return or exclude.</p>
+</dd>
+</dl>
+</div>
+<p>This method lets you retrieve a specific document from your collection. The <code>findOne</code> method is most commonly called with a specific document <code>_id</code>:</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> post = Posts.findOne(postId);
+</code></pre>
+<p>However, you can also call <code>findOne</code> with a Mongo selector, which is an object that specifies a required set of attributes of the desired document. For example, this selector</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> post = Posts.findOne({
+  createdBy: <span class="hljs-string">"12345"</span>,
+  title: {$regex: <span class="hljs-regexp">/first/</span>}
+});
+</code></pre>
+<p>will match this document</p>
+<pre><code class="hljs css"><span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">createdBy</span>:<span class="hljs-value"> <span class="hljs-string">"12345"</span>,
+  title: <span class="hljs-string">"My first post!"</span>,
+  content: <span class="hljs-string">"Today was a good day."</span>
+</span></span></span>}
+</code></pre>
+<p>You can read about MongoDB query operators such as <code>$regex</code>, <code>$lt</code> (less than), <code>$text</code> (text search), and more in the <a href="http://docs.mongodb.org/manual/reference/operator/query/">MongoDB documentation</a>.</p>
+<p>One useful behavior that might not be obvious is that Mongo selectors also match items in arrays. For example, this selector</p>
+<pre><code class="hljs css"><span class="hljs-tag">Post</span><span class="hljs-class">.findOne</span>(<span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">tags</span>:<span class="hljs-value"> <span class="hljs-string">"meteor"</span>
+</span></span></span>});
+</code></pre>
+<p>will match this document</p>
+<pre><code class="hljs css"><span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">title</span>:<span class="hljs-value"> <span class="hljs-string">"I love Meteor"</span>,
+  createdBy: <span class="hljs-string">"242135223"</span>,
+  tags: [<span class="hljs-string">"meteor"</span>, <span class="hljs-string">"javascript"</span>, <span class="hljs-string">"fun"</span>]
+</span></span></span>}
+</code></pre>
+<p>The <code>findOne</code> method is reactive just like <a href="http://localhost:3000/#session_get"><code>Session.get</code></a>, meaning that, if you use it inside a <a href="http://localhost:3000/#template_helpers">template helper</a> or a <a href="http://localhost:3000/#tracker_autorun"><code>Tracker.autorun</code></a> callback, it will automatically rerender the view or rerun the computation if the returned document changes.</p>
+<p>Note that <code>findOne</code> will return <code>null</code> if it fails to find a matching document, which often happens if the document hasn't been loaded yet or has been removed from the collection, so you should be prepared to handle <code>null</code> values.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-find" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-find"><em>collection</em>.find([selector], [options])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Find the documents in a collection that match the selector.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">selector</span> <span class="type"><a href="http://localhost:3000/#selectors">Mongo Selector</a>, <a href="http://localhost:3000/#mongo_object_id">Object ID</a>, or String</span></dt>
+<dd>
+<p>A query describing the documents to find</p>
+</dd>
+</dl>
+<h4>Options</h4>
+<dl class="args">
+<dt><span class="name">sort</span> <span class="type"><a href="http://localhost:3000/#sortspecifiers">Mongo Sort Specifier</a></span></dt>
+<dd>
+<p>Sort order (default: natural order)</p>
+</dd>
+<dt><span class="name">skip</span> <span class="type">Number</span></dt>
+<dd>
+<p>Number of results to skip at the beginning</p>
+</dd>
+<dt><span class="name">limit</span> <span class="type">Number</span></dt>
+<dd>
+<p>Maximum number of results to return</p>
+</dd>
+<dt><span class="name">fields</span> <span class="type"><a href="http://localhost:3000/#fieldspecifiers">Mongo Field Specifier</a></span></dt>
+<dd>
+<p>Dictionary of fields to return or exclude.</p>
+</dd>
+</dl>
+</div>
+<p>The <code>find</code> method is similar to <code>findOne</code>, but instead of returning a single document it returns a MongoDB <em>cursor</em>. A cursor is a special object that represents a list of documents that might be returned from a query. You can pass a cursor into a template helper anywhere you could pass an array:</p>
+<pre><code class="hljs javascript">Template.blog.helpers({
+  posts: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// this helper returns a cursor of</span>
+    <span class="hljs-comment">// all of the posts in the collection</span>
+    <span class="hljs-keyword">return</span> Posts.find();
+  }
+});
+</code></pre>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- a template that renders multiple posts --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">template</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"blog"</span>&gt;</span>
+  {{#each posts}}
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>{{title}}<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>{{content}}<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+  {{/each}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">template</span>&gt;</span>
+</code></pre>
+<p>When you want to retrieve the current list of documents from a cursor, call the cursor's <code>.fetch()</code> method:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// get an array of posts</span>
+<span class="hljs-keyword">var</span> postsArray = Posts.find().fetch();
+</code></pre>
+<p>Keep in mind that while the computation in which you call <code>fetch</code> will rerun when the data changes, the resulting array will not be reactive if it is passed somewhere else.</p>
+<p>You can modify the data stored in a <code>Mongo.Collection</code> by calling <code>insert</code>, <code>update</code>, or <code>remove</code>.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-insert" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-insert"><em>collection</em>.insert(doc, [callback])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Insert a document in the collection. Returns its unique _id.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">doc</span> <span class="type">Object</span></dt>
+<dd>
+<p>The document to insert. May not yet have an _id attribute, in which case Meteor will generate one for you.</p>
+</dd>
+<dt><span class="name">callback</span> <span class="type">Function</span></dt>
+<dd>
+<p>Optional. If present, called with an error object as the first argument and, if no error, the _id as the second.</p>
+</dd>
+</dl>
+</div>
+<p>Here's how you insert a document into a collection:</p>
+<pre><code class="hljs css"><span class="hljs-tag">Posts</span><span class="hljs-class">.insert</span>(<span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">createdBy</span>:<span class="hljs-value"> Meteor.<span class="hljs-function">userId</span>(),
+  createdAt: new <span class="hljs-function">Date</span>(),
+  title: <span class="hljs-string">"My first post!"</span>,
+  content: <span class="hljs-string">"Today was a good day."</span>
+</span></span></span>});
+</code></pre>
+<p>Every document in every <code>Mongo.Collection</code> has an <code>_id</code> field. It must be unique, and is automatically generated if you don't provide one. The <code>_id</code> field can be used to retrieve a specific document using <a href="http://localhost:3000/#findOne"><code>collection.findOne</code></a>.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-update" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-update"><em>collection</em>.update(selector, modifier, [options], [callback])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Modify one or more documents in the collection. Returns the number of affected documents.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">selector</span> <span class="type"><a href="http://localhost:3000/#selectors">Mongo Selector</a>, <a href="http://localhost:3000/#mongo_object_id">Object ID</a>, or String</span></dt>
+<dd>
+<p>Specifies which documents to modify</p>
+</dd>
+<dt><span class="name">modifier</span> <span class="type"><a href="http://localhost:3000/#modifiers">Mongo Modifier</a></span></dt>
+<dd>
+<p>Specifies how to modify the documents</p>
+</dd>
+<dt><span class="name">callback</span> <span class="type">Function</span></dt>
+<dd>
+<p>Optional. If present, called with an error object as the first argument and, if no error, the number of affected documents as the second.</p>
+</dd>
+</dl>
+<h4>Options</h4>
+<dl class="args">
+<dt><span class="name">multi</span> <span class="type">Boolean</span></dt>
+<dd>
+<p>True to modify all matching documents; false to only modify one of the matching documents (the default).</p>
+</dd>
+<dt><span class="name">upsert</span> <span class="type">Boolean</span></dt>
+<dd>
+<p>True to insert a document if no matching documents are found.</p>
+</dd>
+</dl>
+</div>
+<p>The selector here is just like the one you would pass to <code>find</code>, and can match multiple documents. The modifier is an object that specifies which changes should be made to the matched documents. Watch out - unless you use an operator like <code>$set</code>, <code>update</code> will simply replace the entire matched document with the modifier.</p>
+<p>Here's an example of setting the <code>content</code> field on all posts whose titles contain the word "first":</p>
+<pre><code class="hljs css"><span class="hljs-tag">Posts</span><span class="hljs-class">.update</span>(<span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">title</span>:<span class="hljs-value"> {$regex: /first/</span></span></span>}
+}, <span class="hljs-rules">{
+  <span class="hljs-rule">$<span class="hljs-attribute">set</span>:<span class="hljs-value"> {content: <span class="hljs-string">"Tomorrow will be a great day."</span></span></span></span>}
+});
+</code></pre>
+<p>You can read about all of the different operators that are supported in the <a href="http://docs.mongodb.org/manual/reference/operator/update/">MongoDB documentation</a>.</p>
+<p>There's one catch: when you call <code>update</code> on the client, you can only find documents by their <code>_id</code> field. To use all of the possible selectors, you must call <code>update</code> in server code or from a <a href="http://localhost:3000/#meteor_methods">method</a>.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-remove" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-remove"><em>collection</em>.remove(selector, [callback])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Remove documents from the collection</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">selector</span> <span class="type"><a href="http://localhost:3000/#selectors">Mongo Selector</a>, <a href="http://localhost:3000/#mongo_object_id">Object ID</a>, or String</span></dt>
+<dd>
+<p>Specifies which documents to remove</p>
+</dd>
+<dt><span class="name">callback</span> <span class="type">Function</span></dt>
+<dd>
+<p>Optional. If present, called with an error object as its argument.</p>
+</dd>
+</dl>
+</div>
+<p>This method uses the same selectors as <code>find</code> and <code>update</code>, and removes any documents that match the selector from the database. Use <code>remove</code> carefully &mdash; there's no way to get that data back.</p>
+<p>As with <code>update</code>, client code can only remove documents by <code>_id</code>, whereas server code and <a href="http://localhost:3000/#meteor_methods">methods</a> can remove documents using any selector.</p>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-allow" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-allow"><em>collection</em>.allow(options)</a> <span class="locus">Server</span></h3>
+<div class="desc">
+<p>Allow users to write directly to this collection from client code, subject to limitations you define.</p>
+</div>
+<h4>Options</h4>
+<dl class="args">
+<dt><span class="name">insert, update, remove</span> <span class="type">Function</span></dt>
+<dd>
+<p>Functions that look at a proposed modification to the database and return true if it should be allowed.</p>
+</dd>
+</dl>
+</div>
+<p>In newly created apps, Meteor allows almost any calls to <code>insert</code>, <code>update</code>, and <code>remove</code> from any client or server code. This is because apps started with <code>meteor create</code> include the <code>insecure</code> package by default to simplify development. Obviously, if any user could change the database whenever they wanted it would be bad for security, so it is important to remove the <code>insecure</code> package and specify some permissions rules:</p>
+<pre><code class="hljs ruby"><span class="hljs-variable">$ </span>meteor remove insecure
+</code></pre>
+<p>Once you have removed the <code>insecure</code> package, use the <code>allow</code> and <code>deny</code> methods to control who can perform which operations on the database. By default, all operations on the client are denied, so we need to add some <code>allow</code> rules. Keep in mind that server code and code inside <a href="http://localhost:3000/#meteor_methods">methods</a> are not affected by <code>allow</code> and <code>deny</code> &mdash; these rules only apply when <code>insert</code>, <code>update</code>, and <code>remove</code> are called from untrusted client code.</p>
+<p>For example, we might say that users can only create new posts if the <code>createdBy</code> field matches the ID of the current user, so that users can't impersonate each other.</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// In a file loaded on the server (ignored on the client)</span>
+Posts.allow({
+  insert: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(userId, post)</span> </span>{
+    <span class="hljs-comment">// can only create posts where you are the author</span>
+    <span class="hljs-keyword">return</span> post.createdBy === userId;
+  },
+  remove: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(userId, post)</span> </span>{
+    <span class="hljs-comment">// can only delete your own posts</span>
+    <span class="hljs-keyword">return</span> post.createdBy === userId;
+  }
+  <span class="hljs-comment">// since there is no update field, all updates</span>
+  <span class="hljs-comment">// are automatically denied</span>
+});
+</code></pre>
+<p>The <code>allow</code> method accepts three possible callbacks: <code>insert</code>, <code>remove</code>, and <code>update</code>. The first argument to all three callbacks is the <code>_id</code> of the logged in user, and the remaining arguments are as follows:</p>
+<ol>
+<li>
+<p><code>insert(userId, document)</code></p>
+<p><code>document</code> is the document that is about to be inserted into the database. Return <code>true</code> if the insert should be allowed, <code>false</code> otherwise.</p>
+</li>
+<li>
+<p><code>update(userId, document, fieldNames, modifier)</code></p>
+<p><code>document</code> is the document that is about to be modified. <code>fieldNames</code> is an array of top-level fields that are affected by this change. <code>modifier</code> is the <a href="http://localhost:3000/#mongo_modifiers">Mongo Modifier</a> that was passed as the second argument of <code>collection.update</code>. It can be difficult to achieve correct validation using this callback, so it is recommended to use <a href="http://localhost:3000/#meteor_methods">methods</a> instead. Return <code>true</code> if the update should be allowed, <code>false</code> otherwise.</p>
+</li>
+<li>
+<p><code>remove(userId, document)</code></p>
+<p><code>document</code> is the document that is about to be removed from the database. Return <code>true</code> if the document should be removed, <code>false</code> otherwise.</p>
+</li>
+</ol>
+<div class="api new-api-box">
+<h3 id="Mongo-Collection-deny" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Mongo-Collection-deny"><em>collection</em>.deny(options)</a> <span class="locus">Server</span></h3>
+<div class="desc">
+<p>Override <code>allow</code> rules.</p>
+</div>
+<h4>Options</h4>
+<dl class="args">
+<dt><span class="name">insert, update, remove</span> <span class="type">Function</span></dt>
+<dd>
+<p>Functions that look at a proposed modification to the database and return true if it should be denied, even if an <a href="http://localhost:3000/#allow">allow</a> rule says otherwise.</p>
+</dd>
+</dl>
+</div>
+<p>The <code>deny</code> method lets you selectively override your <code>allow</code> rules. While only one of your <code>allow</code> callbacks has to return true to allow a modification, <em>every one</em> of your <code>deny</code> callbacks has to return false for the database change to happen.</p>
+<p>For example, if we wanted to override part of our <code>allow</code> rule above to exclude certain post titles:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// In a file loaded on the server (ignored on the client)</span>
+Posts.deny({
+  insert: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(userId, post)</span> </span>{
+    <span class="hljs-comment">// Don't allow posts with a certain title</span>
+    <span class="hljs-keyword">return</span> post.title === <span class="hljs-string">"First!"</span>;
+  }
+});
+</code></pre>
+<h2 id="accounts">Accounts</h2>
+<p>To get accounts functionality, add one or more of the following packages to your app with <code>meteor add</code>:</p>
+<ul>
+<li><code>accounts-ui</code>: This package allows you to use <code>{{&gt; loginButtons}}</code> in your templates to add an automatically generated UI that will let users log into your app. There are several community alternatives to this package that change the appearance, or you can not use it and use the <a href="http://localhost:3000/#accounts">advanced Accounts methods</a> instead.</li>
+<li><code>accounts-password</code>: This package will allow users to log in with passwords. When you add it the <code>loginButtons</code> dropdown will automatically gain email and password fields.</li>
+<li><code>accounts-facebook</code>, <code>accounts-google</code>, <code>accounts-github</code>, <code>accounts-twitter</code>, and community packages for other services will allow your users to log in with their accounts from other websites. These will automatically add buttons to the <code>loginButtons</code> dropdown.</li>
+</ul>
+<h3 id="loginButtons" class="api-title"><a class="name selflink" href="http://localhost:3000/#b-loginButtons">{{&gt; loginButtons}}</a> <span class="locus">Client</span></h3>
+<p>Include the <code>loginButtons</code> template somewhere in your HTML to use Meteor's default UI for logging in. To use this, you need to add the <code>accounts-ui</code> package:</p>
+<pre><code class="hljs ruby"><span class="hljs-variable">$ </span>meteor add accounts-ui
+</code></pre>
+<div class="api new-api-box">
+<h3 id="Meteor-user" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-user">Meteor.user()</a> <span class="locus">Anywhere but publish functions</span></h3>
+<div class="desc">
+<p>Get the current user record, or <code>null</code> if no user is logged in. A reactive data source.</p>
+</div>
+</div>
+<p>Get the logged in user from the <a href="http://localhost:3000/#meteor_users"><code>Meteor.users</code></a> collection. Equivalent to <code>Meteor.users.findOne(Meteor.userId())</code>.</p>
+<div class="api new-api-box">
+<h3 id="Meteor-userId" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-userId">Meteor.userId()</a> <span class="locus">Anywhere but publish functions</span></h3>
+<div class="desc">
+<p>Get the current user id, or <code>null</code> if no user is logged in. A reactive data source.</p>
+</div>
+</div>
+<div class="api new-api-box">
+<h3 id="Meteor-users" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-users">Meteor.users</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>A <a href="http://localhost:3000/#collections">Mongo.Collection</a> containing user documents.</p>
+</div>
+</div>
+<p>This collection contains one document per registered user. Here's an example user document:</p>
+<pre><code class="hljs objectivec">{
+  _<span class="hljs-keyword">id</span>: <span class="hljs-string">"bbca5d6a-2156-41c4-89da-0329e8c99a4f"</span>,  <span class="hljs-comment">// Meteor.userId()</span>
+  username: <span class="hljs-string">"cool_kid_13"</span>, <span class="hljs-comment">// unique name</span>
+  emails: [
+    <span class="hljs-comment">// each email address can only belong to one user.</span>
+    { address: <span class="hljs-string">"cool@example.com"</span>, verified: <span class="hljs-literal">true</span> },
+    { address: <span class="hljs-string">"another@different.com"</span>, verified: <span class="hljs-literal">false</span> }
+  ],
+  createdAt: Wed Aug <span class="hljs-number">21</span> <span class="hljs-number">2013</span> <span class="hljs-number">15</span>:<span class="hljs-number">16</span>:<span class="hljs-number">52</span> GMT-<span class="hljs-number">0700</span> (PDT),
+  profile: {
+    <span class="hljs-comment">// The profile is writable by the user by default.</span>
+    name: <span class="hljs-string">"Joe Schmoe"</span>
+  },
+  services: {
+    facebook: {
+      <span class="hljs-keyword">id</span>: <span class="hljs-string">"709050"</span>, <span class="hljs-comment">// facebook id</span>
+      accessToken: <span class="hljs-string">"AAACCgdX7G2...AbV9AZDZD"</span>
+    },
+    resume: {
+      loginTokens: [
+        { token: <span class="hljs-string">"97e8c205-c7e4-47c9-9bea-8e2ccc0694cd"</span>,
+          when: <span class="hljs-number">1349761684048</span> }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>A user document can contain any data you want to store about a user. Meteor treats the following fields specially:</p>
+<ul>
+<li><code>username</code>: a unique String identifying the user.</li>
+<li><code>emails</code>: an Array of Objects with keys <code>address</code> and <code>verified</code>; an email address may belong to at most one user. <code>verified</code> is a Boolean which is true if the user has <a href="http://localhost:3000/#accounts_verifyemail">verified the address</a> with a token sent over email.</li>
+<li><code>createdAt</code>: the Date at which the user document was created.</li>
+<li><code>profile</code>: an Object which (by default) the user can create and update with any data.</li>
+<li><code>services</code>: an Object containing data used by particular login services. For example, its <code>reset</code> field contains tokens used by <a href="http://localhost:3000/#accounts_forgotpassword">forgot password</a> links, and its <code>resume</code> field contains tokens used to keep you logged in between sessions.</li>
+</ul>
+<p>Like all <a href="http://localhost:3000/#collections">Mongo.Collection</a>s, you can access all documents on the server, but only those specifically published by the server are available on the client.</p>
+<p>By default, the current user's <code>username</code>, <code>emails</code> and <code>profile</code> are published to the client. You can publish additional fields for the current user with:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// server</span>
+Meteor.publish(<span class="hljs-string">"userData"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.userId) {
+    <span class="hljs-keyword">return</span> Meteor.users.find({_id: <span class="hljs-keyword">this</span>.userId},
+                             {fields: {<span class="hljs-string">'other'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'things'</span>: <span class="hljs-number">1</span>}});
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">this</span>.ready();
+  }
+});
+
+<span class="hljs-comment">// client</span>
+Meteor.subscribe(<span class="hljs-string">"userData"</span>);
+</code></pre>
+<p>If the autopublish package is installed, information about all users on the system is published to all clients. This includes <code>username</code>, <code>profile</code>, and any fields in <code>services</code> that are meant to be public (eg <code>services.facebook.id</code>, <code>services.twitter.screenName</code>). Additionally, when using autopublish more information is published for the currently logged in user, including access tokens. This allows making API calls directly from the client for services that allow this.</p>
+<p>Users are by default allowed to specify their own <code>profile</code> field with <a href="http://localhost:3000/#accounts_createuser"><code>Accounts.createUser</code></a> and modify it with <code>Meteor.users.update</code>. To allow users to edit additional fields, use <a href="http://localhost:3000/#allow"><code>Meteor.users.allow</code></a>. To forbid users from making any modifications to their user document:</p>
+<pre><code class="hljs javascript">Meteor.users.deny({update: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; }});
+</code></pre>
+<div class="api new-api-box">
+<h3 id="currentUser" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/currentUser">{{ currentUser }}</a></h3>
+<div class="desc">
+<p>Calls <a href="http://localhost:3000/#meteor_user">Meteor.user()</a>. Use <code>{{#if currentUser}}</code> to check whether the user is logged in.</p>
+</div>
+</div>
+<h2 id="methods">Methods</h2>
+<p>Methods are server functions that can be called from the client. They are useful in situations where you want to do something more complicated than <code>insert</code>, <code>update</code> or <code>remove</code>, or when you need to do data validation that is difficult to achieve with just <code>allow</code> and <code>deny</code>.</p>
+<p>Methods can return values and throw errors.</p>
+<div class="api new-api-box">
+<h3 id="Meteor-methods" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-methods">Meteor.methods(methods)</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Defines functions that can be invoked over the network by clients.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">methods</span> <span class="type">Object</span></dt>
+<dd>
+<p>Dictionary whose keys are method names and values are functions.</p>
+</dd>
+</dl>
+</div>
+<p>Calling <code>Meteor.methods</code> on the server defines functions that can be called remotely by clients. Here's an example of a method that checks its arguments and throws an error:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// On the server</span>
+Meteor.methods({
+  commentOnPost: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(comment, postId)</span> </span>{
+    <span class="hljs-comment">// Check argument types</span>
+    check(comment, <span class="hljs-built_in">String</span>);
+    check(postId, <span class="hljs-built_in">String</span>);
+
+    <span class="hljs-keyword">if</span> (! <span class="hljs-keyword">this</span>.userId) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Meteor.Error(<span class="hljs-string">"not-logged-in"</span>,
+        <span class="hljs-string">"Must be logged in to post a comment."</span>);
+    }
+
+    <span class="hljs-comment">// ... do stuff ...</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"something"</span>;
+  },
+
+  otherMethod: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// ... do other stuff ...</span>
+  }
+});
+</code></pre>
+<p>The <a href="http://localhost:3000/#check"><code>check</code></a> function is a convenient way to enforce the expected <a href="http://localhost:3000/#matchpatterns">types and structure</a> of method arguments.</p>
+<p>Inside your method definition, <code>this</code> is bound to a method invocation object, which has several useful properties, including <code>this.userId</code>, which identifies the currently logged-in user.</p>
+<p>You don't have to put all your method definitions into a single <code>Meteor.methods</code> call; you may call it multiple times, as long as each method has a unique name.</p>
+<h3 id="latencycompensation">Latency Compensation</h3>
+<p>Calling a method on the server requires a round-trip over the network. It would be really frustrating if users had to wait a whole second to see their comment show up due to this delay. That's why Meteor has a feature called <em>method stubs</em>. If you define a method on the client with the same name as a server method, Meteor will run it to attempt to predict the outcome of the server method. When the code on the server actually finishes, the prediction generated on the client will be replaced with the actual outcome of the server method.</p>
+<p>The client versions of <a href="http://localhost:3000/#insert"><code>insert</code></a>, <a href="http://localhost:3000/#update"><code>update</code></a>, and <a href="http://localhost:3000/#remove"><code>remove</code></a>, which are implemented as methods, use this feature to make client-side interactions with the database appear instant.</p>
+<div class="api new-api-box">
+<h3 id="Meteor-call" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-call">Meteor.call(name, [arg1, arg2...], [asyncCallback])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Invokes a method passing any number of arguments.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">name</span> <span class="type">String</span></dt>
+<dd>
+<p>Name of method to invoke</p>
+</dd>
+<dt><span class="name">arg1, arg2...</span> <span class="type"><a href="http://localhost:3000/#ejson">EJSON-able Object</a></span></dt>
+<dd>
+<p>Optional method arguments</p>
+</dd>
+<dt><span class="name">asyncCallback</span> <span class="type">Function</span></dt>
+<dd>
+<p>Optional callback, which is called asynchronously with the error or result after the method is complete. If not provided, the method runs synchronously if possible (see below).</p>
+</dd>
+</dl>
+</div>
+<p>This is how you call a method.</p>
+<h3 id="ontheclient">On the client</h3>
+<p>Methods called on the client run asynchronously, so you need to pass a callback in order to observe the result of the call. The callback will be called with two arguments, <code>error</code> and <code>result</code>. The <code>error</code> argument will be <code>null</code> unless an exception was thrown. When an exception is thrown, the <code>error</code> argument is a <code>Meteor.Error</code> instance and the <code>result</code> argument is undefined.</p>
+<p>Here's an example of calling the <code>commentOnPost</code> method with arguments <code>comment</code> and <code>postId</code>:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// Asynchronous call with a callback on the client</span>
+Meteor.call(<span class="hljs-string">'commentOnPost'</span>, comment, postId, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(error, result)</span> </span>{
+  <span class="hljs-keyword">if</span> (error) {
+    <span class="hljs-comment">// handle error</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// examine result</span>
+  }
+});
+</code></pre>
+<p>Meteor tracks the database updates performed as part of a method call, and waits to invoke the client-side callback until all of those updates have been sent to the client.</p>
+<h3 id="ontheserver">On the server</h3>
+<p>On the server, you don't have to pass a callback &mdash; the method call will simply block until the method is complete, returning a result or throwing an exception, just as if you called the function directly:</p>
+<pre><code class="hljs js"><span class="hljs-comment">// Synchronous call on the server with no callback</span>
+<span class="hljs-keyword">var</span> result = Meteor.call(<span class="hljs-string">'commentOnPost'</span>, comment, postId);
+</code></pre>
+<div class="api new-api-box">
+<h3 id="Meteor-Error" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-Error">new Meteor.Error(error, [reason], [details])</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>This class represents a symbolic error thrown by a method.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">error</span> <span class="type">String</span></dt>
+<dd>
+<p>A string code uniquely identifying this kind of error. This string should be used by callers of the method to determine the appropriate action to take, instead of attempting to parse the reason or details fields. For example:</p>
+<pre class="prettyprint source"><code class="hljs javascript"><span class="hljs-comment">// on the server, pick a code unique to this error</span>
+<span class="hljs-comment">// the reason field should be a useful debug message</span>
+<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Meteor.Error(<span class="hljs-string">"logged-out"</span>, 
+  <span class="hljs-string">"The user must be logged in to post a comment."</span>);
+
+<span class="hljs-comment">// on the client</span>
+Meteor.call(<span class="hljs-string">"methodName"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(error)</span> </span>{
+  <span class="hljs-comment">// identify the error</span>
+  <span class="hljs-keyword">if</span> (error.error === <span class="hljs-string">"logged-out"</span>) {
+    <span class="hljs-comment">// show a nice error message</span>
+    Session.set(<span class="hljs-string">"errorMessage"</span>, <span class="hljs-string">"Please log in to post a comment."</span>);
+  }
+});</code></pre>
+<p>For legacy reasons, some built-in Meteor functions such as <code>check</code> throw errors with a number in this field.</p>
+</dd>
+<dt><span class="name">reason</span> <span class="type">String</span></dt>
+<dd>
+<p>Optional. A short human-readable summary of the error, like 'Not Found'.</p>
+</dd>
+<dt><span class="name">details</span> <span class="type">String</span></dt>
+<dd>
+<p>Optional. Additional information about the error, like a textual stack trace.</p>
+</dd>
+</dl>
+</div>
+<p>If you want to return an error from a method, throw an exception. Methods can throw any kind of exception, but <code>Meteor.Error</code> is the only kind of error that will be sent to the client. If a method function throws a different exception, the client gets <code>Meteor.Error(500, 'Internal server error')</code>.</p>
+<h2 id="pubsub">Publish and subscribe</h2>
+<p>Meteor servers can publish sets of documents with <code>Meteor.publish</code>, and clients can subscribe to those publications with <code>Meteor.subscribe</code>. Any documents the client subscribes to will be available through the <code>find</code> method of client collections.</p>
+<p>By default, every newly created Meteor app contains the <code>autopublish</code> package, which automatically publishes all available documents to every client. To exercise finer-grained control over what documents different clients receive, first remove <code>autopublish</code>:</p>
+<pre><code class="hljs ruby"><span class="hljs-variable">$ </span>meteor remove autopublish
+</code></pre>
+<p>Now you can use <code>Meteor.publish</code> and <code>Meteor.subscribe</code> to control what documents flow from the server to its clients.</p>
+<div class="api new-api-box">
+<h3 id="Meteor-publish" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-publish">Meteor.publish(name, func)</a> <span class="locus">Server</span></h3>
+<div class="desc">
+<p>Publish a record set.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">name</span> <span class="type">String</span></dt>
+<dd>
+<p>Name of the record set. If <code>null</code>, the set has no name, and the record set is automatically sent to all connected clients.</p>
+</dd>
+<dt><span class="name">func</span> <span class="type">Function</span></dt>
+<dd>
+<p>Function called on the server each time a client subscribes. Inside the function, <code>this</code> is the publish handler object, described below. If the client passed arguments to <code>subscribe</code>, the function is called with the same arguments.</p>
+</dd>
+</dl>
+</div>
+<p>To publish data to clients, call <code>Meteor.publish</code> on the server with two arguments: the name of the record set, and a <em>publish function</em> that will be called each time a client subscribes to this record set.</p>
+<p>Publish functions typically return the result of calling <code>collection.find(query)</code> on some <code>collection</code> with a <code>query</code> that narrows down the set of documents to publish from that collection:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// Publish the logged in user's posts</span>
+Meteor.publish(<span class="hljs-string">"posts"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">return</span> Posts.find({ createdBy: <span class="hljs-keyword">this</span>.userId });
+});
+</code></pre>
+<p>You can publish documents from multiple collections by returning an array of <code>collection.find</code> results:</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// Publish a single post and its comments</span>
+Meteor.publish(<span class="hljs-string">"postAndComments"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(postId)</span> </span>{
+  <span class="hljs-comment">// Check argument</span>
+  check(postId, <span class="hljs-built_in">String</span>);
+
+  <span class="hljs-keyword">return</span> [
+    Posts.find({ _id: postId }),
+    Comments.find({ postId: roomId })
+  ];
+});
+</code></pre>
+<p>Inside the publish function, <code>this.userId</code> is the current logged-in user's <code>_id</code>, which can be useful for filtering collections so that certain documents are visible only to certain users. If the logged-in user changes for a particular client, the publish function will be automatically rerun with the new <code>userId</code>, so the new user will not have access to any documents that were meant only for the previous user.</p>
+<div class="api new-api-box">
+<h3 id="Meteor-subscribe" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-subscribe">Meteor.subscribe(name, [arg1, arg2...], [callbacks])</a> <span class="locus">Client</span></h3>
+<div class="desc">
+<p>Subscribe to a record set. Returns a handle that provides <code>stop()</code> and <code>ready()</code> methods.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">name</span> <span class="type">String</span></dt>
+<dd>
+<p>Name of the subscription. Matches the name of the server's <code>publish()</code> call.</p>
+</dd>
+<dt><span class="name">arg1, arg2...</span> <span class="type">Any</span></dt>
+<dd>
+<p>Optional arguments passed to publisher function on server.</p>
+</dd>
+<dt><span class="name">callbacks</span> <span class="type">Function or Object</span></dt>
+<dd>
+<p>Optional. May include <code>onStop</code> and <code>onReady</code> callbacks. If there is an error, it is passed as an argument to <code>onStop</code>. If a function is passed instead of an object, it is interpreted as an <code>onReady</code> callback.</p>
+</dd>
+</dl>
+</div>
+<p>Clients call <code>Meteor.subscribe</code> to express interest in document collections published by the server. Clients can further filter these collections of documents by calling <a href="http://localhost:3000/#find"><code>collection.find(query)</code></a>. Whenever any data that was accessed by a publish function changes on the server, the publish function is automatically rerun and the updated document collections are pushed to the subscribed client.</p>
+<p>The <code>onReady</code> callback is called with no arguments when the server has sent all of the initial data for the subscription. The <code>onStop</code> callback is when the subscription is terminated for any reason; it receives a <a href="http://localhost:3000/#meteor_error"><code>Meteor.Error</code></a> if the subscription failed due to a server-side error.</p>
+<p><code>Meteor.subscribe</code> returns a subscription handle, which is an object with the following methods:</p>
+<dl class="callbacks">
+<dt><span class="name">stop()</span></dt>
+<dd>
+<p>Cancel the subscription. This will typically result in the server directing the client to remove the subscription's data from the client's cache.</p>
+</dd>
+<dt><span class="name">ready()</span></dt>
+<dd>
+<p>Returns true if the server has <a href="http://localhost:3000/#publish_ready">marked the subscription as ready</a>. A reactive data source.</p>
+</dd>
+</dl>
+<p>If you call <code>Meteor.subscribe</code> inside <a href="http://localhost:3000/#tracker_autorun"><code>Tracker.autorun</code></a>, the subscription will be cancelled automatically whenever the computation reruns (so that a new subscription can be created, if appropriate), meaning you don't have to to call <code>stop</code> on subscriptions made from inside <code>Tracker.autorun</code>.</p>
+<h2 id="environment">Environment</h2>
+<div class="api new-api-box">
+<h3 id="Meteor-isClient" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-isClient">Meteor.isClient</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Boolean variable. True if running in client environment.</p>
+</div>
+</div>
+<div class="api new-api-box">
+<h3 id="Meteor-isServer" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-isServer">Meteor.isServer</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Boolean variable. True if running in server environment.</p>
+</div>
+</div>
+<div class="note">
+<p><code>Meteor.isServer</code> can be used to limit where code runs, but it does not prevent code from being sent to the client. Any sensitive code that you don't want served to the client, such as code containing passwords or authentication mechanisms, should be kept in the <code>server</code> directory.</p>
+</div>
+<div class="api new-api-box">
+<h3 id="Meteor-startup" class="api-title"><a class="name selflink" href="http://localhost:3000/#/basic/Meteor-startup">Meteor.startup(func)</a> <span class="locus">Anywhere</span></h3>
+<div class="desc">
+<p>Run code when a client or a server starts.</p>
+</div>
+<h4>Arguments</h4>
+<dl class="args">
+<dt><span class="name">func</span> <span class="type">Function</span></dt>
+<dd>
+<p>A function to run on startup.</p>
+</dd>
+</dl>
+</div>
+<p>On the server, the callback function will run as soon as the server process is finished starting up. On the client, the callback function will run as soon as the page is ready.</p>
+<p>It's good practice to wrap all code that isn't inside template events, template helpers, <code>Meteor.methods</code>, <code>Meteor.publish</code>, or <code>Meteor.subscribe</code> in <code>Meteor.startup</code> so that your application code isn't executed before the environment is ready.</p>
+<p>For example, to create some initial data if the database is empty when the server starts up, you might use the following pattern:</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (Meteor.isServer) {
+  Meteor.startup(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">if</span> (Rooms.find().count() === <span class="hljs-number">0</span>) {
+      Rooms.insert({name: <span class="hljs-string">"Initial room"</span>});
+    }
+  });
+}
+</code></pre>
+<p>If you call <code>Meteor.startup</code> on the server after the server process has started up, or on the client after the page is ready, the callback will fire immediately.</p>
+<h2 id="packages">Packages</h2>
+<p>All of Meteor's functionality is implemented in modular packages. In addition to the core packages documented above, there are many others that you can add to your app to enable useful functionality.</p>
+<p>From the command line, you can add and remove packages with <code>meteor add</code> and <code>meteor remove</code>:</p>
+<pre><code class="hljs bash"><span class="hljs-comment"># add the less package</span>
+meteor add less
+
+<span class="hljs-comment"># remove the less package</span>
+meteor remove less
+</code></pre>
+<p>Your app will restart itself automatically when you add or remove a package. An app's package dependencies are tracked in <code>.meteor/packages</code>, so your collaborators will be automatically updated to the same set of installed packages as you after they pull your source code, because they have the same <code>.meteor/packages</code> file as you.</p>
+<p>You can see which packages are used by your app by running <code>meteor list</code> in the app's directory.</p>
+<h2 id="searchingforpackages">Searching for packages</h2>
+<p>Currently the best way to search for packages available from the official Meteor package server is <a href="https://atmospherejs.com/">Atmosphere</a>, the community package search website maintained by Percolate Studio. You can also search for packages directly using the <code>meteor search</code> command.</p>
+<p>Packages that have a <code>:</code> in the name, such as <code>mquandalle:jade</code>, are written and maintained by community members. The prefix before the colon is the name of the user or organization who created that package. Unprefixed packages are maintained by Meteor Development Group as part of the Meteor framework.</p>
+<p>There are currently over 2000 packages available on Atmosphere. Below is a small selection of some of the most useful packages.</p>
+<h2 id="accountsui">accounts-ui</h2>
+<p>This is a drop-in user interface to Meteor's accounts system. After adding the package, include it in your templates with <code>{{&gt; loginButtons}}</code>. The UI automatically adapts to include controls for any added login services, such as <code>accounts-password</code>, <code>accounts-facebook</code>, etc.</p>
+<p><a href="http://localhost:3000/#/basic/accounts">See the docs about accounts-ui above.</a>.</p>
+<h2 id="coffeescript">coffeescript</h2>
+<p>Use <a href="http://coffeescript.org/">CoffeeScript</a> in your app. With this package, any files with a <code>.coffee</code> extension will be compiled to JavaScript by Meteor's build system.</p>
+<h2 id="email">email</h2>
+<p>Send emails from your app. See the <a href="http://localhost:3000/#/full/email">email section of the full API docs</a>.</p>
+<h2 id="jade">mquandalle:jade</h2>
+<p>Use the <a href="http://jade-lang.com/">Jade</a> templating language in your app. After adding this package, any files with a <code>.jade</code> extension will be compiled into Meteor templates. See the <a href="https://atmospherejs.com/mquandalle/jade">page on Atmosphere</a> for details.</p>
+<h2 id="jquery">jquery</h2>
+<p>JQuery makes HTML traversal and manipulation, event handling, and animation easy with a simple API that works across most browsers.</p>
+<p>JQuery is automatically included in every Meteor app since the framework uses it extensively. See the <a href="http://jquery.com/">JQuery docs</a> for more details.</p>
+<h2 id="http">http</h2>
+<p>This package allows you to make HTTP requests from the client or server using the same API. See the <a href="http://localhost:3000/#/full/http">http docs</a> to see how to use it.</p>
+<h2 id="less">less</h2>
+<p>Add the <a href="http://lesscss.org/">LESS</a> CSS preprocessor to your app to compile any files with a <code>.less</code> extension into standard CSS. If you want to use <code>@import</code> to include other files and not have Meteor automatically compile them, use the <code>.import.less</code> extension.</p>
+<h2 id="markdown">markdown</h2>
+<p>Include <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> code in your templates. It's as easy as using the <code>{{# markdown}}</code> helper:</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"my-div"</span>&gt;</span>
+{{#markdown}}
+# My heading
+
+Some paragraph text
+{{/markdown}}
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+<p>Just make sure to keep your markdown unindented, since whitespace matters.</p>
+<h2 id="underscore">underscore</h2>
+<p><a href="http://underscorejs.org/">Underscore</a> provides a collection of useful functions to manipulate arrays, objects, and functions. <code>underscore</code> is included in every Meteor app because the framework itself uses it extensively.</p>
+<h2 id="spiderable">spiderable</h2>
+<p>This package gives your app server-side rendering to allow search engine crawlers and other bots see your app's contents. If you care about SEO, you should add this package.</p>
+<h1 id="checkoutthefullapidocs">Check out the Full API Docs</h1>
+<p>Congratulations, you're at the end of the Meteor basic documentation. For more advanced features and more specific explanations, check out the <a href="http://localhost:3000/#/full/">Full API Docs</a>.</p>
+<a href="http://meteor.com"> <img style="width: 100%; max-width: 300px;" src="http://localhost:3000/logo.png" alt="" /> </a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

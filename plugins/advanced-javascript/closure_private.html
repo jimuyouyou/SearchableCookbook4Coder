@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>closure_private</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function Ninja() {
+		var slices = 0;
+		this.getSlices = function(){
+			return slices;
+		}; 
+
+		this.slice = function(){
+			slices++;
+		};
+	}
+
+	var ninja = new Ninja();
+	ninja.slice();
+	
+	assert(ninja.getSlices() == 1, "We're able to access the internal slice data." );
+	assert(ninja.slices === undefined, "And the private data is inaccessible to us." );
+	</script>
+
+<pre>
+	function Ninja() {
+		var slices = 0;
+		this.getSlices = function(){
+			return slices;
+		}; 
+
+		this.slice = function(){
+			slices++;
+		};
+	}
+
+	var ninja = new Ninja();
+	ninja.slice();
+	
+	assert(ninja.getSlices() == 1, "We're able to access the internal slice data." );
+	assert(ninja.slices === undefined, "And the private data is inaccessible to us." );
+
+	#1 Defines constructor
+	#2 Declares “private” variable
+	#3 Creates an accessor method
+	#4 Declares increment method
+	#5 Constructs the object
+	#6 Calls the increment method
+	#7 Tests the private-ness
+</pre>
+	
+</body>
+</html>

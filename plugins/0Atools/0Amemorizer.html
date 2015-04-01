@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>memorizer.html</title>
+	<link rel="stylesheet" href="../../css/main.css">
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+</head>
+<body>
+	<h4>Message 1</h4> 
+	<input type="radio" name="m1" id="m1-1" checked>1
+	<input type="radio" name="m1" id="m1-2">2
+	<input type="radio" name="m1" id="m1-3">3
+	<input type="radio" name="m1" id="m1-4">4
+	<input type="radio" name="m1" id="m1-5">5<p>
+	<textarea name="tv" id='m1' style="height:200px"></textarea><p>
+
+	<h4>Message 2</h4>
+	<input type="radio" name="m2" id="m2-1" checked>1
+	<input type="radio" name="m2" id="m2-2">2
+	<input type="radio" name="m2" id="m2-3">3
+	<input type="radio" name="m2" id="m2-4">4
+	<input type="radio" name="m2" id="m2-5">5<p>
+	<textarea name="tv" id='m2' style="height:200px"></textarea><p>
+</body>
+<script>
+
+	function loadMsg() {
+		$('#m1').val(localStorage.getItem("m1-1"));
+		$('#m2').val(localStorage.getItem("m2-1"));
+	}
+
+	function regEvents() {
+		$('input[type="radio"]').click(function(){
+			var id = $(this).attr('name');
+			var val = localStorage.getItem($(this).attr("id"));
+			$("#" + id).val(val);
+		});
+
+		$('textarea[name="tv"]').change(function(){
+			var nm = 'input[name="' + $(this).attr("id") + '"]:checked';
+			var key = $(nm).attr('id');
+			localStorage.setItem(key, $(this).val());
+		});
+	}
+
+
+	$(document).ready(function(){
+		regEvents();
+		loadMsg();
+	});
+
+
+
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>collection_functions_unique</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	
+	<script type="text/javascript">
+	var store = {
+		nextId: 1,
+		cache: {},
+		add: function(fn) {
+			if (!fn.id) {
+				fn.id = store.nextId++;
+				return !!(store.cache[fn.id] = fn);
+			}
+		}
+	};
+
+	function ninja(){}
+
+	assert(store.add(ninja), "Function was safely added.");
+	assert(!store.add(ninja), "But it was only added once.");
+	</script>
+
+	<pre>
+	var store = {
+		nextId: 1,
+		cache: {},
+		add: function(fn) {
+			if (!fn.id) {
+				fn.id = store.nextId++;
+				return !!(store.cache[fn.id] = fn);
+			}
+		}
+	};
+
+	function ninja(){}
+
+	assert(store.add(ninja), "Function was safely added.");
+	assert(!store.add(ninja), "But it was only added once.");
+	</pre>
+
+	<ul>
+		<li>#1 Keeps track of available ids</li>
+		<li>#2 Stores the functions</li>
+		<li>#3 Adds only unique functions</li>
+		<li>#4 Tests that it works</li>
+	</ul>
+
+	The <b>!! construct</b> is a simple way of turning any JavaScript expression into its Boolean equivalent.
+
+</body>
+</html>

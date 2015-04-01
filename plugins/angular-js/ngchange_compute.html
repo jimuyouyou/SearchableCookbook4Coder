@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>ngchange_compute</title>
+</head>
+<script src='lib/angular1.2.js'></script>
+<body>
+	<form ng-submit="requestFunding()" ng-controller="StartUpController"> <p>
+		Starting: <input ng-change="computeNeeded()" ng-model="funding.startingEstimate"> <p>
+		Recommendation: {{funding.needed}} <p>
+		<button>Fund my startup!</button> <p>
+		<button ng-click="reset()">Reset</button> <p>
+	</form>
+
+	<script>
+	function StartUpController($scope) {
+		$scope.funding = { startingEstimate: 0 };
+
+		computeNeeded = function() {
+			$scope.funding.needed = $scope.funding.startingEstimate * 10;
+		}
+
+		$scope.$watch('funding.startingEstimate', computeNeeded);
+
+		$scope.requestFunding = function() {
+			window.alert("Sorry, please get more customers first.");
+		};
+
+		$scope.reset = function() {
+			$scope.funding.startingEstimate = 0;
+		};
+	}
+	</script>
+</body>
+</html>

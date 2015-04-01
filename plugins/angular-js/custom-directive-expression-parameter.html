@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='myApp'>
+<head>
+	<meta charset="UTF-8">
+	<title>custom-directive-expression-parameter.html</title>
+<script src='lib/angular1.2.js'></script>
+</head>
+<body>
+	<div my-directive my-url="http://www.haosou.com" my-link-text="Click me to go to haosou">click to test</div>
+
+	<script>
+angular.module('myApp', [])
+	.directive('myDirective', function() {
+		return {
+			restrict: 'A',
+			replace: true,
+		scope: {
+			myUrl: '@', // binding strategy
+			myLinkText: '@' // binding strategy
+		},
+		template: '<a href="{{myUrl}}">' + '{{myLinkText}}</a>'
+	}
+})
+	</script>
+</body>
+</html>

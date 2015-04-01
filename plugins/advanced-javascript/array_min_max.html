@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>array_min_max</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function smallest(array){
+		return Math.min.apply(Math, array);
+	} 
+
+	function largest(array){
+		return Math.max.apply(Math, array);
+	} 
+
+	assert(smallest([0, 1, 2, 3]) == 0,"Located the smallest value.");
+	assert(largest([0, 1, 2, 3]) == 3,"Located the largest value.");
+	</script>
+	
+	<pre>
+	function smallest(array){
+		return Math.min.apply(Math, array);
+	} 
+
+	function largest(array){
+		return Math.max.apply(Math, array);
+	} 
+
+	assert(smallest([0, 1, 2, 3]) == 0,"Located the smallest value.");
+	assert(largest([0, 1, 2, 3]) == 3,"Located the largest value.");
+	</pre>
+
+</body>
+</html>

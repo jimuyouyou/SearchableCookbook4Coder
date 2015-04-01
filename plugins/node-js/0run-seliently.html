@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>silent run</title>
+</head>
+<body>
+<pre>
+easiest one: nohup node app.js &
+or: nohup npm start & 
+ps -ef | grep node
+kill the id of node
+
+Forever:
+# sudo npm install forever -g   
+$ forever start app.js          
+$ forever stop app.js           
+$ forever start -l forever.log -o out.log -e err.log app.js   #输出日志和错误
+</pre>
+</body>
+</html>

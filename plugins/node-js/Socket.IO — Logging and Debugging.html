@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://socket.io/docs/logging-and-debugging/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Socket.IO  —  Logging and Debugging</title>
+
+<body class="page page-id-325 page-child parent-pageid-26 page-template page-template-page-siderbar-php custom-background group-blog">
+	<div id="primary" class="content-area with-sidebar">
+		<main id="main" class="site-main" role="main">
+			
+				
+<article id="post-325" class="post-325 page type-page status-publish hentry">
+	<div class="entry-content">
+		<h1 id="logging-and-debugging"><a class="icon-link deep-link" href="http://socket.io/docs/logging-and-debugging/#logging-and-debugging" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Logging and Debugging</h1>
+<p>Socket.IO is now completely instrumented by a minimalistic yet tremendously powerful utility called <a href="https://github.com/visionmedia/debug">debug</a> by TJ Holowaychuk.</p>
+<p>Before 1.0, the Socket.IO server would default to logging everything out to the console. This turned out to be annoyingly verbose for many users (although extremely useful for others), so now we default to being completely silent by default.</p>
+<p>The basic idea is that each module used by Socket.IO provides different debugging scopes that give you insight into the internals. By default, all output is suppressed, and you can opt into seeing messages by supplying the <code>DEBUG</code> env variable (Node.JS) or the <code>localStorage.debug</code> property (Browsers).</p>
+<p>You can see it in action for example on our homepage:</p>
+<h2 id="available-debugging-scopes"><a class="icon-link deep-link" href="http://socket.io/docs/logging-and-debugging/#available-debugging-scopes" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Available debugging scopes</h2>
+<p>The best way to see what information is available is to use the <code>*</code>:</p>
+<pre><code>DEBUG=* node yourfile.js</code></pre>
+<p>or in the browser:</p>
+<pre><code>localStorage.debug = '*';</code></pre>
+<p>And then filter by the scopes you’re interested in. You can use <code>,</code> to separate them.</p>
+			</div><!-- .entry-content -->
+	<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+			
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info">
+			<span class="footer-left">SOCKET.IO IS OPEN-SOURCE (MIT). RUN BY <a href="https://github.com/Automattic/socket.io/graphs/contributors">CONTRIBUTORS</a>. <a href="https://twitter.com/socketio" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @socketio</a></span>
+			<span class="footer-right"><a href="http://automattic.com/">SUPPORTED BY<div id="a8c-image"></div></a></span>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+
+
+
+</body></html>

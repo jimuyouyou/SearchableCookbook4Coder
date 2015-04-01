@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>inline_function</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+
+	<div id="results"></div>
+	
+	<pre>
+		#1 Declares named inline function and assigns it to a variable.
+		#2 Tests that the tow names are equivalent inside the inline function.
+		#3 Invokes function to perform the internal test.
+		#4 Tests that the inline function’s name isn’t available outside the inline function.
+		This listing brings up the most important point regarding inline function
+
+		So while giving inline functions a name may provide a means to clearly allow recursive
+		references within those function – arguably, this approach provides more clarity than using
+		this – it has limited utility elsewhere.
+	</pre>
+	
+	<script type="text/javascript">
+	var ninja = function myNinja(){ //1
+		assert(ninja == myNinja,"This function is named two things at once!"); //2
+	};
+	ninja(); //3
+	assert(typeof myNinja == "undefined", "But myNinja isn't defined outside of the function."); //4
+	</script>
+</body>
+</html>

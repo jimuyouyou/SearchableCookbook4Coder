@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>form</title>
+</head>
+<link rel="stylesheet" type="text/css" href="lib/main.css">
+<body>
+	<div>
+		<div>
+			form validation <br>
+			<textarea style='height:600px'>
+ng-minlength; ng-maxlength; ng-pattern; ng-required	
+
+$pristine    	True if the form has not been changed (no form fields has changed), false if some fields have been changed.
+$dirty 	The reverse of $pristine - false if the form has not been changed - true if it has.
+$valid 	True if the form field (or the whole form = all form fields) is valid. False if not.
+$invalid 	The reverse of the $valid - false if the field (or all fields in the form) is valid, true if the field (or a single field in the for) is invalid.	
+
+ <form ng-submit="myForm.submitTheForm()">
+    <input type="text" id="name" ng-model="myForm.name" ng-minlength="5" ng-maxlength="12"> Name <br/>
+    <select ng-model="myForm.car">
+      <option value="nissan">Nissan</option>
+      <option value="toyota">Toyota</option>
+      <option value="fiat">Fiat</option>
+    </select>
+    <input type="submit" value="Submit Form">
+  </form>
+
+$scope.myForm.$valid
+
+.fieldValid {
+        border: 1px solid #00ff00;
+    }
+ .fieldInvalid {
+        border: 1px solid #ff0000;
+    }
+
+<form>
+		<input type="text" id="name" ng-model="myForm.name" ng-pattern="/^\d+$/"> Name
+        <input type="text" id="name" ng-model="myForm.name" ng-minlength="5" ng-maxlength="12"> Name
+</form>	
+
+ {{myForm.name}}
+
+angular.module("myapp", [])
+.controller("MyController", function($scope) {
+    $scope.myForm = {};
+    $scope.myForm.name = "Jakob Jenkov";
+} );
+			</textarea>
+		</div>
+		<div>
+			bind text<br>
+			<textarea>
+<input type="text" id="firstName" ng-model="myForm.firstName">
+js: $scope.myForm.firstName = 'mqin';
+			</textarea>
+		</div>
+		<div>
+			bind checkbox<br>
+			<textarea> 
+<input type="checkbox" ng-model="myForm.wantNewsletter" ng-true-value="yes" ng-false-value="no" >
+yes/no can be altered to your specific checkbox values
+			</textarea>
+		</div>
+		<div>
+			bind radio<br>
+			<textarea>
+<input type="radio" ng-model="myForm.whichNewsletter" value="weeklyNews">   weeklyNews 
+<input type="radio" ng-model="myForm.whichNewsletter" value="monthlyNews">   monthlyNews
+			</textarea>
+		</div>
+		<div>
+			bind select box<br>
+			<textarea style='height:350px'>
+<div ng-controller="MyController" >
+    <form>
+        <select ng-model="myForm.car">
+            <option value="nissan">Nissan</option>
+            <option value="toyota">Toyota</option>
+            <option value="fiat">Fiat</option>
+        </select>
+    </form>
+
+    <div>
+        {{myForm.car}}
+    </div>
+</div>
+
+<script>
+    angular.module("myapp", [])
+            .controller("MyController", function($scope) {
+                $scope.myForm = {};
+                $scope.myForm.car  = "nissan";
+            } );
+</script>				
+			</textarea>
+		</div>
+		<div>
+			bind select ng-options<br>
+			<textarea style='height:400px'>
+<div ng-controller="MyController" >
+    <form>
+        <select ng-model="myForm.car"
+                ng-options="obj.id as obj.name for obj in myForm.options">
+        </select>
+    </form>
+
+    <div>
+        {{myForm.car}}
+    </div>
+</div>
+
+<script>
+    angular.module("myapp", [])
+        .controller("MyController", function($scope) {
+            $scope.myForm = {};
+            $scope.myForm.car  = "nissan";
+
+            $scope.myForm.options = [
+              { id : "nissan", name: "Nissan" }
+             ,{ id : "toyota", name: "Toyota" }
+             ,{ id : "fiat"  , name: "Fiat" }
+             ];
+
+        } );
+</script>				
+			</textarea>
+		</div>
+		<div>
+			bind multiple options<br>
+			<textarea style='height:400px'>
+<div ng-controller="MyController" >
+    <form>
+        <select multiple="true" ng-model="myForm.car"
+                ng-options="obj.id as obj.name for obj in myForm.options">
+        </select>
+    </form>
+
+    <div>
+        {{myForm.car}}
+    </div>
+</div>
+
+<script>
+    angular.module("myapp", [])
+        .controller("MyController", function($scope) {
+            $scope.myForm = {};
+            $scope.myForm.car  = ["nissan"];
+
+            $scope.myForm.options = [
+              { id : "nissan", name: "Nissan" }
+             ,{ id : "toyota", name: "Toyota" }
+             ,{ id : "fiat"  , name: "Fiat" }
+             ];
+
+        } );
+</script>				
+			</textarea>
+		</div>
+		<div>
+			bind <br>
+			<textarea>
+				
+			</textarea>
+		</div>
+		<div>
+			bind <br>
+			<textarea>
+				
+			</textarea>
+		</div>
+		<div>
+			bind <br>
+			<textarea>
+				
+			</textarea>
+		</div>
+		<div>
+			bind <br>
+			<textarea>
+				
+			</textarea>
+		</div>
+		<div>
+			bind <br>
+			<textarea>
+				
+			</textarea>
+		</div>
+	</div>
+
+</body>
+</html>

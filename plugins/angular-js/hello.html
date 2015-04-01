@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>hello</title>
+</head>
+<link rel="stylesheet" href="lib/main.css"/>
+<script src='lib/angular1.2.js'></script>
+<body>
+	<div ng-controller='HelloController'>
+		<input ng-model='greeting.text'>
+		<p>{{greeting.text}}, World</p>
+	</div>
+	
+	<script>
+	function HelloController($scope) {
+		$scope.greeting = { text: 'Hello' };
+	}
+	</script>
+
+	<pre>
+		Basic concepts: 
+		Client side templates
+		MVC
+		Data Binding
+		Dependency Injections
+		Directives
+	</pre>
+</body>
+</html>

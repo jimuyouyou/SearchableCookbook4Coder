@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this_parameter</title>
+</head>
+<body>
+	<div>
+
+		<b>For functions, it is always window ;</b>
+		<br>
+		<b>for methods, the method’s owning object;</b>
+		<br>
+		<b>and for constructors, a newly created object instance</b>
+		<br><p>
+	</div>
+
+	<div>
+		function context for each invocation of the function changes depending upon how the
+		function is invoked, rather than on how it was declared.
+		<ul>
+			<li>Invocation as a function: 
+				When we invoke the function via the variable – something we can do because the
+				function invocation operator can be applied to any expression that evaluates to a function –
+				we’d once again be invoking the function as a function. As such, we’d once again expect that
+				the function context would be the window (#4), and it is.
+			</li>
+			<li>According to what we stated earlier, when we invoke the function via a method reference,
+				we expect the function context to be the method’s object;
+			</li>
+			<li>The purpose of a constructor is to cause a new object to be created, to set it up, and to return it as the
+				constructor value. Anything that interferes with that intent is not appropriate for functions
+				intended for use as a constructor.
+			</li>
+			<li>
+				<pre>
+					function juggle() {
+					var result = 0;
+					for (var n = 0; n < arguments.length; n++) {
+					result += arguments[n];
+				}
+				this.result = result;
+			} 
+			var ninja1 = {};
+			var ninja2 = {}; 
+			juggle.apply(ninja1,[1,2,3,4]); 
+			juggle.call(ninja2,5,6,7,8); 
+			assert(ninja1.result === 10,"juggled via apply");
+			assert(ninja2.result === 26,"juggled via call"); 
+
+		</pre>
+		<hr/>
+		<pre>
+			function forEach(list,callback) {
+			for (var n = 0; n < list.length; n++) {
+			callback.call(list[n],n);
+		}
+	} #1
+	var list = ['shuriken','katana','nunchucks']; #3
+	#2
+	forEach(
+	#4
+	list,
+	function(index){ console.log(index); console.log(this);
+	assert(this == list[index],
+	"Got the expected value of " + list[index]);
+}
+);
+</pre>
+</li>
+</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>instance_prototype</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	
+	<script type="text/javascript">
+	function Ninja(){} 
+	Ninja.prototype.swingSword = function(){
+		return true;
+	}; 
+	var ninja1 = Ninja();
+	assert(ninja1 === undefined,
+		"No instance of Ninja created.");
+	var ninja2 = new Ninja();
+	assert(ninja2 && ninja2.swingSword(),
+		"Instance exists and method is callable." ); 
+	</script>
+
+	<pre>
+	function Ninja(){} 
+	Ninja.prototype.swingSword = function(){
+		return true;
+	}; 
+	var ninja1 = Ninja();
+	assert(ninja1 === undefined,
+		"No instance of Ninja created.");
+	var ninja2 = new Ninja();
+	assert(ninja2 && ninja2.swingSword(),
+		"Instance exists and method is callable." ); 
+
+	#1 Defines an empty function
+	#2 Adds prototyped method
+	#3 Calls as a function
+	#4 Calls as a constructor
+
+	<b>prototype property adds properties to the new instance</b>
+	</pre>
+	
+
+</body>
+</html>

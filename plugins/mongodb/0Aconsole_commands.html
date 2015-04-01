@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>console_commands</title>
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+	<h1>MongoDB examples</h1>
+	<table>
+		<tr>
+			<th>Explanation</th>
+			<th>Command</th>
+		</tr>
+		<tr>
+			<td>show dbs</td>
+			<td>show dbs</td>
+		</tr>
+		<tr>
+			<td>show collections</td>
+			<td>show collections</td>
+		</tr>
+		<tr>
+			<td>show users</td>
+			<td>show users</td>
+		</tr>
+		<tr>
+			<td>use db</td>
+			<td>use thinkfree</td>
+		</tr>
+		<tr>
+			<td>help</td>
+			<td>db.help()</td>
+		</tr>
+		<tr>
+			<td>collection help</td>
+			<td>db.foo.help()</td>
+		</tr>
+		<tr>
+			<td>find all</td>
+			<td>db.foo.find()</td>
+		</tr>
+		<tr>
+			<td>find some</td>
+			<td>db.foo.find({a:1})</td>
+		</tr>
+		<tr>
+			<td>delete current db</td>
+			<td>db.dropdb()</td>
+		</tr>
+		<tr>
+			<td>clone from 127.0.0.1 to current</td>
+			<td>db.clonedb(“127.0.0.1”)</td>
+		</tr>
+		<tr>
+			<td>copy mydb to temp</td>
+			<td>db.copydb("mydb", "temp", "127.0.0.1");</td>
+		</tr>
+		<tr>
+			<td>repair db</td>
+			<td>db.repairdb();</td>
+		</tr>
+		<tr>
+			<td>get current db name</td>
+			<td>db.getName();(=== db)</td>
+		</tr>
+		<tr>
+			<td>current db status</td>
+			<td>db.stats();</td>
+		</tr>
+		<tr>
+			<td>db version</td>
+			<td>db.version();</td>
+		</tr>
+		<tr>
+			<td>current db host address</td>
+			<td>db.getMongo();</td>
+		</tr>
+		<tr>
+			<td>create collection</td>
+			<td>db.createCollection(“collName”, {size: 20, capped: 5, max: 100});</td>
+		</tr>
+		<tr>
+			<td>getCollection</td>
+			<td>db.getCollection("account");</td>
+		</tr>
+		<tr>
+			<td>getCollectionNames</td>
+			<td>db.getCollectionNames();</td>
+		</tr>
+		<tr>
+			<td>printCollectionStats</td>
+			<td>db.printCollectionStats();</td>
+		</tr>
+		<tr>
+			<td>addUser</td>
+			<td>db.addUser("name");</td>
+		</tr>
+		<tr>
+			<td>addUser, true means readonly</td>
+			<td>db.addUser("userName", "pwd123", true);</td>
+		</tr>
+		<tr>
+			<td>security mode</td>
+			<td>db.auth("userName", "123123");</td>
+		</tr>
+		<tr>
+			<td>removeUser</td>
+			<td>db.removeUser("userName");</td>
+		</tr>
+		<tr>
+			<td>view collentions record count</td>
+			<td>db.yourColl.count();</td>
+		</tr>
+		<tr>
+			<td>dataSize</td>
+			<td>db.userInfo.dataSize();</td>
+		</tr>
+		<tr>
+			<td>getDB</td>
+			<td>db.userInfo.getDB();</td>
+		</tr>
+		<tr>
+			<td>status</td>
+			<td>db.userInfo.stats();</td>
+		</tr>
+		<tr>
+			<td>totalSize</td>
+			<td>db.userInfo.totalSize();</td>
+		</tr>
+		<tr>
+			<td>storageSize</td>
+			<td>db.userInfo.storageSize();</td>
+		</tr>
+		<tr>
+			<td>rename userInfo to users</td>
+			<td>db.userInfo.renameCollection("users"); </td>
+		</tr>
+		<tr>
+			<td>drop, select* from userInfo;</td>
+			<td>db.userInfo.drop();</td>
+		</tr>
+		<tr>
+			<td>distinct, select distict name from userInfo;</td>
+			<td>db.userInfo.distinct("name");</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where age = 22;</td>
+			<td>db.userInfo.find({"age": 22});</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where age >22;</td>
+			<td>db.userInfo.find({age: {$gt: 22}});</td>
+		</tr>
+		<tr>
+			<td>db.userInfo.find({age: {$lt: 22}});</td>
+			<td>select * from userInfo where age <22;</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where age >= 25;</td>
+			<td>db.userInfo.find({age: {$gte: 25}});</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where age <= 25;</td>
+			<td>db.userInfo.find({age: {$lte: 25}});</td>
+		</tr>
+		<tr>
+			<td>greater than, equal, little than</td>
+			<td>db.userInfo.find({age: {$gte: 23, $lte: 26}});</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where name like ‘%mongo%’; name contains mongo</td>
+			<td>db.userInfo.find({name: /mongo/});</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where name like ‘mongo%’; start with</td>
+			<td>db.userInfo.find({name: /^mongo/});</td>
+		</tr>
+		<tr>
+			<td>select name, age from userInfo; specify columns</td>
+			<td>db.userInfo.find({}, {name: 1, age: 1});</td>
+		</tr>
+		<tr>
+			<td>select name, age from userInfo where age >25; specify</td>
+			<td>db.userInfo.find({age: {$gt: 25}}, {name: 1, age: 1});</td>
+		</tr>
+		<tr>
+			<td>sort desc</td>
+			<td>db.userInfo.find().sort({age: -1});</td>
+		</tr>
+		<tr>
+			<td>sort desc</td>
+			<td>db.userInfo.find().sort({age: 1});</td>
+		</tr>
+		<tr>
+			<td>db.userInfo.find().limit(5);</td>
+			<td>db.userInfo.find().limit(5);</td>
+		</tr>
+		<tr>
+			<td>db.userInfo.find().skip(10);</td>
+			<td>db.userInfo.find().skip(10);</td>
+		</tr>
+		<tr>
+			<td>skip limit</td>
+			<td>db.userInfo.find().limit(10).skip(5);</td>
+		</tr>
+		<tr>
+			<td>select * from userInfo where age = 22 or age = 25;</td>
+			<td>db.userInfo.find({$or: [{age: 22}, {age: 25}]});</td>
+		</tr>
+		<tr>
+			<td>db.userInfo.findOne();</td>
+			<td>db.userInfo.findOne();</td>
+		</tr>
+		<tr>
+			<td>select count(*) from userInfo where age >= 20;</td>
+			<td>db.userInfo.find({age: {$gte: 25}}).count();</td>
+		</tr>
+		<tr>
+			<td>create index</td>
+			<td>db.userInfo.ensureIndex({name: 1});</td>
+		</tr>
+		<tr>
+			<td>create index</td>
+			<td>db.userInfo.ensureIndex({name: 1, ts: -1});</td>
+		</tr>
+		<tr>
+			<td>getIndexes</td>
+			<td>db.userInfo.getIndexes();</td>
+		</tr>
+		<tr>
+			<td>totalIndexSize</td>
+			<td>db.userInfo.totalIndexSize();</td>
+		</tr>
+		<tr>
+			<td>read index information</td>
+			<td>db.users.reIndex();</td>
+		</tr>
+		<tr>
+			<td>dropIndex</td>
+			<td>db.users.dropIndex("name_1");</td>
+		</tr>
+		<tr>
+			<td>dropIndexes</td>
+			<td>db.users.dropIndexes();</td>
+		</tr>
+		<tr>
+			<td>save</td>
+			<td>db.users.save({name: ‘zhangsan’, age: 25, sex: true});</td>
+		</tr>
+		<tr>
+			<td>update users set name = ‘changeName’ where age = 25;</td>
+			<td>db.users.update({age: 25}, {$set: {name: 'changeName'}}, false, true);</td>
+		</tr>
+		<tr>
+			<td>update users set age = age + 50 where name = ‘Lisi’;</td>
+			<td>db.users.update({name: 'Lisi'}, {$inc: {age: 50}}, false, true);</td>
+		</tr>
+		<tr>
+			<td>delete</td>
+			<td>db.users.remove({age: 132});</td>
+		</tr>
+		<tr>
+			<td>add multile records</td>
+			<td>for (var i = 0; i < 30; i++) db.users.save({name: "u_" + i, age: 22 + i, sex: i % 2});</td>
+		</tr>
+		<tr>
+			<td>cursor</td>
+			<td>var cursor = db.users.find();while (cursor.hasNext()) { printjson(cursor.next); }</td>
+		</tr>
+		<tr>
+			<td>forEach</td>
+			<td>db.users.find().forEach(printjson); cursor[4];</td>
+		</tr>
+		<tr>
+			<td>cursor[4]</td>
+			<td>var cursor = db.users.find();</td>
+		</tr>
+		<tr>
+			<td>toArray</td>
+			<td>var arr = db.users.find().toArray();printjson(arr[2]);</td>
+		</tr>
+		<tr>
+			<td>forEach function</td>
+			<td>db.things.find({x:4}).forEach(function(x) {print(tojson(x));});</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>immediate_iterator</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<div>DIV 0</div>
+	<div>DIV 1</div>
+	<script>
+	var div = document.getElementsByTagName("div");
+	for (var i = 0; i < div.length; i++) (function(i){
+		div[i].addEventListener("click", function(){
+			alert("div #" + i + " was clicked.");
+		}, false);
+	})(i);
+	</script>
+
+<pre>
+	var div = document.getElementsByTagName("div");
+	for (var i = 0; i < div.length; i++) {
+		div[i].addEventListener("click", function() {
+			alert("div #" + i + " was clicked.");
+		}, false);
+	}
+	<b>
+	the variable that's being closured ( i in this case) is being updated after the function is bound.
+	This means that every bound function handler will always alert the last value stored in i	
+	</b>
+
+	var div = document.getElementsByTagName("div");
+	for (var i = 0; i < div.length; i++) (function(i){
+		div[i].addEventListener("click", function(){
+			alert("div #" + i + " was clicked.");
+		}, false);
+	})(i);	
+	<b>within the scope of each step of the for loop, the i variable is defined anew,</b>
+</pre>
+
+</body>
+</html>

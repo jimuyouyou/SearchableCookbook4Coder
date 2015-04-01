@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)http://socket.io/docs/using-multiple-nodes/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Socket.IO  —  Using multiple nodes</title>
+
+<body class="page page-id-102 page-child parent-pageid-26 page-template page-template-page-siderbar-php custom-background group-blog">
+	<div id="primary" class="content-area with-sidebar">
+		<main id="main" class="site-main" role="main">
+			
+				
+<article id="post-102" class="post-102 page type-page status-publish hentry">
+	<div class="entry-content">
+		<h1 id="using-multiple-nodes"><a class="icon-link deep-link" href="http://socket.io/docs/using-multiple-nodes/#using-multiple-nodes" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Using multiple nodes</h1>
+<h2 id="sticky-load-balancing"><a class="icon-link deep-link" href="http://socket.io/docs/using-multiple-nodes/#sticky-load-balancing" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Sticky load balancing</h2>
+<p>If you plan to distribute the load of connections among different processes or machines, you have to make sure that requests associated with a particular session id connect to the process that originated them.</p>
+<p>This is due to certain transports like XHR Polling or JSONP Polling relying on firing several requests during the lifetime of the “socket”.</p>
+<p>To illustrate why this is needed, consider the example of emitting an event to all connected clients:</p>
+<pre><code>io.emit('hi', 'all sockets');</code></pre>
+<p>Chances are that some of those clients might have an active bi-directional communication channel like <code>WebSocket</code> that we can write to immediately, but some of them might be using long-polling.</p>
+<p>If they’re using long polling, they might or might not have sent a request that we can write to. They could be “in between” those requests. In those situations, it means we have to buffer messages in the process. In order for the client to successfully claim those messages when he sends his request, the easiest way is for him to connect to be routed to that same process.</p>
+<p>An easy way to do that is by routing clients based on their originating address. An example follows using the NginX server:</p>
+<h2 id="nginx-configuration"><a class="icon-link deep-link" href="http://socket.io/docs/using-multiple-nodes/#nginx-configuration" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>NginX configuration</h2>
+<p>Within the <code>http { }</code> section of your <code>nginx.conf</code> file, you can declare a <code>upstream</code> section with a list of Socket.IO process you want to balance load between:</p>
+<pre><code>upstream io_nodes {
+  ip_hash;
+  server 127.0.0.1:6001;
+  server 127.0.0.1:6002;
+  server 127.0.0.1:6003;
+  server 127.0.0.1:6004;
+}</code></pre>
+<p>Notice the <code>ip_hash</code> instruction that indicates the connections will be sticky.</p>
+<p>In the same <code>http { }</code> section, you can declare a <code>server { }</code> that points to this upstream. In order for NginX to support and forward the <code>WebSocket</code> protocol, we explicitly pass along the required <code>Upgrade</code> headers:</p>
+<pre><code>server {
+  listen 3000;
+  server_name io.yourhost.com;
+  location / {
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_http_version 1.1;
+    proxy_pass http://io_nodes;
+  }
+}</code></pre>
+<p>Make sure you also configure <code>worker_processes</code> in the topmost level to indicate how many workers NginX should use. You might also want to look into tweaking the <code>worker_connections</code> setting within the <code>events { }</code> block.</p>
+<h2 id="using-node.js-cluster"><a class="icon-link deep-link" href="http://socket.io/docs/using-multiple-nodes/#using-node.js-cluster" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Using Node.JS Cluster</h2>
+<p>Just like NginX, Node.JS comes with built-in clustering support through the <code>cluster</code> module.</p>
+<p>Fedor Indutny has created a module called <a href="https://github.com/indutny/sticky-session">sticky session</a> that ensures file descriptors (ie: connections) are routed based on the originating <code>remoteAddress</code> (ie: IP).</p>
+<h2 id="passing-events-between-nodes"><a class="icon-link deep-link" href="http://socket.io/docs/using-multiple-nodes/#passing-events-between-nodes" style="position: absolute; margin-left: -18px; text-decoration: none; color: #999;">#</a>Passing events between nodes</h2>
+<p>Now that you have multiple Socket.IO nodes accepting connections, if you want to broadcast events to everyone (or even everyone in a certain <a href="http://new.socket.io/docs/rooms-and-namespaces/">room</a>) you’ll need some way of passing messages between processes or computers.</p>
+<p>The interface in charge of routing messages is what we call the <code>Adapter</code>. You can implement your own on top of the <a href="https://github.com/automattic/socket.io-adapter">socket.io-adapter</a> (by inheriting from it) or you can use the one we provide on top of <a href="http://redis.io/">Redis</a>: <a href="https://github.com/automattic/socket.io-redis">socket.io-redis</a>:</p>
+<pre><code>var io = require('socket.io')(3000);
+var redis = require('socket.io-redis');
+io.adapter(redis({ host: 'localhost', port: 6379 }));</code></pre>
+<p>If you want to pass messages to it from non-socket.io processes, you should look into <a href="http://socket.io/docs/rooms-and-namespaces/#sending-messages-from-the-outside-world">“Sending messages from the outside-world”</a>.</p>
+			</div><!-- .entry-content -->
+	<footer class="entry-footer">
+			</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
+
+			
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+	</div><!-- #content -->
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info">
+			<span class="footer-left">SOCKET.IO IS OPEN-SOURCE (MIT). RUN BY <a href="https://github.com/Automattic/socket.io/graphs/contributors">CONTRIBUTORS</a>. <a href="https://twitter.com/socketio" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @socketio</a></span>
+			<span class="footer-right"><a href="http://automattic.com/">SUPPORTED BY<div id="a8c-image"></div></a></span>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+
+
+
+</body></html>

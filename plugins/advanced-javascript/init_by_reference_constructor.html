@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>init_by_reference_constructor</title>
+</head>
+<link rel="stylesheet" href="main.css"/>
+<script type="text/javascript" src='assert.js'></script>
+<body>
+	<script type="text/javascript">
+	function Ninja(){}
+	var ninja = new Ninja();
+	var ninja2 = new ninja.constructor();
+	assert(ninja2 instanceof Ninja, "It's a Ninja!"); 
+	</script>
+
+	<pre>
+	var ninja = new Ninja();
+	var ninja2 = new ninja.constructor();
+	assert(ninja2 instanceof Ninja, "It's a Ninja!"); 
+	
+	#1 Construts a 2 nd Ninja
+	#2 Proves its Ninja-ness
+	</pre>
+</body>
+</html>
