@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0BTags.html</title>
+</head>
+<body>
+	<p><span style="color: #ff0000;">1、新的文档类型声明(DTD)</span></p>
+<p>文档类型声明<br /> HTML 5的DTD声明为:</p>
+<p>&nbsp;&nbsp;&nbsp; &lt;!doctype html&gt;<br /> &nbsp;&nbsp;&nbsp; &lt;!DOCTYPE html &gt;等也是正确的，因为HTML语法是不区分大小写的。</p>
+<p>在编写HTML5文档时，要求指定文档类型，以确保浏览器能在HTML5的标准模式下进行渲染。</p>
+<p><span style="color: #ff0000;">2、新增的HTML5标签</span></p>
+<p>a，新增的HTML5标签-结构标签</p>
+<p>结构标签：(块状元素) 有意义的div<br /> &nbsp;&lt;article&gt;&nbsp; 标记定义一篇文章<br /> &nbsp;&lt;header&gt;&nbsp; 标记定义一个页面或一个区域的头部<br /> &nbsp;&nbsp;&lt;nav&gt; &nbsp;&nbsp;标记定义导航链接<br /> &nbsp;&lt;section&gt;&nbsp; 标记定义一个区域<br /> &nbsp;&lt;aside&gt; &nbsp;标记定义页面内容部分的侧边栏<br /> &nbsp;&lt;hgroup&gt;&nbsp; 标记定义文件中一个区块的相关信息<br /> &nbsp;&lt;figure&gt; &nbsp;标记定义一组媒体内容以及它们的标题&nbsp;<br /> &nbsp;&lt;figcaption&gt;&nbsp; 标签定义 figure 元素的标题。<br /> &nbsp;&lt;footer&gt; &nbsp;标记定义一个页面或一个区域的底部<br /> &nbsp;&lt;dialog&gt;&nbsp; 标记定义一个对话框(会话框)类似微信</p>
+<p>新的结构标签带来的是网页布局的改变及提升对搜索引擎的友好</p>
+<p>&nbsp;</p>
+<p>b，新增的HTML5标签-多媒体标签</p>
+<p>多媒体交互标签</p>
+<p>&nbsp;&lt;video&gt; 标记定义一个视频<br /> &nbsp;&lt;audio&gt; 标记定义音频内容<br /> &nbsp;&nbsp;&lt;source&gt; 标记定义媒体资源</p>
+<p>&nbsp;&lt;canvas&gt; 标记定义图片</p>
+<p>&nbsp;&lt;embed&gt; 标记定义外部的可交互的内容或插件 比如flash</p>
+<p><br /> HTML5的多媒体标签的出现意味着富媒体的发展以及支持不使用插件的情况下即可操作媒体文件，极大地提升了用户体验</p>
+<p>c，新增的HTML5标签-Web应用标签</p>
+<p>Web应用标签</p>
+<p>&lt;menu&gt;命令列表<br /> &lt;menuitem&gt;menu命令列表标签 FF（嵌入系统）<br /> &lt;command&gt; menu标记定义一个命令按钮</p>
+<p>&lt;meter&gt;状态标签(实时状态显示:气压、气温)C、O<br /> &lt;progress&gt;状态标签 (任务过程:安装、加载) C、F、O</p>
+<p>&lt;datalist&gt; 为input标记定义一个下拉列表,配合option F、O<br /> &lt;details&gt; 标记定义一个元素的详细内容 ，配合dt、dd&nbsp;&nbsp; C</p>
+<p>d，新增的HTML5标签-其他标签</p>
+<p>注释标签<br /> &lt;ruby&gt; 标记定义 注释或音标<br /> &lt;rp&gt; 告诉那些不支持 Ruby元素的浏览器如何去显示<br /> &nbsp;&lt;rt&gt; 标记定义对ruby的注释内容文本</p>
+<p>其他标签<br /> &lt;keygen&gt; 标记定义表单里一个生成的键值(加密信息传送)O、F<br /> &lt;mark&gt; 标记定义有标记的文本 (黄色选中状态)<br /> &lt;output&gt; 标记定义一些输出类型,计算表单结果配合oninput事件</p>
+<p><br /> &lt;time&gt; 标记定义一个日期/时间 目前所有主流浏览器都不支持</p>
+<p><span style="color: #ff0000;">3、删除的HTML标签</span></p>
+<p>纯表现的元素：<br /> basefont，big，center，font, s，strike，tt，u；</p>
+<p>对可用性产生负面影响的元素：<br /> frame，frameset，noframes；</p>
+<p>产生混淆的元素：<br /> acronym ，applet，isindex，dir。</p>
+<p><span style="color: #ff0000;">4、重新定义的HTML标签</span><br /> HTML元素&nbsp;HTML5中的意义<br /> &lt;b&gt;&nbsp;代表内联文本，通常是粗体，没有传递表示重要的意思<br /> &lt;i&gt;&nbsp;代表内联文本，通常是斜体，没有传递表示重要的意思<br /> &lt;dd&gt;&nbsp;可以同details与figure一同使用，定义包含文本，dialog也可用<br /> &lt;dt&gt;&nbsp;可以同details与figure一同使用，汇总细节，dialog也可用<br /> &lt;hr&gt;&nbsp;表示主题结束，而不是水平线，虽然显示相同<br /> &lt;menu&gt;&nbsp;重新定义用户界面的菜单，配合commond或者menuitem使用<br /> &lt;small&gt;&nbsp;表示小字体，例如打印注释或者法律条款<br /> &lt;strong&gt;&nbsp;表示重要性而不是强调符号</p>
+<p>&nbsp;</p>
+<p><span style="color: #ff0000;">5、崭新新的页面布局</span></p>
+<p>传统的：</p>
+<p><img src="http://img.my.csdn.net/uploads/201301/29/1359466352_8928.jpg" alt="" /></p>
+<p>HTML5：</p>
+<p><img src="http://img.my.csdn.net/uploads/201301/29/1359466427_8585.jpg" alt="" /></p>
+<p>&nbsp;</p>
+<p><span style="color: #ff0000;">Div和新结构标签的区别和意义</span></p>
+<p><img src="http://img.my.csdn.net/uploads/201301/29/1359466475_1097.jpg" alt="" /></p>
+</body>
+</html>
