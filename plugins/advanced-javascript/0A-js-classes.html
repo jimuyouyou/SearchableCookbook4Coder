@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0A-js-classes.html</title>
+</head>
+<body>
+	<h2>inheritance</h2>
+	<section>
+		<h3>apply and call</h3>
+		<xmp>
+var person = {};
+person.name = "xiao ming";
+function say(arg1,arg2){
+    console.log(arg1+"_"+arg2+"_"+this.name);
+}
+say.call(person,"nihao","wo jiao")　　//nihao_wo jiao_xiao ming
+say.apply(person,["nihao","wo jiao"])　　//nihao_wo jiao_xiao ming
+// apply is params array, while call is all params
+		</xmp>
+
+		<h3>prototype</h3>
+		<xmp>
+function Person() {
+	this.name = 'me';
+	this.eat = function(){alert('eating');}
+}			
+Ninja.prototype = new Person();			
+		</xmp>
+	</section>
+<hr>
+<hr>
+
+	<h2>3 ways of creating class</h2>
+	<section>
+		<h3>constructor this and prototype</h3>
+		<xmp>
+function Cat() {
+　　　　this.name = "catA";
+}
+Cat.prototype.makeSound = function(){
+　　　　alert("mie mie");
+}
+
+var cat1 = new Cat();
+alert(cat1.name);
+		</xmp>
+		<hr>
+		<h3>Object.create()</h3>
+		<xmp>
+var Cat = {
+　　　　name: "catA",
+　　　　makeSound: function(){ 　alert("mie mie"); }
+　};
+
+var cat1 = Object.create(Cat);
+alert(cat1.name); 
+cat1.makeSound(); 
+
+// if not supported by browser
+if (!Object.create) {
+　　　　Object.create = function (o) {
+　　　　　　 function F() {}
+　　　　　　F.prototype = o;
+　　　　　　return new F();
+　　　　};
+　　}
+		</xmp>
+		<hr>
+		<h3>minimalist approach</h3>
+		<xmp>
+define constructor and return an instance:			
+　var Cat = {
+　　　　createNew: function(){
+　　　　　　var cat = {};
+　　　　　　cat.name = "catA";
+　　　　　　cat.makeSound = function(){ alert("mie mie"); };
+　　　　　　return cat;
+　　　　}
+　　};	
+
+var cat1 = Cat.createNew();
+cat1.makeSound(); 
+
+Inheritance:
+var Animal = {
+　　　　createNew: function(){
+　　　　　　var animal = {};
+　　　　　　animal.sleep = function(){ alert("sleeping"); };
+　　　　　　return animal;
+　　　　}
+　　};
+
+var Cat = {
+	jump: 'jump', // jump is public for all classes
+	sound: 'so',
+　　　　createNew: function(){
+　　　　　　var cat = Animal.createNew();
+　　　　　　cat.name = "catA";
+　　　　　　cat.makeSound = function(){ alert("mie mie"); };
+	  var age = 15; // age is private
+	  cat.getAge = function(){return age};
+	  cat.changeSound = function(x) {Cat.sound = x};
+　　　　　　return cat;
+　　　　}
+　　};
+
+var cat1 = Cat.createNew();
+cat1.sleep();
+
+var cat1 = Cat.createNew();
+var cat2 = Cat.createNew();
+cat1.makeSound(); 
+cat2.changeSound("hu hu hu");
+cat1.makeSound(); 
+		</xmp>
+	</section>
+</body>
+</html>
