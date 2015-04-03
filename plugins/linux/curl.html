@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>curl.html</title>
+	<link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+	<table>
+		<tr>
+			<td>batch download</td>
+			<td>
+				<xmp>
+ftp://ftp.numericals.com/file[1-100].txt
+ftp://ftp.numericals.com/file[001-100].txt (with leading zeros)
+ftp://ftp.letters.com/file[a-z].txt					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>output</td>
+			<td>
+				<xmp>
+curl http://{one,two}.site.com -o "file_#1.txt"
+curl http://{site,host}.host[1-5].com -o "#1_#2"
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>download</td>
+			<td>curl -O http://www.cnblogs.com/-clq/archive/2012/01/29/2330827.html</td>
+		</tr>
+		<tr>
+			<td>proxy port</td>
+			<td>curl -x 123.45.67.89:1080 -o page.html http://www.linuxidc.com</td>
+		</tr>
+		<tr>
+			<td>cookie</td>
+			<td>curl -x 123.45.67.89:1080 -o page.html -D cookie0001.txt http://www.linuxidc.com<br>
+			curl -x 123.45.67.89:1080 -o page1.html -D cookie0002.txt -b cookie0001.txt http://www.linuxidc.com</td>
+		</tr>
+		<tr>
+			<td>browser</td>
+			<td>curl -A "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)" -x 123.45.67.89:1080 -o page.html -D cookie0001.txt http://www.linuxidc.com</td>
+		</tr>
+		<tr>
+			<td>refer option -e</td>
+			<td>curl -A "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)" -x 123.45.67.89:1080 -e "mail.linuxidc.com" -o page.html -D cookie0001.txt http://www.linuxidc.com</td>
+		</tr>
+		<tr>
+			<td>break continue download</td>
+			<td>curl -c -O http://cgi2.tky.3wb.ne.jp/~zzh/screen1.JPG</td>
+		</tr>
+		<tr>
+			<td>ftp</td>
+			<td>curl -u name:passwd ftp://ip:port/path/file<br>curl ftp://name:passwd@ip:port/path/file</td>
+		</tr>
+		<tr>
+			<td>upload</td>
+			<td>curl -T localfile -u name:passwd ftp://upload_site:port/path/<br>curl -T localfile http://cgi2.tky.3web.ne.jp/~zzh/abc.cgi</td>
+		</tr>
+		<tr>
+			<td>http get</td>
+			<td>curl http://www.linuxidc.com/login.cgi?user=nickwolfe&password=12345</td>
+		</tr>
+		<tr>
+			<td>http post</td>
+			<td>curl -d "user=nickwolfe&password=12345" http://www.linuxidc.com/login.cgi</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+</body>
+</html>
