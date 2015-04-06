@@ -1,0 +1,206 @@
+/*
+/*	Background Images
+/*-----------------------------------------------------------------------------------*/
+.x-preloader {
+    background-image: url(../../images/ajax-loader.gif);
+    /*background-color: #16121A;*/
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    position: absolute;
+    /*opacity: 0;*/
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+/*
+/*	COLORS
+/*-----------------------------------------------------------------------------------*/
+#coll-preloader {
+    background-color: #ffffff;
+}
+#coll-preloader .percent{
+    color: #000;
+}
+
+.header {
+    background-color: #222222;
+}
+
+.home .header {
+    /*background-color: #ff3838;*/
+
+}
+
+a {
+    color: #999;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ff6867;
+}
+
+.comment-meta ul.extra small {
+    color: #999;
+}
+
+.comment-reply-link,
+.more-link,
+#comment-submit,
+.blog-nav-item{
+    color: #ff6867;
+}
+.comment-reply-link:hover,
+.more-link:hover,
+#comment-submit:hover,
+.blog-nav-item:hover{
+    color: #000;
+}
+
+.footer .text {
+    color: #38393e;
+}
+/*
+/*	BORDERS
+/*-----------------------------------------------------------------------------------*/
+.header {
+    border-bottom: 1px solid #1e1e1e;
+}
+.type-post {
+    /*border-bottom: 1px solid #000;*/
+}
+
+/* after*/
+.type-post:after {
+    /*content: '';*/
+    /*position: absolute;*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*height: 3px;*/
+    /*bottom: 3px;*/
+    /*border-bottom: 1px solid #000;*/
+}
+
+.border.centered:after {
+    content: '';
+    position: relative;
+    display: block;
+    margin: auto;
+    height: 5px;
+    border-bottom-style: solid;
+}
+
+.border.thick:after {
+    padding-top: 13px;
+    border-width: 5px;
+}
+
+.border.thin:after {
+    padding-top: 5px;
+    border-width: 2px;
+}
+
+.border.full:after {
+    width: 100%;
+}
+
+.border.big:after {
+    width: 30%;
+}
+
+.border.small:after {
+    width: 10%;
+}
+
+.comment-body {
+    border-left: 1px solid #888888;
+}
+
+.comment-reply-link {
+
+    border: 1px solid #ff6867;
+
+}
+.comment-reply-link,
+.more-link,
+#comment-submit,
+.blog-nav-item{
+    border: 1px solid #ff6867;
+}
+.comment-reply-link:hover,
+.more-link:hover,
+#comment-submit:hover,
+.blog-nav-item:hover {
+    border: 1px solid #000;
+}
+
+/*.single-post .type-post:after,*/
+.single-post #comments:before,
+.single-post #pings:before,
+.single-post #respond:before {
+    content: "";
+    display: block;
+    /*position: absolute;*/
+    width: 20px;
+    margin-bottom: 30px;
+    /*height: 30px;*/
+    border-bottom: 1px solid #000000;
+    visibility: visible !important;
+}
+
+.single-post ol.ping-list:after {
+    height: 30px;
+}
+
+input[type=text], textarea {
+    border: 1px solid #E5E6EC;
+}
+
+input[type=submit], button[type=submit] {
+    border: 1px solid #38393e;
+}
+.footer .text:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    top: 0;
+    /*height: 30px;*/
+    border-bottom: 3px solid #38393e;
+    visibility: visible !important;
+}
+/*
+/*	OTHER
+/*-----------------------------------------------------------------------------------*/
+/* responsive menu */
+.responsive-mainmenu {
+    color: #999;
+    -webkit-appearance: none;
+    background-image: url(../../images/responsive-menu-bg.png);
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-color: #000000;
+    border: 1px solid #3A3A3A;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.shadow {
+    -webkit-mask-box-image: -webkit-linear-gradient(left, transparent 0%, rgba(0, 0, 0, .8) 50%, transparent 100%);
+    background-color: transparent;
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .2), transparent);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, .2), transparent);
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, .2), transparent);
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, .2), transparent);
+    background-image: linear-gradient(top, rgba(0, 0, 0, .2), transparent);
+    border-top: 1px solid rgba(0, 0, 0, 0.25);
+    height: 8px;
+    margin: -1px auto -8px;
+    opacity: 1;
+    position: relative;
+    width: 100%;
+    /*z-index: 985;*/
+}
