@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>form-validation-all.html</title>
+</head>
+<body>
+	url: http://www.oschina.net/translate/angularjs-form-validation<p>
+	<div class="Top">
+<h1>AngularJS 的表单验证</h1>
+<h3>英文原文：<a href="http://scotch.io/tutorials/javascript/angularjs-form-validation" target="_blank">AngularJS Form Validation</a></h3>
+<div class="Tags"><strong>标签：</strong> <a class="tag project image" title="HTML的Web框架 AngularJS" href="http://www.oschina.net/translate/tag/angularjs" data-id="16566">AngularJS</a></div>
+<div class="rec_user"><span class="options"> <em id="p_attention_count">12</em>人收藏此文章, <span id="attention_it"> <a id="favor_trigger" title="添加到收藏夹"></a>我要收藏 </span> </span> <a href="http://my.oschina.net/osadmin" target="_blank">oschina</a> 推荐于 10个月前 (共 10 段, 翻译完成于 06-23) (<a href="http://www.oschina.net/translate/angularjs-form-validation#comments">5评</a>)</div>
+<div class="clear">&nbsp;</div>
+</div>
+<div class="toolbar"><span class="label">参与翻译<em>(3人)</em>：</span>
+<div class="contributers"><a class="t_user" href="http://my.oschina.net/xuleo" target="_blank">LeoXu</a>, <a class="t_user" href="http://my.oschina.net/u/1422355" target="_blank">petert</a>, <a class="t_user" href="http://my.oschina.net/andylam2010" target="_blank">AndyLam</a></div>
+<div class="options"><a class="selected" href="http://www.oschina.net/translate/angularjs-form-validation">仅中文</a> | <a href="http://www.oschina.net/translate/angularjs-form-validation?cmp" target="_blank">中英文对照</a> | <a href="http://www.oschina.net/translate/angularjs-form-validation?lang=eng">仅英文</a> | <a href="http://www.oschina.net/translate/angularjs-form-validation?print" target="_blank">打印此文章</a></div>
+</div>
+<div class="Body" style="position: relative;">
+<div id="translate_34531" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;">
+<div class="TextContent">
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">今天我们将来看看Angular如何帮助做表单验证. 我们将讨论更多使用angular进行<span style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">有关表单操作的东西（就像我们另外的一篇文章</span>:&nbsp;<a href="http://scotch.io/tutorials/javascript/submitting-ajax-forms-the-angularjs-way" rel="nofollow">提交Ajax表单：AngularJS的方式</a>). 不过不用担心，那篇文章不一定要读的.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">我们将重点放在客户端验证上，并使用Angular内置的表单属性。这里有一个&nbsp;<a href="http://embed.plnkr.co/lCRwhj/preview" target="_blank" rel="nofollow">demo</a>.</p>
+<h2 id="content_h2_1_10">需求</h2>
+<ul>
+<li>
+<p>Name 必填</p>
+</li>
+<li>
+<p>Username 非必填，最小长度3，最大长度8</p>
+</li>
+<li>
+<p>Email 非必填，但必须是合法的email</p>
+</li>
+<li>
+<p>验证未通过的表单不能提交</p>
+</li>
+<li>
+<p>显示一个必填或者非法email格式的错误信息</p>
+</li>
+<li>
+<p>如果正确提交就弹出一个祝贺信息</p>
+</li>
+</ul>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">现在知道我们的目标了吧，让我们一起来构建这个东西吧.</p>
+</div>
+</td>
+<td class="translater" valign="top"><a title="LeoXu" href="http://my.oschina.net/xuleo" target="_blank"><img class="SmallPortrait" title="LeoXu" src="http://static.oschina.net/uploads/user/116/233834_50.jpg?t=1378539263000" alt="LeoXu" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/xuleo" target="_blank">LeoXu</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34613">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34532" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;">
+<div class="TextContent">
+<h2 id="content_h2_2_5">Angular 的表单属性 $valid, $invalid, $pristine, $dirty</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">Angular 提供了有关表单的属性来帮助我们验证表单. 他们给我们提供了各种有关一个表单及其输入的信息，并且应用到了表单和输入.</p>
+<table style="margin: 0px; padding: 0px; font-family: 微软雅黑, Verdana, sans-serif, 宋体; color: #000000; font-size: 13px;">
+<tbody>
+<tr>
+<td>属性类</td>
+<td>&nbsp;</td>
+<td>描述</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td>$valid</td>
+<td>ng-valid</td>
+<td><em>Boolean</em>&nbsp;告诉我们这一项当前基于你设定的规则是否验证通过</td>
+</tr>
+<tr>
+<td>$invalid</td>
+<td>ng-invalid</td>
+<td><em>Boolean</em>&nbsp;告诉我们这一项当前基于你设定的规则是否验证未通过</td>
+</tr>
+<tr>
+<td>$pristine</td>
+<td>ng-pristine</td>
+<td><em>Boolean</em>&nbsp;如果表单或者输入框没有使用则为True</td>
+</tr>
+<tr>
+<td>$dirty</td>
+<td>ng-dirty</td>
+<td><em>Boolean</em>&nbsp;如果表单或者输入框有使用到则为True</td>
+</tr>
+</tbody>
+</table>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">Angular 也提供了有关表单及其输入框的类，以便你能够依据每一个状态设置其样式.</p>
+<h3 id="content_h3_2_36">访问表单属性</h3>
+<ul>
+<li>
+<p><strong>方位表单:</strong>&nbsp;&lt;form name&gt;.&lt;angular property&gt;</p>
+</li>
+<li>
+<p><strong>访问一个输入框:</strong>&nbsp;&lt;form name&gt;.&lt;input name&gt;.&lt;angular property&gt;</p>
+</li>
+</ul>
+<h2 id="content_h2_2_44">设置我们的表单</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">我们将使用一个简单的表单来做演示.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;"><img src="http://static.oschina.net/uploads/img/201406/22084159_RA8L.png" alt="angular-form-validation" /></p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">我们将需要两个文件:</p>
+<ul>
+<li>
+<p>index.html 我们用来显示表单的代码</p>
+</li>
+<li>
+<p>app.js 我们的Angular应用程序和控制器 (几乎没有任何代码)</p>
+</li>
+</ul>
+<h3 id="content_h3_2_54">Our Form Code&nbsp;index.html</h3>
+<div>
+<div id="highlighter_282312" class="syntaxhighlighter  html">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+<div class="line number14 index13 alt1">14</div>
+<div class="line number15 index14 alt2">15</div>
+<div class="line number16 index15 alt1">16</div>
+<div class="line number17 index16 alt2">17</div>
+<div class="line number18 index17 alt1">18</div>
+<div class="line number19 index18 alt2">19</div>
+<div class="line number20 index19 alt1">20</div>
+<div class="line number21 index20 alt2">21</div>
+<div class="line number22 index21 alt1">22</div>
+<div class="line number23 index22 alt2">23</div>
+<div class="line number24 index23 alt1">24</div>
+<div class="line number25 index24 alt2">25</div>
+<div class="line number26 index25 alt1">26</div>
+<div class="line number27 index26 alt2">27</div>
+<div class="line number28 index27 alt1">28</div>
+<div class="line number29 index28 alt2">29</div>
+<div class="line number30 index29 alt1">30</div>
+<div class="line number31 index30 alt2">31</div>
+<div class="line number32 index31 alt1">32</div>
+<div class="line number33 index32 alt2">33</div>
+<div class="line number34 index33 alt1">34</div>
+<div class="line number35 index34 alt2">35</div>
+<div class="line number36 index35 alt1">36</div>
+<div class="line number37 index36 alt2">37</div>
+<div class="line number38 index37 alt1">38</div>
+<div class="line number39 index38 alt2">39</div>
+<div class="line number40 index39 alt1">40</div>
+<div class="line number41 index40 alt2">41</div>
+<div class="line number42 index41 alt1">42</div>
+<div class="line number43 index42 alt2">43</div>
+<div class="line number44 index43 alt1">44</div>
+<div class="line number45 index44 alt2">45</div>
+<div class="line number46 index45 alt1">46</div>
+<div class="line number47 index46 alt2">47</div>
+<div class="line number48 index47 alt1">48</div>
+<div class="line number49 index48 alt2">49</div>
+<div class="line number50 index49 alt1">50</div>
+<div class="line number51 index50 alt2">51</div>
+<div class="line number52 index51 alt1">52</div>
+<div class="line number53 index52 alt2">53</div>
+<div class="line number54 index53 alt1">54</div>
+<div class="line number55 index54 alt2">55</div>
+<div class="line number56 index55 alt1">56</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html comments">&lt;!--&nbsp;index.html&nbsp;--&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html plain">&lt;!</code><code class="html keyword">DOCTYPE</code>&nbsp;<code class="html plain">html&gt;</code></div>
+<div class="line number3 index2 alt2"><code class="html plain">&lt;</code><code class="html keyword">html</code><code class="html plain">&gt;</code></div>
+<div class="line number4 index3 alt1"><code class="html plain">&lt;</code><code class="html keyword">head</code><code class="html plain">&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;CSS&nbsp;=====================&nbsp;--&gt;</code></div>
+<div class="line number6 index5 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;load&nbsp;bootstrap&nbsp;--&gt;</code></div>
+<div class="line number7 index6 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">link</code>&nbsp;<code class="html color1">rel</code><code class="html plain">=</code><code class="html string">"stylesheet"</code>&nbsp;<code class="html color1">href</code><code class="html plain">=</code><code class="html string">"http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"</code><code class="html plain">&gt;&nbsp;</code></div>
+<div class="line number8 index7 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">style</code><code class="html plain">&gt;</code></div>
+<div class="line number9 index8 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">body&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;padding-top:30px;&nbsp;}</code></div>
+<div class="line number10 index9 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">style</code><code class="html plain">&gt;</code></div>
+<div class="line number11 index10 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number12 index11 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;JS&nbsp;=====================&nbsp;--&gt;</code></div>
+<div class="line number13 index12 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;load&nbsp;angular&nbsp;--&gt;</code></div>
+<div class="line number14 index13 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">script</code>&nbsp;<code class="html color1">src</code><code class="html plain">=</code><code class="html string">"http://code.angularjs.org/1.2.6/angular.js"</code><code class="html plain">&gt;&lt;/</code><code class="html keyword">script</code><code class="html plain">&gt;&nbsp;</code></div>
+<div class="line number15 index14 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">script</code>&nbsp;<code class="html color1">src</code><code class="html plain">=</code><code class="html string">"app.js"</code><code class="html plain">&gt;&lt;/</code><code class="html keyword">script</code><code class="html plain">&gt;</code></div>
+<div class="line number16 index15 alt1"><code class="html plain">&lt;/</code><code class="html keyword">head</code><code class="html plain">&gt;</code></div>
+<div class="line number17 index16 alt2">&nbsp;</div>
+<div class="line number18 index17 alt1"><code class="html comments">&lt;!--&nbsp;apply&nbsp;angular&nbsp;app&nbsp;and&nbsp;controller&nbsp;to&nbsp;our&nbsp;body&nbsp;--&gt;</code></div>
+<div class="line number19 index18 alt2"><code class="html plain">&lt;</code><code class="html keyword">body</code>&nbsp;<code class="html color1">ng-app</code><code class="html plain">=</code><code class="html string">"validationApp"</code>&nbsp;<code class="html color1">ng-controller</code><code class="html plain">=</code><code class="html string">"mainController"</code><code class="html plain">&gt;</code></div>
+<div class="line number20 index19 alt1"><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"container"</code><code class="html plain">&gt;</code></div>
+<div class="line number21 index20 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"col-sm-8&nbsp;col-sm-offset-2"</code><code class="html plain">&gt;</code></div>
+<div class="line number22 index21 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number23 index22 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;PAGE&nbsp;HEADER&nbsp;--&gt;</code></div>
+<div class="line number24 index23 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"page-header"</code><code class="html plain">&gt;&lt;</code><code class="html keyword">h1</code><code class="html plain">&gt;AngularJS&nbsp;Form&nbsp;Validation&lt;/</code><code class="html keyword">h1</code><code class="html plain">&gt;&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number25 index24 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number26 index25 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;FORM&nbsp;--&gt;</code></div>
+<div class="line number27 index26 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;pass&nbsp;in&nbsp;the&nbsp;variable&nbsp;if&nbsp;our&nbsp;form&nbsp;is&nbsp;valid&nbsp;or&nbsp;invalid&nbsp;--&gt;</code></div>
+<div class="line number28 index27 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">form</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"userForm"</code>&nbsp;<code class="html color1">ng-submit</code><code class="html plain">=</code><code class="html string">"submitForm(userForm.$valid)"</code>&nbsp;<code class="html plain">novalidate&gt;&nbsp;</code><code class="html comments">&lt;!--&nbsp;novalidate&nbsp;prevents&nbsp;HTML5&nbsp;validation&nbsp;since&nbsp;we&nbsp;will&nbsp;be&nbsp;validating&nbsp;ourselves&nbsp;--&gt;</code></div>
+<div class="line number29 index28 alt2">&nbsp;</div>
+<div class="line number30 index29 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;NAME&nbsp;--&gt;</code></div>
+<div class="line number31 index30 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code><code class="html plain">&gt;</code></div>
+<div class="line number32 index31 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Name&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number33 index32 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"text"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"name"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"name"</code>&nbsp;<code class="html plain">required&gt;</code></div>
+<div class="line number34 index33 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number35 index34 alt2">&nbsp;</div>
+<div class="line number36 index35 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;USERNAME&nbsp;--&gt;</code></div>
+<div class="line number37 index36 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code><code class="html plain">&gt;</code></div>
+<div class="line number38 index37 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Username&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number39 index38 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"text"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"username"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"user.username"</code>&nbsp;<code class="html color1">ng-minlength</code><code class="html plain">=</code><code class="html string">"3"</code>&nbsp;<code class="html color1">ng-maxlength</code><code class="html plain">=</code><code class="html string">"8"</code><code class="html plain">&gt;</code></div>
+<div class="line number40 index39 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number41 index40 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number42 index41 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;EMAIL&nbsp;--&gt;</code></div>
+<div class="line number43 index42 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code><code class="html plain">&gt;</code></div>
+<div class="line number44 index43 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Email&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number45 index44 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"email"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"email"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"email"</code><code class="html plain">&gt;</code></div>
+<div class="line number46 index45 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number47 index46 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number48 index47 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;SUBMIT&nbsp;BUTTON&nbsp;--&gt;</code></div>
+<div class="line number49 index48 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">button</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"submit"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"btn&nbsp;btn-primary"</code><code class="html plain">&gt;Submit&lt;/</code><code class="html keyword">button</code><code class="html plain">&gt;</code></div>
+<div class="line number50 index49 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number51 index50 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">form</code><code class="html plain">&gt;</code></div>
+<div class="line number52 index51 alt1">&nbsp;</div>
+<div class="line number53 index52 alt2"><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code><code class="html comments">&lt;!--&nbsp;col-sm-8&nbsp;--&gt;</code></div>
+<div class="line number54 index53 alt1"><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code><code class="html comments">&lt;!--&nbsp;/container&nbsp;--&gt;</code></div>
+<div class="line number55 index54 alt2"><code class="html plain">&lt;/</code><code class="html keyword">body</code><code class="html plain">&gt;</code></div>
+<div class="line number56 index55 alt1"><code class="html plain">&lt;/</code><code class="html keyword">html</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">这里列出了一些关键点:</p>
+<ul>
+<li>
+<p><strong>novalidate</strong>: 它将会组织默认的HTML5验证，因为这会由我们自己来做(我们自己的将会更棒)</p>
+</li>
+<li>
+<p>我们在输入框上应用了ng-model，以便将来自表单的数据绑定到angular变量</p>
+</li>
+<li>
+<p>username上的ng-minlength 和 ng-maxlength会自己创建其规则</p>
+</li>
+<li>
+<p>name 输入框是必填的</p>
+</li>
+<li>
+<p>email 输入框有属性&nbsp;<strong>type=&rdquo;email&rdquo;</strong></p>
+</li>
+</ul>
+</div>
+</td>
+<td class="translater" valign="top"><a title="LeoXu" href="http://my.oschina.net/xuleo" target="_blank"><img class="SmallPortrait" title="LeoXu" src="http://static.oschina.net/uploads/user/116/233834_50.jpg?t=1378539263000" alt="LeoXu" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/xuleo" target="_blank">LeoXu</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34615">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34533" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;" rowspan="2">
+<div class="TextContent">
+<h4 id="content_h4_3_5">验证规则</h4>
+<p>Angular 有很多验证规则，像是 tong-min leng than dng-max length.</p>
+<p>&nbsp;Angular还可以自己配置规则. &nbsp;<a href="http://docs.angularjs.org/api/ng.directive:input" target="_blank" rel="nofollow">Angular输入</a>指引上有说明&nbsp;.</p>
+<div>
+<div id="highlighter_60526" class="syntaxhighlighter  html">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+<div class="line number10 index9 alt1">10</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">input</code></div>
+<div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"{&nbsp;string&nbsp;}"</code></div>
+<div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">name</code><code class="html plain">=</code><code class="html string">"{&nbsp;string&nbsp;}"</code></div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">required</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">ng-required</code><code class="html plain">=</code><code class="html string">"{&nbsp;boolean&nbsp;}"</code></div>
+<div class="line number6 index5 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">ng-minlength</code><code class="html plain">=</code><code class="html string">"{&nbsp;number&nbsp;}"</code></div>
+<div class="line number7 index6 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">ng-maxlength</code><code class="html plain">=</code><code class="html string">"{&nbsp;number&nbsp;}"</code></div>
+<div class="line number8 index7 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">ng-pattern</code><code class="html plain">=</code><code class="html string">"{&nbsp;string&nbsp;}"</code></div>
+<div class="line number9 index8 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html color1">ng-change</code><code class="html plain">=</code><code class="html string">"{&nbsp;string&nbsp;}"</code><code class="html plain">&gt;</code></div>
+<div class="line number10 index9 alt1"><code class="html plain">&lt;/</code><code class="html keyword">input</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>现在建好了表单, 接着创建Angular应用和控制器，ng-app ng-控制器.</p>
+<h3 id="content_h3_3_12">应用的 Codeapp.js</h3>
+<div>
+<div id="highlighter_657518" class="syntaxhighlighter  js">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+<div class="line number14 index13 alt1">14</div>
+<div class="line number15 index14 alt2">15</div>
+<div class="line number16 index15 alt1">16</div>
+<div class="line number17 index16 alt2">17</div>
+<div class="line number18 index17 alt1">18</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="js comments">//&nbsp;app.js</code></div>
+<div class="line number2 index1 alt1"><code class="js comments">//&nbsp;create&nbsp;angular&nbsp;app</code></div>
+<div class="line number3 index2 alt2"><code class="js keyword">var</code>&nbsp;<code class="js plain">validationApp&nbsp;=&nbsp;angular.module(</code><code class="js string">'validationApp'</code><code class="js plain">,&nbsp;[]);</code></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number5 index4 alt2"><code class="js comments">//&nbsp;create&nbsp;angular&nbsp;controller</code></div>
+<div class="line number6 index5 alt1"><code class="js plain">validationApp.controller(</code><code class="js string">'mainController'</code><code class="js plain">,&nbsp;</code><code class="js keyword">function</code><code class="js plain">($scope)&nbsp;{</code></div>
+<div class="line number7 index6 alt2">&nbsp;</div>
+<div class="line number8 index7 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">//&nbsp;function&nbsp;to&nbsp;submit&nbsp;the&nbsp;form&nbsp;after&nbsp;all&nbsp;validation&nbsp;has&nbsp;occurred&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code></div>
+<div class="line number9 index8 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$scope.submitForm&nbsp;=&nbsp;</code><code class="js keyword">function</code><code class="js plain">(isValid)&nbsp;{</code></div>
+<div class="line number10 index9 alt1">&nbsp;</div>
+<div class="line number11 index10 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">//&nbsp;check&nbsp;to&nbsp;make&nbsp;sure&nbsp;the&nbsp;form&nbsp;is&nbsp;completely&nbsp;valid</code></div>
+<div class="line number12 index11 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">if</code>&nbsp;<code class="js plain">(isValid)&nbsp;{</code></div>
+<div class="line number13 index12 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">alert(</code><code class="js string">'our&nbsp;form&nbsp;is&nbsp;amazing'</code><code class="js plain">);</code></div>
+<div class="line number14 index13 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">}</code></div>
+<div class="line number15 index14 alt2">&nbsp;</div>
+<div class="line number16 index15 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">};</code></div>
+<div class="line number17 index16 alt2">&nbsp;</div>
+<div class="line number18 index17 alt1"><code class="js plain">});</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</td>
+<td class="translater" valign="top"><a title="petert" href="http://my.oschina.net/u/1422355" target="_blank"><img class="SmallPortrait" title="petert" src="http://static.oschina.net/uploads/user/711/1422355_50.jpg?t=1387071684000" alt="petert" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/u/1422355" target="_blank">petert</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34579">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+<tr>
+<td class="translater" valign="bottom"><a id="btn_show_other_34533" class="showOthers"></a>其它翻译版本(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34534" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;" rowspan="2">
+<div class="TextContent">
+<h2 id="content_h2_4_5">使HTML5验证器的novalidate</h2>
+<p>我们将在我们的表单使用novalidate。这是一个很好的做法，因为我们将会自己处理验证。如果我们让我们的表单这样做，它看起来很丑陋。</p>
+<p><img src="http://static.oschina.net/uploads/img/201406/22084159_4hqu.png" alt="angular-form-novalidate" /></p>
+<h2 id="content_h2_4_10">禁用提交按钮&nbsp;ng-disabled</h2>
+<p>现在真正的好戏上演了。我们<strong>开始使用Angular的属性</strong>&nbsp;。首先让我们禁用我们的提交按钮。如果我们的表单是$invalid的，我们只想禁用它。</p>
+<div>
+<div id="highlighter_987743" class="syntaxhighlighter  html">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html comments">&lt;!--&nbsp;index.html&nbsp;--&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html plain">...</code></div>
+<div class="line number3 index2 alt2">&nbsp;</div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;SUBMIT&nbsp;BUTTON&nbsp;--&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">button</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"submit"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"btn&nbsp;btn-primary"</code>&nbsp;<code class="html color1">ng-disabled</code><code class="html plain">=</code><code class="html string">"userForm.$invalid"</code><code class="html plain">&gt;Submit&lt;/</code><code class="html keyword">button</code><code class="html plain">&gt;</code></div>
+<div class="line number6 index5 alt1">&nbsp;</div>
+<div class="line number7 index6 alt2"><code class="html plain">...</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>只使用一点代码（ng-disabled），如果我们的表单是$invalid的，表单按钮将被禁用。&nbsp;<br /> &nbsp;这意味着，我们的name input 字段是必需的，并且email input字段需要一个有效的电子邮件。</p>
+</div>
+</td>
+<td class="translater" valign="top"><a title="AndyLam" href="http://my.oschina.net/andylam2010" target="_blank"><img class="SmallPortrait" title="AndyLam" src="http://static.oschina.net/uploads/user/47/95974_50.JPG?t=1377507592000" alt="AndyLam" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/andylam2010" target="_blank">AndyLam</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34544">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+<tr>
+<td class="translater" valign="bottom"><a id="btn_show_other_34534" class="showOthers"></a>其它翻译版本(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34535" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;" rowspan="2">
+<div class="TextContent">
+<h2 id="content_h2_5_5">用 eng-show显示错误信息</h2>
+<p><strong>ng-valid</strong> 和<strong>ng-invalid</strong> 会基于提供的表单规则自动验证输入的有效性.</p>
+<p>咱们在输入部分加一些错误信息，只要不等于$valid或是已经使用过的就行 (不能展示还没使用).</p>
+<div>
+<div id="highlighter_27672" class="syntaxhighlighter  html">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+<div class="line number14 index13 alt1">14</div>
+<div class="line number15 index14 alt2">15</div>
+<div class="line number16 index15 alt1">16</div>
+<div class="line number17 index16 alt2">17</div>
+<div class="line number18 index17 alt1">18</div>
+<div class="line number19 index18 alt2">19</div>
+<div class="line number20 index19 alt1">20</div>
+<div class="line number21 index20 alt2">21</div>
+<div class="line number22 index21 alt1">22</div>
+<div class="line number23 index22 alt2">23</div>
+<div class="line number24 index23 alt1">24</div>
+<div class="line number25 index24 alt2">25</div>
+<div class="line number26 index25 alt1">26</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html comments">&lt;!--&nbsp;index.html&nbsp;--&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html plain">...</code></div>
+<div class="line number3 index2 alt2">&nbsp;</div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;NAME&nbsp;--&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code><code class="html plain">&gt;</code></div>
+<div class="line number6 index5 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Name&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number7 index6 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"text"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"name"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"name"</code>&nbsp;<code class="html plain">required&gt;</code></div>
+<div class="line number8 index7 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.name.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.name.$pristine"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;You&nbsp;name&nbsp;is&nbsp;required.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number9 index8 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number10 index9 alt1">&nbsp;</div>
+<div class="line number11 index10 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;USERNAME&nbsp;--&gt;</code></div>
+<div class="line number12 index11 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code><code class="html plain">&gt;</code></div>
+<div class="line number13 index12 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Username&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number14 index13 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"text"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"username"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"user.username"</code>&nbsp;<code class="html color1">ng-minlength</code><code class="html plain">=</code><code class="html string">"3"</code>&nbsp;<code class="html color1">ng-maxlength</code><code class="html plain">=</code><code class="html string">"8"</code><code class="html plain">&gt;</code></div>
+<div class="line number15 index14 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.username.$error.minlength"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;Username&nbsp;is&nbsp;too&nbsp;short.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number16 index15 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.username.$error.maxlength"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;Username&nbsp;is&nbsp;too&nbsp;long.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number17 index16 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number18 index17 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number19 index18 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;EMAIL&nbsp;--&gt;</code></div>
+<div class="line number20 index19 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code><code class="html plain">&gt;</code></div>
+<div class="line number21 index20 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Email&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number22 index21 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"email"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"email"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"email"</code><code class="html plain">&gt;</code></div>
+<div class="line number23 index22 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.email.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.email.$pristine"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;Enter&nbsp;a&nbsp;valid&nbsp;email.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number24 index23 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number25 index24 alt2">&nbsp;</div>
+<div class="line number26 index25 alt1"><code class="html plain">...</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>就像这样 Angular 会根据规则来验证输入部分的$invalid 和 $pristine properties属性从而决定是否显示错误信息.</p>
+<p><img src="http://static.oschina.net/uploads/img/201406/22084159_bxAz.png" alt="angular-form-validation-errors" /></p>
+</div>
+</td>
+<td class="translater" valign="top"><a title="petert" href="http://my.oschina.net/u/1422355" target="_blank"><img class="SmallPortrait" title="petert" src="http://static.oschina.net/uploads/user/711/1422355_50.jpg?t=1387071684000" alt="petert" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/u/1422355" target="_blank">petert</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34581">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+<tr>
+<td class="translater" valign="bottom"><a id="btn_show_other_34535" class="showOthers"></a>其它翻译版本(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34536" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;" rowspan="2">
+<div class="TextContent">
+<h2 id="content_h2_6_5">格局类</h2>
+<p>Angular在验证输入或表单时的有效有否是已经提供了一些类，像是&nbsp;(ng-valid,ng-invalid,ng-pristineandng-dirty).</p>
+<p>你可以编辑自己喜欢的CSS . 你可以私有定制化这些类来实现特定的场景应用.</p>
+<div>
+<div id="highlighter_689282" class="syntaxhighlighter  css">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">.ng-valid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+<div class="line number2 index1 alt1"><code class="css plain">.ng-invalid&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">.ng-pristine&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">.ng-dirty&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+<div class="line number5 index4 alt2">&nbsp;</div>
+<div class="line number6 index5 alt1"><code class="css comments">/*&nbsp;really&nbsp;specific&nbsp;css&nbsp;rules&nbsp;applied&nbsp;by&nbsp;angular&nbsp;*/</code></div>
+<div class="line number7 index6 alt2"><code class="css plain">.ng-invalid-required&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+<div class="line number8 index7 alt1"><code class="css plain">.ng-invalid-minlength&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+<div class="line number9 index8 alt2"><code class="css plain">.ng-valid-max-length&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</td>
+<td class="translater" valign="top"><a title="petert" href="http://my.oschina.net/u/1422355" target="_blank"><img class="SmallPortrait" title="petert" src="http://static.oschina.net/uploads/user/711/1422355_50.jpg?t=1387071684000" alt="petert" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/u/1422355" target="_blank">petert</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34580">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+<tr>
+<td class="translater" valign="bottom"><a id="btn_show_other_34536" class="showOthers"></a>其它翻译版本(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34537" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;">
+<div class="TextContent">
+<h2 id="content_h2_7_5">使用 ng-class 根据条件添加类</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">因为我们使用了&nbsp;<a href="http://getbootstrap.com/" target="_blank" rel="nofollow">Bootstrap</a>, 我们将就使用它们提供的类(has-error). 这样就能围绕我们的form-group获得漂亮的错误信息和颜色.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">ng-class 允许我们基于一个表达式添加类. 在这种情况下，我们想要想我们的form-group添加一个 has-error 类，如果输入框的状态是$invalid或者不是pristine的话.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">其工作的方式是 ng-class="{ &lt;class-you-want&gt; : &lt;expression to be evaluated &gt; }". 更多的信息，请读一读&nbsp;<a href="http://docs.angularjs.org/api/ng.directive:ngClass" target="_blank" rel="nofollow">Angular ngClass 文档吧</a>.</p>
+<div>
+<div id="highlighter_193823" class="syntaxhighlighter  html">
+<div class="toolbar"><a class="toolbar_item command_help help" href="http://www.oschina.net/translate/angularjs-form-validation">?</a></div>
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+<div class="line number14 index13 alt1">14</div>
+<div class="line number15 index14 alt2">15</div>
+<div class="line number16 index15 alt1">16</div>
+<div class="line number17 index16 alt2">17</div>
+<div class="line number18 index17 alt1">18</div>
+<div class="line number19 index18 alt2">19</div>
+<div class="line number20 index19 alt1">20</div>
+<div class="line number21 index20 alt2">21</div>
+<div class="line number22 index21 alt1">22</div>
+<div class="line number23 index22 alt2">23</div>
+<div class="line number24 index23 alt1">24</div>
+<div class="line number25 index24 alt2">25</div>
+<div class="line number26 index25 alt1">26</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html comments">&lt;!--&nbsp;index.html&nbsp;--&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html plain">...</code></div>
+<div class="line number3 index2 alt2">&nbsp;</div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;NAME&nbsp;--&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code>&nbsp;<code class="html color1">ng-class</code><code class="html plain">=</code><code class="html string">"{&nbsp;'has-error'&nbsp;:&nbsp;userForm.name.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.name.$pristine&nbsp;}"</code><code class="html plain">&gt;</code></div>
+<div class="line number6 index5 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Name&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number7 index6 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"text"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"name"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"user.name"</code>&nbsp;<code class="html plain">required&gt;</code></div>
+<div class="line number8 index7 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.name.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.name.$pristine"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;You&nbsp;name&nbsp;is&nbsp;required.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number9 index8 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number10 index9 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number11 index10 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;USERNAME&nbsp;--&gt;</code></div>
+<div class="line number12 index11 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code>&nbsp;<code class="html color1">ng-class</code><code class="html plain">=</code><code class="html string">"{&nbsp;'has-error'&nbsp;:&nbsp;userForm.username.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.username.$pristine&nbsp;}"</code><code class="html plain">&gt;</code></div>
+<div class="line number13 index12 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Username&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number14 index13 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"text"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"username"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"user.username"</code>&nbsp;<code class="html color1">ng-minlength</code><code class="html plain">=</code><code class="html string">"3"</code>&nbsp;<code class="html color1">ng-maxlength</code><code class="html plain">=</code><code class="html string">"8"</code><code class="html plain">&gt;</code></div>
+<div class="line number15 index14 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.username.$error.minlength"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;Username&nbsp;is&nbsp;too&nbsp;short.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number16 index15 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.username.$error.maxlength"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;Username&nbsp;is&nbsp;too&nbsp;long.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number17 index16 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number18 index17 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+<div class="line number19 index18 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html comments">&lt;!--&nbsp;EMAIL&nbsp;--&gt;</code></div>
+<div class="line number20 index19 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">div</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-group"</code>&nbsp;<code class="html color1">ng-class</code><code class="html plain">=</code><code class="html string">"{&nbsp;'has-error'&nbsp;:&nbsp;userForm.email.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.email.$pristine&nbsp;}"</code><code class="html plain">&gt;</code></div>
+<div class="line number21 index20 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">label</code><code class="html plain">&gt;Email&lt;/</code><code class="html keyword">label</code><code class="html plain">&gt;</code></div>
+<div class="line number22 index21 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">input</code>&nbsp;<code class="html color1">type</code><code class="html plain">=</code><code class="html string">"email"</code>&nbsp;<code class="html color1">name</code><code class="html plain">=</code><code class="html string">"email"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"form-control"</code>&nbsp;<code class="html color1">ng-model</code><code class="html plain">=</code><code class="html string">"user.email"</code><code class="html plain">&gt;</code></div>
+<div class="line number23 index22 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code>&nbsp;<code class="html color1">ng-show</code><code class="html plain">=</code><code class="html string">"userForm.email.$invalid&nbsp;&amp;&amp;&nbsp;!userForm.email.$pristine"</code>&nbsp;<code class="html color1">class</code><code class="html plain">=</code><code class="html string">"help-block"</code><code class="html plain">&gt;Enter&nbsp;a&nbsp;valid&nbsp;email.&lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number24 index23 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number25 index24 alt2">&nbsp;</div>
+<div class="line number26 index25 alt1"><code class="html plain">...</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>&nbsp;</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">现在我们的表单就有了恰当的Bootstrap错误类.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;"><img src="http://static.oschina.net/uploads/img/201406/22084159_j6EJ.png" alt="angular-form-validation-class-errors" /></p>
+</div>
+</td>
+<td class="translater" valign="top"><a title="LeoXu" href="http://my.oschina.net/xuleo" target="_blank"><img class="SmallPortrait" title="LeoXu" src="http://static.oschina.net/uploads/user/116/233834_50.jpg?t=1378539263000" alt="LeoXu" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/xuleo" target="_blank">LeoXu</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34626">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34538" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;">
+<div class="TextContent">
+<h2 id="content_h2_8_5">只在提交表单后显示错误信息</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">有时候不想在用户正在输入的时候显示错误信息. 当前错误信息会在用户输入表单时立即显示. 由于Angular很棒的数据绑定特性，这是可以发生的. 因为所有的事务都可以在一瞬间发生改变，这在表单验证时会有副作用.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">对于你想要只在表单正要提交之后才显示错误消息的场景, 你就需要对上面的代码做一些小调整.</p>
+<ol>
+<li>
+<p>你要去掉提交按钮上的ng-disabled，因为我们想要用户即使是在表单没有全部验证完的情况下也能点击提交.</p>
+</li>
+<li>
+<p>你要在表单已经被提交之后添加一个变量. 在你的 submitForm() 函数中, 只要加入 $scope.submitted = true 就行了;. 一旦表单被提交，它就会保存提交值为true的submitted变量.</p>
+</li>
+<li>
+<p>将错误规则从ng-class="{ 'has-error' : userForm.name.$invalid &amp;&amp; !userForm.name.$pristine }" 调整为 ng-class="{ 'has-error' : userForm.name.$invalid &amp;&amp; !userForm.name.$pristine &amp;&amp; submitted }". 这就确保了错误消息只会在表单被提交时被显示出来. 你也许会需要为这个变量调整所有其它的 ng-class 和 ng-show.</p>
+</li>
+</ol>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">现在，只有在submitted变量被设置为true时才会显示错误信息.</p>
+</div>
+</td>
+<td class="translater" valign="top"><a title="LeoXu" href="http://my.oschina.net/xuleo" target="_blank"><img class="SmallPortrait" title="LeoXu" src="http://static.oschina.net/uploads/user/116/233834_50.jpg?t=1378539263000" alt="LeoXu" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/xuleo" target="_blank">LeoXu</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34627">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34539" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;">
+<div class="TextContent">
+<h2 id="content_h2_9_5">只有在输入框之外点击时才显示错误消息</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">只有在输入框之外点击时才显示错误消息（也被叫做失去焦点&nbsp;<strong>blur</strong>) 这一需求比在提交时验证要复杂一点. 在失去焦点时验证表单需要一个c<a href="http://docs.angularjs.org/api/ng.directive:form" target="_blank" rel="nofollow">ustom指令</a>. 这是一个可以让你操作DOM的指令.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;"><span style="line-height: 1.5; font-size: 10pt;">我们正在写一篇文章专门讨论此话题。同时，还有其他的一些资源讨论了创建custom指令来处理失去焦点的情况:</span></p>
+<ul>
+<li>
+<p><a href="http://coding-issues.blogspot.in/2013/10/angularjs-blur-directive.html" target="_blank" rel="nofollow">http://coding-issues.blogspot.in/2013/10/angularjs-blur-directive.html</a></p>
+</li>
+<li>
+<p><a href="http://blog.ejci.net/2013/08/06/dealing-with-focus-and-blur-in-angularjs-directives/" target="_blank" rel="nofollow">http://blog.ejci.net/2013/08/06/dealing-with-focus-and-blur-in-angularjs-directives/</a></p>
+</li>
+<li>
+<p><a href="http://plnkr.co/edit/Xfr7X6JXPhY9lFL3hnOw?p=preview" target="_blank" rel="nofollow">http://plnkr.co/edit/Xfr7X6JXPhY9lFL3hnOw?p=preview</a></p>
+</li>
+</ul>
+<h2 id="content_h2_9_21">全部完成</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">现在一旦我们正确填写了所有的信息，我们的表单提交按钮就能使用了. 一旦我们提交了表单，我们将会见到我们设置的弹出消息.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;"><img src="http://static.oschina.net/uploads/img/201406/22084159_NM9C.png" alt="angular-form-validation-alert" /></p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">用了几行我们就可以:</p>
+<ul>
+<li>
+<p>进行输入框验证</p>
+</li>
+<li>
+<p>显示表单错误消息</p>
+</li>
+<li>
+<p>定制样式类</p>
+</li>
+<li>
+<p>自动禁止和启用表单</p>
+</li>
+<li>
+<p>定制规则</p>
+</li>
+</ul>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">如你所见，我们使用了Angular内置的表单验证技术来创建一个客户端验证表单.</p>
+</div>
+</td>
+<td class="translater" valign="top"><a title="LeoXu" href="http://my.oschina.net/xuleo" target="_blank"><img class="SmallPortrait" title="LeoXu" src="http://static.oschina.net/uploads/user/116/233834_50.jpg?t=1378539263000" alt="LeoXu" align="absmiddle" /></a>
+<div class="info">
+<h6><a href="http://my.oschina.net/xuleo" target="_blank">LeoXu</a><br />翻译于 10个月前</h6>
+<p><em id="vote_count_34628">1</em>人顶</p>
+</div>
+<div class="clear">&nbsp;</div>
+<p class="vote"><a class="rndbutton">顶</a>&nbsp;翻译的不错哦!</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="translate_34540" class="translate_chs">
+<table class="paragraph_chs">
+<tbody>
+<tr>
+<td style="border-right: 1px solid #E3E3E3;">
+<div class="TextContent">
+<h2 id="content_h2_10_5">未来</h2>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">照现在的情况，在用户在输入框之外点击 时做验证不是一个简单的过程. Angular团建已经意识到这个问题，他们已经宣称计划要添加更多的状态来处理 像&nbsp;form.submitted,input.$visited,&nbsp;input.$blurred, or&nbsp;input.$touched的情况. 这里有一些有关未来的表单验证的资源:</p>
+<ul>
+<li>
+<p><a href="https://github.com/angular/angular.js/issues/583#issuecomment-31277556" target="_blank" rel="nofollow">Github 问题</a></p>
+</li>
+<li>
+<p><a href="https://docs.google.com/a/scotch.io/document/d/192dCUnoIBQ7-vurvPeS9BElGdxfk0Ddcof2KzDDi1Mc/edit" target="_blank" rel="nofollow">ngForm 模块设想</a></p>
+</li>
+</ul>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">希望尽快能有轻松做表单验证的方案出来，用以处理我们的应用程序的不同状态.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;"><strong>编辑 #1</strong>: 添加有关在表单提交或者失去焦点之后进行验证的信息. 还添加了一些资源.<br /> <strong>编辑 #2</strong>: 修改表单函数的处理过程来获得valid参数. 对于创建可测试控制器的帮助. 这一点要感谢&nbsp;<a href="https://twitter.com/fredrikbostrom" target="_blank" rel="nofollow">Fredrik Bostrom</a>.</p>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">&nbsp; &nbsp; 本文是<strong><a href="http://scotch.io/series/angularjs-forms" rel="nofollow">AngularJS 表单</a>&nbsp;系列的一部分.</strong></p>
+<ul>
+<li>
+<p>提交<a href="http://scotch.io/tutorials/javascript/submitting-ajax-forms-the-angularjs-way" rel="nofollow">AJAX表单: AngularJS的方式</a></p>
+</li>
+<li>
+<p>AngularJS表单验证(本文)</p>
+</li>
+<li>
+<p><a href="http://scotch.io/tutorials/javascript/handling-checkboxes-and-radio-buttons-in-angular-forms" rel="nofollow">在Angular表单中处理复选框和单选框</a></p>
+</li>
+</ul>
+<p style="font-family: 微软雅黑, Verdana, sans-serif, 宋体;">查看代码 :&nbsp;<a href="http://plnkr.co/edit/lCRwhj?p=preview" target="_blank" rel="nofollow">http://plnkr.co/edit/lCRwhj?p=preview</a></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
