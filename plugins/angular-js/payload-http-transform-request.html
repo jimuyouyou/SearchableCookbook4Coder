@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>payload-http-transform-request.html</title>
+</head>
+<body>
+url: http://blog.csdn.net/myweishanli/article/details/17936287<p>
+
+tested result:<p>
+<p>$http({<br /> url: "/OnTime/api/login",<br /> method: 'POST',<br /> data: {<br /> do_login: true,<br /> username: $scope.username,<br /> password: $scope.password,<br /> orgCode: $scope.orgCode,<br /> },<br /> headers: {'Content-Type': 'application/x-www-form-urlencoded'}, <br /> transformRequest: function(data) {<br /> return $.param(data); // jquery util<br /> }<br />}).success(function(data, status, headers, config) {<br /> alert(data);<br />}).error(function(data, status, headers, config) {<br /> alert("error");<br />}); // end of http post</p>
+
+
+	<p><strong>angularjs发起$http.post请求：</strong></p>
+<p>代码如下：</p>
+<p>&nbsp;</p>
+<div class="dp-highlighter bg_javascript">
+<div class="bar">
+<div class="tools"><strong>[javascript]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/myweishanli/article/details/17936287">view plain</a><a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/myweishanli/article/details/17936287">copy</a><a class="PrintSource" title="print" href="http://blog.csdn.net/myweishanli/article/details/17936287">print</a><a class="About" title="?" href="http://blog.csdn.net/myweishanli/article/details/17936287">?</a><a title="在CODE上查看代码片" href="https://code.csdn.net/snippets/145238" target="_blank"><img src="https://code.csdn.net/assets/CODE_ico.png" alt="在CODE上查看代码片" width="12" height="12" /></a><a title="派生到我的代码片" href="https://code.csdn.net/snippets/145238/fork" target="_blank"><img src="https://code.csdn.net/assets/ico_fork.svg" alt="派生到我的代码片" width="12" height="12" /></a>
+<div><embed id="ZeroClipboardMovie_1" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="21" height="11" align="middle" name="ZeroClipboardMovie_1"></embed></div>
+</div>
+</div>
+<ol class="dp-c" start="1">
+<li class="alt">$http({&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;method:<span class="string">'post'</span>,&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;url:<span class="string">'post.php'</span>,&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;data:{name:<span class="string">"aaa"</span>,id:1,age:20}&nbsp;&nbsp;</li>
+<li class="alt">}).success(<span class="keyword">function</span>(req){&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;console.log(req);&nbsp;&nbsp;</li>
+<li class="alt">})&nbsp;&nbsp;</li>
+</ol>
+</div>
+<p><br />运行结果（chrome&rarr;network）：</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="http://image.angularjs.cn/Uadpdy/20131227/e7b155ed02d04798727183525b77de6a_QQ%E5%9B%BE%E7%89%8720131227110729.jpg" alt="QQ图片20131227110729.jpg" /></p>
+<p>这样的话在PHP中用$_POST是取不到的。</p>
+<p><strong>解决方案：</strong></p>
+<p>1.配置$httpProvider：</p>
+<div class="dp-highlighter bg_javascript">
+<div class="bar">
+<div class="tools"><strong>[javascript]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/myweishanli/article/details/17936287">view plain</a><a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/myweishanli/article/details/17936287">copy</a><a class="PrintSource" title="print" href="http://blog.csdn.net/myweishanli/article/details/17936287">print</a><a class="About" title="?" href="http://blog.csdn.net/myweishanli/article/details/17936287">?</a><a title="在CODE上查看代码片" href="https://code.csdn.net/snippets/145238" target="_blank"><img src="https://code.csdn.net/assets/CODE_ico.png" alt="在CODE上查看代码片" width="12" height="12" /></a><a title="派生到我的代码片" href="https://code.csdn.net/snippets/145238/fork" target="_blank"><img src="https://code.csdn.net/assets/ico_fork.svg" alt="派生到我的代码片" width="12" height="12" /></a>
+<div><embed id="ZeroClipboardMovie_2" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="21" height="11" align="middle" name="ZeroClipboardMovie_2"></embed></div>
+</div>
+</div>
+<ol class="dp-c" start="1">
+<li class="alt">&nbsp;<span class="keyword">var</span>&nbsp;myApp&nbsp;=&nbsp;angular.module(<span class="string">'app'</span>,[]);&nbsp;&nbsp;</li>
+<li class="">&nbsp;myApp.config(<span class="keyword">function</span>($httpProvider){&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;$httpProvider.defaults.transformRequest&nbsp;=&nbsp;<span class="keyword">function</span>(obj){&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;str&nbsp;=&nbsp;[];&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">var</span>&nbsp;p&nbsp;<span class="keyword">in</span>&nbsp;obj){&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str.push(encodeURIComponent(p)&nbsp;+&nbsp;<span class="string">"="</span>&nbsp;+&nbsp;encodeURIComponent(obj[p]));&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;str.join(<span class="string">"&amp;"</span>);&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;$httpProvider.defaults.headers.post&nbsp;=&nbsp;{&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'Content-Type'</span>:&nbsp;<span class="string">'application/x-www-form-urlencoded'</span>&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;</li>
+<li class="">});&nbsp;&nbsp;</li>
+</ol>
+</div>
+<p><br />2.在post中配置:</p>
+<p>&nbsp;</p>
+<div class="dp-highlighter bg_javascript">
+<div class="bar">
+<div class="tools"><strong>[javascript]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/myweishanli/article/details/17936287">view plain</a><a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/myweishanli/article/details/17936287">copy</a><a class="PrintSource" title="print" href="http://blog.csdn.net/myweishanli/article/details/17936287">print</a><a class="About" title="?" href="http://blog.csdn.net/myweishanli/article/details/17936287">?</a><a title="在CODE上查看代码片" href="https://code.csdn.net/snippets/145238" target="_blank"><img src="https://code.csdn.net/assets/CODE_ico.png" alt="在CODE上查看代码片" width="12" height="12" /></a><a title="派生到我的代码片" href="https://code.csdn.net/snippets/145238/fork" target="_blank"><img src="https://code.csdn.net/assets/ico_fork.svg" alt="派生到我的代码片" width="12" height="12" /></a>
+<div><embed id="ZeroClipboardMovie_3" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="21" height="11" align="middle" name="ZeroClipboardMovie_3"></embed></div>
+</div>
+</div>
+<ol class="dp-c" start="1">
+<li class="alt">$http({&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;method:<span class="string">'post'</span>,&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;url:<span class="string">'post.php'</span>,&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;data:{name:<span class="string">"aaa"</span>,id:1,age:20},&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;headers:{<span class="string">'Content-Type'</span>:&nbsp;<span class="string">'application/x-www-form-urlencoded'</span>},&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;transformRequest:&nbsp;<span class="keyword">function</span>(obj)&nbsp;{&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;str&nbsp;=&nbsp;[];&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(<span class="keyword">var</span>&nbsp;p&nbsp;<span class="keyword">in</span>&nbsp;obj){&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str.push(encodeURIComponent(p)&nbsp;+&nbsp;<span class="string">"="</span>&nbsp;+&nbsp;encodeURIComponent(obj[p]));&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;str.join(<span class="string">"&amp;"</span>);&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li class="alt">}).success(<span class="keyword">function</span>(req){&nbsp;&nbsp;</li>
+<li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.log(req);&nbsp;&nbsp;</li>
+<li class="alt">})&nbsp;&nbsp;</li>
+</ol>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>运行结果（chrome&rarr;network）:</p>
+<p><img src="http://image.angularjs.cn/Uadpdy/20131227/9053690fa4544d1d03de4d523e653aa1_QQ%E5%9B%BE%E7%89%8720131227112511.jpg" alt="form data" /></p>
+<p>至此成功换成form data;</p>
+<p>3.PHP中放弃$_POST;</p>
+<div class="dp-highlighter bg_php">
+<div class="bar">
+<div class="tools"><strong>[php]</strong> <a class="ViewSource" title="view plain" href="http://blog.csdn.net/myweishanli/article/details/17936287">view plain</a><a class="CopyToClipboard" title="copy" href="http://blog.csdn.net/myweishanli/article/details/17936287">copy</a><a class="PrintSource" title="print" href="http://blog.csdn.net/myweishanli/article/details/17936287">print</a><a class="About" title="?" href="http://blog.csdn.net/myweishanli/article/details/17936287">?</a><a title="在CODE上查看代码片" href="https://code.csdn.net/snippets/145238" target="_blank"><img src="https://code.csdn.net/assets/CODE_ico.png" alt="在CODE上查看代码片" width="12" height="12" /></a><a title="派生到我的代码片" href="https://code.csdn.net/snippets/145238/fork" target="_blank"><img src="https://code.csdn.net/assets/ico_fork.svg" alt="派生到我的代码片" width="12" height="12" /></a>
+<div><embed id="ZeroClipboardMovie_4" src="http://static.blog.csdn.net/scripts/ZeroClipboard/ZeroClipboard.swf" type="application/x-shockwave-flash" width="21" height="11" align="middle" name="ZeroClipboardMovie_4"></embed></div>
+</div>
+</div>
+<ol class="dp-c" start="1">
+<li class="alt"><span class="vars">$rawpostdata</span>&nbsp;=&nbsp;<span class="func">file_get_contents</span>(<span class="string">"php://input"</span>);&nbsp;&nbsp;</li>
+<li class=""><span class="vars">$post</span>&nbsp;=&nbsp;json_decode(<span class="vars">$rawpostdata</span>,&nbsp;true);&nbsp;&nbsp;</li>
+<li class="alt"><span class="comment">//传的数据都在$post中了;</span>&nbsp;&nbsp;</li>
+</ol>
+</div>
+
+<p>4.如果加载了jquery可以直接这样使用 :)<br />transformRequest : function(data){<br />return $.param(data);<br />}</p>
+</body>
+</html>
