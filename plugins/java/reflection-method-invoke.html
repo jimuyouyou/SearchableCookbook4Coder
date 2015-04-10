@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>reflection-method-invoke.html</title>
+</head>
+<body>
+
+	<xmp>
+		AddressEntity obj = (AddressEntity)ObjectMapper.mapping(address, AddressEntity.class);
+
+	// this method works for two classes with almost same methods and fields, and have same getters and setters
+	public static Object mapping(Object obj, Class<?> cls) {
+		Object newObj = null;
+
+		try {
+			newObj = cls.newInstance();
+
+			Method[] methods = obj.getClass().getDeclaredMethods();
+			for (Method getter : methods) {
+				String methodName = getter.getName();
+				if (methodName != null && methodName.startsWith("get")) {
+					try {
+						Class[] paramTypes = new Class[1];
+						paramTypes[0] = getter.getReturnType();
+						Method setter = null;
+						Object o = getter.invoke(obj);
+						if (o != null) {
+							setter = cls.getDeclaredMethod(methodName.replace("get", "set"), paramTypes);
+							if (setter != null) {
+								setter.invoke(newObj, o);
+							}
+						}
+					} catch (Exception e) {
+
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return newObj;
+	}
+	</xmp>
+	
+</body>
+</html>
