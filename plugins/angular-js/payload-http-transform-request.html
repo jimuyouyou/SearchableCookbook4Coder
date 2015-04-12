@@ -10,6 +10,37 @@ url: http://blog.csdn.net/myweishanli/article/details/17936287<p>
 tested result:<p>
 <p>$http({<br /> url: "/OnTime/api/login",<br /> method: 'POST',<br /> data: {<br /> do_login: true,<br /> username: $scope.username,<br /> password: $scope.password,<br /> orgCode: $scope.orgCode,<br /> },<br /> headers: {'Content-Type': 'application/x-www-form-urlencoded'}, <br /> transformRequest: function(data) {<br /> return $.param(data); // jquery util<br /> }<br />}).success(function(data, status, headers, config) {<br /> alert(data);<br />}).error(function(data, status, headers, config) {<br /> alert("error");<br />}); // end of http post</p>
 
+<xmp>
+ var jsonObject = $('#addPatientTab1CtrlForm').serializeObject();
+      var jsonStr = JSON.stringify(jsonObject);
+      $http({
+        url: "/OnTime/api/patient/save",
+        method: 'POST',
+        data: {},
+        headers: {
+          // 'Content-Type': 'application/json',
+          'payload': jsonStr,
+          'requestToken': appData.authResult.token,
+          'userName': appData.authResult.un,
+        },
+        // transformRequest: function(data) {
+        //   return $.param(data); // jquery util
+        // }
+      }).success(function(data, status, headers, config) {
+        showLoadingBar({
+          delay: .5,
+          pct: 100,
+          finish: function() {
+            if (data.status == 's') {
+              window.location.hash = '#/app/add_patient_tab_2';
+            }
+          }
+        }); // showLoadingBar
+
+      }).error(function(data, status, headers, config) {
+
+      }); // http
+</xmp>
 
 	<p><strong>angularjs发起$http.post请求：</strong></p>
 <p>代码如下：</p>
