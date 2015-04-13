@@ -7,18 +7,26 @@
 <body>
 		<p>Resource:<br>
 		<textarea id='src' style='width:1000px;height:150px' onchange='process();'>
-
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
 	<link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
 	<link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
+	<link rel="stylesheet" href="assets/js/multiselect/css/multi-select.css"/>
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/xenon-core.css">
 	<link rel="stylesheet" href="assets/css/xenon-forms.css">
 	<link rel="stylesheet" href="assets/css/xenon-components.css">
 	<link rel="stylesheet" href="assets/css/xenon-skins.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
-	<script src="assets/js/jquery-1.11.1.min.js"></script>	
-	<!-- Bottom Scripts -->
+	<script src="assets/js/jquery-1.11.1.min.js"></script>			
+<!-- Bottom Scripts -->
+	<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+	<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+	<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+	<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script> 
+	<script src="assets/js/xenon-api.js"></script> 
+	<script src="assets/js/xenon-toggles.js"></script> 
 	<script src="assets/js/jquery-validate/jquery.validate.min.js"></script> 
 	<script src="assets/js/inputmask/jquery.inputmask.bundle.js"></script> 
 	<script src="assets/js/formwizard/jquery.bootstrap.wizard.min.js"></script> 
@@ -28,6 +36,7 @@
 	<script src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script> 
 	<script src="assets/js/timepicker/bootstrap-timepicker.min.js"></script>
 	<script src="assets/js/jquery.serializeObject.min.js"></script>
+
 
 	<script src="app/js/angular/angular.min.js"></script>
 	<script src="app/js/angular-ui/angular-ui-router.min.js"></script>
@@ -39,7 +48,7 @@
 	<script src="assets/js/joinable.js"></script>
 	<script src="assets/js/resizeable.js"></script>
 
-	<!-- App -->
+	<!-- Xenon App -->
 	<script src="app/js/app.js"></script>
 	<script src="app/js/controllers.js"></script>
 	<script src="app/js/directives.js"></script>
@@ -48,7 +57,9 @@
 
 
 	<!-- JavaScripts initializations and stuff -->
-	<script src="app/js/xenon-custom.js"></script>			
+	<script src="app/js/xenon-custom.js"></script>
+
+
 		</textarea>	
 		<br>Check:<br>
 		<textarea id='dest' style='width:1000px;height:150px'  onchange='process();'></textarea>	
