@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>duplicate-elements.html</title>
+</head>
+<body>
+		<p>Resource:<br>
+		<textarea id='src' style='width:1000px;height:150px' onchange='process();'>
+
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
+	<link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/xenon-core.css">
+	<link rel="stylesheet" href="assets/css/xenon-forms.css">
+	<link rel="stylesheet" href="assets/css/xenon-components.css">
+	<link rel="stylesheet" href="assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="assets/css/custom.css">
+	<script src="assets/js/jquery-1.11.1.min.js"></script>	
+	<!-- Bottom Scripts -->
+	<script src="assets/js/jquery-validate/jquery.validate.min.js"></script> 
+	<script src="assets/js/inputmask/jquery.inputmask.bundle.js"></script> 
+	<script src="assets/js/formwizard/jquery.bootstrap.wizard.min.js"></script> 
+	<script src="assets/js/datepicker/bootstrap-datepicker.js"></script> 
+	<script src="assets/js/multiselect/js/jquery.multi-select.js"></script> 
+	<script src="assets/js/jquery-ui/jquery-ui.min.js"></script> 
+	<script src="assets/js/selectboxit/jquery.selectBoxIt.min.js"></script> 
+	<script src="assets/js/timepicker/bootstrap-timepicker.min.js"></script>
+	<script src="assets/js/jquery.serializeObject.min.js"></script>
+
+	<script src="app/js/angular/angular.min.js"></script>
+	<script src="app/js/angular-ui/angular-ui-router.min.js"></script>
+	<script src="app/js/angular-ui/ui-bootstrap-tpls-0.11.2.min.js"></script>
+	<script src="app/js/angular/angular-cookies.min.js"></script>
+	<script src="app/js/oc-lazyload/ocLazyLoad.min.js"></script>
+	<script src="app/js/angular-fullscreen.js"></script>
+	<script src="assets/js/TweenMax.min.js"></script>
+	<script src="assets/js/joinable.js"></script>
+	<script src="assets/js/resizeable.js"></script>
+
+	<!-- App -->
+	<script src="app/js/app.js"></script>
+	<script src="app/js/controllers.js"></script>
+	<script src="app/js/directives.js"></script>
+	<script src="app/js/factory.js"></script>
+	<script src="app/js/services.js"></script>
+
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="app/js/xenon-custom.js"></script>			
+		</textarea>	
+		<br>Check:<br>
+		<textarea id='dest' style='width:1000px;height:150px'  onchange='process();'></textarea>	
+		<p>
+		<div id='newDiv' style='color:red'></div><p>
+		<div id='dupDiv' style='color:green'></div>
+</body>
+<script src='../../lib/jquery-1.8.0.min.js'></script>
+<script>
+function process() {
+	var src = $('#src').val();
+	var dest = $('#dest').val();
+	var srcArray = trimedArray(src.split('\n'));
+	var destArray = trimedArray(dest.split('\n'));
+	var dupArray = new Array();
+	var newArray = new Array();
+	for (var i = 0; i < destArray.length; i++) {
+		var sValue = destArray[i];
+		if ($.inArray(sValue, srcArray) !== -1) {
+			dupArray.push(sValue);
+		} else {
+			newArray.push(sValue);
+		}
+	}
+
+	$('#newDiv').html(styleArray(newArray));
+	$('#dupDiv').html(styleArray(dupArray));
+}
+
+function styleArray(arr) {
+	var sResult = '';
+	for(var i = 0; i < arr.length; i++) {
+		sResult += arr[i].replace(new RegExp('script', 'g'),'').replace(new RegExp('link', 'g'), '') + "<p>";
+	}
+	return sResult;
+}
+
+function trimedArray(arr) {
+	for (var i = 0; i < arr.length; i++) {
+		arr[i] = $.trim(arr[i]);
+	}
+
+	return arr;
+}
+</script>
+</html>
