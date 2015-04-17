@@ -1,3 +1,3 @@
 var cfg = {
-	labels: ['jersey', 'hibernate', 'spring', 'maven', 'custom'] 
+	labels: ['jersey', 'hibernate', 'spring', 'maven', 'custom', 'schedule'] 
 };
