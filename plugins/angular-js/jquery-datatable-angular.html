@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <script src='../../lib/jquery-1.8.0.min.js'></script>
+  <script src='lib/jquery.dataTables.js'></script>
+  <script src='lib/angular1.2.js'></script>
+</head>
+
+<body ng-controller="MyCtrl">
+  <table ng-if="users.length" datatable-setup class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Roles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users">
+        <td>{{user.username}}</td>
+        <td>
+          <ul>
+            <li ng-repeat="role in user.roles">
+              {{role}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+  </table>
+</body>
+</html>
+
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('MyCtrl', ['$scope', '$timeout',
+  function MyCtrl($scope, $timeout) {
+  
+    // Simulating asynchronous call
+    $timeout(function () {
+      $scope.users = 
+        [ 
+          { username: 'user 1', roles: ['guest'] }, 
+          { username: 'user 2', roles: ['support', 'tester'] }, 
+          { username: 'user 3', roles: ['admin'] }
+        ];
+    }, 1000);
+  }
+]);
+
+app.directive('datatableSetup', ['$timeout',
+  function($timeout) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        
+        $timeout(function () {
+          element.dataTable();
+        });
+      }
+    }
+  }
+]);
+</script>

@@ -1,3 +1,3 @@
 var cfg = {
-	labels: ['ref', 'form', 'filter', 'validat', 'custom'] 
+	labels: ['ref', 'http', 'form', 'filter', 'validat', 'factory', 'service', 'provider', 'promise', 'custom'] 
 };

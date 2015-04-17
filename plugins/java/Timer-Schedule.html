@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Timer-Schedule.html</title>
+</head>
+<body>
+	source url: http://www.cdtarena.com/javapx/201303/7842.html
+	<p>
+	<h1>ScheduledExecutorService定时周期执行指定的任务</h1>
+<div class="info"><span class="font">作者:<a href="http://www.cdtarena.com/">达内</a> 更新时间:2013-03-05 10:03:32 来源:<a href="http://www.cdtarena.com/">达内科技</a> </span></div>
+<div class="c2">
+<p><strong>一：简单说明</strong></p>
+<p>ScheduleExecutorService接口中有四个重要的方法，其中scheduleAtFixedRate和scheduleWithFixedDelay在实现定时程序时比较方便。</p>
+<p>下面是该接口的原型定义</p>
+<p>java.util.concurrent.ScheduleExecutorService extends ExecutorService extends Executor</p>
+<p><img src="http://www.cdtarena.com/Upfiles/Article/2013030510054525671.jpg" alt="" /></p>
+<p>接口scheduleAtFixedRate原型定义及参数说明</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="keyword">public</span> ScheduledFuture&lt;?&gt; scheduleAtFixedRate(Runnable command,</li>
+<li><span class="keyword">long</span> initialDelay,</li>
+<li class="alt"><span class="keyword">long</span> period,</li>
+<li>TimeUnit unit);</li>
+</ol>
+</div>
+<p>command：执行线程<br />initialDelay：初始化延时<br />period：两次开始执行最小间隔时间<br />unit：计时单位</p>
+<p>接口scheduleWithFixedDelay原型定义及参数说明</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="keyword">public</span> ScheduledFuture&lt;?&gt; scheduleWithFixedDelay(Runnable command,</li>
+<li><span class="keyword">long</span> initialDelay,</li>
+<li class="alt"><span class="keyword">long</span> delay,</li>
+<li>TimeUnit unit);</li>
+</ol>
+</div>
+<p>command：执行线程<br />initialDelay：初始化延时<br />period：前一次执行结束到下一次执行开始的间隔时间（间隔执行延迟时间）<br />unit：计时单位</p>
+<p><strong>二：功能示例</strong></p>
+<p>1.按指定频率周期执行某个任务。</p>
+<p>初始化延迟0ms开始执行，每隔100ms重新执行一次任务。</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="comment">/**</span></li>
+<li><span class="comment">* 以固定周期频率执行任务</span></li>
+<li class="alt"><span class="comment">*/</span></li>
+<li><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> executeFixedRate() {</li>
+<li class="alt">ScheduledExecutorService executor = Executors.newScheduledThreadPool(<span class="number">1</span>);</li>
+<li>executor.scheduleAtFixedRate(</li>
+<li class="alt"><span class="keyword">new</span> EchoServer(),</li>
+<li><span class="number">0</span>,</li>
+<li class="alt"><span class="number">100</span>,</li>
+<li>TimeUnit.MILLISECONDS);</li>
+<li class="alt">}</li>
+</ol>
+</div>
+<p>间隔指的是连续两次任务开始执行的间隔。</p>
+<p>&nbsp;</p>
+<p>2.按指定频率间隔执行某个任务。</p>
+<p>初始化时延时0ms开始执行，本次执行结束后延迟100ms开始下次执行。</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="comment">/**</span></li>
+<li><span class="comment">* 以固定延迟时间进行执行</span></li>
+<li class="alt"><span class="comment">* 本次任务执行完成后，需要延迟设定的延迟时间，才会执行新的任务</span></li>
+<li><span class="comment">*/</span></li>
+<li class="alt"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> executeFixedDelay() {</li>
+<li>ScheduledExecutorService executor = Executors.newScheduledThreadPool(<span class="number">1</span>);</li>
+<li class="alt">executor.scheduleWithFixedDelay(</li>
+<li><span class="keyword">new</span> EchoServer(),</li>
+<li class="alt"><span class="number">0</span>,</li>
+<li><span class="number">100</span>,</li>
+<li class="alt">TimeUnit.MILLISECONDS);</li>
+<li>}</li>
+</ol>
+</div>
+<p>3.周期定时执行某个任务。</p>
+<p>有时候我们希望一个任务被安排在凌晨3点（访问较少时）周期性的执行一个比较耗费资源的任务，可以使用下面方法设定每天在固定时间执行一次任务。</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="comment">/**</span></li>
+<li><span class="comment">* 每天晚上8点执行一次</span></li>
+<li class="alt"><span class="comment">* 每天定时安排任务进行执行</span></li>
+<li><span class="comment">*/</span></li>
+<li class="alt"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> executeEightAtNightPerDay() {</li>
+<li>ScheduledExecutorService executor = Executors.newScheduledThreadPool(<span class="number">1</span>);</li>
+<li class="alt"><span class="keyword">long</span> oneDay = <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;</li>
+<li><span class="keyword">long</span> initDelay = getTimeMillis(<span class="string">"20:00:00"</span>) - System.currentTimeMillis();</li>
+<li class="alt">initDelay = initDelay &gt; <span class="number">0</span> ? initDelay : oneDay + initDelay;</li>
+<li></li>
+<li class="alt">executor.scheduleAtFixedRate(</li>
+<li><span class="keyword">new</span> EchoServer(),</li>
+<li class="alt">initDelay,</li>
+<li>oneDay,</li>
+<li class="alt">TimeUnit.MILLISECONDS);</li>
+<li>}</li>
+</ol>
+</div>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="comment">/**</span></li>
+<li><span class="comment">* 获取指定时间对应的毫秒数</span></li>
+<li class="alt"><span class="comment">* @param time "HH:mm:ss"</span></li>
+<li><span class="comment">* @return</span></li>
+<li class="alt"><span class="comment">*/</span></li>
+<li><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> getTimeMillis(String time) {</li>
+<li class="alt"><span class="keyword">try</span> {</li>
+<li>DateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yy-MM-dd HH:mm:ss"</span>);</li>
+<li class="alt">DateFormat dayFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yy-MM-dd"</span>);</li>
+<li>Date curDate = dateFormat.parse(dayFormat.format(<span class="keyword">new</span> Date()) + <span class="string">" "</span> + time);</li>
+<li class="alt"><span class="keyword">return</span> curDate.getTime();</li>
+<li>} <span class="keyword">catch</span> (ParseException e) {</li>
+<li class="alt">e.printStackTrace();</li>
+<li>}</li>
+<li class="alt"><span class="keyword">return</span> <span class="number">0</span>;</li>
+<li>}</li>
+</ol>
+</div>
+<p>4.辅助代码</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt"><span class="keyword">class</span> EchoServer <span class="keyword">implements</span> Runnable {</li>
+<li><span class="annotation">@Override</span></li>
+<li class="alt"><span class="keyword">public</span> <span class="keyword">void</span> run() {</li>
+<li><span class="keyword">try</span> {</li>
+<li class="alt">Thread.sleep(<span class="number">50</span>);</li>
+<li>} <span class="keyword">catch</span> (InterruptedException e) {</li>
+<li class="alt">e.printStackTrace();</li>
+<li>}</li>
+<li class="alt">System.out.println(<span class="string">"This is a echo server. The current time is "</span> +</li>
+<li>System.currentTimeMillis() + <span class="string">"."</span>);</li>
+<li class="alt">}</li>
+<li>}</li>
+</ol>
+</div>
+<p><span style="font-weight: bold;">三：一些问题</span></p>
+<p>上面写的内容有不严谨的地方，比如对于scheduleAtFixedRate方法，当我们要执行的任务大于我们指定的执行间隔时会怎么样呢？</p>
+<p>对于中文API中的注释，我们可能会被忽悠，认为无论怎么样，它都会按照我们指定的间隔进行执行，其实当执行任务的时间大于我们指定的间隔时间时，它并不会在指定间隔时开辟一个新的线程并发执行这个任务。而是等待该线程执行完毕。</p>
+<p>源码注释如下：</p>
+<p>&nbsp;</p>
+<div class="dp-highlighter bg_java">
+<div class="bar">
+<div class="tools"><strong>[java]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-j">
+<li class="alt">* Creates and executes a periodic action that becomes enabled first</li>
+<li>* after the given initial delay, and subsequently with the given</li>
+<li class="alt">* period; that is executions will commence after</li>
+<li>* &lt;tt&gt;initialDelay&lt;/tt&gt; then &lt;tt&gt;initialDelay+period&lt;/tt&gt;, then</li>
+<li class="alt">* &lt;tt&gt;initialDelay + <span class="number">2</span> * period&lt;/tt&gt;, and so on.</li>
+<li>* If any execution of the task</li>
+<li class="alt">* encounters an exception, subsequent executions are suppressed.</li>
+<li>* Otherwise, the task will only terminate via cancellation or</li>
+<li class="alt">* termination of the executor. If any execution of <span class="keyword">this</span> task</li>
+<li>* takes longer than its period, then subsequent executions</li>
+<li class="alt">* may start late, but will not concurrently execute.</li>
+</ol>
+</div>
+<p>根据注释中的内容，我们需要注意的时，我们需要捕获最上层的异常，防止出现异常中止执行，导致周期性的任务不再执行。</p>
+<p><strong>四：除了我们自己实现定时任务之外，我们可以使用Spring帮我们完成这样的事情。</strong></p>
+<p>Spring自动定时任务配置方法（我们要执行任务的类名为com.study.MyTimedTask）</p>
+<p>&nbsp;</p>
+<div class="dp-highlighter bg_html">
+<div class="bar">
+<div class="tools"><strong>[html]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-xml">
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">id</span>=<span class="attribute-value">"myTimedTask"</span> <span class="attribute">class</span>=<span class="attribute-value">"com.study.MyTimedTask"</span><span class="tag">/&gt;</span></li>
+</ol>
+</div>
+<div class="dp-highlighter bg_html">
+<div class="bar">
+<div class="tools"><strong>[html]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-xml">
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">id</span>=<span class="attribute-value">"doMyTimedTask"</span> <span class="attribute">class</span>=<span class="attribute-value">"org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"targetObject"</span> <span class="attribute">ref</span>=<span class="attribute-value">"myTimedTask"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"targetMethod"</span> <span class="attribute">value</span>=<span class="attribute-value">"execute"</span><span class="tag">/&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"concurrent"</span> <span class="attribute">value</span>=<span class="attribute-value">"false"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">bean</span><span class="tag">&gt;</span></li>
+</ol>
+</div>
+<div class="dp-highlighter bg_html">
+<div class="bar">
+<div class="tools"><strong>[html]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-xml">
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">id</span>=<span class="attribute-value">"myTimedTaskTrigger"</span> <span class="attribute">class</span>=<span class="attribute-value">"org.springframework.scheduling.quartz.CronTriggerBean"</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"jobDetail"</span> <span class="attribute">ref</span>=<span class="attribute-value">"doMyTimedTask"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"cronExpression"</span> <span class="attribute">value</span>=<span class="attribute-value">"0 0 2 * ?"</span><span class="tag">/&gt;</span></li>
+<li><span class="tag">&lt;/</span><span class="tag-name">bean</span><span class="tag">&gt;</span></li>
+</ol>
+</div>
+<div class="dp-highlighter bg_html">
+<div class="bar">
+<div class="tools"><strong>[html]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-xml">
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">id</span>=<span class="attribute-value">"doScheduler"</span> <span class="attribute">class</span>=<span class="attribute-value">"org.springframework.scheduling.quartz.SchedulerFactoryBean"</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"triggers"</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">list</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">ref</span> <span class="attribute">local</span>=<span class="attribute-value">"myTimedTaskTrigger"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">list</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;/</span><span class="tag-name">property</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">bean</span><span class="tag">&gt;</span></li>
+</ol>
+</div>
+<div class="dp-highlighter bg_html">
+<div class="bar">
+<div class="tools"><strong>[html]</strong> view plaincopyprint?</div>
+</div>
+<ol class="dp-xml">
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">id</span>=<span class="attribute-value">"doScheduler"</span> <span class="attribute">class</span>=<span class="attribute-value">"org.springframework.scheduling.quartz.SchedulerFactoryBean"</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"triggers"</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">list</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">class</span>=<span class="attribute-value">"org.springframework.scheduling.quartz.CronTriggerBean"</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"jobDetail"</span><span class="tag">/&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">id</span>=<span class="attribute-value">"doMyTimedTask"</span> <span class="attribute">class</span>=<span class="attribute-value">"org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"targetObject"</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">bean</span> <span class="attribute">class</span>=<span class="attribute-value">"com.study.MyTimedTask"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">property</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"targetMethod"</span> <span class="attribute">value</span>=<span class="attribute-value">"execute"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"concurrent"</span> <span class="attribute">value</span>=<span class="attribute-value">"false"</span><span class="tag">/&gt;</span></li>
+<li><span class="tag">&lt;/</span><span class="tag-name">bean</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">property</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;</span><span class="tag-name">property</span> <span class="attribute">name</span>=<span class="attribute-value">"cronExpression"</span> <span class="attribute">value</span>=<span class="attribute-value">"0 0 2 * ?"</span><span class="tag">/&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">bean</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;/</span><span class="tag-name">list</span><span class="tag">&gt;</span></li>
+<li class="alt"><span class="tag">&lt;/</span><span class="tag-name">property</span><span class="tag">&gt;</span></li>
+<li><span class="tag">&lt;/</span><span class="tag-name">bean</span><span class="tag">&gt;</span></li>
+</ol>
+</div>
+</div>
+</body>
+</html>

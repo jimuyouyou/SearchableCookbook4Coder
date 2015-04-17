@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>request-form-payload.html</title>
+</head>
+<body>
+source url: http://www.cnblogs.com/yanhua365/p/3458814.html
+<p>	
+	<div id="topics">
+<div class="post">
+<h1 class="postTitle"><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/yanhua365/p/3458814.html">HTTP请求中的form data和request payload的区别</a></h1>
+<div class="clear">&nbsp;</div>
+<div class="postBody">
+<div id="cnblogs_post_body">
+<p>今天帮朋友调试一个程序时发现用jQuery的ajax方法和post方法分别发送请求，在后台Servlet进行处理时结果是不一样的，比如用$.ajax方法发送请求时（data参数是一个JSON.stringify()处理后的字符串，而不是一个JSON对象），servlet里可以这样使用Gson来解析：</p>
+<pre class="javascript" data-second_best="[object Object]" data-result="[object Object]"><code><span class="keyword">new</span> Jsonparser().parse(request.getReader())
+</code></pre>
+<p>但此时是不可用request.getParam(key) 来取值的。</p>
+<p>如果用$.post方法来发送请求（data参数是一个JSON对象,而不要再用JSON.stringify()处理为字符串了），结果恰恰相反。</p>
+<p>在Chrome中调试发现，$.ajax发送的请求显示在request payload下面，而使用$.post方法发送的请求显示在form data下面。有什么区别呢？在万能的stackoverflow上找到答案了，有人问了这个问题<a href="http://stackoverflow.com/questions/10494574/what-is-the-difference-between-form-data-and-request-payload">What is the difference between form data and request payload?</a>：</p>
+<blockquote>
+<p>When I send an AJAX Post request and send parameters in queryString in send() method,Chrome Developer Tool&rsquo;s XHR capture tool shows the parameters under request payload. and when I use jquery&rsquo;s post function, The tool shows parameters under Form Data section.</p>
+</blockquote>
+<blockquote>
+<p>What is the difference ?</p>
+</blockquote>
+<p>回答是：</p>
+<blockquote>
+<p>you have not provided enough information how you use the send function, but I assume that you do not set mime type to specify you are sending form data</p>
+</blockquote>
+<pre data-result="[object Object]"><code>xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+</code></pre>
+<blockquote>
+<p>the data sent are in this case encoded as you encode a query string</p>
+</blockquote>
+<pre class="ruby" data-result="[object Object]"><code><span class="identifier">xhr</span>.<span class="identifier"><span class="keymethods">send</span></span>(<span class="string">"name=foo&amp;value=bar"</span>);
+</code></pre>
+<blockquote>
+<p>otherwise it will not be interpreted as form data by Developer Tools. jquery does majority of work for you in this regard.</p>
+</blockquote>
+<p>关键就是设置Content-type这个Header为application/x-www-form-urlencoded，实际上对于常规的HTML页面上的form的Content-type默认就是这个值。</p>
+<p>相似的问题还发生在AngularJS的$http方法中，<a href="http://stackoverflow.com/questions/11442632/how-can-i-make-angular-js-post-data-as-form-data-instead-of-a-request-payload">How can I make angular.js post data as form data instead of a request payload?</a><span class="Apple-converted-space">&nbsp;</span>这个问题竟然有77个&ldquo;顶&rdquo;，看来遇到此问题的人还真不少。</p>
+<p><em>注：这个问题里说jQuery的ajax方法是可以的，我今天遇到是不可以的，这个需要再验证一下。</em></p>
+<p>当然解决的方法是一样的：</p>
+<pre class="css" data-second_best="[object Object]" data-result="[object Object]"><code>$<span class="tag">http</span>(<span class="rules">{
+    <span class="rule"><span class="attribute">method</span>:<span class="value"> <span class="string">'POST'</span>,
+    url: url,
+    data: xsrf,
+    headers: {<span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded'</span></span>}</span></span>
+})
+</code></pre>
+<p>ArgularJS的$http方法还支持全局设置：</p>
+<pre class="php" data-second_best="[object Object]" data-result="[object Object]"><code><span class="variable">$http</span>.defaults.headers.post[<span class="string">"Content-Type"</span>] = <span class="string">"application/x-www-form-urlencoded"</span>;
+</code></pre>
+<p>还有人专门针对这个问题写了篇博客，分析了原因<a href="http://victorblog.com/2012/12/20/make-angularjs-http-service-behave-like-jquery-ajax/">Make AngularJS $http service behave like jQuery.ajax()</a></p>
+<blockquote>
+<p>The difference is in how jQuery and AngularJS serialize and transmit the data. Fundamentally, the problem lies with your server language of choice being unable to understand AngularJS&rsquo;s transmission natively&mdash;that&rsquo;s a darn shame because AngularJS is certainly not doing anything wrong. By default, jQuery transmits data using Content-Type: x-www-form-urlencoded and the familiar foo=bar&amp;baz=moe serialization. AngularJS, however, transmits data using Content-Type: application/json and { &ldquo;foo&rdquo;: &ldquo;bar&rdquo;, &ldquo;baz&rdquo;: &ldquo;moe&rdquo; } JSON serialization, which unfortunately some Web server languages&mdash;notably PHP&mdash;do not unserialize natively.</p>
+</blockquote>
+<p>当然文章了给出了另外的一种处理方案，还没细读，这个问题先记录在这里，以后再做些例子来详细研究一下。</p>
+<p>另外,如果做Server端的API，默认支持哪种请求为好呢？</p>
+</div>
+<div class="clear">&nbsp;</div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">&nbsp;</div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/yanhua365/tag/ajax/">ajax</a>, <a href="http://www.cnblogs.com/yanhua365/tag/HTTP/">HTTP</a></div>
+<div id="blog_post_info">
+<div id="green_channel">绿色通道： <a id="green_channel_digg"></a>好文要顶 <a id="green_channel_follow"></a>关注我 <a id="green_channel_favorite"></a>收藏该文<a id="green_channel_contact" href="http://space.cnblogs.com/msg/send/yanhua365" target="_blank">与我联系</a> <a id="green_channel_weibo" title="分享至新浪微博"></a><img src="http://static.cnblogs.com/images/icon_weibo_24.png" alt="" /></div>
+<div id="author_profile">
+<div id="author_profile_info" class="author_profile_info"><a href="http://home.cnblogs.com/u/yanhua365/" target="_blank"><img class="author_avatar" src="http://pic.cnitblog.com/face/sample_face.gif" alt="" /></a>
+<div id="author_profile_detail" class="author_profile_info"><a href="http://home.cnblogs.com/u/yanhua365/">yanhua365</a><br /><a href="http://home.cnblogs.com/u/yanhua365/followees">关注 - 0</a><br /><a href="http://home.cnblogs.com/u/yanhua365/followers">粉丝 - 0</a></div>
+</div>
+<div class="clear">&nbsp;</div>
+<div id="author_profile_honor">&nbsp;</div>
+<div id="author_profile_follow"><a>+加关注</a></div>
+</div>
+<div id="div_digg">
+<div class="diggit"><span id="digg_count" class="diggnum">3</span></div>
+<div class="buryit"><span id="bury_count" class="burynum">0</span></div>
+<div class="clear">&nbsp;</div>
+<div id="digg_tips" class="diggword">(请您对文章做出评价)</div>
+</div>
+</div>
+<div class="clear">&nbsp;</div>
+<div id="post_next_prev">&nbsp;</div>
+</div>
+</div>
+<div class="postDesc">posted @ <span id="post-date">2013-12-05 09:21</span> <a href="http://www.cnblogs.com/yanhua365/">yanhua365</a> 阅读(<span id="post_view_count">3204</span>) 评论(<span id="post_comment_count">1</span>) <a href="http://i.cnblogs.com/EditPosts.aspx?postid=3458814" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/yanhua365/p/3458814.html">收藏</a></div>
+</div>
+</div>
+<p><a name="!comments"></a></p>
+<div id="blog-comments-placeholder">
+<div id="comments_pager_top">&nbsp;</div>
+<br />
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems">&nbsp;</div>
+<div class="feedbackItem">
+<div class="feedbackListSubtitle">
+<div class="feedbackManage">&nbsp;&nbsp;</div>
+<a class="layer" href="http://www.cnblogs.com/yanhua365/p/3458814.html#3047226">#1楼</a><a id="comment_anchor_3047226" name="3047226"></a> <span class="comment_date">2014-10-20 13:52</span> <a id="a_comment_author_3047226" href="http://home.cnblogs.com/u/683396/" target="_blank">卡拉不是狗</a> <a class="sendMsg2This" title="发送站内短消息" href="http://msg.cnblogs.com/msg/send/%e5%8d%a1%e6%8b%89%e4%b8%8d%e6%98%af%e7%8b%97">&nbsp;</a></div>
+<div class="feedbackCon">
+<div id="comment_body_3047226" class="blog_comment_body">博主，我尝试了一下1.30的Angularjs，使用在config里用params代替data就可以了</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="articalTitle">
+<h2 id="t_9965673001014ymu" class="titName SG_txta">Tomcat&nbsp;6.0/webapps/项目名/WEB-INF/classes下为空</h2>
+<span class="time SG_txtc">(2012-06-13 12:00:39)</span>
+<div class="turnBoxzz">&nbsp;</div>
+</div>
+<div id="sina_keyword_ad_area2" class="articalContent   ">
+<div>一般启动时说找不到该类：</div>
+<div>
+<p>Tomcat 6.0/webapps/项目名/WEB-INF/classes下为空，意思是工程的所有JAVA文件都不能生成CLASS文件！</p>
+<p>解决方法：</p>
+<p>MyEclipse不编译解决1. 确保 project-&gt;build automatically&nbsp;<wbr />&nbsp;<wbr />&nbsp;<wbr /> 已经被选上.<br /><br />MyEclipse不编译解决2. 如果选上了,也不好使, 使用这一招: project-&gt;clean..-&gt;选第2个clean select project, 勾上start build immediatelly<br /><br />MyEclipse不编译解决3.删除现在的项目,提前设置好编译文件输出路径，重新导入源文件，设置MyEclipse为保存时编译，然后在保存的时候就可以自动编译了<br /><br />MyEclipse不编译解决4.如果项目里引了某个不用的jar包，而那个包又被你删了，就会出现不报错但怎么也编译不出来class文件的情况，可以把所有包都删除,然后一个一个的再引入(需要的),不要一下子把所有包都引入来,没用的可能会引起不良后果.<br /><br />MyEclipse不编译解决5. 想删掉某个class文件重新生成，删除class文件后，但classes目录下的文件夹被其它程序打开，比如Total Commander。此时编译也不会通过，在problems下可能会提示&ldquo;con''t delete classes &hellip;&hellip;&rdquo;。关掉其它程序重新编译即可。<br /><br />MyEclipse不编译解决6.还有种情况是remove掉 JRE System Library，重新导入即可编译。但是什么原因导致的还不清楚。<br /><br />MyEclipse不编译解决7.把build path中所有包都remove掉。然后又add jars,add libraries把需要的加进去，居然又开始编译了。。。<br /><br />MyEclipse不编译解决8.project-&gt;properties-&gt;java build path-&gt;source-&gt;.../WEB-INF/src的output folder不要默认，编辑让它指向../WEB-INF/classes<br /><br />然后重新点击build工程即可自动编译。我的问题出在这里，我把这个编译目录给误删了<br /><br />MyEclipse不编译解决9.再就是最重要的要看工程下面是否缺少了work目录,由于CVS控制时不把work加如版本,所以 checkout后没有这个目录,要手工加上有的工程就能自动编译了<br /><br />最开始的时候,我只找到了前面7个方法,但是他们都没有解决我的问题.无意中我打开了<strong>"Problems"标签,发现里面说缺少work目录,手工加上,然后刷新项目就可以了.</strong><br /><br />还是试了个jar和path的问题<br />一定要注意：<strong>"Problems" 标签,已经为我们提出了问题的所在！所以按照提示去操作吧，一般这类问题就是build path上出问题了，要么多加了jar要么少加了jar。。。。<br /></strong></p>
+<p>选项目：右键---属性---java build path---order and export将所有的复选框选中--重新部署。OK</p>
+</div>
+</div>
+</body>
+</html>
