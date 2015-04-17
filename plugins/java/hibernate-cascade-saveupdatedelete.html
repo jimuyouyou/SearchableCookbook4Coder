@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>hibernate-cascade-saveupdatedelete.html</title>
+</head>
+<body>
+	url: http://www.mkyong.com/hibernate/hibernate-cascade-example-save-update-delete-and-delete-orphan/<p>
+	
+	<h1>Hibernate &ndash; Cascade example (save, update, delete and delete-orphan)</h1>
+<p class="post-meta">By <a title="Posts by mkyong" href="http://www.mkyong.com/author/mkyong/" rel="author">mkyong</a> | <time datetime="2010-02-02T10:02:28+00:00">February 2, 2010</time> | Last Updated : August 30, 2012</p>
+<div class="entry-content">
+<blockquote>
+<p>Cascade is a convenient feature to save the lines of code needed to manage the state of the other side manually.</p>
+</blockquote>
+<p>The &ldquo;Cascade&rdquo; keyword is often appear on the collection mapping to manage the state of the collection automatically. In this tutorials, this <a href="http://www.mkyong.com/hibernate/hibernate-one-to-many-relationship-example/" target="_blank">one-to-many example</a> will be used to demonstrate the cascade effect.</p>
+<h2>Cascade save / update example</h2>
+<p>In this example, if a &lsquo;Stock&rsquo; is saved, all its referenced &lsquo;stockDailyRecords&rsquo; should be saved into database as well.</p>
+<div>
+<div class="hide_if_width_less_800">&nbsp;</div>
+</div>
+<h2>1. No save-update cascade</h2>
+<p>In <a href="http://www.mkyong.com/hibernate/hibernate-one-to-many-relationship-example/" target="_blank">previous section</a>, if you want to save the &lsquo;Stock&rsquo; and its referenced &lsquo;StockDailyRecord&rsquo; into database, you need to save both individually.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">Stock stock = new Stock();
+StockDailyRecord stockDailyRecords = new StockDailyRecord();
+//set the stock and stockDailyRecords  data
+&nbsp;
+stockDailyRecords.setStock(stock);        
+stock.getStockDailyRecords().add(stockDailyRecords);
+&nbsp;
+session.save(stock);
+session.save(stockDailyRecords);</pre>
+</div>
+</div>
+<p><em>Output</em></p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="bash">Hibernate: 
+    insert into mkyong.stock (STOCK_CODE, STOCK_NAME) 
+    values (?, ?)
+&nbsp;
+Hibernate: 
+    insert into mkyong.stock_daily_record
+    (STOCK_ID, PRICE_OPEN, PRICE_CLOSE, PRICE_CHANGE, VOLUME, DATE) 
+    values (?, ?, ?, ?, ?, ?)</pre>
+</div>
+</div>
+<div>
+<div class="hide_if_width_less_800">&nbsp;</div>
+</div>
+<h2>2. With save-update cascade</h2>
+<p>The <strong>cascade=&rdquo;save-update&rdquo;</strong> is declared in &lsquo;stockDailyRecords&rsquo; to enable the save-update cascade effect.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="xml">&lt;!-- Stock.hbm.xml --&gt;
+&lt;set name="stockDailyRecords" cascade="save-update" table="stock_daily_record"...&gt;
+      &lt;key&gt;
+            &lt;column name="STOCK_ID" not-null="true" /&gt;
+      &lt;/key&gt;
+      &lt;one-to-many class="com.mkyong.common.StockDailyRecord" /&gt;
+&lt;/set&gt;</pre>
+</div>
+</div>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">Stock stock = new Stock();
+StockDailyRecord stockDailyRecords = new StockDailyRecord();
+//set the stock and stockDailyRecords  data
+&nbsp;
+stockDailyRecords.setStock(stock);        
+stock.getStockDailyRecords().add(stockDailyRecords);
+&nbsp;
+session.save(stock);</pre>
+</div>
+</div>
+<p><em>Output</em></p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="bash">Hibernate: 
+    insert into mkyong.stock (STOCK_CODE, STOCK_NAME) 
+    values (?, ?)
+&nbsp;
+Hibernate: 
+    insert into mkyong.stock_daily_record
+    (STOCK_ID, PRICE_OPEN, PRICE_CLOSE, PRICE_CHANGE, VOLUME, DATE) 
+    values (?, ?, ?, ?, ?, ?)</pre>
+</div>
+</div>
+<p>The code <strong>session.save(stockDailyRecords);</strong> is no longer required, when you save the &lsquo;Stock&rsquo;, it will &ldquo;cascade&rdquo; the save operation to it&rsquo;s referenced &lsquo;stockDailyRecords&rsquo; and save both into database automatically.</p>
+<h2>Cascade delete example</h2>
+<p>In this example, if a &lsquo;Stock&rsquo; is deleted, all its referenced &lsquo;stockDailyRecords&rsquo; should be deleted from database as well.</p>
+<h2>1. No delete cascade</h2>
+<p>You need to loop all the &lsquo;stockDailyRecords&rsquo; and delete it one by one.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">Query q = session.createQuery("from Stock where stockCode = :stockCode ");
+q.setParameter("stockCode", "4715");
+Stock stock = (Stock)q.list().get(0);
+&nbsp;
+for (StockDailyRecord sdr : stock.getStockDailyRecords()){
+         session.delete(sdr);
+}
+ session.delete(stock);</pre>
+</div>
+</div>
+<p><em>Output</em></p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="bash">Hibernate: 
+    delete from mkyong.stock_daily_record 
+    where DAILY_RECORD_ID=?
+&nbsp;
+Hibernate: 
+    delete from mkyong.stock 
+    where STOCK_ID=?</pre>
+</div>
+</div>
+<h2>2. With delete cascade</h2>
+<p>The <strong>cascade=&rdquo;delete&rdquo;</strong> is declared in &lsquo;stockDailyRecords&rsquo; to enable the delete cascade effect. When you delete the &lsquo;Stock&rsquo;, all its reference &lsquo;stockDailyRecords&rsquo; will be deleted automatically.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="xml">&lt;!-- Stock.hbm.xml --&gt;
+&lt;set name="stockDailyRecords" cascade="delete" table="stock_daily_record" ...&gt;
+      &lt;key&gt;
+            &lt;column name="STOCK_ID" not-null="true" /&gt;
+      &lt;/key&gt;
+      &lt;one-to-many class="com.mkyong.common.StockDailyRecord" /&gt;
+&lt;/set&gt;</pre>
+</div>
+</div>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">Query q = session.createQuery("from Stock where stockCode = :stockCode ");
+q.setParameter("stockCode", "4715");
+Stock stock = (Stock)q.list().get(0);
+session.delete(stock);</pre>
+</div>
+</div>
+<p><em>Output</em></p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="bash">Hibernate: 
+    delete from mkyong.stock_daily_record 
+    where DAILY_RECORD_ID=?
+&nbsp;
+Hibernate: 
+    delete from mkyong.stock 
+    where STOCK_ID=?</pre>
+</div>
+</div>
+<h2>Cascade delete-orphan example</h2>
+<p>In above cascade delete option, if you delete a Stock , all its referenced &lsquo;stockDailyRecords&rsquo; will be deleted from database as well. How about if you just want to delete two referenced &lsquo;stockDailyRecords&rsquo; records? This is called orphan delete, see example&hellip;</p>
+<h2>1. No delete-orphan cascade</h2>
+<p>You need to delete the &lsquo;stockDailyRecords&rsquo; one by one.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">StockDailyRecord sdr1 = (StockDailyRecord)session.get(StockDailyRecord.class, 
+                                            new Integer(56));
+StockDailyRecord sdr2 = (StockDailyRecord)session.get(StockDailyRecord.class, 
+                                            new Integer(57));
+&nbsp;
+session.delete(sdr1);
+session.delete(sdr2);</pre>
+</div>
+</div>
+<p><em>Output</em></p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="bash">Hibernate: 
+    delete from mkyong.stock_daily_record 
+    where DAILY_RECORD_ID=?
+Hibernate: 
+    delete from mkyong.stock_daily_record 
+    where DAILY_RECORD_ID=?</pre>
+</div>
+</div>
+<h2>2. With delete-orphan cascade</h2>
+<p>The <strong>cascade=&rdquo;delete-orphan&rdquo;</strong> is declared in &lsquo;stockDailyRecords&rsquo; to enable the delete orphan cascade effect. When you save or update the Stock, it will remove those &lsquo;stockDailyRecords&rsquo; which already mark as removed.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="xml">&lt;!-- Stock.hbm.xml --&gt;
+&lt;set name="stockDailyRecords" cascade="delete-orphan" table="stock_daily_record" &gt;
+      &lt;key&gt;
+            &lt;column name="STOCK_ID" not-null="true" /&gt;
+      &lt;/key&gt;
+      &lt;one-to-many class="com.mkyong.common.StockDailyRecord" /&gt;
+&lt;/set&gt;</pre>
+</div>
+</div>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">StockDailyRecord sdr1 = (StockDailyRecord)session.get(StockDailyRecord.class, 
+                                       new Integer(56));
+StockDailyRecord sdr2 = (StockDailyRecord)session.get(StockDailyRecord.class, 
+                                       new Integer(57));
+&nbsp;
+Stock stock = (Stock)session.get(Stock.class, new Integer(2));
+stock.getStockDailyRecords().remove(sdr1);
+stock.getStockDailyRecords().remove(sdr2);
+&nbsp;
+session.saveOrUpdate(stock);</pre>
+</div>
+</div>
+<p><em>Output</em></p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="bash">Hibernate: 
+    delete from mkyong.stock_daily_record 
+    where DAILY_RECORD_ID=?
+Hibernate: 
+    delete from mkyong.stock_daily_record 
+    where DAILY_RECORD_ID=?</pre>
+</div>
+</div>
+<blockquote>
+<p>In short, delete-orphan allow parent table to delete few records (delete orphan) in its child table.</p>
+</blockquote>
+<h2>How to enable cascade ?</h2>
+<p>The cascade is supported in both XML mapping file and annotation.</p>
+<h2>1. XML mapping file</h2>
+<p>In XML mapping file, declared the <strong>cascade</strong> keyword in your relationship variable.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="xml">&lt;!-- Stock.hbm.xml --&gt;
+&lt;set name="stockDailyRecords" cascade="save-update, delete" 
+        table="stock_daily_record" ...&gt;
+      &lt;key&gt;
+            &lt;column name="STOCK_ID" not-null="true" /&gt;
+      &lt;/key&gt;
+      &lt;one-to-many class="com.mkyong.common.StockDailyRecord" /&gt;
+&lt;/set&gt;</pre>
+</div>
+</div>
+<h2>2. Annotation</h2>
+<p>In annotation, declared the <strong>CascadeType.SAVE_UPDATE</strong> (save, update) and <strong>CascadeType.REMOVE</strong>(delete) in @Cascade annotation.</p>
+<div class="wp_syntax">
+<div class="code">
+<pre class="java">        //Stock.java
+        @OneToMany(mappedBy = "stock")
+        @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+	public Set&lt;StockDailyRecord&gt; getStockDailyRecords() {
+		return this.stockDailyRecords;
+	}</pre>
+</div>
+</div>
+<p>Further study &ndash; <a href="http://www.mkyong.com/hibernate/cascade-jpa-hibernate-annotation-common-mistake/" target="_blank">Cascade &ndash; JPA &amp; Hibernate annotation common mistake</a>.</p>
+<h2>inverse vs cascade</h2>
+<p>Both are totally different notions, see the <a href="http://www.mkyong.com/hibernate/different-between-cascade-and-inverse/" target="_blank">differential here</a>.</p>
+<h2>Conclusion</h2>
+<p>Cascade is a very convenient feature to manage the state of the other side automatically. However this feature come with a price, if you do not use it wisely (update or delete), it will generate many unnecessary cascade effects (cascade update) to slow down your performance, or delete (cascade delete) some data you didn&rsquo;t expected.</p>
+</div>
+</body>
+</html>

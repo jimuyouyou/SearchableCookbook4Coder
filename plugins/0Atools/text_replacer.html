@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div>
-		From<input name='from' type="text"  style='width:400px' value=''> to<input name='to' type="text" style='width:200px'> Iterate <input type='checkbox' id='iterateCheck'><p>
+		From<input name='from' type="text"  style='width:400px' value=''> to<input name='to' type="text" style='width:200px'> Iterate <input type='checkbox' id='iterateCheck'> To split by ',' and multiple generate<p>
 		From<input name='from' type="text"  style='width:400px' value=''> to<input name='to' type="text" style='width:200px' value=''> <p>
 		From<input name='from' type="text"  style='width:400px'> to<input name='to' type="text" style='width:200px'> <p>
 		From<input name='from' type="text"  style='width:400px'> to<input name='to' type="text" style='width:200px'> <p>
@@ -15,8 +15,8 @@
 	</div>
 	<div>
 		<input type='button' onclick='addMode()' value='AddMode'> 
-		<input type='button' onclick='process()' value='Add'><p>
-		Resource:<br>
+		<input type='button' onclick='process()' value='Add'>For adding only; by default it will modify automatically
+		<p> Resource:<br>
 		<textarea id='src' style='width:1000px;height:150px' onchange='process();'></textarea>	
 		<br>Destination:<br>
 		<textarea id='dest' style='width:1000px;height:400px'></textarea>	
