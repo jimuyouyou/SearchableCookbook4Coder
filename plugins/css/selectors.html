@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>selectors.html</title>
+</head>
+<body>
+	url: http://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048 <p>
+
+	<h2 class="nolinks"><span class="sectionnum"> 1.</span> *</h2>
+<div>
+<div id="highlighter_789373" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">* {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">margin</code><code class="css plain">: </code><code class="css value">0</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;</code><code class="css keyword">padding</code><code class="css plain">: </code><code class="css value">0</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Let's knock the obvious ones out, for the beginners, before we move onto the more advanced selectors.</p>
+<p>The star symbol will target every single element on the page. Many developers will use this trick to zero out the <code>margin</code>s and <code>padding</code>. While this is certainly fine for quick tests, I'd advise you to never use this in production code. It adds too much <em>weight</em> on the browser, and is unnecessary.</p>
+<p>The <code>*</code> can also be used with child selectors.</p>
+<div>
+<div id="highlighter_115527" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">#container * {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This will target every single element that is a child of the <code>#container</code> <code>div</code>. Again, try not to use this technique very much, if ever.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/star.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 2.</span> #X</h2>
+<div>
+<div id="highlighter_905666" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">#container {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">width</code><code class="css plain">: </code><code class="css value">960px</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">margin</code><code class="css plain">: </code><code class="css value">auto</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Prefixing the hash symbol to a selector allows us to target by <code>id</code>. This is easily the most common usage, however be cautious when using <code>id</code> selectors.</p>
+<blockquote>
+<p>Ask yourself: do I absolutely need to apply an <code>id</code> to this element in order to target it?</p>
+</blockquote>
+<p><code>id</code> selectors are rigid and don't allow for reuse. If possible, first try to use a tag name, one of the new HTML5 elements, or even a pseudo-class.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/id.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 3.</span> .X</h2>
+<div>
+<div id="highlighter_268633" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">.error {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This is a <code>class</code> selector. The difference between <code>id</code>s and <code>class</code>es is that, with the latter, you can target multiple elements. Use <code>class</code>es when you want your styling to apply to a group of elements. Alternatively, use <code>id</code>s to find a needle-in-a-haystack, and style only that specific element.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/class.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 4.</span> X Y</h2>
+<div>
+<div id="highlighter_389718" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">li a {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">text-decoration</code><code class="css plain">: </code><code class="css value">none</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The next most comment selector is the <code>descendant</code> selector. When you need to be more specific with your selectors, you use these. For example, what if, rather than targeting <em>all</em> anchor tags, you only need to target the anchors which are within an unordered list? This is specifically when you'd use a descendant selector.</p>
+<blockquote>
+<p><strong>Pro-tip</strong> - If your selector looks like <code>X Y Z A B.error</code>, you're doing it wrong. Always ask yourself if it's absolutely necessary to apply all of that <em>weight</em>.</p>
+</blockquote>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/descend.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 5.</span> X</h2>
+<div>
+<div id="highlighter_828257" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a { </code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">; }</code></div>
+<div class="line number2 index1 alt1"><code class="css plain">ul { </code><code class="css keyword">margin-left</code><code class="css plain">: </code><code class="css value">0</code><code class="css plain">; }</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>What if you want to target all elements on a page, according to their <code>type</code>, rather than an <code>id</code> or <code>class</code>name? Keep it simple, and use a type selector. If you need to target all unordered lists, use <code>ul {}</code>.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/tagName.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 6.</span> X:visited and X:link</h2>
+<div>
+<div id="highlighter_290251" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a:link { </code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">; }</code></div>
+<div class="line number2 index1 alt1"><code class="css plain">a:visted { </code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">purple</code><code class="css plain">; }</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We use the <code>:link</code> pseudo-class to target all anchors tags which have yet to be clicked on.</p>
+<p>Alternatively, we also have the <code>:visited</code> pseudo class, which, as you'd expected, allows us to apply specific styling to only the anchor tags on the page which <em>have</em> been clicked on, or <em>visited</em>.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/links.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum">7.</span> X + Y</h2>
+<div>
+<div id="highlighter_176158" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul + p {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This is referred to as an adjacent selector. It will select <em>only</em> the element that is immediately preceded by the former element. In this case, only the first paragraph after each <code>ul</code> will have red text.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/adjacent.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum">8.</span> X &gt; Y</h2>
+<div>
+<div id="highlighter_926959" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">div#container &gt; ul {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The difference between the standard <code>X Y</code> and <code>X &gt; Y</code> is that the latter will only select direct children. For example, consider the following markup.</p>
+<div>
+<div id="highlighter_458781" class="syntaxhighlighter noskimlinks noskimwords html">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code> <code class="html color1">id</code><code class="html plain">=</code><code class="html string">"container"</code><code class="html plain">&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item</code></div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; Child &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number6 index5 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number7 index6 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number8 index7 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number9 index8 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number10 index9 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number11 index10 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number12 index11 alt1"><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A selector of <code>#container &gt; ul</code> will only target the <code>ul</code>s which are direct children of the <code>div</code> with an <code>id</code> of <code>container</code>. It will not target, for instance, the <code>ul</code> that is a child of the first <code>li</code>.</p>
+<p>For this reason, there are performance benefits in using the child combinator. In fact, it's recommended particularly when working with JavaScript-based CSS selector engines.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/childcombinator.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 9.</span> X ~ Y</h2>
+<div>
+<div id="highlighter_622291" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul ~ p {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This sibling combinator is similar to <code>X + Y</code>, however, it's less strict. While an adjacent selector (<code>ul + p</code>) will only select the first element that is <em>immediately</em> preceded by the former selector, this one is more generalized. It will select, referring to our example above, any <code>p</code> elements, as long as they follow a <code>ul</code>.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/generalcombinator.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 10.</span> X[title]</h2>
+<div>
+<div id="highlighter_123268" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[title] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">green</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Referred to as an <em>attributes selector</em>, in our example above, this will only select the anchor tags that have a <code>title</code> attribute. Anchor tags which do not will not receive this particular styling. But, what if you need to be more specific? Well...</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 11.</span> X[href="foo"]</h2>
+<div>
+<div id="highlighter_408889" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[href=</code><code class="css string">"<a href="http://net.tutsplus.com">http://net.tutsplus.com</a>"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">#1f6053</code><code class="css plain">; </code><code class="css comments">/* nettuts green */</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The snippet above will style all anchor tags which link to <em><a href="http://net.tutsplus.com">http://net.tutsplus.com</a></em>; they'll receive our branded green color. All other anchor tags will remain unaffected.</p>
+<blockquote>
+<p>Note that we're wrapping the value in quotes. Remember to also do this when using a JavaScript CSS selector engine. When possible, always use CSS3 selectors over unofficial methods.</p>
+</blockquote>
+<p>This works well, though, it's a bit rigid. What if the link does indeed direct to Nettuts+, but, maybe, the path is <em><span class="skimlinks-unlinked">nettuts.com</span></em> rather than the full url? In those cases we can use a bit of the regular expressions syntax.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes2.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 12.</span> X[href*="nettuts"]</h2>
+<div>
+<div id="highlighter_275090" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[href*=</code><code class="css string">"tuts"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">#1f6053</code><code class="css plain">; </code><code class="css comments">/* nettuts green */</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>There we go; that's what we need. The star designates that the proceeding value must appear <em>somewhere</em> in the attribute's value. That way, this covers <em><span class="skimlinks-unlinked">nettuts.com</span></em>, <em><span class="skimlinks-unlinked">net.tutsplus.com</span>,</em> and even <em><span class="skimlinks-unlinked">tutsplus.com</span></em>.</p>
+<p>Keep in mind that this is a broad statement. What if the anchor tag linked to some non-Envato site with the string <em>tuts</em> in the url? When you need to be more specific, use <code>^</code> and <code>$</code>, to reference the beginning and end of a string, respectively.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes3.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 13.</span> X[href^="http"]</h2>
+<div>
+<div id="highlighter_837214" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[href^=</code><code class="css string">"http"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">background</code><code class="css plain">: </code><code class="css value">url</code><code class="css plain">(path/to/external/</code><code class="css value">icon</code><code class="css plain">.png) </code><code class="css value">no-repeat</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">padding-left</code><code class="css plain">: </code><code class="css value">10px</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Ever wonder how some websites are able to display a little icon next to the links which are external? I'm sure you've seen these before; they're nice reminders that the link will direct you to an entirely different website.</p>
+<p>This is a cinch with the carat symbol. It's most commonly used in regular expressions to designate the beginning of a string. If we want to target all anchor tags that have a <code>href</code> which begins with <code>http</code>, we could use a selector similar to the snippet shown above.</p>
+<blockquote>
+<p>Notice that we're not searching for <code>http://</code>; that's unnecessary, and doesn't account for the urls that begin with <code>https://</code>.</p>
+</blockquote>
+<p>Now, what if we wanted to instead style all anchors which link to, say, a photo? In those cases, let's search for the <em>end</em> of the string.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes4.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 14.</span> X[href$=".jpg"]</h2>
+<div>
+<div id="highlighter_270624" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[href$=</code><code class="css string">".jpg"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Again, we use a regular expressions symbol, <code>$</code>, to refer to the end of a string. In this case, we're searching for all anchors which link to an image -- or at least a url that ends with <code>.jpg</code>. Keep in mind that this certainly won't work for <code>gifs</code> and <code>pngs</code>.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes5.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 15.</span> X[data-*="foo"]</h2>
+<div>
+<div id="highlighter_880702" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[data-filetype=</code><code class="css string">"image"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Refer back to number eight; how do we compensate for all of the various image types: <code>png</code>, <code>jpeg,</code><code>jpg</code>, <code>gif</code>? Well, we could create multiple selectors, such as:</p>
+<div>
+<div id="highlighter_946784" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[href$=</code><code class="css string">".jpg"</code><code class="css plain">],</code></div>
+<div class="line number2 index1 alt1"><code class="css plain">a[href$=</code><code class="css string">".jpeg"</code><code class="css plain">],</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">a[href$=</code><code class="css string">".png"</code><code class="css plain">],</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">a[href$=</code><code class="css string">".gif"</code><code class="css plain">] {</code></div>
+<div class="line number5 index4 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number6 index5 alt1"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>But, that's a pain in the butt, and is inefficient. Another possible solution is to use custom attributes. What if we added our own <code>data-filetype</code> attribute to each anchor that links to an image?</p>
+<div>
+<div id="highlighter_57428" class="syntaxhighlighter noskimlinks noskimwords html">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">a</code> <code class="html color1">href</code><code class="html plain">=</code><code class="html string">"path/to/image.jpg"</code> <code class="html color1">data-filetype</code><code class="html plain">=</code><code class="html string">"image"</code><code class="html plain">&gt; Image Link &lt;/</code><code class="html keyword">a</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Then, with that <em>hook</em> in place, we can use a standard attributes selector to target only those anchors.</p>
+<div>
+<div id="highlighter_38090" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[data-filetype=</code><code class="css string">"image"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes6.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 16.</span> X[foo~="bar"]</h2>
+<div>
+<div id="highlighter_36013" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a[data-info~=</code><code class="css string">"external"</code><code class="css plain">] {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number5 index4 alt2"><code class="css plain">a[data-info~=</code><code class="css string">"image"</code><code class="css plain">] {</code></div>
+<div class="line number6 index5 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number7 index6 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Here's a special one that'll impress your friends. Not too many people know about this trick. The tilda (<code>~</code>) symbol allows us to target an attribute which has a spaced-separated list of values.</p>
+<p>Going along with our custom attribute from number fifteen, above, we could create a <code>data-info</code> attribute, which can receive a space-separated list of anything we need to make note of. In this case, we'll make note of external links and links to images -- just for the example.</p>
+<div>
+<div id="highlighter_862940" class="syntaxhighlighter noskimlinks noskimwords html">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">"&lt;</code><code class="html keyword">a</code> <code class="html color1">href</code><code class="html plain">=</code><code class="html string">"path/to/image.jpg"</code> <code class="html color1">data-info</code><code class="html plain">=</code><code class="html string">"external image"</code><code class="html plain">&gt; Click Me, Fool &lt;/</code><code class="html keyword">a</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>With that markup in place, now we can target any tags that have either of those values, by using the ~ attributes selector trick.</p>
+<div>
+<div id="highlighter_150968" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+<div class="line number8 index7 alt1">8</div>
+<div class="line number9 index8 alt2">9</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css comments">/* Target data-info attr that contains the value "external" */</code></div>
+<div class="line number2 index1 alt1"><code class="css plain">a[data-info~=</code><code class="css string">"external"</code><code class="css plain">] {</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">}</code></div>
+<div class="line number5 index4 alt2">&nbsp;</div>
+<div class="line number6 index5 alt1"><code class="css comments">/* And which contain the value "image" */</code></div>
+<div class="line number7 index6 alt2"><code class="css plain">a[data-info~=</code><code class="css string">"image"</code><code class="css plain">] {</code></div>
+<div class="line number8 index7 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number9 index8 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Pretty nifty, ay?</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/attributes7.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 17.</span> X:checked</h2>
+<div>
+<div id="highlighter_827135" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">input[type=radio]:checked {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This pseudo class will only target a user interface element that has been <em>checked</em> - like a radio button, or checkbox. It's as simple as that.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/checked.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 18.</span> X:after</h2>
+<p>The <code>before</code> and <code>after</code> pseudo classes kick butt. Every day, it seems, people are finding new and creative ways to use them effectively. They simply generate content around the selected element.</p>
+<p>Many were first introduced to these classes when they encountered the clear-fix hack.</p>
+<div>
+<div id="highlighter_853169" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">.clearfix:after {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">content</code><code class="css plain">: </code><code class="css string">""</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">display</code><code class="css plain">: </code><code class="css value">block</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">clear</code><code class="css plain">: </code><code class="css value">both</code><code class="css plain">;</code></div>
+<div class="line number5 index4 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">visibility</code><code class="css plain">: </code><code class="css value">hidden</code><code class="css plain">;</code></div>
+<div class="line number6 index5 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-size</code><code class="css plain">: </code><code class="css value">0</code><code class="css plain">;</code></div>
+<div class="line number7 index6 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">height</code><code class="css plain">: </code><code class="css value">0</code><code class="css plain">;</code></div>
+<div class="line number8 index7 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css plain">}</code></div>
+<div class="line number9 index8 alt2">&nbsp;</div>
+<div class="line number10 index9 alt1"><code class="css plain">.clearfix { </code></div>
+<div class="line number11 index10 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css plain">*</code><code class="css keyword">display</code><code class="css plain">: inline-</code><code class="css value">block</code><code class="css plain">; </code></div>
+<div class="line number12 index11 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">_height</code><code class="css plain">: </code><code class="css value">1%</code><code class="css plain">;</code></div>
+<div class="line number13 index12 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This <em>hack</em> uses the <code>:after</code> pseudo class to append a space after the element, and then clear it. It's an excellent trick to have in your tool bag, particularly in the cases when the <code>overflow: hidden;</code> method isn't possible.</p>
+<p>For another creative use of this, <a href="http://net.tutsplus.com/tutorials/html-css-techniques/quick-tip-getting-clever-with-css3-shadows/">refer to my quick tip on creating shadows</a>.</p>
+<blockquote>
+<p>According to the CSS3 Selectors specification, you should technically use the pseudo element syntax of two colons <code>::</code>. However, to remain compatible, the user-agent will accept a single colon usage as well. In fact, at this point, it's smarter to use the single-colon version in your projects.</p>
+</blockquote>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE8+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 19.</span> X:hover</h2>
+<div>
+<div id="highlighter_823716" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">div:hover {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">background</code><code class="css plain">: </code><code class="css value">#e3e3e3</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Oh come on. You know this one. The official term for this is <code>user action pseudo class</code>. It sounds confusing, but it really isn't. Want to apply specific styling when a user hovers over an element? This will get the job done!</p>
+<blockquote>
+<p>Keep in mind that older version of Internet Explorer don't respond when the <code>:hover</code> pseudo class is applied to anything other than an anchor tag.</p>
+</blockquote>
+<p>You'll most often use this selector when applying, for example, a <code>border-bottom</code> to anchor tags, when hovered over.</p>
+<div>
+<div id="highlighter_302680" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">a:hover {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">border-bottom</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<blockquote>
+<p><strong>Pro-tip</strong> - <code>border-bottom: 1px solid black;</code> looks better than <code>text-decoration: underline;</code>.</p>
+</blockquote>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+ (In IE6, :hover must be applied to an anchor element)</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 20.</span> X:not(selector)</h2>
+<div>
+<div id="highlighter_161968" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">div:not(#container) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">blue</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The <code>negation</code> pseudo class is particularly helpful. Let's say I want to select all divs, except for the one which has an <code>id</code> of <code>container</code>. The snippet above will handle that task perfectly.</p>
+<p>Or, if I wanted to select every single element (not advised) except for paragraph tags, we could do:</p>
+<div>
+<div id="highlighter_164210" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">*:not(p) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">green</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/not.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 21.</span> X::pseudoElement</h2>
+<div>
+<div id="highlighter_271137" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">p::first-line {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-size</code><code class="css plain">: </code><code class="css value">1.2em</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We can use pseudo elements (designated by <code>::</code>) to style fragments of an element, such as the first line, or the first letter. Keep in mind that these must be applied to block level elements in order to take effect.</p>
+<blockquote>
+<p>A pseudo-element is composed of two colons: <code>::</code></p>
+</blockquote>
+<h4 class="nolinks">Target the First Letter of a Paragraph</h4>
+<div>
+<div id="highlighter_484322" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">p::first-letter {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">float</code><code class="css plain">: </code><code class="css value">left</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-size</code><code class="css plain">: </code><code class="css value">2em</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number5 index4 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-family</code><code class="css plain">: </code><code class="css value">cursive</code><code class="css plain">;</code></div>
+<div class="line number6 index5 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">padding-right</code><code class="css plain">: </code><code class="css value">2px</code><code class="css plain">;</code></div>
+<div class="line number7 index6 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This snippet is an abstraction that will find all paragraphs on the page, and then sub-target only the first letter of that element.</p>
+<p>This is most often used to create newspaper-like styling for the first-letter of an article.</p>
+<h4 class="nolinks">Target the First Line of a Paragraph</h4>
+<div>
+<div id="highlighter_460259" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">p::first-line {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-size</code><code class="css plain">: </code><code class="css value">1.2em</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Similarly, the <code>::first-line</code> pseudo element will, as expected, style the first line of the element only.</p>
+<blockquote>
+<p>"For compatibility with existing style sheets, user agents must also accept the previous one-colon notation for pseudo-elements introduced in CSS levels 1 and 2 (namely, :first-line, :first-letter, :before and :after). This compatibility is not allowed for the new pseudo-elements introduced in this specification." - <a href="http://www.w3.org/TR/css3-selectors/">Source</a></p>
+</blockquote>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/pseudoElements.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE6+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 22.</span> X:nth-child(n)</h2>
+<div>
+<div id="highlighter_60947" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">li:nth-child(</code><code class="css value">3</code><code class="css plain">) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Remember the days when we had no way to target specific elements in a stack? The <code>nth-child</code> pseudo class solves that!</p>
+<p>Please note that <code>nth-child</code> accepts an integer as a parameter, however, this is not zero-based. If you wish to target the second list item, use <code>li:nth-child(2)</code>.</p>
+<p>We can even use this to select a variable set of children. For example, we could do <code>li:nth-child(4n)</code> to select every fourth list item.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/nth.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox 3.5+</li>
+<li>Chrome</li>
+<li>Safari</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 23.</span> X:nth-last-child(n)</h2>
+<div>
+<div id="highlighter_416867" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">li:nth-last-child(</code><code class="css value">2</code><code class="css plain">) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>What if you had a huge list of items in a <code>ul</code>, and only needed to access, say, the third to the last item? Rather than doing <code>li:nth-child(397)</code>, you could instead use the <code>nth-last-child</code> pseudo class.</p>
+<p>This technique works almost identically from number sixteen above, however, the difference is that it begins at the end of the collection, and works its way back.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/nthLast.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox 3.5+</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 24.</span> X:nth-of-type(n)</h2>
+<div>
+<div id="highlighter_410178" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul:nth-of-type(</code><code class="css value">3</code><code class="css plain">) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>There will be times when, rather than selecting a <code>child</code>, you instead need to select according to the <code>type</code> of element.</p>
+<p>Imagine mark-up that contains five unordered lists. If you wanted to style only the third <code>ul</code>, and didn't have a unique <code>id</code> to hook into, you could use the <code>nth-of-type(n)</code> pseudo class. In the snippet above, only the third <code>ul</code> will have a border around it.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/nthOfType.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox 3.5+</li>
+<li>Chrome</li>
+<li>Safari</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 25.</span> X:nth-last-of-type(n)</h2>
+<div>
+<div id="highlighter_664797" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul:nth-last-of-type(</code><code class="css value">3</code><code class="css plain">) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>And yes, to remain consistent, we can also use <code>nth-last-of-type</code> to begin at the end of the selectors list, and work our way back to target the desired element.</p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox 3.5+</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 26.</span> X:first-child</h2>
+<div>
+<div id="highlighter_695914" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul li:first-child {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border-top</code><code class="css plain">: </code><code class="css value">none</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This structural pseudo class allows us to target only the first child of the element's parent. You'll often use this to remove borders from the first and last list items.</p>
+<p>For example, let's say you have a list of rows, and each one has a <code>border-top</code> and a <code>border-bottom</code>. Well, with that arrangement, the first and last item in that set will look a bit odd.</p>
+<p>Many designers apply classes of <code>first</code> and <code>last</code> to compensate for this. Instead, you can use these pseudo classes.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/firstChild.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE7+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 27.</span> X:last-child</h2>
+<div>
+<div id="highlighter_723425" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul &gt; li:last-child {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">green</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The opposite of <code>first-child</code>, <code>last-child</code> will target the last item of the element's parent.</p>
+<h3 class="nolinks">Example</h3>
+<p>Let's build a simple example to demonstrate one possible use of these classes. We'll create a styled list item.</p>
+<h4 class="nolinks">Markup</h4>
+<div>
+<div id="highlighter_421187" class="syntaxhighlighter noskimlinks noskimwords html">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html plain">&lt;/</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Nothing special here; just a simple list.</p>
+<h4 class="nolinks">CSS</h4>
+<div>
+<div id="highlighter_394191" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+<div class="line number13 index12 alt2">13</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">width</code><code class="css plain">: </code><code class="css value">200px</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css spaces">&nbsp;</code><code class="css keyword">background</code><code class="css plain">: </code><code class="css value">#292929</code><code class="css plain">;</code></div>
+<div class="line number4 index3 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">white</code><code class="css plain">;</code></div>
+<div class="line number5 index4 alt2"><code class="css spaces">&nbsp;</code><code class="css keyword">list-style</code><code class="css plain">: </code><code class="css value">none</code><code class="css plain">;</code></div>
+<div class="line number6 index5 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">padding-left</code><code class="css plain">: </code><code class="css value">0</code><code class="css plain">;</code></div>
+<div class="line number7 index6 alt2"><code class="css plain">}</code></div>
+<div class="line number8 index7 alt1">&nbsp;</div>
+<div class="line number9 index8 alt2"><code class="css plain">li {</code></div>
+<div class="line number10 index9 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">padding</code><code class="css plain">: </code><code class="css value">10px</code><code class="css plain">;</code></div>
+<div class="line number11 index10 alt2"><code class="css spaces">&nbsp;</code><code class="css keyword">border-bottom</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">black</code><code class="css plain">;</code></div>
+<div class="line number12 index11 alt1"><code class="css spaces">&nbsp;</code><code class="css keyword">border-top</code><code class="css plain">: </code><code class="css value">1px</code> <code class="css value">solid</code> <code class="css value">#3c3c3c</code><code class="css plain">;</code></div>
+<div class="line number13 index12 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This styling will set a background, remove the browser-default padding on the <code>ul</code>, and apply borders to each <code>li</code> to provide a bit of depth.</p>
+<div><img src="https://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/extraBorders.png" alt="Styled List" /></div>
+<blockquote>
+<p>To add depth to your lists, apply a <code>border-bottom</code> to each <code>li</code> that is a shade or two darker than the <code>li</code>'s background color. Next, apply a <code>border-top</code> which is a couple shades <em>lighter</em>.</p>
+</blockquote>
+<p>The only problem, as shown in the image above, is that a border will be applied to the very top and bottom of the unordered list - which looks odd. Let's use the <code>:first-child</code> and <code>:last-child</code> pseudo classes to fix this.</p>
+<div>
+<div id="highlighter_345547" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+<div class="line number7 index6 alt2">7</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">li:first-child {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border-top</code><code class="css plain">: </code><code class="css value">none</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+<div class="line number4 index3 alt1">&nbsp;</div>
+<div class="line number5 index4 alt2"><code class="css plain">li:last-child {</code></div>
+<div class="line number6 index5 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">border-bottom</code><code class="css plain">: </code><code class="css value">none</code><code class="css plain">;</code></div>
+<div class="line number7 index6 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div><img src="https://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/fixed.png" alt="Fixed" /></div>
+<p>There we go; that fixes it!</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/firstChild.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<p><em>Yep - IE8 supported <code>:first-child</code>, but not <code>:last-child</code>. Go figure. </em></p>
+<h2 class="nolinks"><span class="sectionnum"> 28.</span> X:only-child</h2>
+<div>
+<div id="highlighter_200187" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">div p:only-child {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">color</code><code class="css plain">: </code><code class="css value">red</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Truthfully, you probably won't find yourself using the <code>only-child</code> pseudo class too often. Nonetheless, it's available, should you need it.</p>
+<p>It allows you to target elements which are the <em>only</em> child of its parent. For example, referencing the snippet above, only the paragraph that is the only child of the <code>div</code> will be colored, red.</p>
+<p>Let's assume the following markup.</p>
+<div>
+<div id="highlighter_753318" class="syntaxhighlighter noskimlinks noskimwords html">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+<div class="line number4 index3 alt1">4</div>
+<div class="line number5 index4 alt2">5</div>
+<div class="line number6 index5 alt1">6</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code><code class="html plain">&gt;&lt;</code><code class="html keyword">p</code><code class="html plain">&gt; My paragraph here. &lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number2 index1 alt1">&nbsp;</div>
+<div class="line number3 index2 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code><code class="html plain">&gt; Two paragraphs total. &lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code><code class="html plain">&gt; Two paragraphs total. &lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number6 index5 alt1"><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>In this case, the second <code>div</code>'s paragraphs will not be targeted; only the first <code>div</code>. As soon as you apply more than one child to an element, the <code>only-child</code> pseudo class ceases to take effect.</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/onlyChild.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 29.</span> X:only-of-type</h2>
+<div>
+<div id="highlighter_103742" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">li:only-of-type {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This structural pseudo class can be used in some clever ways. It will target elements that do not have any siblings within its parent container. As an example, let's target all <code>ul</code>s, which have only a single list item.</p>
+<p>First, ask yourself how you would accomplish this task? You could do <code>ul li</code>, but, this would target <em>all</em> list items. The only solution is to use <code>only-of-type</code>.</p>
+<div>
+<div id="highlighter_568730" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul &gt; li:only-of-type {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/onlyOfType.html">View Demo </a></p>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox 3.5+</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+<h2 class="nolinks"><span class="sectionnum"> 30.</span> X:first-of-type</h2>
+<p>The <code>first-of-type</code> pseudo class allows you to select the first siblings of its type.</p>
+<h4 class="nolinks">A Test</h4>
+<p>To better understand this, let's have a test. Copy the following mark-up into your code editor:</p>
+<div>
+<div id="highlighter_886624" class="syntaxhighlighter noskimlinks noskimwords html">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">01</div>
+<div class="line number2 index1 alt1">02</div>
+<div class="line number3 index2 alt2">03</div>
+<div class="line number4 index3 alt1">04</div>
+<div class="line number5 index4 alt2">05</div>
+<div class="line number6 index5 alt1">06</div>
+<div class="line number7 index6 alt2">07</div>
+<div class="line number8 index7 alt1">08</div>
+<div class="line number9 index8 alt2">09</div>
+<div class="line number10 index9 alt1">10</div>
+<div class="line number11 index10 alt2">11</div>
+<div class="line number12 index11 alt1">12</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="html plain">&lt;</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+<div class="line number2 index1 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">p</code><code class="html plain">&gt; My paragraph here. &lt;/</code><code class="html keyword">p</code><code class="html plain">&gt;</code></div>
+<div class="line number3 index2 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number4 index3 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item 1 &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number5 index4 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item 2 &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number6 index5 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number7 index6 alt2">&nbsp;</div>
+<div class="line number8 index7 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">ul</code><code class="html plain">&gt;</code></div>
+<div class="line number9 index8 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item 3 &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number10 index9 alt1"><code class="html spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;</code><code class="html keyword">li</code><code class="html plain">&gt; List Item 4 &lt;/</code><code class="html keyword">li</code><code class="html plain">&gt;</code></div>
+<div class="line number11 index10 alt2"><code class="html spaces">&nbsp;&nbsp;&nbsp;</code><code class="html plain">&lt;/</code><code class="html keyword">ul</code><code class="html plain">&gt;&nbsp;&nbsp; </code></div>
+<div class="line number12 index11 alt1"><code class="html plain">&lt;/</code><code class="html keyword">div</code><code class="html plain">&gt;</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Now, without reading further, try to figure out how to target only <em>"List Item 2"</em>. When you've figured it out (or given up), read on.</p>
+<h4 class="nolinks">Solution 1</h4>
+<p>There are a variety of ways to solve this test. We'll review a handful of them. Let's begin by using <code>first-of-type</code>.</p>
+<div>
+<div id="highlighter_814860" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul:first-of-type &gt; li:nth-child(</code><code class="css value">2</code><code class="css plain">) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This snippet essentially says, "find the first unordered list on the page, then find only the immediate children, which are list items. Next, filter that down to only the second list item in that set.</p>
+<h4 class="nolinks">Solution 2</h4>
+<p>Another option is to use the adjacent selector.</p>
+<div>
+<div id="highlighter_986859" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">p + ul li:last-child {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;</code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>In this scenario, we find the <code>ul</code> that immediately proceeds the <code>p</code> tag, and then find the very last child of the element.</p>
+<h4 class="nolinks">Solution 3</h4>
+<p>We can be as obnoxious or as playful as we want with these selectors.</p>
+<div>
+<div id="highlighter_915967" class="syntaxhighlighter noskimlinks noskimwords css">
+<table border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line number1 index0 alt2">1</div>
+<div class="line number2 index1 alt1">2</div>
+<div class="line number3 index2 alt2">3</div>
+</td>
+<td class="code">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="css plain">ul:first-of-type li:nth-last-child(</code><code class="css value">1</code><code class="css plain">) {</code></div>
+<div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;</code><code class="css keyword">font-weight</code><code class="css plain">: </code><code class="css value">bold</code><code class="css plain">;&nbsp;&nbsp; </code></div>
+<div class="line number3 index2 alt2"><code class="css plain">}</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This time, we grab the first <code>ul</code> on the page, and then find the very first list item, but starting from the bottom! :)</p>
+<p><a href="http://cdn.tutsplus.com/net/uploads/legacy/840_cssSelectors/selectors/firstOfType.html">View Demo </a></p>
+<div class="post__inarticle-ad-template" style="margin-top: 30px;">
+<div class="ad view ad--inarticle">
+<div class="ad__wrapper">
+<div class="ad__label">Advertisement</div>
+</div>
+</div>
+</div>
+<h3 class="nolinks">Compatibility</h3>
+<ul>
+<li>IE9+</li>
+<li>Firefox 3.5+</li>
+<li>Chrome</li>
+<li>Safari</li>
+<li>Opera</li>
+</ul>
+</body>
+</html>
