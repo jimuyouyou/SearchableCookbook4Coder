@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>border</title>
+</head>
+<body>
+	<p>Borders can be used for many things, for example as a decorative element or to underline a separation of two things. CSS gives you endless options when using borders in your pages.</p>
+<ul>
+<li><a href="http://html.net/tutorials/css/lesson11.php#s1">border-width</a></li>
+<li><a href="http://html.net/tutorials/css/lesson11.php#s2">border-color</a></li>
+<li><a href="http://html.net/tutorials/css/lesson11.php#s3">border-style</a></li>
+<li><a href="http://html.net/tutorials/css/lesson11.php#s5">border</a></li>
+</ul>
+<h2 id="s1">The width of borders [border-width]</h2>
+<p>The width of borders is defined by the property <code>border-width</code>, which can obtain the values thin, medium, and thick, or a numeric value, indicated in pixels. The figure below illustrates the system:</p>
+<p><img src="http://html.net/tutorials/css/figure012.gif" alt="Examples of border-width" /></p>
+<h2 id="s2">The color of borders [border-color]</h2>
+<p><img src="http://html.net/tutorials/css/figure013.gif" alt="Colors" /></p>
+<p>The property border-color defines which color the border has. The values are the normal color-values for example "#123456", "rgb(123,123,123)" or "yellow" .</p>
+<h2 id="s3">Types of borders [border-style]</h2>
+<p>There are different types of borders to choose from. Below are shown 8 different types of borders as Internet Explorer 5.5 interprets them. All examples are shown with the color "gold" and the thickness "thick" but can naturally be shown in other colors and thicknesses.</p>
+<p>The values none or hidden can be used if you do not want any border.</p>
+<p><img src="http://html.net/tutorials/css/figure014.gif" alt="Different types of borders" /></p>
+<h2 id="s4">Examples of defining borders</h2>
+<p>The three properties described above can be put together by each element and thereby produce different borders. To illustrate this, we will take a look at a document where we define different borders for <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;ul&gt;</code> and <code>&lt;p&gt;</code>. The result may not be that pretty but it illustrates some of the many possibilities:</p>
+<div class="codebox">
+<pre>	<code>
+	h1 {
+		border-width: thick;
+		border-style: dotted;
+		border-color: gold;
+	}
+
+	h2 {
+		border-width: 20px;
+		border-style: outset;
+		border-color: red;
+	}
+
+	p {
+		border-width: 1px;
+		border-style: dashed;
+		border-color: blue;
+	}
+
+	ul {
+		border-width: thin;
+		border-style: solid;
+		border-color: orange;
+	}
+	</code>
+	</pre>
+</div>
+<ul class="examplelinklist">
+<li><a title="Show above code" href="http://html.net/tutorials/css/lesson11_ex1.php">Show example</a></li>
+</ul>
+<p>It is also possible to state special properties for top-, bottom-, right- or left borders. The following example shows you how:</p>
+<div class="codebox">
+<pre>	<code>
+	h1 {
+		border-top-width: thick;
+		border-top-style: solid;
+		border-top-color: red;
+
+		border-bottom-width: thick;
+		border-bottom-style: solid;
+		border-bottom-color: blue;
+
+		border-right-width: thick;
+		border-right-style: solid;
+		border-right-color: green;
+
+		border-left-width: thick;
+		border-left-style: solid;
+		border-left-color: orange;
+	}
+	</code>
+	</pre>
+</div>
+<ul class="examplelinklist">
+<li><a title="Show above code" href="http://html.net/tutorials/css/lesson11_ex2.php">Show example</a></li>
+</ul>
+<h2 id="s5">Compilation [border]</h2>
+<p>As it is also the case for many other properties, you can compile many properties into one using border. Let us take a look at an example:</p>
+<div class="codebox">
+<pre>	<code>
+	p {
+		border-width: 1px;
+		border-style: solid;
+		border-color: blue;
+	}
+	</code>
+	</pre>
+</div>
+<p>Can be compiled into:</p>
+<div class="codebox">
+<pre>	<code>
+	p {
+		border: 1px solid blue;
+	}
+	</code>
+	</pre>
+</div>
+<h2>Summary</h2>
+<p>In this lesson you have learned about the endless options CSS gives you when using borders in your pages.</p>
+<p>In the next lesson, we will look at how you define the dimensions in the box model - height and width.</p>
+	
+</body>
+</html>

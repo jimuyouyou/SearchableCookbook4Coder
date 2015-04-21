@@ -3,19 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>command</title>
-	<script src='../../lib/jquery-1.8.0.min.js'></script>
-	<script src='../../lib/table_search.js'></script>
 	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['export', 'set', 'less', 'ln', 'zip', 'du', 'curl', 'tar', 'jar', '7z', 'ssh', 'keyring', 'date']
+	};
+	</script>
 </head>
 <body>
 	<h2>Common command for linux</h2>
 
 	<table>
-		<tr>
-			<th>name</th>
-			<th>example</th>
-			<th>explanation</th>
-		</tr>
 		<tr>
 			<td>which</td>
 			<td>which node</td>
@@ -52,15 +53,15 @@
 			<td>less app.js</td>
 			<td>
 				<pre>
-					q: quit
-					/use: search down keyword use
-					?use: search up keyword use
-					space: next page
-					u: previous half page
-					d: next half page
-					PageDown: next page
-					PageUp: previous page
-					Enter: next line
+q: quit
+/use: search down keyword use
+?use: search up keyword use
+space: next page
+u: previous half page
+d: next half page
+PageDown: next page
+PageUp: previous page
+Enter: next line
 				</pre>
 			</td>
 		</tr>
@@ -135,8 +136,11 @@
 			<td>keying is setup by default, so just create a soft link would work</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
+			<td>date</td>
+			<td><xmp>
+date -s 14:36:00 
+date -s "2008-08-08 12:00:00" 				
+			</xmp></td>
 			<td></td>
 		</tr>
 		<tr>

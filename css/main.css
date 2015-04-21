@@ -11,11 +11,10 @@ A:link,A:visited {
 	text-decoration: underline;
 }
 
-A:hover, A:active {
+A:hover {
 	COLOR: #ff7f24;
 	text-decoration: underline;
 }
-
 
 li.pass { color: green; }
 li.fail { color: red; }

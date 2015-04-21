@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0A-code-ref.html</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['color', 'background', 'font', 'text', 'a:link', 'selector', 'box', 'margin', 'padding', 'border', 'position', 'index', 'word-wrap'] 
+	};
+	</script>
+</head>
+<body>
+	<p>
+	url: http://html.net/tutorials/css/ <p>
+	url: http://www.w3school.com.cn/css3/ <p>
+	<table>
+		<tr>
+			<td>Foreground color</td>
+			<td>
+				<xmp>
+h1 {
+		color: #ff0000;
+	}	
+http://html.net/tutorials/css/lesson3_ex1.php					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>background-color</td>
+			<td>
+				<xmp>
+body {
+		background-color: #FFCC66;
+}
+
+h1 {
+	color: #990000;
+	background-color: #FC9804;
+}
+http://html.net/tutorials/css/lesson3_ex2.php
+	</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>background-image</td>
+			<td>
+				<xmp>
+body {
+		background-color: #FFCC66;
+		background-image: url("butterfly.gif");
+	}
+
+	h1 {
+		color: #990000;
+		background-color: #FC9804;
+	}
+http://html.net/tutorials/css/lesson3_ex3.php						
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>background-repeat</td>
+			<td>
+<p>The table below outlines the four different values for <code>background-repeat</code>.</p>
+<table border="1">
+<tbody>
+<tr>
+<th>Value</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td><code>background-repeat: repeat-x</code></td>
+<td>The image is repeated horizontally</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex4.php">Show example</a></td>
+</tr>
+<tr>
+<td><code>background-repeat: repeat-y</code></td>
+<td>The image is repeated vertically</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex5.php">Show example</a></td>
+</tr>
+<tr>
+<td><code>background-repeat: repeat</code></td>
+<td>The image is repeated both horizontally and vertically</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex6.php">Show example</a></td>
+</tr>
+<tr>
+<td><code>background-repeat: no-repeat</code></td>
+<td>The image is not repeated</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex7.php">Show example</a></td>
+</tr>
+</tbody>
+</table>				
+			</td>
+		</tr>
+		<tr>
+			<td>background-attachment</td>
+			<td>
+The property background-attachment specifies whether a background picture is fixed or scrolls along with the containing element.
+<table border="1">
+<tbody>
+<tr>
+<th>Value</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td><code>Background-attachment: scroll</code></td>
+<td>The image scrolls with the page - unlocked</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex8.php">Show example</a></td>
+</tr>
+<tr>
+<td><code>Background-attachment: fixed</code></td>
+<td>The image is locked</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex9.php">Show example</a></td>
+</tr>
+</tbody>
+</table>
+			</td>
+		</tr>
+		<tr>
+			<td>background-position</td>
+			<td>
+<p>&nbsp;</p>
+<p><img src="http://html.net/tutorials/css/figure004.gif" alt="" /></p>
+<p><br />The table below gives some examples.</p>
+<table border="1">
+<tbody>
+<tr>
+<th>Value</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td><code>background-position: 2cm 2cm</code></td>
+<td>The image is positioned 2 cm from the left and 2 cm down the page</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex10.php">Show example</a></td>
+</tr>
+<tr>
+<td><code>background-position: 50% 25%</code></td>
+<td>The image is centrally positioned and one fourth down the page</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex11.php">Show example</a></td>
+</tr>
+<tr>
+<td><code>background-position: top right</code></td>
+<td>The image is positioned in the top-right corner of the page</td>
+<td><a href="http://html.net/tutorials/css/lesson3_ex12.php">Show example</a></td>
+</tr>
+</tbody>
+</table>
+<p>The code example below positions the background image in the bottom right corner:</p>				
+			</td>
+		</tr>
+		<tr>
+			<td>background</td>
+			<td>
+				<xmp>
+background-color: #FFCC66;
+	background-image: url("butterfly.gif");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: right bottom;
+
+	=== background: #FFCC66 url("butterfly.gif") no-repeat fixed right bottom;
+
+	The list of order is as follows:
+
+[background-color] | [background-image] | [background-repeat] | [background-attachment] | [background-position]
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>font-family</td>
+			<td>
+				<xmp>
+
+	h1 {font-family: arial, verdana, sans-serif;}
+	h2 {font-family: "Times New Roman", serif;}
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>font-style</td>
+			<td>
+				<xmp>
+The property font-style defines the chosen font either in normal, italic or oblique. In the example below, all headlines marked with <h2> will be shown in italics.
+	
+	h1 {font-family: arial, verdana, sans-serif;}
+	h2 {font-family: "Times New Roman", serif; font-style: italic;}
+
+	http://html.net/tutorials/css/lesson4_ex2.php
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>font-variant</td>
+			<td>
+				<p>The property <code>font-variant</code> is used to choose between <strong>normal</strong> or <strong>small-caps</strong> variants of a font. A <strong>small-caps</strong> font is a font that uses smaller sized capitalized letters (upper case) instead of lower case letters. Confused? Take a look at these examples:</p>
+<p><img src="http://html.net/tutorials/css/figure006.gif" alt="Four examples of fonts in small caps" /></p>
+				<xmp>
+
+h1 {font-variant: small-caps;}
+	h2 {font-variant: normal;}
+
+	http://html.net/tutorials/css/lesson4_ex3.php					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>font-weight</td>
+			<td>
+				<xmp>
+The property font-weight describes how bold or "heavy" a font should be presented. A font can either be normal or bold. Some browsers even support the use of numbers between 100-900 (in hundreds) to describe the weight of a font.
+
+	
+	p {font-family: arial, verdana, sans-serif;}
+	td {font-family: arial, verdana, sans-serif; font-weight: bold;}
+	
+	http://html.net/tutorials/css/lesson4_ex4.php
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>font-size</td>
+			<td>
+				<xmp>
+h1 {font-size: 30px;}
+	h2 {font-size: 12pt;}
+	h3 {font-size: 120%;}
+	p {font-size: 1em;}
+
+http://html.net/tutorials/css/lesson4_ex5.php						
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>font</td>
+			<td>
+				<xmp>
+	p {
+		font-style: italic;
+		font-weight: bold;
+		font-size: 30px;
+		font-family: arial, sans-serif;
+	}
+	
+Using the short hand property, the code can be simplified:
+	p {
+		font: italic bold 30px arial, sans-serif;
+	}
+	
+The order of values for font is:
+font-style | font-variant | font-weight | font-size | font-family					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text-indent</td>
+			<td>
+				<xmp>
+p {
+		text-indent: 30px;
+	}
+	http://html.net/tutorials/css/lesson5_ex1.php					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text-align</td>
+			<td>
+				<xmp>
+th {
+		text-align: right;
+	}
+
+	td {
+		text-align: center;
+	}
+
+	p {
+		text-align: justify;
+	}
+value justify will stretch each line so that both the right and left margins are straight	
+http://html.net/tutorials/css/lesson5_ex2.php						
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text-decoration</td>
+			<td>
+				<xmp>
+h1 {
+		text-decoration: underline;
+	}
+
+	h2 {
+		text-decoration: overline;
+	}
+
+	h3 {
+		text-decoration: line-through;
+	}
+	http://html.net/tutorials/css/lesson5_ex3.php					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text letter-spacing</td>
+			<td>
+				<xmp>
+h1 {
+		letter-spacing: 6px;
+	}
+
+	p {
+		letter-spacing: 3px;
+	}
+	http://html.net/tutorials/css/lesson5_ex4.php					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text-transform</td>
+			<td>
+				<xmp>
+capitalize, use uppercase or lowercase 
+h1 {
+		text-transform: uppercase;
+	}
+
+	li {
+		text-transform: capitalize;
+	}
+	http://html.net/tutorials/css/lesson5_ex5.php
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>a:link</td>
+			<td>
+				<xmp>
+a:link {
+		color: blue;
+	}
+
+	a:visited {
+		color: red;
+	}
+	a:active {
+		background-color: #FFFF00;
+	}
+	a:hover {
+		color: orange;
+		font-style: italic;
+	}
+	a:link {
+		color: blue;
+		text-decoration:none;
+	}
+	http://html.net/tutorials/css/lesson6_ex7.php					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>selector</td>
+			<td>
+				<xmp>
+1. classname					
+	<li><a href="pb.htm" class="whitewine">Pinot Blanc</a></li>
+	<li><a href="pn.htm" class="redwine">Pinot Noir</a></li>
+a {
+		color: blue;
+	}
+
+	a.whitewine {
+		color: #FFBB00;
+	}
+
+	a.redwine {
+		color: #800000;
+	}
+	http://html.net/tutorials/css/lesson7_ex2.php
+
+2. id
+<h2 id="c1-2">Chapter 1.2</h2>
+	#c1-2 {
+		color: red;
+	}	
+http://html.net/tutorials/css/lesson7_ex3.php	
+
+3. span
+<span class="benefit">wise</span>.</p>
+span.benefit {
+		color:red;
+	}	
+
+4. div
+<div id="republicans">
+#republicans {
+		background:red;
+	}
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>box</td>
+			<td>
+				<img src="lib/box.gif"/>
+				<img src="lib/box2.gif"/>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>margin</td>
+			<td>
+				<p>.</p>
+<p><img src="http://html.net/tutorials/css/figure011.gif" alt="Examples of margins" /></p>
+<p>The CSS code for this would look as follow:</p>
+<div class="codebox">
+<pre>	<code>
+	body {
+		margin-top: 100px;
+		margin-right: 40px;
+		margin-bottom: 10px;
+		margin-left: 70px;
+	}
+	</code>
+	</pre>
+</div>
+<p>Or you could choose a more elegant compilation:</p>
+<div class="codebox">
+<pre>	<code>
+	body {
+		margin: 100px 40px 10px 70px;
+	}
+	</code>
+	</pre>
+</div>
+<ul class="examplelinklist">
+<li><a title="Show above code" href="http://html.net/tutorials/css/lesson10_ex1.php">Show example</a></li>
+</ul>
+<p>You can set the margins in the same way on almost every element. For example, we can choose to define margins for all of our text paragraphs marked with <code>&lt;p&gt;</code>:</p>
+<div class="codebox">
+<pre>	<code>
+	body {
+		margin: 100px 40px 10px 70px;
+	}
+
+	<strong>p {
+		margin: 5px 50px 5px 50px;
+	}</strong>
+	</code>
+	</pre>
+</div>
+<ul class="examplelinklist">
+<li><a title="Show above code" href="http://html.net/tutorials/css/lesson10_ex2.php">Show example</a></li>
+</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>padding</td>
+			<td>
+				<xmp>
+h1 {
+		background: yellow;
+		padding: 20px 20px 20px 80px;
+	}
+
+	h2 {
+		background: orange;
+		padding-left:120px;
+	}
+http://html.net/tutorials/css/lesson10_ex4.php						
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>border</td>
+			<td>
+				<xmp>
+h1 {
+		border-top-width: thick;
+		border-top-style: solid;
+		border-top-color: red;
+
+		border-bottom-width: thick;
+		border-bottom-style: solid;
+		border-bottom-color: blue;
+
+		border-right-width: thick;
+		border-right-style: solid;
+		border-right-color: green;
+
+		border-left-width: thick;
+		border-left-style: solid;
+		border-left-color: orange;
+	}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>position</td>
+			<td>
+<p>&nbsp;</p>
+<p><img src="http://html.net/tutorials/css/figure018.gif" alt="Headline in a box" /></p>
+<p>If we want this headline positioned 100px from the top of the document and 200px from the left of the document, we could type the following in our CSS:</p>
+<div class="codebox">
+<pre>	<code>
+	h1 {
+		position:absolute;
+		<strong>top: 100px;
+		left: 200px;</strong>
+	}
+	</code>
+	</pre>
+</div>
+
+relatively positioned is calculated from the original position in the document:
+#dog1 {
+		position:relative;
+		left: 350px;
+		bottom: 150px;
+	}
+	#dog2 {
+		position:relative;
+		left: 150px;
+		bottom: 500px;
+	}
+
+	#dog3 {
+		position:relative;
+		left: 50px;
+		bottom: 700px;
+	}
+			</td>
+		</tr>
+		<tr>
+			<td>index</td>
+			<td>
+<img src="http://html.net/tutorials/css/figure020.gif" alt="">
+<pre>
+	#ten_of_diamonds {
+		position: absolute;
+		left: 100px;
+		top: 100px;
+		z-index: 1;
+	}
+
+	#jack_of_diamonds {
+		position: absolute;
+		left: 115px;
+		top: 115px;
+		z-index: 2;
+	}
+
+	#queen_of_diamonds {
+		position: absolute;
+		left: 130px;
+		top: 130px;
+		z-index: 3;
+	}
+
+	#king_of_diamonds {
+		position: absolute;
+		left: 145px;
+		top: 145px;
+		z-index: 4;
+	}
+
+	#ace_of_diamonds {
+		position: absolute;
+		left: 160px;
+		top: 160px;
+		z-index: 5;
+	}
+</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>border-radius</td>
+			<td>
+				<xmp>
+div
+{
+border:2px solid;
+border-radius:25px;
+-moz-border-radius:25px; /* Old Firefox */
+}
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>box-shadow</td>
+			<td>
+				<xmp>
+div
+{
+box-shadow: 10px 10px 5px #888888;
+}
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>border-image</td>
+			<td>
+				<xmp>
+div
+{
+border-image:url(border.png) 30 30 round;
+-moz-border-image:url(border.png) 30 30 round; /* 老的 Firefox */
+-webkit-border-image:url(border.png) 30 30 round; /* Safari 和 Chrome */
+-o-border-image:url(border.png) 30 30 round; /* Opera */
+}
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text-shadow</td>
+			<td>
+				<xmp>
+h1
+{
+text-shadow: 5px 5px 5px #FF0000;
+}
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>word-wrap</td>
+			<td>
+				<xmp>p {word-wrap:break-word;}</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

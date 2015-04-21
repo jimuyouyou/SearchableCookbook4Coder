@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0A-meteor-code-ref.html</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['create', 'template', 'helpers', 'events', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup']
+	};
+	</script>
+</head>
+<body><p>
+
+	packages url: https://atmospherejs.com/
+	example url: https://bulletproofmeteor.com/
+	example 2: https://github.com/benstr/meteoric-projects
+	<table>
+		<tr>
+			<td>install</td>
+			<td>
+				curl https://install.meteor.com | /bin/sh
+			</td>
+		</tr>
+		<tr>
+			<td>create</td>
+			<td>
+				meteor create myapp
+			</td>
+		</tr>
+		<tr>
+			<td>run</td>
+			<td>
+				meteor
+			</td>
+		</tr>
+		<tr>
+			<td>free deploy</td>
+			<td>
+				meteor deploy myapp.meteor.com
+			</td>
+		</tr>
+		<tr>
+			<td>help</td>
+			<td>
+				meteor help
+			</td>
+		</tr>
+		<tr>
+			<td>meteor run</td>
+			<td>
+				meteor run
+			</td>
+		</tr>
+		<tr>
+			<td>template</td>
+			<td>
+				<xmp>
+<head>
+  <title>My website!</title>
+</head>
+
+<!-- add code to the <body> of the page -->
+<body>
+  <h1>Hello!</h1>
+  {{> welcomePage}}
+</body>
+
+<!-- define a template called welcomePage -->
+<template name="welcomePage">
+  <p>Welcome to my website!</p>
+</template>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>helpers</td>
+			<td>
+				<xmp>
+<template name="nametag">
+  <p>My name is {{name}}.</p>
+</template>			
+
+Template.nametag.helpers({
+  name: "Ben Bitdiddle"
+});		
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>helper each</td>
+			<td>
+				<xmp>
+Template.welcomePage.helpers({
+  people: [{name: "Bob"}, {name: "Frank"}, {name: "Alice"}]
+});
+
+then you can display every person's name as a list of <p> tags:
+{{#each people}}
+  <p>{{name}}</p>
+{{/each}}
+
+or use the "nametag" template from above instead of <p> tags:
+{{#each people}}
+  {{> nametag}}
+{{/each}}
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>helpers function</td>
+			<td>
+				<xmp>
+Template.profilePage.helpers({
+  username: function () {
+    return Meteor.user() && Meteor.user().username;
+  }
+});
+
+<template name="profilePage">
+  <p>Profile page for {{username}}</p>
+</template>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>helpers function params</td>
+			<td>
+				<xmp>
+Template.post.helpers({
+  commentCount: function (numComments) {
+    if (numComments === 1) {
+      return "1 comment";
+    } else {
+      return numComments + " comments";
+    }
+  }
+});
+
+<p>There are {{commentCount 3}}.</p>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>with events</td>
+			<td>
+				<xmp>
+<template name="example">
+  {{#with myHelper}}
+    <button class="my-button">My button</button>
+    <form>
+      <input type="text" name="myInput" />
+      <input type="submit" value="Submit Form" />
+    </form>
+  {{/with}}
+</template>
+
+you might call Template.example.events as follows:
+
+Template.example.events({
+  "click .my-button": function (event, template) {
+    alert("My button was clicked!");
+  },
+  "submit form": function (event, template) {
+    var inputValue = event.target.myInput.value;
+    var helperValue = this;
+    alert(inputValue, helperValue);
+  }
+});
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>onRendered findAll</td>
+			<td>
+				<xmp>
+Template.codeSample.onRendered(function () {
+  hljs.highlightBlock(this.findAll('pre'));
+});		
+
+template.$ === this.findAll	
+
+this.find('pre') returns only the first element
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Session</td>
+			<td>
+				<xmp>
+<template name="main">
+  <p>We've always been at war with {{theEnemy}}.</p>
+</template>
+
+// In your JavaScript
+Template.main.helpers({
+  theEnemy: function () {
+    return Session.get("enemy");
+  }
+});
+
+Session.set("enemy", "Eastasia");
+// Page will say "We've always been at war with Eastasia"
+
+Session.set("enemy", "Eurasia");
+// Page will change to say "We've always been at war with Eurasia"
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Tracker.autorun stop</td>
+			<td>
+				<xmp>
+Tracker.autorun(function () {
+  var celsius = Session.get("celsius");
+  Session.set("fahrenheit", celsius * 9/5 + 32);
+});		
+
+// Initialize a session variable called "counter" to 0
+Session.set("counter", 0);
+
+// The autorun function runs but does not alert (counter: 0)
+Tracker.autorun(function (computation) {
+  if (Session.get("counter") === 2) {
+    computation.stop();
+    alert("counter reached two");
+  }
+});
+
+// The autorun function runs but does not alert (counter: 1)
+Session.set("counter", Session.get("counter") + 1);
+
+// The autorun function runs and alerts "counter reached two"
+Session.set("counter", Session.get("counter") + 1);
+
+// The autorun function no longer runs (counter: 3)
+Session.set("counter", Session.get("counter") + 1);			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Collection</td>
+			<td>
+				<xmp>
+// In a JS file that's loaded on the client and the server
+Posts = new Mongo.Collection("posts");
+Comments = new Mongo.Collection("comments");					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>autopublish</td>
+			<td>
+				<xmp>meteor remove autopublish</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Collection findOne</td>
+			<td>
+				<xmp>
+var post = Posts.findOne(postId);
+
+var post = Posts.findOne({
+  createdBy: "12345",
+  title: {$regex: /first/}
+});
+
+will match this document
+{
+  createdBy: "12345",
+  title: "My first post!",
+  content: "Today was a good day."
+}
+
+Post.findOne({
+  tags: "meteor"
+});
+
+will match this document
+{
+  title: "I love Meteor",
+  createdBy: "242135223",
+  tags: ["meteor", "javascript", "fun"]
+}
+
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>collection find</td>
+			<td>
+				<xmp>
+Template.blog.helpers({
+  posts: function () {
+    // this helper returns a cursor of
+    // all of the posts in the collection
+    return Posts.find();
+  }
+});
+
+<!-- a template that renders multiple posts -->
+<template name="blog">
+  {{#each posts}}
+    <h1>{{title}}</h1>
+    <p>{{content}}</p>
+  {{/each}}
+</template>
+
+When you want to retrieve the current list of documents from a cursor, call the cursor's .fetch() method:
+// get an array of posts
+var postsArray = Posts.find().fetch();
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>collection.insert(doc, [callback]) </td>
+			<td>
+				<xmp>
+Posts.insert({
+  createdBy: Meteor.userId(),
+  createdAt: new Date(),
+  title: "My first post!",
+  content: "Today was a good day."
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>collection.update(selector, modifier, [options], [callback]) </td>
+			<td>
+				<xmp>
+Posts.update({
+  title: {$regex: /first/}
+}, {
+  $set: {content: "Tomorrow will be a great day."}
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>collection.remove(selector, [callback]) </td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>client collection secure</td>
+			<td>
+				<xmp>
+collection.allow(options) Server
+insert, update, remove Function					
+
+meteor remove insecure					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>collection.allow</td>
+			<td>
+				<xmp>
+// In a file loaded on the server (ignored on the client)
+Posts.allow({
+  insert: function (userId, post) {
+    // can only create posts where you are the author
+    return post.createdBy === userId;
+  },
+  remove: function (userId, post) {
+    // can only delete your own posts
+    return post.createdBy === userId;
+  }
+  // since there is no update field, all updates
+  // are automatically denied
+});		
+
+insert(userId, document)
+update(userId, document, fieldNames, modifier)
+remove(userId, document)			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>collection.deny(options)</td>
+			<td>
+				<xmp>
+// In a file loaded on the server (ignored on the client)
+Posts.deny({
+  insert: function (userId, post) {
+    // Don't allow posts with a certain title
+    return post.title === "First!";
+  }
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>accounts</td>
+			<td>
+				<xmp>
+meteor add accounts-ui
+
+{{> loginButtons}} 
+
+To get accounts functionality, add one or more of the following packages to your app with meteor add:
+
+    accounts-ui: This package allows you to use {{> loginButtons}} in your templates to add an automatically generated UI that will let users log into your app. There are several community alternatives to this package that change the appearance, or you can not use it and use the advanced Accounts methods instead.
+    accounts-password: This package will allow users to log in with passwords. When you add it the loginButtons dropdown will automatically gain email and password fields.
+    accounts-facebook, accounts-google, accounts-github, accounts-twitter, and community packages for other services will allow your users to log in with their accounts from other websites. These will automatically add buttons to the loginButtons dropdown.
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Meteor.user()</td>
+			<td>
+				<xmp>
+Meteor.user() === Meteor.users.findOne(Meteor.userId()).	
+
+Meteor.userId() 	
+
+Users are by default allowed to specify their own profile field with Accounts.createUser and modify it with Meteor.users.update. To allow users to edit additional fields, use Meteor.users.allow. To forbid users from making any modifications to their user document:
+
+Meteor.users.deny({update: function () { return true; }});
+
+{{ currentUser }}
+
+Calls Meteor.user(). Use {{#if currentUser}} to check whether the user is logged in.
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Meteor.publish user</td>
+			<td>
+				<xmp>
+By default, the current user's username, emails and profile are published to the client. You can publish additional fields for the current user with:
+
+// server
+Meteor.publish("userData", function () {
+  if (this.userId) {
+    return Meteor.users.find({_id: this.userId},
+                             {fields: {'other': 1, 'things': 1}});
+  } else {
+    this.ready();
+  }
+});
+
+// client
+Meteor.subscribe("userData");
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Meteor.methods(methods) </td>
+			<td>
+				<xmp>
+// On the server
+Meteor.methods({
+  commentOnPost: function (comment, postId) {
+    // Check argument types
+    check(comment, String);
+    check(postId, String);
+
+    if (! this.userId) {
+      throw new Meteor.Error("not-logged-in",
+        "Must be logged in to post a comment.");
+    }
+
+    // ... do stuff ...
+
+    return "something";
+  },
+
+  otherMethod: function () {
+    // ... do other stuff ...
+  }
+});
+
+The check function is a convenient way to enforce the expected types and structure of method arguments.
+
+Inside your method definition, this is bound to a method invocation object, which has several useful properties, including this.userId, which identifies the currently logged-in user.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Meteor.call</td>
+			<td>
+				<xmp>
+// Asynchronous call with a callback on the client
+Meteor.call('commentOnPost', comment, postId, function (error, result) {
+  if (error) {
+    // handle error
+  } else {
+    // examine result
+  }
+});
+
+// Synchronous call on the server with no callback
+var result = Meteor.call('commentOnPost', comment, postId);					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Meteor.Error</td>
+			<td>
+				<xmp>
+    // on the server, pick a code unique to this error
+    // the reason field should be a useful debug message
+    throw new Meteor.Error("logged-out", 
+      "The user must be logged in to post a comment.");
+
+    // on the client
+    Meteor.call("methodName", function (error) {
+      // identify the error
+      if (error.error === "logged-out") {
+        // show a nice error message
+        Session.set("errorMessage", "Please log in to post a comment.");
+      }
+    });
+
+    For legacy reasons, some built-in Meteor functions such as check throw errors with a number in this field.
+reason String
+
+    Optional. A short human-readable summary of the error, like 'Not Found'.
+details String
+
+    Optional. Additional information about the error, like a textual stack trace.
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>publish</td>
+			<td>
+				<xmp>
+// Publish the logged in user's posts
+Meteor.publish("posts", function () {
+  return Posts.find({ createdBy: this.userId });
+});
+
+// Publish a single post and its comments
+Meteor.publish("postAndComments", function (postId) {
+  // Check argument
+  check(postId, String);
+
+  return [
+    Posts.find({ _id: postId }),
+    Comments.find({ postId: roomId })
+  ];
+});
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>client server startup</td>
+			<td>
+				<xmp>
+if (Meteor.isClient) {}					
+if (Meteor.isServer) {}	
+
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    if (Rooms.find().count() === 0) {
+      Rooms.insert({name: "Initial room"});
+    }
+  });
+}				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+	
+</body>
+</html>
