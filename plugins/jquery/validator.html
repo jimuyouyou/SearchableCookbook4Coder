@@ -3,6 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>validator.html</title>
+    <style>
+input.error { border: 1px solid #CC3F44 }
+label.error { color: #CC3F44; }
+
+/*input.error { border: 1px solid red; }
+label.error {
+  background:url("./demo/images/unchecked.gif") no-repeat 0px 0px;
+
+  padding-left: 16px;
+
+  padding-bottom: 2px;
+
+  font-weight: bold;
+
+  color: red;
+}
+
+label.checked {
+  background:url("./demo/images/checked.gif") no-repeat 0px 0px;
+}*/
+    </style>
 </head>
 <body>
 <form id="myForm" action="">Name:
@@ -59,17 +80,17 @@ $(function () {
 	<xmp>
 <form id="myForm" action="">Name:
     <input type="text" name="fname" />
-    <br />Do you check?
+    <p />Do you check?
     <input type="checkbox" id="check" name="check" />
-    <br />Do you radio?
+    <p />Do you radio?
     <input type="radio" name="radio" />
-    <br />choose color:
+    <p />choose color:
     <select id="color" name="color" class="required">
         <option value="">Choose One</option>
         <option value="blue">blue</option>
         <option value="blue">red</option>
     </select>
-    <br />
+    <p />
 </form>
 <input type="button" id="submit" value="Submit form" />
 <input type="button" id="submit2" value="Submit form2" />
