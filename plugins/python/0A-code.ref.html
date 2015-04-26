@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0A-code.ref.html</title>
+	<link rel="stylesheet" href="../../css/main.css">
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script type="text/javascript">
+	var cfg = {
+		labels: ['string', 'module', 'exec', 'statement', 'basic', 'date', 'number', 'string', 'range', 'list', 'tuple', 'class', 'exception', 'assert'] 
+	};
+	</script>
+</head>
+<body>
+	<p>url: http://python4java.necaiseweb.org/Main/TableOfContents <p>
+	Python for Java Developer<p>
+	<table>
+		<tr>
+			<td>UTF-8</td>
+			<td>
+				# -* - coding: UTF-8 -* -
+			</td>
+		</tr>
+		<tr>
+			<td>interpreter</td>
+			<td>
+				#! /usr/bin/python 
+			</td>
+		</tr>
+		<tr>
+			<td>py_compile</td>
+			<td>
+				<xmp>
+import py_compile  
+py_compile.compile(‘hello.py’) 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>optimize</td>
+			<td>
+				python -O -m py_complie hello.py 
+			</td>
+		</tr>
+		<tr>
+			<td>module</td>
+			<td>
+				<xmp>
+gl.py：
+    _a = 1 
+    _b = 2 
+
+use_global.py:
+    import gl  
+
+    def fun():  
+	    print gl._a  
+	    print gl._b  
+    fun() 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>linux execution</td>
+			<td>
+				<xmp>
+1. include the following as the first line in the text file 
+#!/usr/bin/python
+
+2. then make the file an executable 
+chmod +x mypgm.py
+
+3. execute the actual program 
+mypgm.py 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>continual statement</td>
+			<td>
+				<xmp>
+result = (someValue * 5 + anotherValue * 12) \
+         - (originalValue * 2)
+name = "John "\
+       "Smith"	
+
+myFunction( a, b,
+            "name",
+            avg )
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>comment</td>
+			<td>
+				<xmp>
+# This is a comment.
+result = 0   # so is this					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>block</td>
+			<td>
+				<xmp>
+while i <= 20:
+   total = total + i
+   i = i + 1
+
+print "The total = ", total					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>basic</td>
+			<td>
+				<xmp>
+1. integer
+-9    50     0x4F     077 
+2. long
+456L      4567812391234L
+3. floating-point
+similar to a double in Java but the size is platform dependent. 
+4. Boolean
+error = False
+continue = True
+5. string
+ 'string'     "another string"     "c"
+6. list (or array) 
+an ordered sequence of objects of any type. A literal list is specified using square brackets.
+[ 0, 1, 2, 3 ]     [ 'abc', 1, 4.5 ]    []
+7. tuple
+similar to a list type but a tuple can not be changed once it has been created.
+1, 2, 3     ( 1, 4, 5.6, 'a' )     (5,)
+8. dictionary (or hash)
+{ 123 : "bob",  456 : "sally" }
+9. set
+    an unordered collection of immutable values which provide typical mathematical set operations. Python does not provide a mechanism for specifying literal sets. Instead, the various class methods are used for creating and manipulating set objects
+10. Constants
+Python does not support constant variables. Instead, it is common practice for the programmer to specify constant variables as those named with all capital letters. To create the two constant variables, you should write
+TAX_RATE = 0.06
+MAX_SIZE = 100
+11. math
+**	Exponentiation
+//	Division (floored)
+ +=   -=   *=   /=   %=   **=   //=
+12. execute
+In Python, the first statement to be executed, is the first statement at file level (outside of all functions and class definitions).
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>modules</td>
+			<td>
+				<xmp>
+from math import *
+y = sqrt( x )
+
+from math import sqrt
+
+import random					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>math</td>
+			<td>
+				<xmp>
+from math import *
+
+x = float( raw_input( "Enter a real value:" ) )
+y = sqrt( x )
+print "The square root of", x, "is", y
+ 
+
+The following is a list of the more commonly used mathematical functions. All parameters must be numeric and each function returns a floating point value unless otherwise indicated.
+
+ceil( x )
+    Computes and returns the ceiling of x: ⌈ x ⌉
+floor( x )
+    Computes and returns the floor of x: ⌊ x ⌋
+sqrt( x )
+    Computes the square root of x.
+cos( x ), sin( x ), tan( x )
+    Computes the indicated trigonometric value of radians x.
+degrees( x )
+    Converts the radians x to degrees.
+radians( x )
+    Converts the angle x from degrees to radians. 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>date</td>
+			<td>
+				<xmp>
+from datetime import date
+today = date( 2006, 8, 25 )	
+whichDay = today.weekday()		
+
+import datetime
+tomorrow = datetime.date( 2006, 8, 26 )		
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>number</td>
+			<td>
+				<xmp>
+complex( x, y )
+    Creates a complex object with a real part x and an imaginary part y. Both x and y must be numeric.
+float( x )
+    Converts a string or numeric object to a float.
+int( x )
+    Converts a string or numeric object to an integer.
+long( x )
+    Converts a string or numeric object to a long integer. 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>input</td>
+			<td>
+				<xmp>
+print "What is your name? "
+name = raw_input()
+
+name = raw_input( "What is your name? " )
+
+userInput = raw_input( "What is your gpa? " )
+gpa = float( userInput )					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>format print</td>
+			<td>
+				<xmp>
+print "Your average grade = ", avg
+
+print "The sum of %d and %d is %f\n" % (a, b, sum)
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>string</td>
+			<td>
+				<xmp>
+1. conversion					
+x = 45
+intStr = str( x )          # '45'
+floatStr = str( 56.89 )    # '56.89'
+boolStr = str( False )     # 'False'
+
+i = int( "85" )      # 85
+f = float( '3.14' )  # 3.14
+ 
+2. escape:
+Sequence	Description
+\\	Backslash (produces \)
+\'	Single quote (produces ')
+\"	Double quote (produces ")
+\n	Newline (produces a newline)
+\t	Horizontal tab
+
+3. Multiline Strings 
+"""This is a string which
+can continue onto a new line. When printed, it will appear
+   exactly as written between the trip quotes.
+"""
+
+'''Here is another
+        multiline string example 
+     using triple single quotes.'''
+
+4. string concat
+fullstr = strvar + "a string"
+result = "The value of x is " + str( x )
+
+5. length
+len( name )
+
+6. character access
+msg = "This is a string!"
+print "The first character is", msg[ 0 ]
+print "The last character is", msg[ len( msg ) - 1 ]
+print "The last character is", msg[ -1 ]
+
+7. Substrings
+name = "John Smith"
+first = name[0:4]
+last = name[5:]
+
+You can also slice a string from the end using a negative index. The following statement
+end = name[:-4]
+
+8. duplication
+print "-" * 45
+
+9. formatted string
+print "Origin: (%d, %d)\n" % (pointX, pointY)
+
+%[flags][width][.precision]code
+
+flags
+    Used to indicate zero fills (0) which fills preceding blank spaces within the field with 0 and optional justification within the given field width: + for right-justification or - for left-justification.
+width
+    An integer value indicating the number of spaces in the current field used when formatting the replacement value.
+precision
+    The number of digits to be printed after the decimal place when printing a real value.
+code
+    One of the format specificer codes which are the same as those found in Java 
+
+Code	Description
+%s	String (or any object)
+%c	Character (from an ASCII value)
+%d	Decimal or integer value
+%i	Integer value (same as %d)
+%u	Unsigned integer
+%o	Octal integer
+%x	Hexadecimal integer
+%X	Same as %x but uppercase
+%e	Floating-point with exponent
+%E	Same as %e but uppercase
+%f	Floating-point no exponent
+%g	Same as %e or %f
+%G	Same as %g but uppercase
+%%	Prints a literal %
+
+10. contains
+if "Smith" in name1 :
+   print name1
+
+if "Jones" not in name1 :
+   print "Name not found"   
+
+11. split
+ssn = "412-45-8900"
+parts = ssn.split( "-" )
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>boolean</td>
+			<td>
+				<xmp>
+or  and  not
+
+Non-zero numeric values are converted to True while a value of zero, both integer and floating-point, is False.
+For all other types, the values are converted to True if the object is nonempty and False when they are empty. 
+
+The built-in function bool( x ) can be used to convert value x to a boolean using these standard rules.
+
+Note:
+An empty literal string ("") is considered empty and will evaluate to False. 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>logic</td>
+			<td>
+				<xmp>
+   <   >   <=   >=   ==   !=   <>
+
+where <> and != are equivalent. As in Java, parentheses can be used to override the order of precedence. 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>evaluation compare</td>
+			<td>
+				<xmp>
+If the == operator is applied to two string variables in Python, the strings themselves are compared and not the variable references. This is the case for all Python variables since all variables are object references.
+
+Reference Comparisons:
+name1 = "Smith"
+name2 = "Jones"
+result = name1 is name2					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Null Reference</td>
+			<td>
+				<xmp>
+# The is operator along with None can tests for null references.
+result = name1 is None
+result2 = name1 == None
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>if-else</td>
+			<td>
+				<xmp>
+if value < 0 :
+   print "The value is negative."
+   value = abs( value )
+else:
+   print "The value is positive."
+
+if avgGrade >= 90.0 :
+   letterGrade = "A"
+elif avgGrade >= 80.0 :
+   letterGrade = "B"
+elif avgGrade >= 70.0 :
+   letterGrade = "C"
+elif avgGrade >= 60.0 :
+   letterGrade = "D"
+else:
+   letterGrade = "F"
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>while</td>
+			<td>
+				<xmp>
+theSum = 0
+i = 1
+while i <= 100:
+   theSum = theSum + i
+   i = i + 1
+
+print "The sum = ", theSum					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>for - range</td>
+			<td>
+				<xmp>
+for i in xrange( 1, 11 ) :
+   print i		
+
+for i in xrange( 0, 51, 5 ) :
+   print i
+
+for i in xrange( 10, 0, -1 ) :
+  print i
+
+for i in xrange( 20 )
+   print i        			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>function</td>
+			<td>
+				<xmp>
+1. common					
+def sumRange( first, last ) :
+   total = 0
+   i = first
+   while i <= last :
+      total = total + i
+      i = i + 1
+   return total
+
+start = 1
+end = 100
+theSum = sumRange( start, end )
+print "The sum of the integers between", start,\
+      "and", end, "is", theSum   					
+
+2. default values
+def sumRange2( first, last, step = 1 ) :
+
+3. keyword argument:
+theSum = sumRange2( last = 100, step = 3, first = 1 )      
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>scope</td>
+			<td>
+				<xmp>
+1. conception
+built-in
+    Variables and literal values defined as part of the language. These can be used anywhere within a program.
+global or module
+    Variables created at the top-level of a source file or module (outside of all functions and classes). Unlike other languages in which a global variable can be used anywhere within a program, each module in Python creates its own global scope.
+local
+    Variables created within a function are local to that function. Function and method arguments are local variables.
+instance
+    Variables defined as data fields of a class. 
+
+2. global
+Modifying Global Variables:
+varA = 40
+
+def three( varB ) :
+   global varA
+   varC = varA + varB
+   varA = 0
+   return varC
+
+print varA, three( 20 )  
+
+def foo() :
+   global a, b, c
+   a = b + c
+   return a  					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>module</td>
+			<td>
+				<xmp>
+# driver.py
+# The driver file which contains the statements creating
+# the main flow of execution.
+
+import modA
+import modB
+
+value1 = int( raw_input( "Enter value one: " ) )
+value2 = int( raw_input( "Enter value two: " ) )
+resultA = modA.funcA( value1, value2 )
+resultB = modB.funcB( resultA )
+print "Results = ", resultA, resultB
+
+# ---------------------------------------------------------
+# modA.py
+# A user-defined module which defines a function and
+# imports a standard module.
+
+from math import *
+
+def funcA( x, y ) :
+  d = sqrt( x * x + y * y )
+  return d
+
+# ---------------------------------------------------------
+# modB.py
+# A second user-defined module which defines a function and
+# imports the other user-defined module as well as a
+# standard module.
+
+from modA import *
+
+def funcB( a ) :
+  b = funcA( a, a * 4 )
+  return b / 3 + funcC()
+
+def funcC( x = 0 ) :
+  return x * 12					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>list</td>
+			<td>
+				<xmp>
+1. definition					
+gradeList = [ 85, 90, 87, 65, 91 ]	
+print "Forward:", gradeList[ 0 ], gradeList[ 3 ]
+print "Reverse:", gradeList[ -1 ], gradeList[ -3 ]
+
+2. length
+theLength = len( gradeList )
+
+3. toString
+aString = str( gradeList )				
+
+4. iteration
+total = 0
+for value in valueList :
+   total = total + value
+avg = float( total ) / len( valueList )
+print "The average value = %6.2f" % avg
+
+5. append
+append one:
+for i in range( 1000 ) :
+   valueList.append( random.random() )
+
+append multiple:
+listA = [ 0, 1, 2, 3 ]
+listB = listA.extend( [ 4, 5, 6 ] )
+print listB
+
+insert:
+values = [ 0, 1, 2, 3, 4 ]
+values.insert( 1, 8 )
+print values
+
+remove:
+theList = [ 10, 11, 12, 13 ]
+theList.remove( 11 )
+print theList       # prints [10, 12, 13]
+
+del b[i] 	Delete the ith element from list b. 
+
+pop:
+x = theList.pop( 1 )
+print "list =", theList
+print "x =", x
+
+item search:
+theList = [ 10, 11, 12, 13 ]
+pos = theList.index( 13 )
+print pos         
+# prints 3
+
+contain:
+if 90 in gradeList :
+   print gradeList.index( 90 )
+else :
+   print "Grade not in list."
+
+min max:
+print "The minimum value = ", min( valueList )
+print "The maximim value = ", max( valueList )
+
+concat:
+listA = [ 1, 2, 3 ]
+listB = [ 8, 9 ]
+bigList = listA + listB
+print bigList
+
+reverse:
+theList = [ 10, 11, 12, 13 ]
+theList.reverse()
+print theList       
+# prints [13, 12, 11, 10]
+
+replication:
+intList = [ 0, 1, 2, 3, 4 ] * 25   
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>tuple</td>
+			<td>
+				<xmp>
+Tuples are exactly like lists, except they are immutable. 
+t = ( 0, 2, 4 )           # 3 element tuple
+a = ( 2, )                # 1 element tuple
+b = ( 'abc', 1, 4.5, 5 )  # 4 element mixed tuple
+c = ( 0, ( 'a', 'b' ) )   # nested tuple
+
+print "(%d, %d)" % (x, y)					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>file</td>
+			<td>
+				<xmp>
+1. open a file
+infile = file( 'records.txt', 'r' )
+outfile = file( 'report.txt', 'w' )
+infile.close()
+outfile.close()
+
+2. write to file
+outfile.write( "Student Report\n" )
+outfile.write( "-" * 40 + "\n" )
+outfile.write( "%4d  %6.2f\n" % idNum, avgGrade )
+strList = [ "Line 1", "Line 2", "and yet more" ]
+txtfile = file( "sample.txt", "w" )
+txtfile.writelines( strList )
+close( txtfile )
+
+3. reading from file
+infile = file( "data.txt" )
+line = infile.readline()
+while line != "" :
+   print line
+   line = infile.readline()
+infile.close()
+
+The readline() method leaves the newline character at the end of the string when the line is extracted from the file. The rstrip() string method can be used to strip the white space from the end.
+line = infile.readline()
+stripped = line.rstrip()
+
+4. read a char
+ch = infile.readline( 1 )  # read a single character
+
+5. read all
+# Open the input file and extract all of the lines.
+infile = file( "myreport.txt", "r" )
+fileInput = infile.readlines()
+infile.close()
+
+# Open the output file and print each string appended with a \n.
+outfile = file( "double.txt", "w" )
+i = 0
+while i < len( fileInput ) :
+   outfile.write( fileInput[ i ] + "\n" )
+   i = i + 1
+   
+outfile.close()
+
+6. file iterator
+# Open the input and output files.
+infile = file( "myreport.txt", "r" )
+outfile = file( "double.txt", "w" )
+
+# Iterate over each line in the file.
+for line in infile:
+   outfile.write( line + "\n" )
+
+# Close the two files.
+infile.close()
+outfile.close()
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>class</td>
+			<td>
+				<xmp>
+class Point :
+   def __init__( self, x = 0, y = 0 ) :
+      self.xCoord = x
+      self.yCoord = y
+     
+   def __str__( self ) :
+      return "(" + str( self.yCoord ) + ", " +
+                   str( self.yCoord ) + ")"
+     
+   def getX( self ) :
+      return self.XCoord
+     
+   def getY( self ) :
+      return self.yCoord
+     
+   def shift( self, xInc, yInc ) :
+      self.xCoord += xInc
+      self.yCoord += yInc	
+
+using:
+from point import *
+pointA = Point( 5, 7 )
+pointB = Point()     
+pointA.shift( 10, 15 )
+myString = str( pointA )
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>exception</td>
+			<td>
+				<xmp>
+try:
+  x = 0
+  myList = [ 12, 50, 5, 17 ]
+  print myList[ 3 ] / x
+
+except IndexError:
+  print "Error: Index out of range."
+
+except ZeroDivisionError:
+  print "Error: Attempt to divide by zero.	
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>assert</td>
+			<td>
+				 assert len( valueList ) > 0, "Empty list in average()."
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

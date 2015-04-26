@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>property</title>
+</head>
+<body>
+	<xmp>
+package com.common;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class UADConfig {
+	private static final Logger log = LogManager.getLogger("xlog");
+
+	private static final String fileName = "userAgentDetector.properties";
+	private static Properties properties = new Properties();
+
+	static {
+		readPropertiesFile(fileName);
+	}
+
+	public static void readPropertiesFile(String filename) {
+		try {
+			InputStream inputStream = UADConfig.class.getClassLoader().getResourceAsStream(filename);
+			properties.load(inputStream);
+			inputStream.close();
+		} catch (IOException e) {
+			log.error("readPropertiesFile error: ", e);
+		}
+	}
+
+	public static Long getCacheMaxNumber() {
+		return Long.parseLong(properties.getProperty("cache_max_number"));
+	}
+
+	public static Integer getCacheEmptyMinutes() {
+		return Integer.parseInt(properties.getProperty("cache_empty_minutes"));
+	}
+
+	public static Integer getCacheNewFileMinutes() {
+		return Integer.parseInt(properties.getProperty("cache_newfile_minutes"));
+	}
+
+	public static Integer getCookieExpireMinutes() {
+		return Integer.parseInt(properties.getProperty("cookie_expire_minutes"));
+	}
+
+	public static String getCacheFilePath() {
+		return properties.getProperty("cache_file_path");
+	}
+
+}		
+	</xmp>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ec2-tomcat.html</title>
+</head>
+<body>
+	url: http://coenraets.org/blog/2011/11/set-up-an-amazon-ec2-instance-with-tomcat-and-mysql-5-minutes-tutorial/
+	<pre>
+
+	sudo yum install tomcat7 tomcat7-webapps
+	
+	sudo service tomcat7 start
+
+	sudo service tomcat7 stop
+
+	The configuration files are in /usr/share/tomcat7
+
+	http://ip:8080/
+
+	conf/tomcat-user.xml
+	<role rolename="manager-gui"/> <user username="admin" password="admin" roles="manager-gui"/>
+
+	------------------------------------------------
+	sudo yum install mysql-server
+
+	sudo service mysqld start
+
+	sudo service mysqld stop
+	</pre>
+
+	<header>
+<h1 class="title entry-title">Set Up an Amazon EC2 Instance with Tomcat and MySQL &ndash; 5 Minute Tutorial</h1>
+</header>
+<div class="post-meta"><abbr class="date time published updated" title="2011-11-15T11:57:09-0400">November 15, 2011</abbr> <span class="small">in</span> <span class="categories"><a title="View all items in Amazon EC2" href="http://coenraets.org/blog/category/amazon-ec2/">Amazon EC2</a>, <a title="View all items in Cloud" href="http://coenraets.org/blog/category/cloud/">Cloud</a></span></div>
+<section class="entry">
+<h4>Create an AWS Account</h4>
+<p>First things first: you need to create your AWS account. You can sign up <a href="http://aws.amazon.com/ec2/">here</a>. You&rsquo;ll have to provide a credit card and a phone number where you will be called as part of the online registration process for verification purposes. Amazon offers a <em>Free Usage Tier</em>, which is great to explore the services and even host real apps without being charged. Check the details <a href="http://aws.amazon.com/free/">here</a>.</p>
+<h4>Create an Instance</h4>
+<p>Now that you have an AWS account, access the AWS Management Console and click the EC2 tab to create a new instance:</p>
+<ul>
+<li>Choose an AMI in the classic instance wizard: I chose the <strong>Basic 64-bit Amazon Linux AMI</strong>.</li>
+<li>Instance details: keep the default settings.</li>
+<li>Create a new key pair. Enter a name for your key pair (i.e. christophe) and download your key pair (i.e. christophe.pem).</li>
+<li>Select the quick start security group.</li>
+<li>Launch your instance.</li>
+</ul>
+<p>&nbsp;</p>
+<h4>SSH</h4>
+<p>Once your instance is running, you can ssh into it. First, you need to identify the address of your instance: Select the instance in the AWS Management Console, and look for the Public DNS in the instance description (bottom part of the screen).</p>
+<p><a href="http://coenraets.org/blog/wp-content/uploads/2011/11/aws2.jpg"><img class="alignnone size-full wp-image-2212" title="aws2" src="http://coenraets.org/blog/wp-content/uploads/2011/11/aws2.jpg" alt="" width="640" height="578" /></a></p>
+<p>Use that address (and a path to your .pem file) to ssh into your instance:<br /><span style="font-family: courier; font-weight: bold; color: #000;">ssh ec2-user@ec2-50-17-14-16.compute-1.amazonaws.com -i ~/christophe.pem<br /> </span></p>
+<p>Important Notes:</p>
+<ol>
+<li>You may have to chmod your .pem file as follows:<br /><span style="font-family: courier; font-weight: bold; color: #000;">chmod 600 ~/christophe.pem</span></li>
+<li>Depending on the image you chose, you may also have to replace <strong>ec2-user</strong> with <strong>root</strong> or <strong>ubuntu</strong>. ec2-user is what you need for an Amazon Linux AMI.</li>
+</ol>
+<h4>SFTP</h4>
+<p>At this point, you can also SFTP into your new instance using parameters similar to these:</p>
+<p>host: ec2-50-17-14-16.compute-1.amazonaws.com<br /> port: 22<br /> user: ec2-user<br /> password: Select your .pem file</p>
+<h4>Elastic IP</h4>
+<p>The public DNS address changes when you restart your instance. To get a permanent IP address, click Elastic IPs in the AWS Management Console (left navigation bar), allocate a new IP address and associate it with your instance.</p>
+<h4>Install Tomcat</h4>
+<p>To install tomcat, ssh into your instance and type the following command:<br /><span style="font-family: courier; font-weight: bold; color: #000;">sudo yum install tomcat6 tomcat6-webapps</span></p>
+<p>&ldquo;tomcat6-webapps&rdquo; is optional and will install the Tomcat sample apps. The configuration files are in <strong>/usr/share/tomcat6</strong>. To install your own web app, you can simply SFTP it to /usr/share/tomcat6/webapps.</p>
+<p>To start Tomcat:<br /><span style="font-family: courier; font-weight: bold; color: #000;">sudo service tomcat6 start</span></p>
+<p>To stop Tomcat:<br /><span style="font-family: courier; font-weight: bold; color: #000;">sudo service tomcat6 stop</span></p>
+<p>The default Tomcat server uses port 8080. You need to open that port on your instance to make sure your Tomcat server is available on the Web (you could also change the default port). In the AWS Management Console, select Security Groups (left navigation bar), select the quick-start group, the Inbound tab and add port 8080. Make sure you click &ldquo;Add Rule&rdquo; and then &ldquo;Apply Rule Changes&rdquo;.</p>
+<p><a href="http://coenraets.org/blog/wp-content/uploads/2011/11/aws5.jpg"><img class="alignnone size-full wp-image-2231" title="aws5" src="http://coenraets.org/blog/wp-content/uploads/2011/11/aws5.jpg" alt="" width="640" height="450" /></a></p>
+<p>You should now be able to access your Tomcat server from a browser using (use your own Public DNS address or Elastic IP):<br /><span style="font-family: courier; font-weight: bold; color: #000;">http://ec2-50-17-14-16.compute-1.amazonaws.com:8080/</span></p>
+<h4>MySQL</h4>
+<p>To install MySQL, ssh into your instance and type the following command:<br /><span style="font-family: courier; font-weight: bold; color: #000;">sudo yum install mysql-server</span></p>
+<p>To start MySQL:<br /><span style="font-family: courier; font-weight: bold; color: #000;">sudo service mysqld start</span></p>
+<p>To stop MySQL:<br /><span style="font-family: courier; font-weight: bold; color: #000;">sudo service mysqld stop</span></p>
+<h4>MySQL Workbench</h4>
+<p>You can administer your database remotely using MySQL Workbench. You don&rsquo;t have to open an additional port (i.e. 3306). Simply choose <strong>Standard TCP/IP over SSH</strong> in the Setup New Connection dialog as follows:</p>
+<p><a href="http://coenraets.org/blog/wp-content/uploads/2011/11/aws3.jpg"><img class="alignnone size-full wp-image-2222" title="aws3" src="http://coenraets.org/blog/wp-content/uploads/2011/11/aws3.jpg" alt="" width="640" height="436" /></a></p>
+</section>
+</body>
+</html>

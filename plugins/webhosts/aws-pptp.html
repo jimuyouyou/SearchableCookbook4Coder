@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>aws.html</title>
+</head>
+<body>
+	ec2 console:  https://console.aws.amazon.com/ec2/
+
+	<p>aws doc: https://aws.amazon.com/documentation/
+
+	<p>chmod 400 my-key-pair.pem
+
+	<p>ssh -i my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
+
+<div class="content">
+<div class="row">
+<div class="col-sm-12">
+<h1>PPTP VPN on Amazon EC2</h1>
+<p>pptp url: http://www.yzhang.net/blog/2013-03-07-pptp-vpn-ec2.html <p>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-9 post-content">
+<p><del><strong>NOTE: This article uses Amazon Linux AMI (32 bit)</strong></del></p>
+<p>I used to host this website on an Amazon EC2 instance. But in fact, that EC2 instance had been mainly used as a VPN server.</p>
+<p>And here is how it was setup.</p>
+<p>First of all, you need to install <code>pptpd</code>, with the following commands:</p>
+<pre><code class="prettyprint">$ wget http://poptop.sourceforge.net/yum/stable/rhel6/i386/pptpd-1.3.4-2.el6.i686.rpm
+$ yum localinstall pptpd-1.3.4-2.el6.i686.rpm
+</code></pre>
+<p>(for 64 bit instances, get the package at <a href="http://poptop.sourceforge.net/yum/stable/rhel6/x86_64/pptpd-1.4.0-1.el6.x86_64.rpm">http://poptop.sourceforge.net/yum/stable/rhel6/x86_64/pptpd-1.4.0-1.el6.x86_64.rpm</a>)</p>
+<p>And update pptpd configurations in file <code>/etc/pptpd.conf</code>, by adding the following lines:</p>
+<pre><code class="prettyprint">localip     192.168.9.1
+remoteip    192.168.9.11-30
+</code></pre>
+<p>The <code>localip</code> field determines the IP address of your EC2 instance on the VPN, while <code>remoteip</code> field determines the IP address of connected clients. Because there may be potentially many clients connecting to this VPN, the <code>remoteip</code> is a range of 20 IP addresses.</p>
+<p><del>Optionally</del>, you <del>might want</del> need to tell your clients to use some specific DNS server. This could be done by editing <code>/etc/ppp/options.pptpd</code>, and add the following lines:</p>
+<pre><code class="prettyprint">ms-dns    8.8.8.8
+ms-dns    8.8.4.4
+</code></pre>
+<p>We are using Google&rsquo;s public DNS servers here.</p>
+<p>Now you want to setup VPN username and password in <code>/etc/ppp/chap-secrets</code>. Each line in the file has the format:</p>
+<pre><code class="prettyprint">&lt;username&gt; pptpd &lt;passwd&gt; *
+</code></pre>
+<p>Next step is to enable IP forwarding. Edit <code>/etc/sysctl.conf</code>, use the following config:</p>
+<pre><code class="prettyprint">net.ipv4.ip_forward = 1
+</code></pre>
+<p>You need to reload the configuration by <code>/sbin/sysctl -p</code>.</p>
+<p>And we also need to enable <code>iptables</code> NAT configuration:</p>
+<pre><code class="prettyprint">$ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+</code></pre>
+<p>To ensure the NAT configuration be loaded when the machine boots, it might be a good idea to add in your <code>/etc/rc.local</code> the command <code>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</code>.</p>
+<p>OK, it&rsquo;s nearly finished! You need to start the <code>pptpd</code> service, and set it to automatically start when the machine boots:</p>
+<pre><code class="prettyprint">$ /sbin/service pptpd start
+$ chkconfig pptpd on
+</code></pre>
+<p><strong>ONE FINAL THING</strong>: be sure to enable port 1723 of your EC2 instance, otherwise the firewall will prevent your VPN from working!</p>
+<p>If the VPN server is not working correctly, check <code>/var/log/message</code> for error messages.</p>
+<p><strong>UPDATE ON 2014-09-07</strong></p>
+<p>I recently setup an instance again and could not connect to it. The server side error log <code>/var/log/message</code> says the following:</p>
+<pre><code class="prettyprint">/usr/lib/pptpd/pptpd-logwtmp.so: wrong ELF class: ELFCLASS32
+Couldn't load plugin /usr/lib/pptpd/pptpd-logwtmp.so
+GRE: read(fd=6,buffer=8059660,len=8196) from PTY failed: status = -1 error = Input/output error, usually caused by unexpected termination of pppd, check option syntax and pppd logs
+</code></pre>
+<p>I found a solution from <a href="http://www.lidaren.com/archives/1229">http://www.lidaren.com/archives/1229</a> (in Chinese). That is, comment out the following line from <code>/etc/pptpd.conf</code>:</p>
+<pre><code class="prettyprint">logwtmp
+</code></pre>
+<p>Restart pptpd and it should start working.</p>
+<h2 id="client-side-configuration">Client side configuration</h2>
+<p>For Mac, make sure you added PPTP VPN connection. Besides that you only need to setup server address, account name, and password in authentication settings. No pain here.</p>
+<p><img src="http://www.yzhang.net/data/pptp-vpn-mac-1.png" alt="image" /></p>
+<p><img src="http://www.yzhang.net/data/pptp-vpn-mac-2.png" alt="image" /></p>
+<p>(Thanks to Slavomir J for the Mac screen shots)</p>
+<p>For Linux, I used NetworkManager to add VPN connections. Make sure you added PPTP VPN connection. And the configuration I use is here:</p>
+<p><img src="http://www.yzhang.net/data/pptp-vpn-ubuntu.png" alt="image" /></p>
+<p>And for Windows:</p>
+<p><img src="http://www.yzhang.net/data/pptp-vpn-win.png" alt="image" /></p>
+<hr />
+<ul class="pager">
+<li class="previous"><a title="Undo RAID" href="http://www.yzhang.net/blog/2013-02-12-undo-raid.html">&larr; Previous</a></li>
+<li><a href="http://www.yzhang.net/blog/archive.html">Archive</a></li>
+<li class="next"><a title="Best diagram to explain how Linux VFS works" href="http://www.yzhang.net/blog/2013-04-16-linux-vfs.html">Next &rarr;</a></li>
+</ul>
+<hr />
+<div id="disqus_thread">&nbsp;</div>
+</div>
+<div class="col-sm-3">
+<h4><a href="http://www.yzhang.net/blog/archive.html">Archive</a></h4>
+<h4>Published</h4>
+<div class="date">Mar 7, 2013</div>
+<h4><a href="http://www.yzhang.net/blog/tags.html">Tags</a></h4>
+<ul class="tag_list list-inline">
+<li><a href="http://www.yzhang.net/blog/tags.html#aws-ref"> <span class="label label-info">aws <sup>2</sup></span> </a></li>
+<li><a href="http://www.yzhang.net/blog/tags.html#vpn-ref"> <span class="label label-info">vpn <sup>1</sup></span> </a></li>
+</ul>
+</div>
+</div>
+</div>
+<hr /><footer>
+<div class="row">
+<div class="col-lg-12">&copy; Yang Zhang <img src="http://www.yzhang.net/img/my-email.png" alt="" /></div>
+</div>
+</footer>
+
+
+</body>
+</html>

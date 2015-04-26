@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	url: http://www.codeproject.com/Articles/213138/An-Example-to-Use-jQuery-Validation-Plugin
+
+
+	<h2>The "Example.htm" File</h2>
+<p>The <em>Example.htm</em> file is implemented as follows:</p>
+<div id="premain521953" class="pre-action-link" style="width: 100%; display: block;"><span id="prehide521953">Hide</span> &nbsp; <span id="preShrink521953">Shrink</span> <img id="preimg521953" style="height: 16px; width: 16px;" src="http://www.codeproject.com/images/arrow-up-16.png" alt="" /> &nbsp; Copy Code</div>
+<pre id="pre521953" lang="xml" style="margin-top: 0px;"><span class="code-keyword">&lt;</span><span class="code-leadattribute">!DOCTYPE</span> <span class="code-attribute">html</span> <span class="code-attribute">PUBLIC</span> <span class="code-attribute">"-</span><span class="code-keyword">/</span><span class="code-keyword">/</span><span class="code-attribute">W3C</span><span class="code-keyword">/</span><span class="code-keyword">/</span><span class="code-attribute">DTD</span> <span class="code-attribute">XHTML</span> <span class="code-attribute">1.0</span> <span class="code-attribute">Transitional</span><span class="code-keyword">/</span><span class="code-keyword">/</span><span class="code-attribute">EN"</span>
+    <span class="code-attribute">"http:</span><span class="code-keyword">/</span><span class="code-keyword">/</span><span class="code-attribute">www.w3.org</span><span class="code-keyword">/</span><span class="code-attribute">TR</span><span class="code-keyword">/</span><span class="code-attribute">xhtml1</span><span class="code-keyword">/</span><span class="code-attribute">DTD</span><span class="code-keyword">/</span><span class="code-attribute">xhtml1-transitional.dtd"</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">html</span> <span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://www.w3.org/1999/xhtml"</span><span class="code-keyword">&gt;</span>
+ 
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">head</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">meta</span> <span class="code-attribute">http-equiv</span><span class="code-keyword">="</span><span class="code-keyword">Content-Type"</span> <span class="code-attribute">content</span><span class="code-keyword">="</span><span class="code-keyword">text/html; charset=utf-8"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">title</span><span class="code-keyword">&gt;</span>jQuery Validation Example<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">title</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">link</span> <span class="code-attribute">href</span><span class="code-keyword">="</span><span class="code-keyword">Styles/ui-lightness/jquery-ui-1.8.13.custom.css"</span>
+        <span class="code-attribute">rel</span><span class="code-keyword">="</span><span class="code-keyword">stylesheet"</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/css"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">link</span> <span class="code-attribute">href</span><span class="code-keyword">="</span><span class="code-keyword">Styles/Site.css"</span> <span class="code-attribute">rel</span><span class="code-keyword">="</span><span class="code-keyword">stylesheet"</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/css"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+ 
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span> <span class="code-attribute">src</span><span class="code-keyword">="</span><span class="code-keyword">Scripts/jquery-1.6.1.min.js"</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/javascript"</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span> <span class="code-attribute">src</span><span class="code-keyword">="</span><span class="code-keyword">Scripts/jquery-ui-1.8.13.custom.min.js"</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/javascript"</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span> <span class="code-attribute">src</span><span class="code-keyword">="</span><span class="code-keyword">Scripts/jquery.validate.min.js"</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/javascript"</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span> <span class="code-attribute">src</span><span class="code-keyword">="</span><span class="code-keyword">Scripts/jquery.validate.wrapper.js"</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/javascript"</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+ 
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text/javascript"</span> <span class="code-attribute">language</span><span class="code-keyword">="</span><span class="code-keyword">javascript"</span><span class="code-keyword">&gt;</span>
+ 
+    $(document).ready(<span class="code-keyword">function</span> () {
+        <span class="code-comment">//</span><span class="code-comment"> 1. prepare the validation rules and messages.
+</span>        <span class="code-keyword">var</span> rules = {
+            textbox1: {
+                required: <span class="code-keyword">true</span>,
+                minlength: <span class="code-digit">2</span>
+            },
+            textbox2: <span class="code-string">"</span><span class="code-string">required"</span>,
+            textbox3: <span class="code-string">"</span><span class="code-string">required"</span>
+        };
+        <span class="code-keyword">var</span> messages = {
+            textbox1: {
+                required: <span class="code-string">"</span><span class="code-string">textbox1 is required"</span>,
+                minlength: <span class="code-string">"</span><span class="code-string">textbox1 needs to be at least length 2"</span>
+            },
+            textbox2: <span class="code-string">"</span><span class="code-string">textbox2 is requried"</span>,
+            textbox3: <span class="code-string">"</span><span class="code-string">textbox3 is required"</span>
+        };
+ 
+        <span class="code-comment">//</span><span class="code-comment"> 2. Initiate the validator
+</span>        <span class="code-keyword">var</span> validator
+            = <span class="code-keyword">new</span> jQueryValidatorWrapper(<span class="code-string">"</span><span class="code-string">FormToValidate"</span>,
+                rules, messages);
+ 
+        <span class="code-comment">//</span><span class="code-comment"> 3. Set the click event to do the validation
+</span>        $(<span class="code-string">"</span><span class="code-string">#btnValidate"</span>).click(<span class="code-keyword">function</span> () {
+            <span class="code-keyword">if</span> (!validator.validate())
+                <span class="code-keyword">return</span>;
+ 
+            alert(<span class="code-string">"</span><span class="code-string">Validation Success!"</span>);
+        });
+    });
+       
+<span class="code-keyword">&lt;/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">head</span><span class="code-keyword">&gt;</span>
+ 
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">body</span><span class="code-keyword">&gt;</span>
+ 
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">form</span> <span class="code-attribute">id</span><span class="code-keyword">="</span><span class="code-keyword">FormToValidate"</span> <span class="code-attribute">action</span><span class="code-keyword">="</span><span class="code-keyword">#"</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">table</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">tr</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">input</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text"</span> <span class="code-attribute">id</span><span class="code-keyword">="</span><span class="code-keyword">textbox1"</span> <span class="code-attribute">name</span><span class="code-keyword">="</span><span class="code-keyword">textbox1"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">input</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text"</span> <span class="code-attribute">id</span><span class="code-keyword">="</span><span class="code-keyword">textbox2"</span> <span class="code-attribute">name</span><span class="code-keyword">="</span><span class="code-keyword">textbox2"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">tr</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">tr</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">input</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">text"</span> <span class="code-attribute">id</span><span class="code-keyword">="</span><span class="code-keyword">textbox3"</span> <span class="code-attribute">name</span><span class="code-keyword">="</span><span class="code-keyword">textbox3"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">input</span> <span class="code-attribute">type</span><span class="code-keyword">="</span><span class="code-keyword">button"</span> <span class="code-attribute">id</span><span class="code-keyword">="</span><span class="code-keyword">btnValidate"</span>
+                <span class="code-attribute">style</span><span class="code-keyword">="</span><span class="code-keyword">width: 100%"</span> <span class="code-attribute">value</span><span class="code-keyword">="</span><span class="code-keyword">Validate"</span> <span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">td</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">tr</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">table</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">form</span><span class="code-keyword">&gt;</span>
+ 
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">body</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">html</span><span class="code-keyword">&gt;</span></pre>
+<p>This HTML file has three text boxes and a button. The purpose of this example is to validate the content in the text boxes when the button is clicked. To set up the validation, we need to go through three steps in the <code>$(document).ready</code> event.</p>
+<ul>
+<li>Prepare the validation rules and the messages to show if the validation fails.</li>
+<li>Create a validator object by passing the ID of the <a href="http://www.w3schools.com/html/html_forms.asp">HTMl Form</a> that contains the text boxes to the <code>jQueryValidatorWrapper</code> function. The validation rules and messages are also passed to this function. The <code>jQueryValidatorWrapper</code> function is implemented in the <em>jquery.validate.wrapper.js</em> file.</li>
+<li>Hook up the click event for the button to start validation.</li>
+</ul>
+<p>This piece of code is pretty simple, but you should pay some attention to the following:</p>
+<ul>
+<li>All the required JavaScript files and style sheets need to be referenced properly.</li>
+<li>All the text boxes need to have a "<code>name</code>" attribute. The validation rules and messages are associated with the <code>name</code> attribute.</li>
+<li>All the text boxes to be validated need to be in the <a href="http://www.w3schools.com/html/html_forms.asp">HTML Form</a> that is used to create the validator object.</li>
+</ul>
+<p>Now let us take a look at the <code>jQueryValidatorWrapper</code> function.</p>
+<h2>The jQuery Validation Wrapper</h2>
+<p>The <code>jQueryValidatorWrapper</code> function is implemented in the <em>jquery.validate.wrapper.js</em> file:</p>
+<div id="premain865110" class="pre-action-link" style="width: 100%; display: block;"><span id="prehide865110">Hide</span> &nbsp; <span id="preShrink865110">Shrink</span> <img id="preimg865110" style="height: 16px; width: 16px;" src="http://www.codeproject.com/images/arrow-up-16.png" alt="" /> &nbsp; Copy Code</div>
+<pre id="pre865110" lang="jscript" style="margin-top: 0px;"><span class="code-keyword">var</span> dialogIdSeed = <span class="code-digit">1000000000</span>;
+<span class="code-keyword">function</span> jQueryValidatorWrapper(formId, rules, messages) {
+    <span class="code-comment">//</span><span class="code-comment"> Get an Id for the "&lt;div&gt;" to diaply the error messages.
+</span>    <span class="code-comment">//</span><span class="code-comment"> The Id is made sure to be unique in the web page.
+</span>    <span class="code-keyword">var</span> dialogId = <span class="code-string">"</span><span class="code-string">V_dia_log"</span> + dialogIdSeed++;
+    <span class="code-keyword">while</span> ($(<span class="code-string">"</span><span class="code-string">#"</span> + dialogId).length != <span class="code-digit">0</span>) {
+        alert(dialogId);
+        dialogId = <span class="code-string">"</span><span class="code-string">V_dia_log"</span> + dialogIdSeed++;
+    }
+ 
+    <span class="code-comment">//</span><span class="code-comment"> create the error message "div" and add it to the dom.
+</span>    <span class="code-comment">//</span><span class="code-comment"> it will be use to display the validation error messages.
+</span>    <span class="code-keyword">var</span> dialogText = <span class="code-string">"</span><span class="code-string">&lt;div id='"</span> + dialogId
+            + <span class="code-string">"</span><span class="code-string">' title='Please correct the errors ...'&gt;"</span>
+            + <span class="code-string">"</span><span class="code-string">&lt;ul /&gt;&lt;/div&gt;"</span>;
+    $(<span class="code-string">"</span><span class="code-string">body"</span>).append(dialogText);
+    <span class="code-keyword">var</span> $dialog = $(<span class="code-string">"</span><span class="code-string">#"</span> + dialogId);
+    <span class="code-keyword">var</span> $ul = $(<span class="code-string">"</span><span class="code-string">#"</span> + dialogId + <span class="code-string">"</span><span class="code-string">&gt;ul"</span>);
+ 
+    $dialog.dialog({
+        autoOpen: <span class="code-keyword">false</span>,
+        modal: <span class="code-keyword">true</span>,
+        close: <span class="code-keyword">function</span> (event, ui) {
+            $ul.html(<span class="code-string">"</span><span class="code-string">"</span>);
+        }
+    });
+ 
+    <span class="code-comment">//</span><span class="code-comment"> hook up the form, the validation rules, and messages with jQuery validate.
+</span>    <span class="code-keyword">var</span> showErrorMessage = <span class="code-keyword">false</span>;
+    <span class="code-keyword">var</span> validator = $(<span class="code-string">"</span><span class="code-string">#"</span> + formId).validate({
+        onchange: <span class="code-keyword">true</span>,
+        rules: rules,
+        messages: messages,
+        errorPlacement: <span class="code-keyword">function</span> (error, element) {
+            <span class="code-keyword">if</span> (showErrorMessage) {
+                <span class="code-keyword">var</span> li = document.createElement(<span class="code-string">"</span><span class="code-string">li"</span>)
+                li.appendChild(document
+                    .createTextNode(error.html()));
+                $ul.append(li);
+            }
+        },
+        showErrors: <span class="code-keyword">function</span> (errorMap, errorList) {
+            <span class="code-keyword">this</span>.defaultShowErrors();
+            <span class="code-keyword">if</span> ((errorList.length != <span class="code-digit">0</span>) &amp;&amp; showErrorMessage) {
+                $dialog.dialog(<span class="code-string">'</span><span class="code-string">open'</span>);
+            }
+        }
+    });
+ 
+    <span class="code-comment">//</span><span class="code-comment"> This is the function to call whem make the validation
+</span>    <span class="code-keyword">this</span>.validate = <span class="code-keyword">function</span> () {
+        showErrorMessage = <span class="code-keyword">true</span>;
+        <span class="code-keyword">var</span> result = validator.form();
+        showErrorMessage = <span class="code-keyword">false</span>;
+ 
+        <span class="code-keyword">return</span> result;
+    };
+}</pre>
+<p>The <code>jQueryValidatorWrapper</code> function does the following:</p>
+<ul>
+<li>It first creates a <code>div</code> element and appends it to the <a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM</a>. It makes sure that the ID of the <code>div</code> element is unique in the web page. This <code>div</code> element will be used as a dialog box to display the error messages if the validation fails.</li>
+<li>It hooks up the validation rules and messages with the <a href="http://www.w3schools.com/html/html_forms.asp">HTML Form</a> that will be validated using the <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery Validation Plug-in</a>.</li>
+<li>At last, it creates a function that starts the validation.</li>
+</ul>
+<h2>The CSS to Highlight the Failed Input Element</h2>
+<p>If the validation fails a textbox, we need to highlight it. The CSS class used to highlight the HTML element is implemented in the <em>Site.css</em> file.</p>
+<div id="premain117736" class="pre-action-link" style="width: 100%; display: block;"><span id="prehide117736">Hide</span> &nbsp; Copy Code</div>
+<pre id="pre117736" lang="css" style="margin-top: 0px;">.<span class="code-leadattribute">error</span>
+{
+ <span class="code-attribute">border-color</span><span class="code-keyword">:red</span>;
+ <span class="code-attribute">border-style</span><span class="code-keyword">:solid</span>;
+ <span class="code-attribute">border-width</span><span class="code-keyword">:1px</span>;
+}</pre>
+<p>The <a href="http://bassistance.de/jquery-plugins/jquery-plugin-validation/">jQuery Validation Plug-in</a> will look for the <code>.error</code> class to apply styles to failed HTML elements. You can implement this CSS class to highlight the failed elements whatever way you want. In this example, if a text box fails validation, I will simply give it a red border.</p>
+<h2>Run the Example</h2>
+<p>Now that we have finished reviewing the code, we can test run the web page. Set the <em>Example.htm</em> file as the start up page; we can debug and run the application in Visual Studio.</p>
+<p><img src="http://www.codeproject.com/KB/ajax/jQueryValidateExample/RunAppStart.jpg" alt="RunAppStart.jpg" width="394" height="197" /></p>
+<p>When the web page first loads, we can see the three text boxes and the <em>Validate</em> button.</p>
+<p><img src="http://www.codeproject.com/KB/ajax/jQueryValidateExample/RunAppFailAll.jpg" alt="RunAppFailAll.jpg" width="402" height="371" /></p>
+<p>Without typing anything in the text boxes and clicking the <em>Validate</em> button, the validation will fail all the three text boxes. The text boxes are highlighted with red borders and a dialog box shows up asking us to correct the problems.</p>
+<p><img src="http://www.codeproject.com/KB/ajax/jQueryValidateExample/RunAppElementValidate.jpg" alt="RunAppElementValidate.jpg" width="404" height="207" /></p>
+<p>After closing the dialog box, we can type something into the text boxes. You may notice that when the text in a text box becomes valid, the red border disappears.</p>
+<p><img src="http://www.codeproject.com/KB/ajax/jQueryValidateExample/RunAppSuccess.jpg" alt="RunAppSuccess.jpg" width="439" height="341" /></p>
+<p>If we give all the three text boxes valid texts, clicking the <em>Validate</em> button shows up the message box telling us that the validation was successful.</p>
+<h2>Points of Interest</h2>
+<ul>
+<li>This article presented an example of using jQuery Validation Plug-in.</li>
+<li>You may have noticed that I insert a <code>div</code> element into the <a href="http://en.wikipedia.org/wiki/Document_Object_Model">DOM</a> in the <em>jquery.validate.wrapper.js</em> file when I initiate the validator. This <code>div</code> element will be given an ID in the form of "V_dia_log1???..". If you accidentally have an HTML element having an ID of the same pattern in your web page, the <code>jQueryValidatorWrapper</code> function will eventually find a unique ID for the <code>div</code> element, but it may take some time. If you want to use <em>jquery.validate.wrapper.js</em> as it is in your applications, you should avoid assigning any element in the page an ID of the same pattern.</li>
+<li>I have tested the example in IE8, Google Chrome, Firefox, and Safari. This example does not run well in IE7 and below. My test is limited though. If you find anything interesting in your own test, please do not hesitate to let me know and I will appreciate it.</li>
+<li>The attached example does not work well in IE7. It is because the <em>jquery.validate.min.js</em> that I use in this example is version 1.5.5. After I finished the article, I found that if you use a newer version 1.8.1, it should work in IE7. You can download the version 1.8.1 from <a href="http://bassistance.de/2011/05/14/release-validation-plugin-1-8-1/">here</a>.</li>
+<li>I hope you like my postings and I hope this article can help you one way or the other.</li>
+</ul>
+</body>
+</html>
