@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>stripe-plan-java.html</title>
+</head>
+<body>
+	html:
+	<xmp>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>Stripe Getting Started Form</title>
+
+<script type="text/javascript" src="stripe.js"></script>
+<script type="text/javascript" src="jquery1.9.min.js"></script>
+
+<!-- CDN JS Libs
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ -->
+
+<script type="text/javascript">
+	// This identifies your website in the createToken call below
+	Stripe.setPublishableKey('pk_test_R9TijR83o5UMsQiY2plXplj2');
+
+	var stripeResponseHandler = function(status, response) {
+		var $form = $('#payment-form');
+
+		if (response.error) {
+			// Show the errors on the form
+			$form.find('.payment-errors').text(response.error.message);
+			$form.find('button').prop('disabled', false);
+		} else {
+			// token contains id, last4, and card type
+			var token = response.id;
+			// Insert the token into the form so it gets submitted to the server
+			$form.append($('<input type="hidden" name="stripeToken" />').val(
+					token));
+			// and re-submit
+			$form.get(0).submit();
+		}
+	};
+
+	jQuery(function($) {
+		$('#payment-form').submit(function(e) {
+			var $form = $(this);
+
+			// Disable the submit button to prevent repeated clicks
+			$form.find('button').prop('disabled', true);
+
+			Stripe.card.createToken($form, stripeResponseHandler);
+
+			// Prevent the form from submitting with the default action
+			return false;
+		});
+	});
+</script>
+
+<style>
+.payment-errors {
+	color: red;
+}
+
+div.form-row {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+div.form-row label span {
+	float: left;
+	width: 180px;
+	font-weight: bold;
+}
+
+div.form-row lable input {
+	width: 200px;
+}
+
+button {
+	font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+	<div class="content">
+		<h2>Subscribe a plan with Stripe</h2>
+
+		<form action="SubscribeServlet" method="POST" id="payment-form">
+			<span class="payment-errors"></span>
+
+			<div class="form-row">
+				<label> <span>Name/Company</span> <input type="text" size="20" name="nameCompany" required />
+				</label>
+			</div>
+
+			<div class="form-row">
+				<label> <span>Email Address</span> <input type="text" size="20" name="email" required />
+				</label>
+			</div>
+
+			<div class="form-row">
+				<label> <span>Card Number</span> <input type="text" size="20" data-stripe="number" required />
+				</label>
+			</div>
+
+			<div class="form-row">
+				<label> <span>CVC</span> <input type="text" size="20" data-stripe="cvc" required />
+				</label>
+			</div>
+
+			<div class="form-row">
+				<label> <span>Expiration (MM/YYYY)</span> <input type="text" size="2" data-stripe="exp-month" /required>
+				</label> / <input type="text" size="4" data-stripe="exp-year" required />
+			</div>
+
+			<button type="submit">Submit Payment</button>
+		</form>
+	</div>
+</body>
+</html>		
+	</xmp>
+
+	<p>java servlet<p>
+		<xmp>
+package com.servlet;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.stripe.Stripe;
+import com.stripe.model.Customer;
+import com.stripe.model.Subscription;
+
+/**
+ * Servlet implementation class SubscribeServlet
+ */
+@WebServlet("/SubscribeServlet")
+public class SubscribeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public SubscribeServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		try {
+			// API key, Params and Token
+			Stripe.apiKey = "sk_test_s68TED7xIG1z4upwZFa2sMXs"; // Secret Key
+			String token = request.getParameter("stripeToken"); // the token got from Stripe
+			String email = request.getParameter("email");
+			String nameCompnay = request.getParameter("nameCompany");
+
+			/***************** use existing customer begin *****************/
+			// Customer cu = Customer.retrieve("cus_67FpIkCDUYK7zv"); //existing Customer ID
+			/***************** use existing customer end *****************/
+
+			/***************** create new customer begin *****************/
+			Map<String, Object> customerParams = new HashMap<String, Object>();
+			customerParams.put("description", nameCompnay);
+			customerParams.put("email", email);
+			customerParams.put("source", token);
+			Customer cu = Customer.create(customerParams);
+			/***************** create new customer begin *****************/
+
+			/***************** use existing customer begin *****************/
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("plan", "mqin"); // Pland ID
+			Subscription subscription = cu.createSubscription(params);
+			System.out.println("status: " + subscription.getStatus());
+			/***************** use existing customer begin *****************/
+
+			// thankyou
+			if ("active".equals(subscription.getStatus())) {
+				response.sendRedirect("thankyou.jsp");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("subscription failed: " + e);
+		}
+	}
+
+}
+		</xmp>
+</body>
+</html>

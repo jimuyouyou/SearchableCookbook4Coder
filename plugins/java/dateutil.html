@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dateutil.html</title>
+</head>
+<body>
+	<xmp>
+package com.common;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class DateUtil {
+	/**
+	 * @return strCurrentDateHour with format like 2015-04-05_09
+	 */
+	public static String strCurrentDateHour() {
+		return new SimpleDateFormat("yyyy-MM-dd_HH").format(new Date());
+	}
+
+	/**
+	 * @return how many minutes it left from current to next hour eg. current 08:23, it will return 37, which has a
+	 *         duration of 37 minutes to 09:00
+	 */
+	public static Long getMinutes2NextHour() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, calendar.get(Calendar.HOUR_OF_DAY) + 1);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.getTimeInMillis();
+		return (calendar.getTimeInMillis() - System.currentTimeMillis()) / (1000 * 60);
+	}
+}
+		
+	</xmp>
+</body>
+</html>

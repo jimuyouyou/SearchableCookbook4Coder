@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SimpleORM.html</title>
+</head>
+<body>
+	<xmp>
+package com.common;
+
+import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class SimpleORM {
+	private static final Logger log = LogManager.getLogger("xlog");
+
+	/**
+	 * @param conn
+	 * @param sql
+	 * @param cls
+	 * @return Java Object List
+	 */
+	public static List map(Connection conn, String sql, Class<?> cls) {
+		List list = new ArrayList();
+
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			Object object = null;
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnCount = rsmd.getColumnCount();
+			while (rs.next()) {
+				object = cls.newInstance();
+				for (int i = 1; i <= columnCount; i++) {
+					// get setter and invoke to map sql query to Object
+					Method setterMethod = cls.getMethod(getSetMethodName(rsmd.getColumnName(i)),
+							Class.forName(rsmd.getColumnClassName(i)));
+					setterMethod.invoke(object, rs.getObject(rsmd.getColumnName(i)));
+
+				}
+				list.add(object);
+			}
+		} catch (Exception e) {
+			log.error("SimpleORM error: ", e);
+		} finally {
+			DBUtil.closePreparedStatement(stmt);
+			DBUtil.closeResultSet(rs);
+		}
+
+		return list;
+	}
+
+	/**
+	 * @param conn
+	 * @param stmt
+	 * @param cls
+	 * @return Java Object List
+	 */
+	public static List map(Connection conn, PreparedStatement stmt, Class<?> cls) {
+		List list = new ArrayList();
+
+		ResultSet rs = null;
+		try {
+			rs = stmt.executeQuery();
+			Object object = null;
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnCount = rsmd.getColumnCount();
+			while (rs.next()) {
+				object = cls.newInstance();
+				for (int i = 1; i <= columnCount; i++) {
+					// get setter and invoke to map sql query to Object
+					Method setterMethod = cls.getMethod(getSetMethodName(rsmd.getColumnName(i)),
+							Class.forName(rsmd.getColumnClassName(i)));
+					setterMethod.invoke(object, rs.getObject(rsmd.getColumnName(i)));
+
+				}
+				list.add(object);
+			}
+		} catch (Exception e) {
+			log.error("SimpleORM error: ", e);
+		} finally {
+			DBUtil.closePreparedStatement(stmt);
+			DBUtil.closeResultSet(rs);
+		}
+
+		return list;
+	}
+
+	/**
+	 * @param columnName
+	 * @return setter method name for one field
+	 */
+	public static String getSetMethodName(String columnName) {
+		return "set" + columnName.substring(0, 1).toUpperCase() + columnName.toLowerCase().substring(1);
+	}
+}
+		
+	</xmp>
+</body>
+</html>
