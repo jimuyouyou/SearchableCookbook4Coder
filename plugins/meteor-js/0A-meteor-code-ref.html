@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', 'template', 'helpers', 'events', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup']
+		labels: ['create', 'template', 'helpers', 'events', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe']
 	};
 	</script>
 </head>
@@ -435,7 +435,7 @@ Calls Meteor.user(). Use {{#if currentUser}} to check whether the user is logged
 			</td>
 		</tr>
 		<tr>
-			<td>Meteor.publish user</td>
+			<td>Meteor.publish user subscribe</td>
 			<td>
 				<xmp>
 By default, the current user's username, emails and profile are published to the client. You can publish additional fields for the current user with:

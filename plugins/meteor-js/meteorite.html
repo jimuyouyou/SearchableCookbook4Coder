@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>meteorite.html</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['bootstrap', 'coffeescript', 'deploy', 'forever', 'var', 'mongo', 'autopublish', '_publishCursor', '', '', '', '', '',]
+	};
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>install</td>
+			<td>
+				sudo npm install -g meteorite
+			</td>
+		</tr>
+		<tr>
+			<td>create</td>
+			<td>
+				mrt create microscope
+			</td>
+		</tr>
+		<tr>
+			<td>mrt</td>
+			<td>
+				mrt
+			</td>
+		</tr>
+		<tr>
+			<td>bootstrap</td>
+			<td>
+				mrt add bootstrap
+			</td>
+		</tr>
+		<tr>
+			<td>coffeescript</td>
+			<td>
+				mrt add coffeescript
+			</td>
+		</tr>
+		<tr>
+			<td>deploy</td>
+			<td>
+				meteor deploy myapp.meteor.com
+			</td>
+		</tr>
+		<tr>
+			<td>deploy</td>
+			<td>
+				<pre>
+Alternatively, if you want to use your own domain set its CNAME to redirect to origin.meteor.com and then deploywith:					
+				mrt deploy www.myapp.com
+				</pre>
+			</td>
+		</tr>
+		<tr>
+			<td>forever</td>
+			<td>
+				<xmp>
+npm install -g forever
+forever start bundle/main.js					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>global var</td>
+			<td>
+				<xmp>
+In Meteor, the var keyword limits the scope of an object to the current file. We want to make the Posts collection available to our whole app, which is why we're omitting that keyword here.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>mongo</td>
+			<td>
+				mrt mongo
+			</td>
+		</tr>
+		<tr>
+			<td>reset db</td>
+			<td>
+				<xmp>meteor reset</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>autopublish</td>
+			<td>
+				mrt remove autopublish
+			</td>
+		</tr>
+		<tr>
+			<td>_publishCursor</td>
+			<td>
+				<xmp>
+Here's what _publishCursor() does:
+1. It checks the name of the server-side collection.
+2. It pulls all matching documents from the cursor and sends it into a client-side collection of the same name. (It uses.added() to do this).
+3. Whenever a document is added, removed or changed, it sends those changes down to the client-side collection. (It uses .observe() on the cursor and .added(), .updated() and removed() to do this).
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>publish partial fields</td>
+			<td>
+				<xmp>
+Meteor.publish('allPosts',function(){
+return Posts.find({'author':'Tom'}, {fields: {
+dates: false
+}});
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
