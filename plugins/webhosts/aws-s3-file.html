@@ -13,10 +13,10 @@
 	<div id="results"></div>
 
 	<script type="text/javascript">
-	AWS.config.update({accessKeyId: 'AKIAJRGVSIQSQPGZ2DYA', secretAccessKey: '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'});
-	AWS.config.region = 'us-west-1';
+	AWS.config.update({accessKeyId: '', secretAccessKey: ''});
+	AWS.config.region = '';
 
-	var bucket = new AWS.S3({params: {Bucket: 'ontimestorage'}});
+	var bucket = new AWS.S3({params: {Bucket: ''}});
 
 	var fileChooser = document.getElementById('file-chooser');
 	var button = document.getElementById('upload-button');
