@@ -21,6 +21,17 @@
 	conf/tomcat-user.xml
 	<role rolename="manager-gui"/> <user username="admin" password="admin" roles="manager-gui"/>
 
+	tar -cvf file2.tar /home/usr2/file2 	
+
+	scp -i  mqin.pem /home/michael/Downloads/ontime.tar.gz ec2-user@54.149.248.36:/home/ec2-user
+
+	tar -zxvf ontime.tar
+
+	sudo cp -r 28-4-2015_Design_HTML /usr/share/tomcat7/webapps/
+
+	sudo find 28-4-2015_Design_HTML -type f -exec chmod 755 {} \;  
+
+	sudo find 28-4-2015_Design_HTML -type d -exec chmod 755 {} \; 
 	------------------------------------------------
 	sudo yum install mysql-server
 
