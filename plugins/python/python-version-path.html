@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>python-version-path.html</title>
+</head>
+<body>
+	version: python --version<p>
+	install path: <br>
+	<pre>
+import sys 
+>>> path = sys.executable 
+>>> print path 
+C:\Python25\pythonw.exe 
+>>> folder = path[ 0 : path.rfind( os.sep ) ] 
+>>> print folder 
+C:\Python25 
+	</pre>
+	
+</body>
+</html>
