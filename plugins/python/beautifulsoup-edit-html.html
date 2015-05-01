@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<xmp>
+import re
+import sys
+
+from bs4 import BeautifulSoup
+
+srcPath = "C:/tab_1.html"
+destPath = "C:/validation/"
+
+# get form name and controller name
+fname = srcPath[srcPath.rfind("/") + 1:]
+fctrl = fname[:fname.rfind(".")] + "_form"
+
+############## process begin ##############
+msg = ''
+ename = ''
+formFields = {}
+fp = open(srcPath)
+soup = BeautifulSoup(fp)
+fp.close()
+
+# inputs
+inputs = soup.findAll("input")
+for ele in inputs:
+#     print ele
+    if ele['type'] <> 'hidden':
+        pl = ele.parent.parent.select("label")
+        if len(pl) == 0:
+            pl = ele.parent.parent.parent.select("label")
+        if len(pl) == 0:
+            pl = ele.parent.parent.parent.parent.select("label")
+        for b in pl:
+            if b.string <> None:
+                msg = b.string
+                msgRE = re.compile('\W')
+                ename = msgRE.sub('',msg)
+#                 ename = msg.replace('[\W\D]', '') # .replace(' ', '')
+                ele['name'] = ename
+                formFields[ename] = "Please enter " + msg + "."
+                break
+
+# selects
+sels = soup.findAll("select")
+for ele in sels:
+#     print ele
+    for b in ele.parent.parent.select("label"):
+        if b.string <> None:
+            msg = b.string
+            ename = msg.replace(' ', '')
+            ele['name'] = ename
+            formFields[ename] = "Please select " + msg + "."
+            break
+        
+# selects - options
+opts = soup.findAll("option")
+for ele in opts:
+    if ele['value'] == 'al':
+        ele['value'] = ''
+    if ele['value'] == 'au':
+        ele['value'] = '1'
+# forms  
+forms = soup.findAll("form")
+for ele in forms:
+    if ele["role"] == "form":
+        ele["id"] = fctrl
+        ele["name"] = fctrl
+        
+# buttons  
+buttons = soup.select("button")
+for ele in buttons:
+    if 'Save' in ele.string:
+        ele['type'] = 'submit'
+    elif 'Reset' in ele.string:
+        ele['type'] = 'reset'
+    elif 'Submit' in ele.string:
+        ele['type'] = 'submit'
+    elif 'Next' in ele.string:
+        ele['type'] = 'submit'
+#     if ele["role"] == "form":
+#         ele["id"] = fctrl
+#         ele["name"] = fctrl
+############## process end ##############        
+
+
+############## jquery validation begin ##############
+# header
+jv = '''
+  <script type="text/javascript">
+   // validate
+    jQuery(document).ready(function($) {
+        setTimeout(function() {
+            $(".fade-in-effect").addClass('in');
+         }, 1);
+
+
+        // Validation
+        $("#'''
+jv += fctrl
+jv += '''").validate({
+'''
+
+# rules and msgs
+rules = 'rules: {'
+msgs = 'messages: {'
+for ff in formFields:
+    rules += ff + ": {required: true},\n" 
+    msgs += ff + ": {required: '" +  formFields[ff] + "'},\n"
+rules += "},"
+msgs += "},"
+jv += rules + '\n\n'
+jv += msgs
+
+# date of birth
+jv += '''
+
+errorPlacement: function(error, element) {
+    if (element.attr("name") == "DateofBirth") {
+      error.insertAfter($(element).parent());
+    } else {
+      error.insertAfter(element);
+    }
+  },'''
+
+# footer
+jv += "\n\n});// validate \n\n });// ready \n" + "</script>"
+soup.append(jv)
+
+############## jquery validation end ##############
+
+
+############## write 2 file begin ##############
+scontent =  soup.prettify(formatter=None)
+# print scontent
+outfile = file(destPath + fname, 'w' )
+outfile.write(scontent.encode("utf-8"))
+outfile.close()
+############## write 2 file end ##############
+
+
+	</xmp>
+</body>
+</html>

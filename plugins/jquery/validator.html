@@ -27,7 +27,8 @@ label.checked {
 </head>
 <body>
 <form id="myForm" action="">Name:
-    <input type="text" name="fname" />
+    <input type="text" name="fname" /><p>
+    <input type="text" id="inte3" name="inte3"/>
     <br />Do you check?
     <input type="checkbox" id="check" name="check" />
     <br />Do you radio?
@@ -55,7 +56,8 @@ $(function () {
             fname: "required",
             check: "required",
             radio: "required",
-            color: "required"
+            color: "required",
+            inte3: "digits"
         },
         messages: {
             fname: "Enter your firstname",
@@ -79,7 +81,8 @@ $(function () {
 </script>
 	<xmp>
 <form id="myForm" action="">Name:
-    <input type="text" name="fname" />
+    <input type="text" name="fname" /><p>
+    <input type="text" id="inte3" name="inte3"/>
     <p />Do you check?
     <input type="checkbox" id="check" name="check" />
     <p />Do you radio?
@@ -90,6 +93,7 @@ $(function () {
         <option value="blue">blue</option>
         <option value="blue">red</option>
     </select>
+    
     <p />
 </form>
 <input type="button" id="submit" value="Submit form" />
@@ -104,7 +108,8 @@ $(function () {
             fname: "required",
             check: "required",
             radio: "required",
-            color: "required"
+            color: "required",
+            inte: "Integer"
         },
         messages: {
             fname: "Enter your firstname",
