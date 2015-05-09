@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script type="text/javascript">
 	var cfg = {
-		labels: ['string', 'module', 'exec', 'statement', 'basic', 'date', 'number', 'string', 'range', 'list', 'tuple', 'class', 'exception', 'assert'] 
+		labels: ['string', 'module', 'exec', 'statement', 'basic', 'date', 'number',  'range', 'list', 'tuple', 'dict', 'class', 'exception', 'assert', 'file'] 
 	};
 	</script>
 </head>
@@ -769,9 +769,14 @@ except ZeroDivisionError:
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>dict</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+dc = {"ename": "msg", "e2":"m2"}
+dc["dd"] = "dvg"
+for e in dc:
+    print e + dc[e]					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
