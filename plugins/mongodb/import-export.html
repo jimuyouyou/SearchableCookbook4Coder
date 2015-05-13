@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>import-export.html</title>
+</head>
+<body>
+	<xmp>
+meteor mongo
+show dbs
+use meteor
+# mongoexport --collection users --out user.json
+mongoexport --host localhost --port 3001 --db meteor --collection users --out users.json
+	</xmp>
+</body>
+</html>
