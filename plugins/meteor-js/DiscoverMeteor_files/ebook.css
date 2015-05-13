@@ -1,0 +1,1469 @@
+/* line 1, /app/source/stylesheets/includes/_github.scss */
+.hll {
+  background-color: #ffffcc; }
+
+/* line 2, /app/source/stylesheets/includes/_github.scss */
+.c {
+  color: #999988;
+  font-style: italic; }
+
+/* Comment */
+/* line 3, /app/source/stylesheets/includes/_github.scss */
+.err {
+  color: #a61717;
+  background-color: #e3d2d2; }
+
+/* Error */
+/* line 4, /app/source/stylesheets/includes/_github.scss */
+.k {
+  color: #000000;
+  font-weight: bold; }
+
+/* Keyword */
+/* line 5, /app/source/stylesheets/includes/_github.scss */
+.o {
+  color: #000000;
+  font-weight: bold; }
+
+/* Operator */
+/* line 6, /app/source/stylesheets/includes/_github.scss */
+.cm {
+  color: #999988;
+  font-style: italic; }
+
+/* Comment.Multiline */
+/* line 7, /app/source/stylesheets/includes/_github.scss */
+.cp {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic; }
+
+/* Comment.Preproc */
+/* line 8, /app/source/stylesheets/includes/_github.scss */
+.c1 {
+  color: #999988;
+  font-style: italic; }
+
+/* Comment.Single */
+/* line 9, /app/source/stylesheets/includes/_github.scss */
+.cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic; }
+
+/* Comment.Special */
+/* line 10, /app/source/stylesheets/includes/_github.scss */
+.gd {
+  color: #000000;
+  background-color: #ffdddd; }
+
+/* Generic.Deleted */
+/* line 11, /app/source/stylesheets/includes/_github.scss */
+.ge {
+  color: #000000;
+  font-style: italic; }
+
+/* Generic.Emph */
+/* line 12, /app/source/stylesheets/includes/_github.scss */
+.gr {
+  color: #aa0000; }
+
+/* Generic.Error */
+/* line 13, /app/source/stylesheets/includes/_github.scss */
+.gh {
+  color: #999999; }
+
+/* Generic.Heading */
+/* line 14, /app/source/stylesheets/includes/_github.scss */
+.gi {
+  color: #000000;
+  background-color: #ddffdd; }
+
+/* Generic.Inserted */
+/* line 15, /app/source/stylesheets/includes/_github.scss */
+.go {
+  color: #888888; }
+
+/* Generic.Output */
+/* line 16, /app/source/stylesheets/includes/_github.scss */
+.gp {
+  color: #555555; }
+
+/* Generic.Prompt */
+/* line 17, /app/source/stylesheets/includes/_github.scss */
+.gs {
+  font-weight: bold; }
+
+/* Generic.Strong */
+/* line 18, /app/source/stylesheets/includes/_github.scss */
+.gu {
+  color: #aaaaaa; }
+
+/* Generic.Subheading */
+/* line 19, /app/source/stylesheets/includes/_github.scss */
+.gt {
+  color: #aa0000; }
+
+/* Generic.Traceback */
+/* line 20, /app/source/stylesheets/includes/_github.scss */
+.kc {
+  color: #000000;
+  font-weight: bold; }
+
+/* Keyword.Constant */
+/* line 21, /app/source/stylesheets/includes/_github.scss */
+.kd {
+  color: #000000;
+  font-weight: bold; }
+
+/* Keyword.Declaration */
+/* line 22, /app/source/stylesheets/includes/_github.scss */
+.kn {
+  color: #000000;
+  font-weight: bold; }
+
+/* Keyword.Namespace */
+/* line 23, /app/source/stylesheets/includes/_github.scss */
+.kp {
+  color: #000000;
+  font-weight: bold; }
+
+/* Keyword.Pseudo */
+/* line 24, /app/source/stylesheets/includes/_github.scss */
+.kr {
+  color: #000000;
+  font-weight: bold; }
+
+/* Keyword.Reserved */
+/* line 25, /app/source/stylesheets/includes/_github.scss */
+.kt {
+  color: #445588;
+  font-weight: bold; }
+
+/* Keyword.Type */
+/* line 26, /app/source/stylesheets/includes/_github.scss */
+.m {
+  color: #009999; }
+
+/* Literal.Number */
+/* line 27, /app/source/stylesheets/includes/_github.scss */
+.s {
+  color: #dd1144; }
+
+/* Literal.String */
+/* line 28, /app/source/stylesheets/includes/_github.scss */
+.na {
+  color: teal; }
+
+/* Name.Attribute */
+/* line 29, /app/source/stylesheets/includes/_github.scss */
+.nb {
+  color: #0086b3; }
+
+/* Name.Builtin */
+/* line 30, /app/source/stylesheets/includes/_github.scss */
+.nc {
+  color: #445588;
+  font-weight: bold; }
+
+/* Name.Class */
+/* line 31, /app/source/stylesheets/includes/_github.scss */
+.no {
+  color: teal; }
+
+/* Name.Constant */
+/* line 32, /app/source/stylesheets/includes/_github.scss */
+.nd {
+  color: #3c5d5d;
+  font-weight: bold; }
+
+/* Name.Decorator */
+/* line 33, /app/source/stylesheets/includes/_github.scss */
+.ni {
+  color: purple; }
+
+/* Name.Entity */
+/* line 34, /app/source/stylesheets/includes/_github.scss */
+.ne {
+  color: #990000;
+  font-weight: bold; }
+
+/* Name.Exception */
+/* line 35, /app/source/stylesheets/includes/_github.scss */
+.nf {
+  color: #990000;
+  font-weight: bold; }
+
+/* Name.Function */
+/* line 36, /app/source/stylesheets/includes/_github.scss */
+.nl {
+  color: #990000;
+  font-weight: bold; }
+
+/* Name.Label */
+/* line 37, /app/source/stylesheets/includes/_github.scss */
+.nn {
+  color: #555555; }
+
+/* Name.Namespace */
+/* line 38, /app/source/stylesheets/includes/_github.scss */
+.nt {
+  color: navy; }
+
+/* Name.Tag */
+/* line 39, /app/source/stylesheets/includes/_github.scss */
+.nv {
+  color: teal; }
+
+/* Name.Variable */
+/* line 40, /app/source/stylesheets/includes/_github.scss */
+.ow {
+  color: #000000;
+  font-weight: bold; }
+
+/* Operator.Word */
+/* line 41, /app/source/stylesheets/includes/_github.scss */
+.w {
+  color: #bbbbbb; }
+
+/* Text.Whitespace */
+/* line 42, /app/source/stylesheets/includes/_github.scss */
+.mf {
+  color: #009999; }
+
+/* Literal.Number.Float */
+/* line 43, /app/source/stylesheets/includes/_github.scss */
+.mh {
+  color: #009999; }
+
+/* Literal.Number.Hex */
+/* line 44, /app/source/stylesheets/includes/_github.scss */
+.mi {
+  color: #009999; }
+
+/* Literal.Number.Integer */
+/* line 45, /app/source/stylesheets/includes/_github.scss */
+.mo {
+  color: #009999; }
+
+/* Literal.Number.Oct */
+/* line 46, /app/source/stylesheets/includes/_github.scss */
+.sb {
+  color: #dd1144; }
+
+/* Literal.String.Backtick */
+/* line 47, /app/source/stylesheets/includes/_github.scss */
+.sc {
+  color: #dd1144; }
+
+/* Literal.String.Char */
+/* line 48, /app/source/stylesheets/includes/_github.scss */
+.sd {
+  color: #dd1144; }
+
+/* Literal.String.Doc */
+/* line 49, /app/source/stylesheets/includes/_github.scss */
+.s2 {
+  color: #dd1144; }
+
+/* Literal.String.Double */
+/* line 50, /app/source/stylesheets/includes/_github.scss */
+.se {
+  color: #dd1144; }
+
+/* Literal.String.Escape */
+/* line 51, /app/source/stylesheets/includes/_github.scss */
+.sh {
+  color: #dd1144; }
+
+/* Literal.String.Heredoc */
+/* line 52, /app/source/stylesheets/includes/_github.scss */
+.si {
+  color: #dd1144; }
+
+/* Literal.String.Interpol */
+/* line 53, /app/source/stylesheets/includes/_github.scss */
+.sx {
+  color: #dd1144; }
+
+/* Literal.String.Other */
+/* line 54, /app/source/stylesheets/includes/_github.scss */
+.sr {
+  color: #009926; }
+
+/* Literal.String.Regex */
+/* line 55, /app/source/stylesheets/includes/_github.scss */
+.s1 {
+  color: #dd1144; }
+
+/* Literal.String.Single */
+/* line 56, /app/source/stylesheets/includes/_github.scss */
+.ss {
+  color: #990073; }
+
+/* Literal.String.Symbol */
+/* line 57, /app/source/stylesheets/includes/_github.scss */
+.bp {
+  color: #999999; }
+
+/* Name.Builtin.Pseudo */
+/* line 58, /app/source/stylesheets/includes/_github.scss */
+.vc {
+  color: teal; }
+
+/* Name.Variable.Class */
+/* line 59, /app/source/stylesheets/includes/_github.scss */
+.vg {
+  color: teal; }
+
+/* Name.Variable.Global */
+/* line 60, /app/source/stylesheets/includes/_github.scss */
+.vi {
+  color: teal; }
+
+/* Name.Variable.Instance */
+/* line 61, /app/source/stylesheets/includes/_github.scss */
+.il {
+  color: #009999; }
+
+/* Literal.Number.Integer.Long */
+/*================ FUNCTIONS =================*/
+/*================ VARIABLES =================*/
+/*================ CLASSES =================*/
+/* line 35, /app/source/stylesheets/includes/_mixins.scss */
+.cf {
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+  *zoom: 1; }
+  /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+  .cf:before, .cf:after {
+    content: "";
+    display: table; }
+  /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+  .cf:after {
+    clear: both; }
+
+/*================ MIXINS =================*/
+/* line 29, /app/source/stylesheets/includes/_grid.scss */
+.row {
+  *zoom: 1;
+  max-width: 720px;
+  _width: 720px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  position: relative;
+  -webkit-transition: left 300ms 0ms;
+  -webkit-transition-delay: ease-out;
+  -webkit-transition: left 300ms 0ms ease-out;
+  transition: left 300ms 0ms ease-out; }
+  /* line 38, /app/vendor/bundle/ruby/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+@media screen and (max-width: 47.5em) {
+  /* line 39, /app/source/stylesheets/includes/_grid.scss */
+  body {
+    overflow-x: hidden; } }
+@media screen and (min-width: 47.5em) {
+  /* line 44, /app/source/stylesheets/includes/_grid.scss */
+  section {
+    *zoom: 1;
+    max-width: 720px;
+    _width: 720px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0; }
+    /* line 38, /app/vendor/bundle/ruby/2.0.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+    section:after {
+      content: "";
+      display: table;
+      clear: both; }
+
+  /* line 48, /app/source/stylesheets/includes/_grid.scss */
+  .mailinglist {
+    width: 760px; }
+    /* line 50, /app/source/stylesheets/includes/_grid.scss */
+    .mailinglist .book {
+      display: block; }
+    /* line 53, /app/source/stylesheets/includes/_grid.scss */
+    .mailinglist .form {
+      padding-left: 9.02778%;
+      width: 18.75%;
+      float: left;
+      margin-right: 8.33333%;
+      display: inline; }
+    /* line 57, /app/source/stylesheets/includes/_grid.scss */
+    .mailinglist .share {
+      width: 0.69444%;
+      float: right;
+      margin-right: 0;
+      *margin-left: -60px;
+      display: inline; }
+
+  /* line 61, /app/source/stylesheets/includes/_grid.scss */
+  .bottom .form {
+    padding-left: 0%;
+    width: 27.77778%;
+    float: right;
+    margin-right: 0;
+    *margin-left: -60px;
+    display: inline; }
+
+  /* line 65, /app/source/stylesheets/includes/_grid.scss */
+  .about {
+    width: 18.75%;
+    float: left;
+    margin-right: 8.33333%;
+    display: inline; } }
+/* line 2, /app/source/stylesheets/includes/_main.scss */
+*, html, body, h1, h2, h3, h4, h5, h6, form, textarea, input, p, strong, em {
+  font-family: 'source-sans-pro', 'Source Sans Pro', 'Proxima Nova', "Helvetica Neue", sans-serif; }
+
+/* line 5, /app/source/stylesheets/includes/_main.scss */
+.secondary-font, h1, h2, h3, h4, h5, h6, h2 span, figure figcaption, .chapter-title, .inner-cover .title h1 span, .inner-cover .title h1 strong {
+  font-family: "klavika-web", "Klavika", "Helvetica Neue", "Helvetica", sans-serif; }
+
+/* line 8, /app/source/stylesheets/includes/_main.scss */
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #413b52;
+  font-size: 18px;
+  background: white;
+  line-height: 1.8; }
+
+/* line 16, /app/source/stylesheets/includes/_main.scss */
+html[lang="he"] {
+  direction: rtl; }
+  /* line 18, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] body {
+    direction: rtl; }
+  /* line 20, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] pre, html[lang="he"] .contributors {
+    direction: ltr; }
+  /* line 21, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] p[data-value]:after {
+    /*left: 0;
+    right: initial;*/
+    display: none; }
+  /* line 26, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] .post-nav .prev {
+    float: right; }
+  /* line 27, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] .post-nav .next {
+    float: left; }
+  /* line 29, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] .post-content .portrait {
+    float: right;
+    margin: 0 0px 20px 20px; }
+  /* line 33, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] p[data-value]:before {
+    content: attr(data-value) "% "; }
+  /* line 36, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] .chapter-number {
+    float: left !important; }
+  /* line 37, /app/source/stylesheets/includes/_main.scss */
+  html[lang="he"] .toc li span {
+    float: left; }
+
+/* line 39, /app/source/stylesheets/includes/_main.scss */
+a {
+  font-weight: bold;
+  text-decoration: none; }
+  /* line 42, /app/source/stylesheets/includes/_main.scss */
+  a:link {
+    color: #6e5eb2; }
+  /* line 45, /app/source/stylesheets/includes/_main.scss */
+  a:visited {
+    color: #a399cd; }
+  /* line 48, /app/source/stylesheets/includes/_main.scss */
+  a:active, a:hover {
+    color: #f4cd13; }
+
+/* line 52, /app/source/stylesheets/includes/_main.scss */
+p {
+  margin: 0 0 30px 0; }
+
+/* line 55, /app/source/stylesheets/includes/_main.scss */
+footer {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 14px; }
+
+/* line 60, /app/source/stylesheets/includes/_main.scss */
+ul, ol {
+  padding-left: 40px; }
+  /* line 62, /app/source/stylesheets/includes/_main.scss */
+  ul li, ol li {
+    margin-bottom: 10px; }
+
+/* line 66, /app/source/stylesheets/includes/_main.scss */
+h1, h2, h3, h4, h5, h6, h2 span {
+  color: #413b52; }
+
+/* line 70, /app/source/stylesheets/includes/_main.scss */
+h1 {
+  font-size: 48px; }
+
+/* line 73, /app/source/stylesheets/includes/_main.scss */
+h2 {
+  font-size: 36px; }
+
+/* line 76, /app/source/stylesheets/includes/_main.scss */
+h3 {
+  font-size: 24px; }
+
+/* line 79, /app/source/stylesheets/includes/_main.scss */
+h4 {
+  font-size: 16px; }
+
+/* line 83, /app/source/stylesheets/includes/_main.scss */
+.footnotes li {
+  margin-bottom: 20px; }
+/* line 86, /app/source/stylesheets/includes/_main.scss */
+.footnotes p {
+  display: inline; }
+
+/* line 90, /app/source/stylesheets/includes/_main.scss */
+.bio, .post-author {
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+  *zoom: 1;
+  margin-bottom: 30px; }
+  /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+  .bio:before, .bio:after, .post-author:before, .post-author:after {
+    content: "";
+    display: table; }
+  /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+  .bio:after, .post-author:after {
+    clear: both; }
+  /* line 93, /app/source/stylesheets/includes/_main.scss */
+  .bio p, .post-author p {
+    margin-left: 120px; }
+  /* line 96, /app/source/stylesheets/includes/_main.scss */
+  .bio .portrait, .post-author .portrait {
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    height: 100px;
+    width: 100px;
+    float: left;
+    display: block; }
+
+/* line 104, /app/source/stylesheets/includes/_main.scss */
+#lightbox {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  cursor: pointer; }
+  /* line 112, /app/source/stylesheets/includes/_main.scss */
+  #lightbox.hide {
+    display: none; }
+  /* line 115, /app/source/stylesheets/includes/_main.scss */
+  #lightbox .inner {
+    width: 100%;
+    max-width: 680px;
+    padding: 40px;
+    background: white;
+    margin: 40px auto 0 auto;
+    text-align: center; }
+    /* line 122, /app/source/stylesheets/includes/_main.scss */
+    #lightbox .inner img {
+      display: block;
+      width: 100%; }
+
+/* line 129, /app/source/stylesheets/includes/_main.scss */
+.screenshot img {
+  width: 100%; }
+
+/* line 134, /app/source/stylesheets/includes/_main.scss */
+.diagram img {
+  width: 100%; }
+
+/* line 138, /app/source/stylesheets/includes/_main.scss */
+.chapters {
+  margin-bottom: 30px; }
+  /* line 14, /app/source/stylesheets/ebook.scss */
+  .chapters .not-used {
+    width: 63.88889%;
+    float: left;
+    margin-right: 8.33333%;
+    display: inline; }
+  /* line 143, /app/source/stylesheets/includes/_main.scss */
+  .chapters h2 {
+    font-weight: 200;
+    font-size: 36px;
+    margin: 0 0 30px 0;
+    text-align: center; }
+  /* line 149, /app/source/stylesheets/includes/_main.scss */
+  .chapters ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none; }
+    /* line 153, /app/source/stylesheets/includes/_main.scss */
+    .chapters ul li {
+      /* For modern browsers */
+      /* For IE 6/7 (trigger hasLayout) */
+      *zoom: 1;
+      border-bottom: 1px dotted #c9c5cf;
+      padding-bottom: 10px;
+      margin-bottom: 10px; }
+      /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+      .chapters ul li:before, .chapters ul li:after {
+        content: "";
+        display: table; }
+      /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+      .chapters ul li:after {
+        clear: both; }
+      /* line 158, /app/source/stylesheets/includes/_main.scss */
+      .chapters ul li .chapter-percentage {
+        color: #8f8e96;
+        font-size: 14px; }
+      /* line 162, /app/source/stylesheets/includes/_main.scss */
+      .chapters ul li .chapter-number {
+        float: right;
+        color: #aaa9b1;
+        font-weight: 200; }
+
+/* line 170, /app/source/stylesheets/includes/_main.scss */
+.book {
+  margin-top: 20px; }
+  /* line 172, /app/source/stylesheets/includes/_main.scss */
+  .book img {
+    display: block;
+    width: 80%;
+    max-width: 150px;
+    margin: auto; }
+
+/* line 181, /app/source/stylesheets/includes/_main.scss */
+.last-position-link {
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background: #e2e1e4;
+  padding: 5px 10px;
+  display: block;
+  text-align: center;
+  margin: 20px 0; }
+  /* line 188, /app/source/stylesheets/includes/_main.scss */
+  .last-position-link:visited {
+    color: #6e5eb2; }
+  /* line 191, /app/source/stylesheets/includes/_main.scss */
+  .last-position-link:hover {
+    background: #c9c5cf;
+    color: #6e5eb2; }
+
+/* line 197, /app/source/stylesheets/includes/_main.scss */
+blockquote.pull {
+  font-size: 22px;
+  line-height: 1.8; }
+  /* line 200, /app/source/stylesheets/includes/_main.scss */
+  blockquote.pull:before {
+    content: '\201C'; }
+  /* line 203, /app/source/stylesheets/includes/_main.scss */
+  blockquote.pull:after {
+    content: '\201D'; }
+/* line 208, /app/source/stylesheets/includes/_main.scss */
+blockquote .not-used.pull {
+  width: 200px; }
+/* line 211, /app/source/stylesheets/includes/_main.scss */
+blockquote .not-used.pull-right {
+  float: right;
+  margin: 0 0px 40px 40px; }
+/* line 215, /app/source/stylesheets/includes/_main.scss */
+blockquote .not-used.pull-left {
+  float: left;
+  margin: 0 40px 40px 0px; }
+@media screen and (min-width: 62.5em) {
+  /* line 221, /app/source/stylesheets/includes/_main.scss */
+  blockquote.pull-right {
+    margin: 0 -100px 40px 40px; }
+  /* line 224, /app/source/stylesheets/includes/_main.scss */
+  blockquote.pull-left {
+    margin: 0 40px 40px -100px; } }
+
+/* line 230, /app/source/stylesheets/includes/_main.scss */
+.interview h2 {
+  text-align: center; }
+/* line 14, /app/source/stylesheets/ebook.scss */
+.interview .not-used {
+  padding: 0 50px; }
+/* line 236, /app/source/stylesheets/includes/_main.scss */
+.interview p {
+  font-size: 18px;
+  line-height: 1.8; }
+/* line 240, /app/source/stylesheets/includes/_main.scss */
+.interview .note {
+  margin-bottom: 40px; }
+  /* line 241, /app/source/stylesheets/includes/_main.scss */
+  .interview .note p {
+    margin: 0;
+    text-align: center; }
+
+/* line 249, /app/source/stylesheets/includes/_main.scss */
+figure img {
+  width: 100%;
+  display: block; }
+/* line 253, /app/source/stylesheets/includes/_main.scss */
+figure figcaption {
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 14px;
+  color: #aaa9b1; }
+/* line 260, /app/source/stylesheets/includes/_main.scss */
+figure.portrait {
+  height: 160px;
+  width: 160px; }
+  /* line 14, /app/source/stylesheets/ebook.scss */
+  figure.portrait .not-used {
+    float: left;
+    margin: 0 40px 40px -80px; }
+  /* line 267, /app/source/stylesheets/includes/_main.scss */
+  figure.portrait img {
+    -o-border-radius: 400px;
+    border-radius: 400px; }
+  /* line 270, /app/source/stylesheets/includes/_main.scss */
+  figure.portrait figcaption {
+    text-align: center; }
+
+/* line 275, /app/source/stylesheets/includes/_main.scss */
+.simple-button {
+  display: block;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background: #c9c5cf;
+  padding: 10px 0;
+  margin-bottom: 10px; }
+  /* line 281, /app/source/stylesheets/includes/_main.scss */
+  .simple-button:link, .simple-button:visited {
+    color: #413b52; }
+  /* line 284, /app/source/stylesheets/includes/_main.scss */
+  .simple-button:hover {
+    color: #f4cd13;
+    background: #322d44; }
+
+/* line 289, /app/source/stylesheets/includes/_main.scss */
+.intro {
+  margin-top: 30px; }
+
+/* line 292, /app/source/stylesheets/includes/_main.scss */
+.side-column {
+  font-size: 16px; }
+  /* line 14, /app/source/stylesheets/ebook.scss */
+  .side-column .not-used {
+    width: 27.77778%;
+    float: right;
+    margin-right: 0;
+    *margin-left: -60px;
+    display: inline; }
+  /* line 297, /app/source/stylesheets/includes/_main.scss */
+  .side-column h3 {
+    margin: 0 0 5px 0; }
+  /* line 300, /app/source/stylesheets/includes/_main.scss */
+  .side-column > div {
+    margin-bottom: 30px; }
+  /* line 303, /app/source/stylesheets/includes/_main.scss */
+  .side-column h3 {
+    margin-top: 0;
+    border-bottom: 1px dotted #c9c5cf;
+    margin-bottom: 10px;
+    font-weight: 200; }
+  /* line 309, /app/source/stylesheets/includes/_main.scss */
+  .side-column ul {
+    font-size: 16px;
+    line-height: 1.6; }
+
+/* line 315, /app/source/stylesheets/includes/_main.scss */
+.progress p, .progress progress {
+  margin-bottom: 10px; }
+/* line 318, /app/source/stylesheets/includes/_main.scss */
+.progress .commit-date {
+  font-size: 14px;
+  color: #aaa9b1; }
+
+/* line 324, /app/source/stylesheets/includes/_main.scss */
+.translators ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+
+/* line 332, /app/source/stylesheets/includes/_main.scss */
+.contributors li img {
+  display: inline-block;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px; }
+/* line 339, /app/source/stylesheets/includes/_main.scss */
+.contributors li a, .contributors li span {
+  vertical-align: top; }
+
+/* line 1, /app/source/stylesheets/includes/_book.scss */
+.date {
+  margin-bottom: 5px;
+  color: #aaa9b1;
+  font-size: 14px; }
+
+/* line 7, /app/source/stylesheets/includes/_book.scss */
+.post {
+  position: relative;
+  -webkit-transition: all 300ms 0ms;
+  -webkit-transition-delay: ease-out;
+  -webkit-transition: all 300ms 0ms ease-out;
+  transition: all 300ms 0ms ease-out; }
+
+/* line 12, /app/source/stylesheets/includes/_book.scss */
+.post-content h3 {
+  font-weight: 200;
+  border-bottom: 1px solid #e2e1e4;
+  padding-bottom: 8px;
+  clear: both; }
+/* line 18, /app/source/stylesheets/includes/_book.scss */
+.post-content .chapter-number {
+  position: relative;
+  top: 12px; }
+
+/* line 23, /app/source/stylesheets/includes/_book.scss */
+.chapter-heading {
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+  *zoom: 1;
+  border-bottom: 1px solid #e2e1e4;
+  padding-bottom: 5px;
+  margin-bottom: 40px; }
+  /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+  .chapter-heading:before, .chapter-heading:after {
+    content: "";
+    display: table; }
+  /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+  .chapter-heading:after {
+    clear: both; }
+
+/* line 29, /app/source/stylesheets/includes/_book.scss */
+.chapter-title {
+  border: none;
+  display: inline-block;
+  margin: 0;
+  font-weight: 200;
+  line-height: 1.3; }
+
+/* line 37, /app/source/stylesheets/includes/_book.scss */
+.chapter-number {
+  float: right;
+  font-weight: 200;
+  color: #aaa9b1; }
+
+/* line 42, /app/source/stylesheets/includes/_book.scss */
+.post-top {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e1e4;
+  margin-bottom: 30px;
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+  *zoom: 1; }
+  /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+  .post-top:before, .post-top:after {
+    content: "";
+    display: table; }
+  /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+  .post-top:after {
+    clear: both; }
+  /* line 47, /app/source/stylesheets/includes/_book.scss */
+  .post-top .back {
+    display: block;
+    float: left; }
+  /* line 51, /app/source/stylesheets/includes/_book.scss */
+  .post-top .meta {
+    float: right; }
+  /* line 54, /app/source/stylesheets/includes/_book.scss */
+  .post-top .twitter {
+    display: inline-block; }
+    /* line 56, /app/source/stylesheets/includes/_book.scss */
+    .post-top .twitter iframe {
+      width: 90px !important; }
+  /* line 60, /app/source/stylesheets/includes/_book.scss */
+  .post-top .date {
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    top: -5px; }
+
+/* line 67, /app/source/stylesheets/includes/_book.scss */
+.post-content {
+  padding-bottom: 40px; }
+  /* line 69, /app/source/stylesheets/includes/_book.scss */
+  .post-content h1 {
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: 100; }
+  /* line 74, /app/source/stylesheets/includes/_book.scss */
+  .post-content img {
+    width: 100%;
+    display: block;
+    margin-bottom: 30px; }
+  /* line 80, /app/source/stylesheets/includes/_book.scss */
+  .post-content .portrait {
+    display: block;
+    float: left;
+    margin: 0 20px 20px 0px;
+    -o-border-radius: 100px;
+    border-radius: 100px;
+    width: 80px;
+    height: 80px; }
+  /* line 88, /app/source/stylesheets/includes/_book.scss */
+  .post-content > pre, .post-content > .highlight {
+    margin-bottom: 30px; }
+    /* line 90, /app/source/stylesheets/includes/_book.scss */
+    .post-content > pre pre, .post-content > .highlight pre {
+      margin: 0; }
+  /* line 94, /app/source/stylesheets/includes/_book.scss */
+  .post-content h5 {
+    display: inline-block;
+    background: #f2f1f2;
+    text-transform: uppercase;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    padding: 3px 6px;
+    font-size: 14px;
+    font-weight: normal; }
+  /* line 104, /app/source/stylesheets/includes/_book.scss */
+  .post-content .pullcenter {
+    width: 50%;
+    margin: 0 auto;
+    cursor: pointer; }
+    /* line 108, /app/source/stylesheets/includes/_book.scss */
+    .post-content .pullcenter img {
+      border: 0; }
+    /* line 111, /app/source/stylesheets/includes/_book.scss */
+    .post-content .pullcenter figcaption {
+      font-style: italic;
+      font-size: 14px;
+      border-top: 1px solid #e2e1e4;
+      padding-top: 10px;
+      margin-top: 10px;
+      color: #aaa9b1; }
+
+/* line 121, /app/source/stylesheets/includes/_book.scss */
+.post-author {
+  border-top: 1px solid #e2e1e4;
+  border-bottom: 1px solid #e2e1e4;
+  padding: 20px;
+  background: #f7f6f7;
+  margin-bottom: 30px; }
+
+/* line 128, /app/source/stylesheets/includes/_book.scss */
+.post-nav {
+  margin: 20px 0;
+  margin-bottom: 30px;
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+  *zoom: 1; }
+  /* line 130, /app/source/stylesheets/includes/_book.scss */
+  .post-nav a {
+    white-space: nowrap; }
+  /* line 133, /app/source/stylesheets/includes/_book.scss */
+  .bottom-nav .post-nav {
+    border-top: 1px solid #e2e1e4;
+    padding-top: 40px; }
+  /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+  .post-nav:before, .post-nav:after {
+    content: "";
+    display: table; }
+  /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+  .post-nav:after {
+    clear: both; }
+  /* line 139, /app/source/stylesheets/includes/_book.scss */
+  .post-nav .prev {
+    display: block;
+    float: left; }
+  /* line 143, /app/source/stylesheets/includes/_book.scss */
+  .post-nav .next {
+    display: block;
+    float: right; }
+
+/* line 149, /app/source/stylesheets/includes/_book.scss */
+.note {
+  background: #fcf9e2;
+  background: -webkit-linear-gradient(125deg, rgba(253, 228, 0, 0.2) 0%, rgba(253, 228, 0, 0.1) 90%);
+  background: -webkit-linear-gradient(325deg, rgba(253, 228, 0, 0.2) 0%, rgba(253, 228, 0, 0.1) 90%);
+  background: linear-gradient(125deg, rgba(253, 228, 0, 0.2) 0%, rgba(253, 228, 0, 0.1) 90%);
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.6; }
+  /* line 156, /app/source/stylesheets/includes/_book.scss */
+  .note p {
+    margin-bottom: 20px; }
+  /* line 159, /app/source/stylesheets/includes/_book.scss */
+  .note h3 {
+    margin: 0 0 10px 0;
+    border: 0;
+    font-size: 20px; }
+  /* line 164, /app/source/stylesheets/includes/_book.scss */
+  .note ul {
+    margin: 0; }
+  /* line 167, /app/source/stylesheets/includes/_book.scss */
+  .note li {
+    margin-bottom: 5px; }
+  /* line 170, /app/source/stylesheets/includes/_book.scss */
+  .note.chapter {
+    background: #e2e1e4;
+    background: -webkit-linear-gradient(125deg, #e2e0e9 0%, rgba(226, 224, 233, 0.5) 90%);
+    background: -webkit-linear-gradient(325deg, #e2e0e9 0%, rgba(226, 224, 233, 0.5) 90%);
+    background: linear-gradient(125deg, #e2e0e9 0%, rgba(226, 224, 233, 0.5) 90%); }
+  /* line 174, /app/source/stylesheets/includes/_book.scss */
+  .note p:last-child {
+    margin-bottom: 0; }
+
+/* line 179, /app/source/stylesheets/includes/_book.scss */
+.screenshot img {
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.25); }
+
+/* line 184, /app/source/stylesheets/includes/_book.scss */
+figure {
+  margin-bottom: 30px; }
+  /* line 187, /app/source/stylesheets/includes/_book.scss */
+  figure .not-used.pull-right {
+    float: right;
+    width: 400px;
+    margin: 0 0 40px 40px;
+    margin-right: -200px; }
+  /* line 193, /app/source/stylesheets/includes/_book.scss */
+  figure .not-used.pull-center {
+    width: 400px;
+    margin: 40px auto; }
+  /* line 197, /app/source/stylesheets/includes/_book.scss */
+  figure .not-used.pull-left {
+    float: left;
+    width: 400px;
+    margin: 0 40px 40px 0px;
+    margin-left: -200px;
+    clear: both; }
+
+/* line 207, /app/source/stylesheets/includes/_book.scss */
+pre, code, pre span, code span {
+  font-family: 'Source Code Pro', Courier, monospace;
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.5; }
+
+/* line 213, /app/source/stylesheets/includes/_book.scss */
+code {
+  background: #efeef0;
+  padding: 1px 5px; }
+
+/* line 217, /app/source/stylesheets/includes/_book.scss */
+pre {
+  padding: 20px;
+  background: #efeef0;
+  overflow: auto; }
+  /* line 223, /app/source/stylesheets/includes/_book.scss */
+  pre.all-new {
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-out;
+    -webkit-transition: all 300ms 0ms ease-out;
+    transition: all 300ms 0ms ease-out;
+    border-left: 4px solid transparent;
+    padding-left: 16px; }
+    /* line 227, /app/source/stylesheets/includes/_book.scss */
+    pre.all-new:hover {
+      background: #e8fae8;
+      border-left-color: #c5fcc5; }
+  /* line 232, /app/source/stylesheets/includes/_book.scss */
+  pre .line {
+    -webkit-transition: all 300ms 0ms;
+    -webkit-transition-delay: ease-out;
+    -webkit-transition: all 300ms 0ms ease-out;
+    transition: all 300ms 0ms ease-out;
+    display: block;
+    margin: 0 -20px 0 -20px;
+    padding-left: 20px; }
+    /* line 237, /app/source/stylesheets/includes/_book.scss */
+    pre .line.highlighted {
+      border-left: 4px solid transparent;
+      padding-left: 16px; }
+    /* line 241, /app/source/stylesheets/includes/_book.scss */
+    pre .line.deleted {
+      background: #fdd;
+      border-color: #f7bcbc; }
+  /* line 247, /app/source/stylesheets/includes/_book.scss */
+  pre .added {
+    background: #e8fae8;
+    border-color: #c5fcc5; }
+  /* line 252, /app/source/stylesheets/includes/_book.scss */
+  pre .browser-prompt {
+    color: #4289ff; }
+
+/* line 256, /app/source/stylesheets/includes/_book.scss */
+.caption {
+  padding: 10px;
+  background: #e2e1e4;
+  font-size: 14px;
+  color: #696873;
+  margin-top: -30px;
+  margin-bottom: 30px; }
+
+/* line 264, /app/source/stylesheets/includes/_book.scss */
+.commit {
+  padding: 20px;
+  margin-bottom: 30px;
+  /* For modern browsers */
+  /* For IE 6/7 (trigger hasLayout) */
+  *zoom: 1;
+  border: 4px solid #e2e1e4;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 30px 20px; }
+  /* line 3, /app/source/stylesheets/includes/_mixins.scss */
+  .commit:before, .commit:after {
+    content: "";
+    display: table; }
+  /* line 7, /app/source/stylesheets/includes/_mixins.scss */
+  .commit:after {
+    clear: both; }
+  /* line 275, /app/source/stylesheets/includes/_book.scss */
+  .commit img {
+    display: block;
+    float: left;
+    width: 40px;
+    margin: 0 15px 0 0;
+    display: none; }
+  /* line 284, /app/source/stylesheets/includes/_book.scss */
+  .commit .message {
+    float: left;
+    display: inline-block;
+    float: none; }
+  /* line 291, /app/source/stylesheets/includes/_book.scss */
+  .commit h4 {
+    margin: 0;
+    line-height: 1;
+    text-align: center; }
+  /* line 298, /app/source/stylesheets/includes/_book.scss */
+  .commit p {
+    margin: 0;
+    text-align: center; }
+  /* line 304, /app/source/stylesheets/includes/_book.scss */
+  .commit .actions {
+    padding-top: 10px; }
+    /* line 14, /app/source/stylesheets/ebook.scss */
+    .commit .actions .not-used {
+      float: right;
+      padding-top: 4px; }
+  /* line 313, /app/source/stylesheets/includes/_book.scss */
+  .commit a {
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    background: #e2e1e4;
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    display: inline-block;
+    font-size: 12px; }
+    /* line 319, /app/source/stylesheets/includes/_book.scss */
+    .commit a:nth-of-type(2n) {
+      margin-right: 0; }
+    /* line 322, /app/source/stylesheets/includes/_book.scss */
+    .commit a:hover {
+      background: #5e5873; }
+    /* line 14, /app/source/stylesheets/ebook.scss */
+    .commit a .not-used {
+      display: block;
+      float: left; }
+
+/* line 345, /app/source/stylesheets/includes/_book.scss */
+blockquote, blockquote p {
+  font-style: italic; }
+
+/* line 348, /app/source/stylesheets/includes/_book.scss */
+.marker {
+  font-family: 'source-code-pro', 'Source Code Pro' , monospace;
+  text-transform: uppercase;
+  -o-border-radius: 100px;
+  border-radius: 100px;
+  display: inline-block;
+  text-align: center;
+  font-size: 12px;
+  height: 20px;
+  line-height: 22px;
+  position: relative;
+  margin-left: 5px;
+  padding: 0px 10px;
+  font-weight: normal();
+  vertical-align: middle;
+  top: -5px; }
+
+/* line 365, /app/source/stylesheets/includes/_book.scss */
+.sidebar-marker {
+  background: #c9c5cf; }
+
+/* line 368, /app/source/stylesheets/includes/_book.scss */
+.special-marker {
+  background: #f3cc14; }
+
+/* line 371, /app/source/stylesheets/includes/_book.scss */
+.draft-marker {
+  background: #7ac0e4; }
+
+/* line 374, /app/source/stylesheets/includes/_book.scss */
+.issues {
+  padding: 20px;
+  text-align: center; }
+  /* line 377, /app/source/stylesheets/includes/_book.scss */
+  .issues .issue-link {
+    margin-bottom: 20px; }
+  /* line 380, /app/source/stylesheets/includes/_book.scss */
+  .issues hr {
+    margin-bottom: 20px;
+    border: 0;
+    height: 1px;
+    background: #c9c5cf; }
+  /* line 386, /app/source/stylesheets/includes/_book.scss */
+  .issues p {
+    margin: 0;
+    color: #413b52;
+    font-size: 14px; }
+
+/* line 392, /app/source/stylesheets/includes/_book.scss */
+.version-marker {
+  background: #c9c5cf; }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 200;
+  font-style: normal;
+  src: url(../fonts/SourceSansPro-Light.otf); }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/SourceSansPro-Regular.otf); }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  font-style: italic;
+  src: url(../fonts/SourceSansPro-It.otf); }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/SourceSansPro-Bold.otf); }
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/SourceCodePro-Regular.otf); }
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/SourceCodePro-Bold.otf); }
+
+@font-face {
+  font-family: 'klavika-web';
+  font-weight: 200;
+  font-style: normal;
+  src: url(../fonts/Klavika-Light.otf); }
+
+@font-face {
+  font-family: 'klavika-web';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/Klavika-Bold.otf); }
+
+/* line 73, /app/source/stylesheets/ebook.scss */
+.body {
+  font-family: 'Source Sans Pro'; }
+
+/* line 77, /app/source/stylesheets/ebook.scss */
+body, p {
+  font-size: 16px; }
+
+/* line 81, /app/source/stylesheets/ebook.scss */
+section, .section {
+  page-break-after: always;
+  padding-bottom: 40px; }
+
+/* line 86, /app/source/stylesheets/ebook.scss */
+h1 {
+  font-size: 30px; }
+
+/* line 89, /app/source/stylesheets/ebook.scss */
+h2 {
+  font-size: 24px; }
+
+/* line 92, /app/source/stylesheets/ebook.scss */
+h3 {
+  font-size: 18px; }
+
+/* line 95, /app/source/stylesheets/ebook.scss */
+h4 {
+  font-size: 16px; }
+
+/* line 105, /app/source/stylesheets/ebook.scss */
+.cover-page {
+  page-break-after: auto;
+  padding-bottom: 0; }
+  /* line 108, /app/source/stylesheets/ebook.scss */
+  .cover-page img {
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+    text-align: center; }
+
+/* line 116, /app/source/stylesheets/ebook.scss */
+.inner-cover .title {
+  margin: 200px 0 200px 0; }
+  /* line 118, /app/source/stylesheets/ebook.scss */
+  .inner-cover .title h1 {
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    margin: 0px;
+    font-size: 48px;
+    text-align: center; }
+    /* line 124, /app/source/stylesheets/ebook.scss */
+    .inner-cover .title h1 span {
+      font-weight: 200; }
+    /* line 128, /app/source/stylesheets/ebook.scss */
+    .inner-cover .title h1 strong {
+      font-weight: 700; }
+  /* line 133, /app/source/stylesheets/ebook.scss */
+  .inner-cover .title h2 {
+    margin: 0px 0 10px 0;
+    font-weight: 200;
+    text-align: center; }
+  /* line 138, /app/source/stylesheets/ebook.scss */
+  .inner-cover .title .version {
+    font-size: 14px;
+    text-align: center; }
+/* line 144, /app/source/stylesheets/ebook.scss */
+.inner-cover footer .credits {
+  margin: 0 0 40px 0; }
+  /* line 146, /app/source/stylesheets/ebook.scss */
+  .inner-cover footer .credits h3 {
+    font-size: 18px;
+    margin: 0; }
+  /* line 150, /app/source/stylesheets/ebook.scss */
+  .inner-cover footer .credits p {
+    margin: 0; }
+/* line 154, /app/source/stylesheets/ebook.scss */
+.inner-cover footer .site {
+  font-size: 24px; }
+
+/* line 160, /app/source/stylesheets/ebook.scss */
+.highlight, pre, .note, .commit {
+  page-break-inside: avoid; }
+
+/* line 163, /app/source/stylesheets/ebook.scss */
+.note {
+  background: #fcf9e2 !important; }
+  /* line 165, /app/source/stylesheets/ebook.scss */
+  .note h3, .note h4 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    border-bottom: none; }
+  /* line 170, /app/source/stylesheets/ebook.scss */
+  .note.chapter {
+    background: #e2e1e4 !important; }
+
+/* line 174, /app/source/stylesheets/ebook.scss */
+.sidebar-marker {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 6px;
+  height: 16px;
+  line-height: 16px;
+  position: relative;
+  top: -3px;
+  border-radius: 100px;
+  margin-left: 5px;
+  text-transform: uppercase; }
+
+/* line 186, /app/source/stylesheets/ebook.scss */
+pre, code {
+  word-wrap: break-word; }
+
+/* line 189, /app/source/stylesheets/ebook.scss */
+pre, code, pre span, code span {
+  font-size: 13px; }
+
+/* line 192, /app/source/stylesheets/ebook.scss */
+.commit {
+  text-align: center; }
+  /* line 194, /app/source/stylesheets/ebook.scss */
+  .commit .actions {
+    width: 245px;
+    margin: 0 auto 0 auto; }
+  /* line 198, /app/source/stylesheets/ebook.scss */
+  .commit a {
+    display: inline-block;
+    font-size: 12px;
+    width: 100px; }
+
+/* line 205, /app/source/stylesheets/ebook.scss */
+.screenshot img {
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25); }
+
+/* line 209, /app/source/stylesheets/ebook.scss */
+.sidebar {
+  display: none; }
+
+/* line 212, /app/source/stylesheets/ebook.scss */
+.post-nav {
+  display: none; }
+
+/* line 216, /app/source/stylesheets/ebook.scss */
+.diagram.pull-right, .diagram.pull-left {
+  width: 70%;
+  float: none;
+  margin: 0 auto 40px auto; }
+
+/* line 222, /app/source/stylesheets/ebook.scss */
+.portrait {
+  display: none !important; }
+
+/* line 226, /app/source/stylesheets/ebook.scss */
+.cta {
+  border: 10px solid #e2e1e4;
+  padding: 20px 40px;
+  margin-bottom: 100px; }
+  /* line 230, /app/source/stylesheets/ebook.scss */
+  .cta h2 {
+    font-weight: 200; }
+
+/* line 234, /app/source/stylesheets/ebook.scss */
+.translation-progress {
+  display: none; }
+
+/* line 239, /app/source/stylesheets/ebook.scss */
+.chapter-number {
+  top: 0px !important; }
+
+/* line 242, /app/source/stylesheets/ebook.scss */
+.toc-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+  /* line 246, /app/source/stylesheets/ebook.scss */
+  .toc-list .chapter-heading {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #c9c5cf; }
