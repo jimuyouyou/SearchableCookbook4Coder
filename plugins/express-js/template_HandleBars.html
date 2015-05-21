@@ -4,18 +4,22 @@
 	<meta charset="UTF-8">
 	<title>HandleBars</title>
 </head>
-<link rel="stylesheet" href="../../css/main.css">
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels:['depend', 'engine', 'iterate', 'object', 'script', 'block', 'execute', 'path', 'comments', 'helper', 'if-unless', 'each', 'with', 'lookup']
+	};
+	</script>
 <body>
+
+	<p>url: http://handlebarsjs.com/<p>
 	<table>
-		<tr>
-			<th>name</th>
-			<th>example</th>
-			<th>explanation</th>
-		</tr>
 		<tr>
 			<td>install</td>
 			<td>npm install hbs --save-dev</td>
-			<td>save to dev</td>
 		</tr>
 		<tr>
 			<td>dependencies</td>
@@ -26,7 +30,6 @@
 }					
 				</pre>
 			</td>
-			<td>devDependencies</td>
 		</tr>
 		<tr>
 			<td>template engine</td>
@@ -37,7 +40,6 @@ app.set('view engine', 'html');
 app.engine('html', hbs.__express);					
 				</pre>
 			</td>
-			<td>handler template engine</td>
 		</tr>
 		<tr>
 			<td>iteration</td>
@@ -49,7 +51,6 @@ app.engine('html', hbs.__express);
 {{/each}}					
 				</pre>
 			</td>
-			<td>iteration</td>
 		</tr>
 		<tr>
 			<td>object</td>
@@ -60,82 +61,350 @@ Published: {{blog.published}}
 Body: {{blog.body}}				
 				</pre>
 			</td>
-			<td>object properties</td>
+		</tr>
+		<tr>
+			<td>script</td>
+			<td>
+				<xmp>
+<script id="entry-template" type="text/x-handlebars-template">
+  <div class="entry">
+    <h1>{{title}}</h1>
+    <div class="body">
+      {{body}}
+    </div>
+  </div>
+</script>
+
+var source   = $("#entry-template").html();
+var template = Handlebars.compile(source);
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>execute</td>
+			<td>
+				<xmp>
+var context = {title: "My New Post", body: "This is my first post!"};
+var html    = template(context);
+
+results in:
+<div class="entry">
+  <h1>My New Post</h1>
+  <div class="body">
+    This is my first post!
+  </div>
+</div>
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>html escape</td>
+			<td>
+				<xmp>
+<div class="entry">
+  <h1>{{title}}</h1>
+  <div class="body">
+    {{{body}}}
+  </div>
+</div>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>block helper</td>
+			<td>
+				<xmp>
+{{#list people}}{{firstName}} {{lastName}}{{/list}}
+
+{
+  people: [
+    {firstName: "Yehuda", lastName: "Katz"},
+    {firstName: "Carl", lastName: "Lerche"},
+    {firstName: "Alan", lastName: "Johnson"}
+  ]
+}
+
+Handlebars.registerHelper('list', function(items, options) {
+  var out = "<ul>";
+
+  for(var i=0, l=items.length; i<l; i++) {
+    out = out + "<li>" + options.fn(items[i]) + "</li>";
+  }
+
+  return out + "</ul>";
+});
+
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>path</td>
+			<td>
+				<xmp>
+<h1>Comments</h1>
+
+<div id="comments">
+  {{#each comments}}
+  <h2><a href="/posts/{{../permalink}}#{{id}}">{{title}}</a></h2>
+  <div>{{body}}</div>
+  {{/each}}
+</div>
+
+<p>{{./name}} or {{this/name}} or {{this.name}}</p>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>comments</td>
+			<td>
+				<xmp>
+<div class="entry">
+  {{!-- only output this author names if an author exists --}}
+  {{#if author}}
+    <h1>{{firstName}} {{lastName}}</h1>
+  {{/if}}
+</div>
+
+<div class="entry">
+  {{! This comment will not be in the output }}
+  <!-- This comment will be in the output -->
+</div>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>registerHelper</td>
+			<td>
+				<xmp>
+<div class="post">
+  <h1>By {{fullName author}}</h1>
+  <div class="body">{{body}}</div>
+
+  <h1>Comments</h1>
+
+  {{#each comments}}
+  <h2>By {{fullName author}}</h2>
+  <div class="body">{{body}}</div>
+  {{/each}}
+</div>
+
+when using this context and helpers:
+
+var context = {
+  author: {firstName: "Alan", lastName: "Johnson"},
+  body: "I Love Handlebars",
+  comments: [{
+    author: {firstName: "Yehuda", lastName: "Katz"},
+    body: "Me too!"
+  }]
+};
+
+Handlebars.registerHelper('fullName', function(person) {
+  return person.firstName + " " + person.lastName;
+});
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>if-unless</td>
+			<td>
+				<xmp>
+If its argument returns false, undefined, null, "", 0, or [], Handlebars will not render the block. 
+<div class="entry">
+  {{#if author}}
+    <h1>{{firstName}} {{lastName}}</h1>
+  {{else}}
+    <h1>Unknown Author</h1>
+  {{/if}}
+</div>
+
+ You can use the unless helper as the inverse of the if helper. Its block will be rendered if the expression returns a falsy value.
+<div class="entry">
+  {{#unless license}}
+  <h3 class="warning">WARNING: This entry does not have a license!</h3>
+  {{/unless}}
+</div>
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>each</td>
+			<td>
+				<xmp>
+
+You can iterate over a list using the built-in each helper. Inside the block, you can use this to reference the element being iterated over.
+
+<ul class="people_list">
+  {{#each people}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+when used with this context:
+
+{
+  people: [
+    "Yehuda Katz",
+    "Alan Johnson",
+    "Charles Jolley"
+  ]
+}
+
+will result in:
+
+<ul class="people_list">
+  <li>Yehuda Katz</li>
+  <li>Alan Johnson</li>
+  <li>Charles Jolley</li>
+</ul>
+
+You can use the this expression in any context to reference the current context.
+You can optionally provide an {{else}} section which will display only when the list is empty.
+
+{{#each paragraphs}}
+  <p>{{this}}</p>
+{{else}}
+  <p class="empty">No content</p>
+{{/each}}
+
+When looping through items in each, you can optionally reference the current loop index via {{@index}}
+
+{{#each array}}
+  {{@index}}: {{this}}
+{{/each}}
+
+Additionally for object iteration, {{@key}} references the current key name:
+
+{{#each object}}
+  {{@key}}: {{this}}
+{{/each}}
+
+The first and last steps of iteration are noted via the @first and @last variables then iterating over an array. When iterating over an object only the @first is available.
+Nested each blocks may access the interation variables via depted paths. To access the parent index, for example, {{@../index}} can be used.
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>with</td>
+			<td>
+				<xmp>
+ You can shift the context for a section of a template by using the built-in with block helper.
+<div class="entry">
+  <h1>{{title}}</h1>
+
+  {{#with author}}
+  <h2>By {{firstName}} {{lastName}}</h2>
+  {{/with}}
+</div>
+
+
+You can optionally provide an {{else}} section which will display only when the passed value is empty.
+{{#with author}}
+  <p>{{name}}</p>
+{{else}}
+  <p class="empty">No content</p>
+{{/with}}
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>lookup</td>
+			<td>
+				<xmp>
+
+The lookup helper allows for dynamic parameter resolution using Handlebars variables. This is useful for resolving values for array indexes.
+{{#each bar}}
+  {{lookup ../foo @index}}
+{{/each}}
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>helper</td>
+			<td>
+				<xmp>
+Handlebars.registerHelper('link', function(text, url) {
+  url = Handlebars.escapeExpression(url);
+  text = Handlebars.escapeExpression(text);
+
+  return new Handlebars.SafeString(
+    "<a href='" + url + "'>" + text + "</a>"
+  );
+});
+
+You could use the exact same helper with dynamic text based on the value of story.text:
+{{{link story.text story.url}}}
+
+ Handlebars helpers can also receive an optional sequence of key-value pairs as their final parameter (referred to as hash arguments in the documentation):
+
+{{{link "See more..." href=story.url class="story"}}}
+
+The keys in hash arguments must each be simple identifiers, and the values are Handlebars expressions. This means that values can be simple identifiers, paths, or Strings.
+
+Handlebars.registerHelper('link', function(text, options) {
+  var attrs = [];
+
+  for (var prop in options.hash) {
+    attrs.push(
+        Handlebars.escapeExpression(prop) + '="'
+        + Handlebars.escapeExpression(options.hash[prop]) + '"');
+  }
+
+  return new Handlebars.SafeString(
+    "<a " + attrs.join(" ") + ">" + Handlebars.escapeExpression(text) + "</a>"
+  );
+});
+				</xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
 		</tr>
 	</table>
 </body>
