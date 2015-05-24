@@ -3,9 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>basic_crud</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
 	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
 	<script src='../../lib/table_search.js'></script>
-	<link rel="stylesheet" href="../../css/main.css">
+	<script>
+	var cfg = {
+		labels: ['$', 'save', 'select', 'insert', 'update', 'array']
+	};
+	</script>
 </head>
 <body>
 	<div>
@@ -167,28 +173,67 @@ db.books.update(
 			<td>$lte little or equal</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
+			<td>$inc</td>
+			<td>db.b.update({"uid" : "201203"},{"$inc":{"size" : 3}}); db.b.update({"uid" : "201203"},{"$inc":{"size" : -3}})</td>
+			<td>increament number values</td>
+		</tr>
+		<tr>
+			<td>$set</td>
+			<td>
+				<xmp>
+db.a.update({"uid" : "20120002","type" : "3"},{"$set":{"sname":"ssk"}})
+
+embedded document:
+db.c.findOne({"name":"toyota"})
+{
+        "_id" : ObjectId("5003be465af21ff428dafbe7"),
+        "name" : "toyota",
+        "type" : "suv",
+        "size" : {
+                "height" : 10,
+                "width" : 5,
+                "length" : 15
+        }
+}
+db.c.update({"name":"toyota"},{"$set":{"size.height":8}})					
+				</xmp>
+			</td>
+			<td>update</td>
+		</tr>
+		<tr>
+			<td>$unset</td>
+			<td>db.a.update({"uid" : "20120002","type" : "3"},{"$unset":{"num":0}})</td>
+			<td>remove one field</td>
+		</tr>
+		<tr>
+			<td>$push - array</td>
+			<td>
+<xmp>
+db.c.find()
+{ "_id" : ObjectId("5003be465af21ff428dafbe7"), "name" : "toyota", "size" : { "height" : 8,
+ "width" : 7, "length" : 15 }, "title" : [ "t1" ], "type" : "suv" }
+
+db.c.update({"name" : "toyota"},{$push:{"title":"t2"}})
+
+db.c.find()
+{ "_id" : ObjectId("5003be465af21ff428dafbe7"), "name" : "toyota", "size" : { "height" : 8,
+ "width" : 7, "length" : 15 }, "title" : [ "t1", "t2" ], "type" : "suv" }				
+ </xmp>
+			</td>
 			<td></td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
+			<td>$pop、$pull - array</td>
+			<td>
+				<xmp>
+{ "_id" : ObjectId("5003be465af21ff428dafbe7"), "name" : "toyota", "size" : { "height" : 8,
+ "width" : 7, "length" : 15 }, "title" : [ "t1", "t2", "t3", "t4" ],"type" : "suv" }
+
+db.c.update({"name" : "toyota"},{$pop:{"title":1}})
+db.c.update({"name" : "toyota"},{$pop:{"title":-1}})
+db.c.update({"name" : "toyota"},{$pull:{"title":"t2"}})					
+				</xmp>
+			</td>
 			<td></td>
 		</tr>
 		<tr>
