@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>oA-code-ref.html</title>
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+	<table>
+		<tr>
+			<td>exports</td>
+			<td>
+				<xmp>
+return exports object:					
+var canadianDollar = 0.91;
+function roundTwoDecimals(amount) {
+return Math.round(amount * 100) / 100;
+}
+exports.canadianToUS = function(canadian) {
+return roundTwoDecimals(canadian * canadianDollar);
+}
+exports.USToCanadian = function(us) {
+return roundTwoDecimals(us / canadianDollar);
+}					
+
+---------------------------------
+var currency = require('./currency');
+console.log('50 Canadian dollars equals this amount of US dollars:');
+console.log(currency.canadianToUS(50));
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp>
+return class:
+Currency.prototype.canadianToUS = function(canadian) {
+return this.roundTwoDecimals(canadian * this.canadianDollar);
+}
+Currency.prototype.USToCanadian = function(us) {
+return this.roundTwoDecimals(us / this.canadianDollar);
+}
+exports = Currency;
+
+---------------------------------					
+var Currency = require('./currency')
+, canadianDollar = 0.91;
+currency = new Currency(canadianDollar);
+console.log(currency.canadianToUS(50));
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
