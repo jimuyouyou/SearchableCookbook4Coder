@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>get-post.html</title>
+</head>
+<body>
+Get:
+	<xmp>	
+$.get('webapi/create', {
+	title : $('#title').val(),
+	content : $('#content').val()
+}, function(data) {
+	if (data) {
+		$('#result').html('You have just successfuly added one record!');
+		$('#result').show();
+	}
+});
+	</xmp>
+
+Post:
+<xmp>
+$.post('webapi/create', {
+	title : $('#title').val(),
+	content : $('#content').val()
+}, function(data) {
+	if (data) {
+		$('#result').html('You have just successfuly added one record!');
+		$('#result').show();
+	}
+});	
+</xmp>
+
+Post Serialize:
+<xmp>
+<script>
+	$(document).ready(function() {
+
+		$("#form").submit(function() {
+			var userName = $('#Name').val();
+			if ($.trim(userName).length > 0) {
+				var formData = $('#form').serialize();
+				$.post('formpost.jsp', formData, function(data) {
+					console.log('data: ' + data);
+				});
+			} // if
+			
+			return false;
+		}); // submit
+
+	}); // document
+</script>	
+</xmp>
+
+</body>
+</html>
