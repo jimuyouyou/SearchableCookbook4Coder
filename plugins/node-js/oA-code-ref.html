@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script type="text/javascript">
 	var cfg = {
-		labels: ['export', 'sync', 'function', 'mysql', 'event', 'listener', 'flow', 'serial', 'stream', 'audio', 'video', 'ol', 'opt', 'window'] 
+		labels: ['export', 'sync', 'function', 'mysql', 'event', 'listener', 'flow', 'serial', 'stream', 'sqlite', 'mysql', 'PostgreSQL', 'redis', 'Mongoose', 'mongodb', 'assert'] 
 	};
 	</script>
 </head>
@@ -343,57 +343,401 @@ function add(req, res) {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>sqlite</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+npm install sqlite
+
+var sqlite = require('sqlite')
+, db = new sqlite.Database();
+
+db.open('timetrack.sqlite', function(err) {
+	if (err) throw err;
+	db.execute(
+		"CREATE TABLE IF NOT EXISTS work (" + "id INTEGER PRIMARY KEY, " + "hours REAL DEFAULT 0, " + "date TEXT, " + "archived INTEGER DEFAULT 0, " + "description TEXT)",
+		function(err) {
+			if (err) throw err;
+			console.log('Server started...');
+			server.listen(3000, '127.0.0.1');
+		}
+	);
+});
+
+db.execute(
+	"INSERT INTO work (hours, date, description) " +
+	" VALUES (?, ?, ?)", [work.hours, work.date, work.description],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+db.execute(
+	"DELETE FROM work WHERE id=?", [work.id],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+db.execute(
+	"UPDATE work SET archived=1 WHERE id=?", [work.id],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+var query = "SELECT * FROM work " +
+	"WHERE archived=? " +
+	"ORDER BY date DESC";
+var archiveValue = (showArchived) ? 1 : 0;
+db.execute(
+	query, [archiveValue],
+	function(err, rows) {
+		if (err) throw err;
+		html = (showArchived) ? '' : '<a href="/archived">Archived Work</a><br/>';
+		html += exports.workHitlistHtml(rows);
+		html += exports.workFormHtml();
+		exports.sendHtml(res, html);
+	}
+);
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>mysql</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+npm install mysql
+
+var http = require('http'),
+	work = require('./lib/timetrack'),
+	mysql = require('mysql');
+var db = mysql.createClient({
+	user: 'myuser',
+	password: 'mypassword',
+});
+db.useDatabase('timetrack');
+
+db.query(
+	"CREATE TABLE IF NOT EXISTS work (" + "id INT(10) NOT NULL AUTO_INCREMENT, " + "hours DECIMAL(5,2) DEFAULT 0, " + "date DATE, " + "archived INT(1) DEFAULT 0, " + "description LONGTEXT," + "PRIMARY KEY(id))",
+	function(err) {
+		if (err) throw err;
+		console.log('Server started...');
+		server.listen(300, '127.0.0.1');
+	}
+);
+
+db.query(
+	"INSERT INTO work (hours, date, description) " +
+	" VALUES (?, ?, ?)", [work.hours, work.date, work.description],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+db.query(
+	"INSERT INTO users " +
+	"(name, age) VALUES (?, ?)", ['Rico', 23],
+	function(err, result) {
+		if (err) throw err;
+		console.log('New row ID is ' + result.insertId + '.');
+	}
+);
+
+db.query(
+	"SELECT * FROM users",
+	function(err, results, fields) {
+		if (err) throw err;
+		for (var index in results) {
+			console.log(results[index].name);
+		}
+		client.end();
+	}
+);
+
+db.end();					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>PostgreSQL</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+npm install pg
+
+var pg = require('pg');
+var conString = "tcp://myuser:mypassword@localhost:5432/mydatabase";
+var client = new pg.Client(conString);
+client.connect();
+
+client.query(
+	'INSERT INTO users ' +
+	"(name) VALUES ('Mike')"
+);
+
+client.query(
+	"INSERT INTO users " +
+	"(name, age) VALUES ($1, $2)", ['Mike', 39]
+);
+
+var query = client.query(
+	"SELECT * FROM users WHERE age > $1", [40]
+);
+query.on('row', function(row) {
+	Handle
+	return of a
+	console.log(row.name)
+	row
+});
+query.on('end', function() {
+	Handle query
+	client.end();
+	completion
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>redis</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+npm install redis
+npm install hiredis
+npm rebuild hiredis
+
+var redis = require('redis'),
+	client = redis.createClient(6379, '127.0.0.1');
+client.on('error', function(err) {
+	console.log('Error ' + err);
+});
+
+client.set('color', 'red', redis.print);
+var keyValue = client.get('color', function(err, value) {
+	if (err) throw err;
+	console.log('Got: ' + value);
+});
+
+client.hset('camping', 'shelter', '2-person tent', redis.print);
+client.hset('camping', 'cooking', 'campstove', redis.print);
+client.hget('camping', 'cooking', function(err, value) {
+	console.log('Will be cooking with: ' + value);
+});
+client.hkeys('camping', function(err, keys) {
+	if (err) throw err;
+	keys.forEach(function(key, i) {
+		console.log(' ' + key);
+	});
+});
+
+client.lpush('tasks', 'Paint the bikeshed red.', redis.print);
+client.lpush('tasks', 'Paint the bikeshed green.', redis.print);
+client.lrange('tasks', 0, -1, function(err, items) {
+	if (err) throw err;
+	items.forEach(function(item, i) {
+		console.log(' ' + item);
+	});
+});
+
+client.sadd('ip_addresses', '204.10.37.96', redis.print);
+client.sadd('ip_addresses', '204.10.37.96', redis.print);
+client.sadd('ip_addresses', '72.32.231.8', redis.print);
+client.smembers('ip_addresses', function(err, members) {
+	if (err) throw err;
+	console.log(members);
+});
+
+var redis = require('redis'),
+	clientA = redis.createClient(),
+	clientB = redis.createClient();
+clientA.on('message', function(channel, message) {
+	console.log('Client A got message from channel %s: %s',
+		channel,
+		message
+	);
+});
+clientA.on('subscribe', function(channel, count) {
+	clientB.publish('main_chat_room', 'Hello world!');
+});
+clientA.subscribe('main_chat_room');					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>mongodb</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+npm install mongodb
+
+var mongodb = require('mongodb'),
+	server = new mongodb.Server('127.0.0.1', 27017, {});
+var client = new mongodb.Db('mtest', server);
+
+client.open(function(err) {
+	client.collection('test_insert', function(err, collection) {
+		if (err) throw err;
+		console.log('We are now able to perform queries.');
+
+		collection.insert({
+			a: 2
+		}, {
+			safe: true
+		}, function(err, documents) {
+			if (err) throw err;
+			console.log('Document ID is: ' + documents[0]._id);
+		});
+
+		var _id = new client.bson_serializer
+			.ObjectID('4e650d344ac74b5a01000001');
+		collection.update({
+				_id: _id
+			}, {
+				$set: {
+					a: 3
+				}
+			}, {
+				safe: true
+			},
+			function(err) {
+				if (err) throw err;
+			}
+		);
+
+		collection.find({
+			a: 2
+		}).toArray(function(err, results) {
+			if (err) throw err;
+			console.log(results);
+		});
+
+		var _id = new client
+			.bson_serializer
+			.ObjectID('4e6513f0730d319501000001');
+		collection.remove({
+			_id: _id
+		}, {
+			safe: true
+		}, function(err) {
+			if (err) throw err;
+		});
+	});
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Mongoose</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+npm install mongoose
+
+var mongoose = require('mongoose'),
+	db = mongoose.connect('mongodb://localhost/tasks');
+
+mongoose.disconnect();
+
+var Schema = mongoose.Schema;
+var Tasks = new Schema({
+	project: String,
+	description: String
+});
+mongoose.model('Task', Tasks);
+
+var Task = mongoose.model('Task');
+var task = new Task();
+task.project = 'Bikeshed';
+task.description = 'Paint the bikeshed red.';
+task.save(function(err) {
+	if (err) throw err;
+	console.log('Task saved.');
+});
+
+var Task = mongoose.model('Task');
+Task.find({
+	'project': 'Bikeshed'
+}).each(function(err, task) {
+	if (task != null) {
+		console.log('ID:' + task._id);
+		console.log(task.description);
+	}
+});
+
+var Task = mongoose.model('Task');
+Task.update({
+		_id: '4e65b793d0cf5ca508000001'
+	}, {
+		description: 'Paint the bikeshed green.'
+	}, {
+		multi: false
+	},
+	function(err, rows_updated) {
+		if (err) throw err;
+		console.log('Updated.');
+	}
+);
+
+var Task = mongoose.model('Task');
+Task.findById('4e65b3dce1592f7d08000001', function(err, task) {
+	task.remove();
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>assert</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var assert = require('assert');
+
+assert.equal(
+	todos.length,
+	0,
+	'Failure: there should be no todos after deleting them'
+);
+
+assert.notEqual(
+	todos.length,
+	0,
+	'Failure: there should be one todo'
+);
+
+In addition to equal and notEqual functionality, the assert module offers strict versions of the above called: strictEqual and strictNotEqual.
+These use the strict equality operator("===") rather than the more permissive "==".
+
+For the comparison of objects, the assert module offers deepEqual and notDeepEqual.
+
+assert.ok(
+	unfinished,
+	'Failure: todos should be unfinished'
+);					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Expresso</td>
 			<td>
-				<xmp></xmp>
+				npm install -g expresso
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>nodeunit</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+git clone https://github.com/caolan/nodeunit.git
+	cd nodeunit
+make browser
+
+exports.testPony = function(test) {
+	test.expect(2);
+	if (false) {
+		test.ok(false, 'This should not have passed.');
+	}
+	test.ok(true, 'This should have passed.');
+	test.done();
+}					
+				</xmp>
 			</td>
 		</tr>
 	</table>
