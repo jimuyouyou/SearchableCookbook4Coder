@@ -3,9 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>oA-code-ref.html</title>
-	<script src='../../lib/jquery-1.8.0.min.js'></script>
-	<script src='../../lib/table_search.js'></script>
 	<link rel="stylesheet" href="../../css/main.css">
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script type="text/javascript">
+	var cfg = {
+		labels: ['export', 'sync', 'function', 'mysql', 'event', 'listener', 'flow', 'serial', 'stream', 'audio', 'video', 'ol', 'opt', 'window'] 
+	};
+	</script>
 </head>
 <body>
 	<table>
@@ -54,57 +60,286 @@ console.log(currency.canadianToUS(50));
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>asyncFunction</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+function asyncFunction(callback) {
+	setTimeout(function() {
+		callback()
+	}, 200);
+}
+var color = 'blue';
+(function(color) {
+	asyncFunction(function() {
+		console.log('The color is ' + color);
+	})
+})(color);
+color = 'green';					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>callback-mysql</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var http = require('http'),
+	mysql = require('mysql');
+var client = mysql.createClient({
+	user: 'myuser',
+});
+client.useDatabase('blog');
+
+http.createServer(function(req, res) {
+	if (req.url == '/') {
+		client.query("SELECT * FROM posts ORDER BY timestamp DESC LIMIT 5",
+			function(err, results, fields) {
+				if (err) throw err;
+				var output = '<html><head></head><body>' +
+					'<h1>Latest Posts</h1>' +
+					'<ul>';
+				for (var index in results) {
+					output += '<li>' + results[index].title + '</li>';
+				}
+				output += '</ul></body></html>';
+				res.writeHead(200, {
+					'Content-Type': 'text/html'
+				});
+				res.end(output);
+			}
+		);
+	}
+}).listen(8000, "127.0.0.1");				
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>nesting functions</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+someAsyncFunction('data', function(text) {
+	anotherAsyncFunction(text, function(text) {
+		yetAnotherAsyncFunction(text, function(text) {
+			console.log(text);
+		});
+	});
+});
+
+traditional way of handling nesting logic:
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function handleResult(text) {
+	console.log(text);
+}
+
+function innerLogic(text) {
+	yetAnotherAsyncFunction(text, handleResult);
+}
+
+function outerLogic(text) {
+	anotherAsyncFunction(text, innerLogic);
+}
+someAsyncFunction('data', outerLogic);					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Event listener</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+// events
+var events = require('events');
+var channel = new events.EventEmitter();
+channel.on('join', function() {
+	console.log("Welcome!");
+});
+
+channel.emit('join');	
+
+
+// remove listener
+channel.removeListener('broadcast', this.subscriptions[id]);
+channel.removeAllListeners('broadcast');
+
+
+// error
+var events = require('events');
+var myEmitter = new events.EventEmitter();
+myEmitter.on('error', function(err) {
+	console.log('ERROR: ' + err.message);
+});
+myEmitter.emit('error', new Error('Something is wrong.'));
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>listener</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+channel.on('join', function(id, client) {
+var welcome = "Welcome!\n" + 'Guests online: ' + this.listeners('broadcast').length;
+client.write(welcome + "\n");
+
+channel.setMaxListeners(50);					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>EXTENDING THE EVENT EMITTER</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+function Watcher(watchDir, processedDir) {
+	this.watchDir = watchDir;
+	this.processedDir = processedDir;
+}
+
+var events = require('events');
+Watcher.prototype = new events.EventEmitter();
+
+var fs = require('fs'),
+	watchDir = './watch',
+	processedDir = './done';
+Watcher.prototype.watch = function() {
+	var watcher = this;
+	fs.readdir(this.watchDir, function(err, files) {
+		if (err) throw err;
+		for (index in files) {
+			watcher.emit('process', files[index]);
+		}
+	})
+}
+Watcher.prototype.start = function() {
+	var watcher = this;
+	fs.watchFile(watchDir, function() {
+		watcher.watch();
+	});
+}
+
+var watcher = new Watcher(watchDir, processedDir);
+watcher.on('process', function process(file) {
+	var watchFile = this.watchDir + '/' + file;
+	var processedFile = this.processedDir + '/' + file.toLowerCase();
+	fs.rename(watchFile, processedFile, function(err) {
+		if (err) throw err;
+	});
+});
+
+watcher.start();
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>serial - parallel flow control</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+callback:
+	setTimeout(function() {
+		console.log('I execute first.');
+		setTimeout(function() {
+			console.log('I execute next.');
+			setTimeout(function() {
+				console.log('I execute last.');
+			}, 100);
+		}, 500);
+	}, 1000);
+
+serial_control_with_tool.js: serial control using a community - created add - on:
+	var flow = require('nimble');
+flow.series([
+	function(callback) {
+		setTimeout(function() {
+			console.log('I execute first.');
+			callback();
+		}, 1000);
+	},
+	function(callback) {
+		setTimeout(function() {
+			console.log('I execute next.');
+			callback();
+		}, 500);
+	},
+	function(callback) {
+		setTimeout(function() {
+			console.log('I execute last.');
+			callback();
+		}, 100);
+	}
+]);			
+
+parellel in nimble:
+var flow = require('nimble'),
+	exec = require('child_process').exec;
+
+function downloadNodeVersion(version, destination, callback) {
+	Download Node
+	var url = 'http://nodejs.org/dist/node-v' + version + '.tar.gz';
+	source code
+	for a
+	var filepath = destination + '/' + version + '.tgz';
+	exec('wget ' + url + ' -O ' + filepath, callback);
+}
+
+flow.series([
+	function(callback) {
+		tasks in sequence
+		flow.parallel([
+			Execute downloads
+
+			function(callback) { in parallel
+				console.log('Downloading Node v0.4.6...');
+				downloadNodeVersion('0.4.6', '/tmp', callback);
+			},
+			function(callback) {
+				console.log('Downloading Node v0.4.7...');
+				downloadNodeVersion('0.4.7', '/tmp', callback);
+			}
+		], callback);
+	},
+	function(callback) {
+		console.log('Creating archive of downloaded files...');
+		exec(
+			Create archive flile 'tar cvf node_distros.tar /tmp/0.4.6.tgz /tmp/0.4.7.tgz',
+			function(error, stdout, stderr) {
+				console.log('All done!');
+				callback();
+			}
+		);
+	}
+]);		
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>stream pipe</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var server = http.createServer(function(req, res) {
+	var url = parse(req.url);
+	var path = join(root, url.pathname);
+	var stream = fs.createReadStream(path);
+	stream.pipe(res);
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>querystring</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var qs = require('querystring');
+
+function add(req, res) {
+	var body = '';
+	req.setEncoding('utf8');
+	req.on('data', function(chunk) {
+		body += chunk
+	});
+	req.on('end', function() {
+		var obj = qs.parse(body);
+		items.push(obj.item);
+		show(res);
+	});
+}					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
