@@ -740,6 +740,151 @@ exports.testPony = function(test) {
 				</xmp>
 			</td>
 		</tr>
+		<tr>
+			<td>connect</td>
+			<td>
+				<xmp>
+npm install connect		
+
+function logger(req, res, next) {
+	console.log('%s %s', req.method, req.url);
+	next();
+}
+
+function hello(req, res) {
+	res.setHeader('Content-Type', 'text/plain');
+	res.end('hello world');
+}
+
+var http = require('http');
+var connect = require('connect');
+var app = connect();
+app.use(logger).use(hello);
+
+var app = connect()
+	.use(logger)
+	.use('/admin', restrict)
+	.use('/admin', admin)
+	.use(hello);
+	
+http.createServer(app).listen(3000);			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>socket</td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
 	</table>
 </body>
 </html>
