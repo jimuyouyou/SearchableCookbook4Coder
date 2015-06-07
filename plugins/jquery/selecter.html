@@ -5,7 +5,7 @@
 	<title>selector</title>
 </head>
 <body>
-	<pre>
+	<xmp>
 		$('pre').show; $('p').hide();
 		$("input[id^='code']");//id属性以code开始的所有input标签
 		$("input[id$='code']");//id属性以code结束的所有input标签
@@ -38,6 +38,8 @@
 		$(Obj).next("div");//获取$Obj标签的后面紧邻的一个div，nextAll获取所有
 		$('parent > child')，只选择 parent 的子元素（下一级元素），不对子元素以下的元素进行选择
 		$(Obj).children("input").length; //获得$Obj下一级节点的input个数
+		$("#foo").one("click", function() {	alert("This will be displayed only once."); });
+
 
 	function loadMsg() {
 		$('#m1').val(localStorage.getItem("m1-1"));
@@ -64,6 +66,7 @@
 		loadMsg();
 	});
 
-	</pre>
+	</xmp>
+
 </body>
 </html>

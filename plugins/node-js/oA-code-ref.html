@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script type="text/javascript">
 	var cfg = {
-		labels: ['export', 'sync', 'function', 'mysql', 'event', 'listener', 'flow', 'serial', 'stream', 'sqlite', 'mysql', 'PostgreSQL', 'redis', 'Mongoose', 'mongodb', 'assert'] 
+		labels: ['export', 'sync', 'function', 'mysql', 'event', 'listener', 'flow', 'serial', 'stream', 'sqlite', 'mysql', 'PostgreSQL', 'redis', 'Mongoose', 'mongodb', 'assert', 'file'] 
 	};
 	</script>
 </head>
@@ -772,15 +772,48 @@ http.createServer(app).listen(3000);
 			</td>
 		</tr>
 		<tr>
-			<td>socket</td>
+			<td>file</td>
 			<td>
-				<xmp></xmp>
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<xmp></xmp>
+				<xmp>
+Currently there are 3 ways to write a file:
+1. fs.write(fd, buffer, offset, length, position, [callback])
+You need to wait for the callback to ensure that the buffer is written to disk. It's not buffered.
+var path = 'public/uploads/file.txt',
+buffer = new Buffer("some content\n");
+fs.open(path, 'w', function(err, fd) {
+    if (err) {
+        throw 'error opening file: ' + err;
+    }
+
+    fs.write(fd, buffer, 0, buffer.length, null, function(err) {
+        if (err) throw 'error writing file: ' + err;
+        fs.close(fd, function() {
+            console.log('file written');
+        })
+    });
+});
+
+2. fs.writeFile(filename, data, [encoding], [callback])
+All data must be stored at the same time; you cannot perform sequential writes.
+var fs = require('fs');
+fs.writeFile("/tmp/test", "Hey there!", function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
+
+3. fs.createWriteStream(path, [options])
+Creates a WriteStream, which is convenient because you don't need to wait for a callback. But again, it's not buffered.
+var fs = require('fs');
+var stream = fs.createWriteStream("my_file.txt");
+stream.once('open', function(fd) {
+  stream.write("My first row\n");
+  stream.write("My second row\n");
+  stream.end();
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
