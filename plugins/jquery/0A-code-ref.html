@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['selector', 'noConflict', 'events', 'fade', 'slide', 'animate', 'curl', 'tar', 'jar', '7z', 'ssh', 'keyring', 'date']
+		labels: ['selector', 'noConflict', 'events', 'fade', 'slide', 'animate', 'append', 'remove', 'css', 'Dimensions', 'dom', 'ajax', 'date']
 	};
 	</script>
 </head>
@@ -282,39 +282,146 @@ $("button").click(function(){
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>append prepend after before</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+append() - Inserts content at the end of the selected elements
+prepend() - Inserts content at the beginning of the selected elements
+after() - Inserts content after the selected elements
+before() - Inserts content before the selected elements
+
+$("p").append("Some appended text.");
+$("p").prepend("Some prepended text.");
+$("p").append(txt1, txt2, txt3);         // Append the new elements 
+
+$("img").after("Some text after");
+$("img").before("Some text before");
+$("img").after(txt1, txt2, txt3);          // Insert new elements after <img>					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>remove</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+remove() - Removes the selected element (and its child elements)
+empty() - Removes the child elements from the selected element
+
+$("#div1").remove();
+$("#div1").empty();
+$("p").remove(".test"); // all <p> elements with class="test"
+$("p").remove(".test, .demo"); // removes all <p> elements with class="test" and class="demo"					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>css</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$("h1, h2, p").addClass("blue");
+$("#div1").addClass("important blue");
+
+$("h1, h2, p").removeClass("blue");
+$("h1, h2, p").toggleClass("blue");
+
+$("p").css("background-color");
+$("p").css("background-color", "yellow");
+$("p").css({
+	"background-color": "yellow",
+	"font-size": "200%"
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Dimensions</td>
 			<td>
-				<xmp></xmp>
+<img src="lib/img_jquerydim.gif" alt="">				
+				<xmp>
+txt += "Width: " + $("#div1").width() + "</br>";
+txt += "Height: " + $("#div1").height();
+txt += "Inner width: " + $("#div1").innerWidth() + "</br>";
+txt += "Inner height: " + $("#div1").innerHeight();
+txt += "Outer width: " + $("#div1").outerWidth() + "</br>";
+txt += "Outer height: " + $("#div1").outerHeight();
+txt += "Outer width (+margin): " + $("#div1").outerWidth(true) + "</br>";
+txt += "Outer height (+margin): " + $("#div1").outerHeight(true);
+txt += "Document width/height: " + $(document).width();
+txt += "x" + $(document).height() + "\n";
+txt += "Window width/height: " + $(window).width();
+txt += "x" + $(window).height();
+
+$("#div1").width(500).height(500);
+
+url: http://www.w3schools.com/jquery/jquery_dimensions.asp
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>dom</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+ $("span").parent(); // returns the direct parent element of the selected element.
+ $("span").parents(); // returns all ancestors of all <span> elements
+ $("span").parents("ul"); // all <span> elements that are <ul> elements
+ $("span").parentsUntil("div"); // all ancestor elements between a <span> and a <div> element
+
+ $("div").children(); // all elements that are direct children of each <div> elements
+ $("div").children("p.1"); // returns all <p> elements with the class name "1", that are direct children of <div>
+ $("div").find("span"); // all <span> elements that are descendants of <div>
+ $("div").find("*"); // all descendants of <div>
+
+ $("h2").siblings(); // all sibling elements of <h2>:
+ $("h2").siblings("p"); // all sibling elements of <h2> that are <p> elements:
+ $("h2").next(); //  the next sibling of <h2>
+ $("h2").nextAll(); // returns all next sibling elements of <h2>:
+ $("h2").nextUntil("h6"); // all sibling elements between a <h2> and a <h6> element:
+ prev(), prevAll() and prevUntil() methods work just like the methods above but with reverse functionality
+
+ $("div p").first(); // first <p> element inside the first <div> element
+ $("div p").last(); // last <p> element inside the last <div> element:
+ $("p").eq(1); // selects the second <p> element (index number 1):
+ $("p").filter(".intro"); // returns all <p> elements with class name "intro":
+ $("p").not(".intro"); // returns all <p> elements that do not have class name "intro":					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>ajax</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$(selector).load(URL, data, callback);
+The required URL parameter specifies the URL you wish to load.
+The optional data parameter specifies a set of querystring key / value pairs to send along with the request.
+The optional callback parameter is the name of a
+
+function to be executed after the load() method is completed.
+
+$("#div1").load("demo_test.txt");
+$("#div1").load("demo_test.txt #p1"); // loads the content of the element with id="p1", inside the file "demo_test.txt", into a specific <div> element:
+$("#div1").load("demo_test.txt", function(responseTxt, statusTxt, xhr) {
+	if (statusTxt == "success")
+		alert("External content loaded successfully!");
+	if (statusTxt == "error")
+		alert("Error: " + xhr.status + ": " + xhr.statusText);
+});
+
+$.get(URL, callback);
+$.get("demo_test.asp", function(data, status) {
+	alert("Data: " + data + "\nStatus: " + status);
+});
+
+$.post(URL, data, callback);
+$("button").click(function() {
+	$.post("demo_test_post.asp", {
+			name: "Donald Duck",
+			city: "Duckburg"
+		},
+		function(data, status) {
+			alert("Data: " + data + "\nStatus: " + status);
+		});
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
@@ -348,6 +455,7 @@ $("button").click(function(){
 			</td>
 		</tr>
 	</table>
+
 	
 </body>
 </html>
