@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jasmine.js</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/table_search.js'></script>
+</head>
+<body>
+	<p>url: http://jasmine.github.io/2.3/introduction.html </p>
+
+	<div id="container">
+<div class="title-banner">
+<div class="powered-container"><span class="powered">Powered by</span></div>
+</div>
+<ul class="jump_to">
+<li>Jump To:</li>
+<li><a class="source" href="http://jasmine.github.io/2.3/ajax.html">ajax.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/boot.html">boot.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/custom_boot.html">custom_boot.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/custom_equality.html">custom_equality.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/custom_matcher.html">custom_matcher.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/custom_reporter.html">custom_reporter.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/focused_specs.html">focused_specs.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/introduction.html">introduction.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/node.html">node.js</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/python_egg.html">python_egg.py</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/ruby_gem.html">ruby_gem.rb</a></li>
+<li><a class="source" href="http://jasmine.github.io/2.3/upgrading.html">upgrading.js</a></li>
+</ul>
+<table cellspacing="0" cellpadding="0">
+<thead>
+<tr>
+<th class="docs">
+<h1>introduction.js</h1>
+</th>
+<th class="code">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr id="section-Standalone_Distribution">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Standalone_Distribution">&para;</a></div>
+<p>Jasmine is a behavior-driven development framework for testing JavaScript code. It does not depend on any other JavaScript frameworks. It does not require a DOM. And it has a clean, obvious syntax so that you can easily write tests. This guide is running against Jasmine version <span class="version">2.3.0</span>.</p>
+<h2>Standalone Distribution</h2>
+<p>The <a href="https://github.com/pivotal/jasmine/releases">releases page</a> has links to download the standalone distribution, which contains everything you need to start running Jasmine. After downloading a particular version and unzipping, opening <code>SpecRunner.html</code> will run the included specs. You&rsquo;ll note that both the source files and their respective specs are linked in the <code>&lt;head&gt;</code> of the <code>SpecRunner.html</code>. To start using Jasmine, replace the source/spec files with your own.</p>
+<h2>Suites: <code>describe</code> Your Tests</h2>
+<p>A test suite begins with a call to the global Jasmine function <code>describe</code> with two parameters: a string and a function. The string is a name or title for a spec suite &ndash; usually what is being tested. The function is a block of code that implements the suite.</p>
+<h2>Specs</h2>
+<p>Specs are defined by calling the global Jasmine function <code>it</code>, which, like <code>describe</code> takes a string and a function. The string is the title of the spec and the function is the spec, or test. A spec contains one or more expectations that test the state of the code. An expectation in Jasmine is an assertion that is either true or false. A spec with all true expectations is a passing spec. A spec with one or more false expectations is a failing spec.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A suite"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"contains spec with an expectation"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-It&amp;rsquo;s_Just_Functions">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-It&amp;rsquo;s_Just_Functions">&para;</a></div>
+<h3>It&rsquo;s Just Functions</h3>
+<p>Since <code>describe</code> and <code>it</code> blocks are functions, they can contain any executable code necessary to implement the test. JavaScript scoping rules apply, so variables declared in a <code>describe</code> are available to any <code>it</code> block inside the suite.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A suite is just a function"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"and so is a spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">a</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Expectations">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Expectations">&para;</a></div>
+<h2>Expectations</h2>
+<p>Expectations are built with the function <code>expect</code> which takes a value, called the actual. It is chained with a Matcher function, which takes the expected value.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"The 'toBe' matcher compares with ==="</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Matchers">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Matchers">&para;</a></div>
+<h3>Matchers</h3>
+<p>Each matcher implements a boolean comparison between the actual value and the expected value. It is responsible for reporting to Jasmine if the expectation is true or false. Jasmine will then pass or fail the spec.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"and has a positive case"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-5">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-5">&para;</a></div>
+<p>Any matcher can evaluate to a negative assertion by chaining the call to <code>expect</code> with a <code>not</code> before calling the matcher.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"and can have a negative case"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">false</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Included_Matchers">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Included_Matchers">&para;</a></div>
+<h3>Included Matchers</h3>
+<p>Jasmine has a rich set of matchers included. Each is used here &ndash; all expectations and specs pass. There is also the ability to write <a href="http://jasmine.github.io/2.3/custom_matcher.html">custom matchers</a> for when a project&rsquo;s domain calls for specific assertions that are not included below.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"Included matchers:"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBe' matcher compares with ==="</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"The 'toEqual' matcher"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"works for simple literals and variables"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"should work for objects"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">a</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nx">b</span><span class="o">:</span> <span class="mi">34</span>
+      <span class="p">};</span>
+      <span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">a</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+        <span class="nx">b</span><span class="o">:</span> <span class="mi">34</span>
+      <span class="p">};</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toMatch' matcher is for regular expressions"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="s2">"foo bar baz"</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">message</span><span class="p">).</span><span class="nx">toMatch</span><span class="p">(</span><span class="sr">/bar/</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">message</span><span class="p">).</span><span class="nx">toMatch</span><span class="p">(</span><span class="s2">"bar"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">message</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toMatch</span><span class="p">(</span><span class="sr">/quux/</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeDefined' matcher compares against `undefined`"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">foo</span><span class="o">:</span> <span class="s2">"foo"</span>
+    <span class="p">};</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">bar</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeDefined</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The `toBeUndefined` matcher compares against `undefined`"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">foo</span><span class="o">:</span> <span class="s2">"foo"</span>
+    <span class="p">};</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">foo</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeUndefined</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toBeUndefined</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeNull' matcher compares against null"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="s2">"foo"</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">null</span><span class="p">).</span><span class="nx">toBeNull</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toBeNull</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeNull</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeTruthy' matcher is for boolean casting testing"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">foo</span> <span class="o">=</span> <span class="s2">"foo"</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeTruthy</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeFalsy' matcher is for boolean casting testing"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">foo</span> <span class="o">=</span> <span class="s2">"foo"</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toBeFalsy</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeFalsy</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toContain' matcher is for finding an item in an Array"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"foo"</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">];</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">toContain</span><span class="p">(</span><span class="s2">"bar"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toContain</span><span class="p">(</span><span class="s2">"quux"</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeLessThan' matcher is for mathematical comparisons"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pi</span> <span class="o">=</span> <span class="mf">3.1415926</span><span class="p">,</span>
+      <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.78</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">e</span><span class="p">).</span><span class="nx">toBeLessThan</span><span class="p">(</span><span class="nx">pi</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pi</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeLessThan</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeGreaterThan' matcher is for mathematical comparisons"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pi</span> <span class="o">=</span> <span class="mf">3.1415926</span><span class="p">,</span>
+      <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.78</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pi</span><span class="p">).</span><span class="nx">toBeGreaterThan</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">e</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeGreaterThan</span><span class="p">(</span><span class="nx">pi</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toBeCloseTo' matcher is for precision math comparison"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pi</span> <span class="o">=</span> <span class="mf">3.1415926</span><span class="p">,</span>
+      <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.78</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pi</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toBeCloseTo</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">pi</span><span class="p">).</span><span class="nx">toBeCloseTo</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toThrow' matcher is for testing if a function throws an exception"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toThrow</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toThrow</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"The 'toThrowError' matcher is for testing a specific thrown exception"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s2">"foo bar baz"</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toThrowError</span><span class="p">(</span><span class="s2">"foo bar baz"</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toThrowError</span><span class="p">(</span><span class="sr">/bar/</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toThrowError</span><span class="p">(</span><span class="nx">TypeError</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toThrowError</span><span class="p">(</span><span class="nx">TypeError</span><span class="p">,</span> <span class="s2">"foo bar baz"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Grouping_Related_Specs_with_&lt;code&gt;describe&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Grouping_Related_Specs_with_%3Ccode%3Edescribe%3C/code%3E">&para;</a></div>
+<h2>Grouping Related Specs with <code>describe</code></h2>
+<p>The <code>describe</code> function is for grouping related specs. The string parameter is for naming the collection of specs, and will be concatenated with specs to make a spec&rsquo;s full name. This aids in finding specs in a large suite. If you name them well, your specs read as full sentences in traditional <a href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> style.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"is just a function, so it can contain any code"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">foo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"can have more than one expectation"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">foo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Setup_and_Teardown">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Setup_and_Teardown">&para;</a></div>
+<h3>Setup and Teardown</h3>
+<p>To help a test suite DRY up any duplicated setup and teardown code, Jasmine provides the global <code>beforeEach</code>, <code>afterEach</code>, <code>beforeAll</code>, and <code>afterAll</code> functions.</p>
+</td>
+<td class="code">&nbsp;</td>
+</tr>
+<tr id="section-9">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-9">&para;</a></div>
+<p>As the name implies, the <code>beforeEach</code> function is called once before each spec in the <code>describe</code> is run, and the <code>afterEach</code> function is called once after each spec.</p>
+<p>Here is the same set of specs written a little differently. The variable under test is defined at the top-level scope &mdash; the <code>describe</code> block &mdash; and initialization code is moved into a <code>beforeEach</code> function. The <code>afterEach</code> function resets the variable before continuing.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spec using beforeEach and afterEach"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">afterEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"is just a function, so it can contain any code"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"can have more than one expectation"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-10">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-10">&para;</a></div>
+<p>The <code>beforeAll</code> function is called only once before all the specs in <code>describe</code> are run, and the <code>afterAll</code> function is called after all specs finish. These functions can be used to speed up test suites with expensive setup and teardown.</p>
+<p>However, be careful using <code>beforeAll</code> and <code>afterAll</code>! Since they are not reset between specs, it is easy to accidentally leak state between your specs so that they erroneously pass or fail.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spec using beforeAll and afterAll"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">;</span>
+
+  <span class="nx">beforeAll</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">afterAll</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"sets the initial value of foo before specs run"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">foo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"does not reset foo between specs"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-The_&lt;code&gt;this&lt;/code&gt;_keyword">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-The_%3Ccode%3Ethis%3C/code%3E_keyword">&para;</a></div>
+<h3>The <code>this</code> keyword</h3>
+<p>Another way to share variables between a <code>beforeEach</code>, <code>it</code>, and <code>afterEach</code> is through the <code>this</code> keyword. Each spec&rsquo;s <code>beforeEach</code>/<code>it</code>/<code>afterEach</code> has the <code>this</code> as the same empty object that is set back to empty for the next spec&rsquo;s <code>beforeEach</code>/<code>it</code>/<code>afterEach</code>.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"can use the `this` to share state"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bar</span> <span class="o">=</span> <span class="s2">"test pollution?"</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"prevents test pollution by having an empty `this` created for the next spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Nesting_&lt;code&gt;describe&lt;/code&gt;_Blocks">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Nesting_%3Ccode%3Edescribe%3C/code%3E_Blocks">&para;</a></div>
+<h3>Nesting <code>describe</code> Blocks</h3>
+<p>Calls to <code>describe</code> can be nested, with specs defined at any level. This allows a suite to be composed as a tree of functions. Before a spec is executed, Jasmine walks down the tree executing each <code>beforeEach</code> function in order. After the spec is executed, Jasmine walks through the <code>afterEach</code> functions similarly.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">foo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">afterEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"is just a function, so it can contain any code"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"can have more than one expectation"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"nested inside a second describe"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">bar</span><span class="p">;</span>
+
+    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">bar</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"can reference both scopes as needed"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">bar</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Disabling_Suites">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Disabling_Suites">&para;</a></div>
+<h2>Disabling Suites</h2>
+<p>Suites and specs can be disabled with the <code>xdescribe</code> and <code>xit</code> functions, respectively. These suites and any specs inside them are skipped when run and thus their results will not appear in the results.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">xdescribe</span><span class="p">(</span><span class="s2">"A spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">foo</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"is just a function, so it can contain any code"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Pending_Specs">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Pending_Specs">&para;</a></div>
+<h2>Pending Specs</h2>
+<p>Pending specs do not run, but their names will show up in the results as <code>pending</code>.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"Pending specs"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-15">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-15">&para;</a></div>
+<p>Any spec declared with <code>xit</code> is marked as pending.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">xit</span><span class="p">(</span><span class="s2">"can be declared 'xit'"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-16">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-16">&para;</a></div>
+<p>Any spec declared without a function body will also be marked pending in results.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"can be declared with 'it' but without a function"</span><span class="p">);</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-17">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-17">&para;</a></div>
+<p>And if you call the function <code>pending</code> anywhere in the spec body, no matter the expectations, the spec will be marked pending. A string passed to <code>pending</code> will be treated as a reason and displayed when the suite finishes.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"can be declared by calling 'pending' in the spec body"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kc">true</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">pending</span><span class="p">(</span><span class="s1">'this is why it is pending'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies">&para;</a></div>
+<h2>Spies</h2>
+<p>Jasmine has test double functions called spies. A spy can stub any function and tracks calls to it and all arguments. A spy only exists in the <code>describe</code> or <code>it</code> block it is defined, and will be removed after each spec. There are special matchers for interacting with spies. <strong>This syntax has changed for Jasmine 2.0.</strong> The <code>toHaveBeenCalled</code> matcher will return true if the spy was called. The <code>toHaveBeenCalledWith</code> matcher will return true if the argument list matches any of the recorded calls to the spy.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s1">'setBar'</span><span class="p">);</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s1">'another param'</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks that the spy was called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks all the arguments of its calls"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s1">'another param'</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"stops all execution on a function"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toBeNull</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;and.callThrough&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3Eand.callThrough%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>and.callThrough</code></h3>
+<p>By chaining the spy with <code>and.callThrough</code>, the spy will still track all calls to it but in addition it will delegate to the actual implementation.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy, when configured to call through"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">,</span> <span class="nx">fetchedBar</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="nx">getBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">bar</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s1">'getBar'</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">callThrough</span><span class="p">();</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">fetchedBar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">getBar</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks that the spy was called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">getBar</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"should not effect other functions"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"when called returns the requested value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">fetchedBar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;and.returnValue&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3Eand.returnValue%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>and.returnValue</code></h3>
+<p>By chaining the spy with <code>and.returnValue</code>, all calls to the function will return a specific value.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy, when configured to fake a return value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">,</span> <span class="nx">fetchedBar</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="nx">getBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">bar</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s2">"getBar"</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">returnValue</span><span class="p">(</span><span class="mi">745</span><span class="p">);</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">fetchedBar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">getBar</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks that the spy was called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">getBar</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"should not effect other functions"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"when called returns the requested value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">fetchedBar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">745</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;and.callFake&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3Eand.callFake%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>and.callFake</code></h3>
+<p>By chaining the spy with <code>and.callFake</code>, all calls to the spy will delegate to the supplied function.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy, when configured with an alternate implementation"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">,</span> <span class="nx">fetchedBar</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="nx">getBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">bar</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s2">"getBar"</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">callFake</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="mi">1001</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">fetchedBar</span> <span class="o">=</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">getBar</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks that the spy was called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">getBar</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"should not effect other functions"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"when called returns the requested value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">fetchedBar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1001</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;and.throwError&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3Eand.throwError%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>and.throwError</code></h3>
+<p>By chaining the spy with <code>and.throwError</code>, all calls to the spy will <code>throw</code> the specified value as an error.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy, when configured to throw an error"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s2">"setBar"</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">throwError</span><span class="p">(</span><span class="s2">"quux"</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"throws the value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+    <span class="p">}).</span><span class="nx">toThrowError</span><span class="p">(</span><span class="s2">"quux"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;and.stub&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3Eand.stub%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>and.stub</code></h3>
+<p>When a calling strategy is used for a spy, the original stubbing behavior can be returned at any time with <code>and.stub</code>.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s1">'setBar'</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">callThrough</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"can call through and then stub in the same spec"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">and</span><span class="p">.</span><span class="nx">stub</span><span class="p">();</span>
+    <span class="nx">bar</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">bar</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Other_tracking_properties">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Other_tracking_properties">&para;</a></div>
+<h3>Other tracking properties</h3>
+<p>Every call to a spy is tracked and exposed on the <code>calls</code> property.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">bar</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">setBar</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bar</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="s1">'setBar'</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-25">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-25">&para;</a></div>
+<p><code>.calls.any()</code>: returns <code>false</code> if the spy has not been called at all, and then <code>true</code> once at least one call happens.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks if it was called at all"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">any</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">();</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">any</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-26">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-26">&para;</a></div>
+<p><code>.calls.count()</code>: returns the number of times the spy was called</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks the number of times it was called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">count</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">();</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">();</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">count</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-27">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-27">&para;</a></div>
+<p><code>.calls.argsFor(index)</code>: returns the arguments passed to call number <code>index</code></p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks the arguments of each call"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">argsFor</span><span class="p">(</span><span class="mi">0</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">([</span><span class="mi">123</span><span class="p">]);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">argsFor</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">([</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">]);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-28">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-28">&para;</a></div>
+<p><code>.calls.allArgs()</code>: returns the arguments to all calls</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks the arguments of all calls"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">allArgs</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">([[</span><span class="mi">123</span><span class="p">],[</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">]]);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-29">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-29">&para;</a></div>
+<p><code>.calls.all()</code>: returns the context (the <code>this</code>) and arguments passed all calls</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"can provide the context and arguments to all calls"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">all</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">([{</span><span class="nx">object</span><span class="o">:</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="mi">123</span><span class="p">],</span> <span class="nx">returnValue</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">}]);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-30">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-30">&para;</a></div>
+<p><code>.calls.mostRecent()</code>: returns the context (the <code>this</code>) and arguments for the most recent call</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"has a shortcut to the most recent call"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">mostRecent</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">({</span><span class="nx">object</span><span class="o">:</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">],</span> <span class="nx">returnValue</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">});</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-31">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-31">&para;</a></div>
+<p><code>.calls.first()</code>: returns the context (the <code>this</code>) and arguments for the first call</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"has a shortcut to the first call"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">first</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">({</span><span class="nx">object</span><span class="o">:</span> <span class="nx">foo</span><span class="p">,</span> <span class="nx">args</span><span class="o">:</span> <span class="p">[</span><span class="mi">123</span><span class="p">],</span> <span class="nx">returnValue</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">});</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-32">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-32">&para;</a></div>
+<p>When inspecting the return from <code>all()</code>, <code>mostRecent()</code> and <code>first()</code>, the <code>object</code> property is set to the value of <code>this</code> when the spy was called.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks the context"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">spy</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'spy'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">baz</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">fn</span><span class="o">:</span> <span class="nx">spy</span>
+    <span class="p">};</span>
+    <span class="kd">var</span> <span class="nx">quux</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">fn</span><span class="o">:</span> <span class="nx">spy</span>
+    <span class="p">};</span>
+    <span class="nx">baz</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">quux</span><span class="p">.</span><span class="nx">fn</span><span class="p">(</span><span class="mi">456</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">spy</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">first</span><span class="p">().</span><span class="nx">object</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">baz</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">spy</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">mostRecent</span><span class="p">().</span><span class="nx">object</span><span class="p">).</span><span class="nx">toBe</span><span class="p">(</span><span class="nx">quux</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-33">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-33">&para;</a></div>
+<p><code>.calls.reset()</code>: clears all tracking for a spy</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"can be reset"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">(</span><span class="mi">456</span><span class="p">,</span> <span class="s2">"baz"</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">any</span><span class="p">()).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">setBar</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">any</span><span class="p">()).</span><span class="nx">toBe</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;createSpy&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3EcreateSpy%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>createSpy</code></h3>
+<p>When there is not a function to spy on, <code>jasmine.createSpy</code> can create a &ldquo;bare&rdquo; spy. This spy acts as any other spy &ndash; tracking calls, arguments, etc. But there is no implementation behind it. Spies are JavaScript objects and can be used as such.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"A spy, when created manually"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">whatAmI</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">whatAmI</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'whatAmI'</span><span class="p">);</span>
+
+    <span class="nx">whatAmI</span><span class="p">(</span><span class="s2">"I"</span><span class="p">,</span> <span class="s2">"am"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"spy"</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"is named, which helps in error reporting"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">whatAmI</span><span class="p">.</span><span class="nx">and</span><span class="p">.</span><span class="nx">identity</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="s1">'whatAmI'</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks that the spy was called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">whatAmI</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks its number of calls"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">whatAmI</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">count</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks all the arguments of its calls"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">whatAmI</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="s2">"I"</span><span class="p">,</span> <span class="s2">"am"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">,</span> <span class="s2">"spy"</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"allows access to the most recent call"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">whatAmI</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">mostRecent</span><span class="p">().</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="nx">toEqual</span><span class="p">(</span><span class="s2">"I"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Spies:_&lt;code&gt;createSpyObj&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Spies:_%3Ccode%3EcreateSpyObj%3C/code%3E">&para;</a></div>
+<h3>Spies: <code>createSpyObj</code></h3>
+<p>In order to create a mock with multiple spies, use <code>jasmine.createSpyObj</code> and pass an array of strings. It returns an object that has a property for each string that is a spy.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"Multiple spies, when created manually"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">tape</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">tape</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpyObj</span><span class="p">(</span><span class="s1">'tape'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'play'</span><span class="p">,</span> <span class="s1">'pause'</span><span class="p">,</span> <span class="s1">'stop'</span><span class="p">,</span> <span class="s1">'rewind'</span><span class="p">]);</span>
+
+    <span class="nx">tape</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+    <span class="nx">tape</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+    <span class="nx">tape</span><span class="p">.</span><span class="nx">rewind</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"creates spies for each requested function"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">pause</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">stop</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">rewind</span><span class="p">).</span><span class="nx">toBeDefined</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks that the spies were called"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">play</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">pause</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">rewind</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">stop</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"tracks all the arguments of its calls"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">tape</span><span class="p">.</span><span class="nx">rewind</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Matching_Anything_with_&lt;code&gt;jasmine.any&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Matching_Anything_with_%3Ccode%3Ejasmine.any%3C/code%3E">&para;</a></div>
+<h2>Matching Anything with <code>jasmine.any</code></h2>
+<p><code>jasmine.any</code> takes a constructor or &ldquo;class&rdquo; name as an expected value. It returns <code>true</code> if the constructor matches the constructor of the actual value.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"jasmine.any"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"matches any value"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">({}).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Object</span><span class="p">));</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="mi">12</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Number</span><span class="p">));</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"when used with a spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"is useful for comparing arguments"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+      <span class="nx">foo</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">});</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Number</span><span class="p">),</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nb">Function</span><span class="p">));</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Matching_existance_with_&lt;code&gt;jasmine.anything&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Matching_existance_with_%3Ccode%3Ejasmine.anything%3C/code%3E">&para;</a></div>
+<h2>Matching existance with <code>jasmine.anything</code></h2>
+<p><code>jasmine.anything</code> returns <code>true</code> if the actual value is not <code>null</code> or <code>undefined</code>.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"jasmine.anything"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"matches anything"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">anything</span><span class="p">());</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"when used with a spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"is useful when the argument can be ignored"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+      <span class="nx">foo</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">});</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">anything</span><span class="p">());</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Partial_Matching_with_&lt;code&gt;jasmine.objectContaining&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Partial_Matching_with_%3Ccode%3Ejasmine.objectContaining%3C/code%3E">&para;</a></div>
+<h2>Partial Matching with <code>jasmine.objectContaining</code></h2>
+<p><code>jasmine.objectContaining</code> is for those times when an expectation only cares about certain key/value pairs in the actual.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"jasmine.objectContaining"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nx">b</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="nx">bar</span><span class="o">:</span> <span class="s2">"baz"</span>
+    <span class="p">};</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"matches objects with the expect key/value pairs"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">objectContaining</span><span class="p">({</span>
+      <span class="nx">bar</span><span class="o">:</span> <span class="s2">"baz"</span>
+    <span class="p">}));</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">objectContaining</span><span class="p">({</span>
+      <span class="nx">c</span><span class="o">:</span> <span class="mi">37</span>
+    <span class="p">}));</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"when used with a spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"is useful for comparing arguments"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'callback'</span><span class="p">);</span>
+
+      <span class="nx">callback</span><span class="p">({</span>
+        <span class="nx">bar</span><span class="o">:</span> <span class="s2">"baz"</span>
+      <span class="p">});</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">objectContaining</span><span class="p">({</span>
+        <span class="nx">bar</span><span class="o">:</span> <span class="s2">"baz"</span>
+      <span class="p">}));</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">objectContaining</span><span class="p">({</span>
+        <span class="nx">c</span><span class="o">:</span> <span class="mi">37</span>
+      <span class="p">}));</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Partial_Array_Matching_with_&lt;code&gt;jasmine.arrayContaining&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Partial_Array_Matching_with_%3Ccode%3Ejasmine.arrayContaining%3C/code%3E">&para;</a></div>
+<h2>Partial Array Matching with <code>jasmine.arrayContaining</code></h2>
+<p><code>jasmine.arrayContaining</code> is for those times when an expectation only cares about some of the values in an array.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"jasmine.arrayContaining"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">foo</span><span class="p">;</span>
+
+  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">foo</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"matches arrays with some of the values"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">arrayContaining</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]));</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">arrayContaining</span><span class="p">([</span><span class="mi">6</span><span class="p">]));</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"when used with a spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"is useful when comparing arguments"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'callback'</span><span class="p">);</span>
+
+      <span class="nx">callback</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]);</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">arrayContaining</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]));</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">arrayContaining</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]));</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-String_Matching_with_&lt;code&gt;jasmine.stringMatching&lt;/code&gt;">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-String_Matching_with_%3Ccode%3Ejasmine.stringMatching%3C/code%3E">&para;</a></div>
+<h2>String Matching with <code>jasmine.stringMatching</code></h2>
+<p><code>jasmine.stringMatching</code> is for when you don&rsquo;t want to match a string in a larger object exactly, or match a portion of a string in a spy expectation.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s1">'jasmine.stringMatching'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"matches as a regexp"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="s1">'bar'</span><span class="p">}).</span><span class="nx">toEqual</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">stringMatching</span><span class="p">(</span><span class="sr">/^bar$/</span><span class="p">)});</span>
+    <span class="nx">expect</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="s1">'foobarbaz'</span><span class="p">}).</span><span class="nx">toEqual</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">stringMatching</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">)});</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"when used with a spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"is useful for comparing arguments"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'callback'</span><span class="p">);</span>
+
+      <span class="nx">callback</span><span class="p">(</span><span class="s1">'foobarbaz'</span><span class="p">);</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">stringMatching</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">));</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">jasmine</span><span class="p">.</span><span class="nx">stringMatching</span><span class="p">(</span><span class="sr">/^bar$/</span><span class="p">));</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Custom_asymmetric_equality_tester">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Custom_asymmetric_equality_tester">&para;</a></div>
+<h2>Custom asymmetric equality tester</h2>
+<p>When you need to check that something meets a certain criteria, without being strictly equal, you can also specify a custom asymmetric equality tester simply by providing an object that has an <code>asymmetricMatch</code> function.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"custom asymmetry"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">tester</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">asymmetricMatch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actual</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">secondValue</span> <span class="o">=</span> <span class="nx">actual</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+      <span class="k">return</span> <span class="nx">secondValue</span> <span class="o">===</span> <span class="s1">'bar'</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"dives in deep"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="s2">"foo,bar,baz,quux"</span><span class="p">).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">tester</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">"when used with a spy"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"is useful for comparing arguments"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s1">'callback'</span><span class="p">);</span>
+
+      <span class="nx">callback</span><span class="p">(</span><span class="s1">'foo,bar,baz'</span><span class="p">);</span>
+
+      <span class="nx">expect</span><span class="p">(</span><span class="nx">callback</span><span class="p">).</span><span class="nx">toHaveBeenCalledWith</span><span class="p">(</span><span class="nx">tester</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Jasmine_Clock">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Jasmine_Clock">&para;</a></div>
+<h2>Jasmine Clock</h2>
+<p><strong>This syntax has changed for Jasmine 2.0.</strong> The Jasmine Clock is available for testing time dependent code.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"Manually ticking the Jasmine Clock"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">timerCallback</span><span class="p">;</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-43">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-43">&para;</a></div>
+<p>It is installed with a call to <code>jasmine.clock().install</code> in a spec or suite that needs to manipulate time.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">timerCallback</span> <span class="o">=</span> <span class="nx">jasmine</span><span class="p">.</span><span class="nx">createSpy</span><span class="p">(</span><span class="s2">"timerCallback"</span><span class="p">);</span>
+    <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">install</span><span class="p">();</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-44">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-44">&para;</a></div>
+<p>Be sure to uninstall the clock after you are done to restore the original functions.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">afterEach</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">uninstall</span><span class="p">();</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Mocking_the_JavaScript_Timeout_Functions">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Mocking_the_JavaScript_Timeout_Functions">&para;</a></div>
+<h3>Mocking the JavaScript Timeout Functions</h3>
+<p>You can make <code>setTimeout</code> or <code>setInterval</code> synchronous executing the registered functions only once the clock is ticked forward in time.</p>
+<p>To execute registered functions, move time forward via the <code>jasmine.clock().tick</code> function, which takes a number of milliseconds.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"causes a timeout to be called synchronously"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">timerCallback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">timerCallback</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+
+    <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">tick</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">timerCallback</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">it</span><span class="p">(</span><span class="s2">"causes an interval to be called synchronously"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">timerCallback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">timerCallback</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+
+    <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">tick</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">timerCallback</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">count</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">tick</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">timerCallback</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">count</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">tick</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">timerCallback</span><span class="p">.</span><span class="nx">calls</span><span class="p">.</span><span class="nx">count</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Mocking_the_Date">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Mocking_the_Date">&para;</a></div>
+<h3>Mocking the Date</h3>
+<p>The Jasmine Clock can also be used to mock the current date.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">describe</span><span class="p">(</span><span class="s2">"Mocking the Date object"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"mocks the Date object and sets it to a given time"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">baseTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">23</span><span class="p">);</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-47">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-47">&para;</a></div>
+<p>If you do not provide a base time to <code>mockDate</code> it will use the current date.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>      <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">mockDate</span><span class="p">(</span><span class="nx">baseTime</span><span class="p">);</span>
+
+      <span class="nx">jasmine</span><span class="p">.</span><span class="nx">clock</span><span class="p">().</span><span class="nx">tick</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+      <span class="nx">expect</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nx">baseTime</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Asynchronous_Support">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Asynchronous_Support">&para;</a></div>
+<h2>Asynchronous Support</h2>
+<p><strong>This syntax has changed for Jasmine 2.0.</strong> Jasmine also has support for running specs that require testing asynchronous operations.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span class="nx">describe</span><span class="p">(</span><span class="s2">"Asynchronous specs"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">value</span><span class="p">;</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-49">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-49">&para;</a></div>
+<p>Calls to <code>beforeAll</code>, <code>afterAll</code>, <code>beforeEach</code>, <code>afterEach</code>, and <code>it</code> can take an optional single argument that should be called when the async work is complete.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="nx">done</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-50">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-50">&para;</a></div>
+<p>This spec will not start until the <code>done</code> function is called in the call to <code>beforeEach</code> above. And this spec will not complete until its <code>done</code> is called.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">it</span><span class="p">(</span><span class="s2">"should support async execution of test preparation and expectations"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">value</span><span class="o">++</span><span class="p">;</span>
+    <span class="nx">expect</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">toBeGreaterThan</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="nx">done</span><span class="p">();</span>
+  <span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-51">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-51">&para;</a></div>
+<p>By default jasmine will wait for 5 seconds for an asynchronous spec to finish before causing a timeout failure. If specific specs should fail faster or need more time this can be adjusted by passing a timeout value to <code>it</code>, etc.</p>
+<p>If the entire suite should have a different timeout, <code>jasmine.DEFAULT_TIMEOUT_INTERVAL</code> can be set globally, outside of any given <code>describe</code>.</p>
+</td>
+<td class="code">
+<div class="highlight">
+<pre>  <span class="nx">describe</span><span class="p">(</span><span class="s2">"long asynchronous specs"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">beforeEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">done</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+
+    <span class="nx">it</span><span class="p">(</span><span class="s2">"takes a long time"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">done</span><span class="p">();</span>
+      <span class="p">},</span> <span class="mi">9000</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">10000</span><span class="p">);</span>
+
+    <span class="nx">afterEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">done</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span></pre>
+</div>
+</td>
+</tr>
+<tr id="section-Downloads">
+<td class="docs">
+<div class="pilwrap"><a class="pilcrow" href="http://jasmine.github.io/2.3/introduction.html#section-Downloads">&para;</a></div>
+<h2>Downloads</h2>
+<ul>
+<li>The <a href="https://github.com/pivotal/jasmine/tree/master/dist">Standalone Release</a> is for simple, browser page, or console projects</li>
+<li>The <a href="http://github.com/pivotal/jasmine-gem">Jasmine Ruby Gem</a> is for Rails, Ruby, or Ruby-friendly development</li>
+<li><a href="http://github.com/pivotal/jasmine/wiki">Other Environments</a> are supported as well</li>
+</ul>
+<h2>Support</h2>
+<ul>
+<li><a href="http://groups.google.com/group/jasmine-js">Mailing list</a> at Google Groups &ndash; a great first stop to ask questions, propose features, or discuss pull requests</li>
+<li><a href="http://github.com/pivotal/jasmine/issues">Report Issues</a> at Github</li>
+<li>The <a href="http://www.pivotaltracker.com/projects/10606">Backlog</a> lives at <a href="http://www.pivotaltracker.com/">Pivotal Tracker</a></li>
+<li>Follow <a href="http://twitter.com/jasminebdd">@JasmineBDD</a> on Twitter</li>
+</ul>
+<h2>Thanks</h2>
+<p><em>Running documentation inspired by <a href="http://twitter.com/mjackson">@mjackson</a> and the 2012 <a href="http://fluentconf.com">Fluent</a> Summit.</em></p>
+</td>
+<td class="code">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="jasmine_html-reporter">
+<div class="banner"><span class="version">2.3.0</span>
+<div class="run-options"><span class="trigger">Options</span></div>
+</div>
+<div class="alert"><span class="duration">finished in 9.134s</span><span class="bar skipped"><a title="Run all specs" href="http://jasmine.github.io/2.3/introduction.html">Ran 79 of 82 specs - run all</a></span><span class="bar passed">79 specs, 0 failures, 1 pending spec</span></div>
+<div class="results">
+<div class="failures">&nbsp;</div>
+<div class="summary">
+<ul id="suite-suite1" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20suite">A suite</a></li>
+<ul class="specs">
+<li id="spec-spec0" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20suite%20contains%20spec%20with%20an%20expectation">contains spec with an expectation</a></li>
+</ul>
+</ul>
+<ul id="suite-suite2" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20suite%20is%20just%20a%20function">A suite is just a function</a></li>
+<ul class="specs">
+<li id="spec-spec1" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20suite%20is%20just%20a%20function%20and%20so%20is%20a%20spec">and so is a spec</a></li>
+</ul>
+</ul>
+<ul id="suite-suite3" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=The%20%27toBe%27%20matcher%20compares%20with%20%3D%3D%3D">The 'toBe' matcher compares with ===</a></li>
+<ul class="specs">
+<li id="spec-spec2" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=The%20%27toBe%27%20matcher%20compares%20with%20%3D%3D%3D%20and%20has%20a%20positive%20case">and has a positive case</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec3" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=The%20%27toBe%27%20matcher%20compares%20with%20%3D%3D%3D%20and%20can%20have%20a%20negative%20case">and can have a negative case</a></li>
+</ul>
+</ul>
+<ul id="suite-suite4" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A">Included matchers:</a></li>
+<ul class="specs">
+<li id="spec-spec4" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBe%27%20matcher%20compares%20with%20%3D%3D%3D">The 'toBe' matcher compares with ===</a></li>
+</ul>
+<ul id="suite-suite5" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toEqual%27%20matcher">The 'toEqual' matcher</a></li>
+<ul class="specs">
+<li id="spec-spec5" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toEqual%27%20matcher%20works%20for%20simple%20literals%20and%20variables">works for simple literals and variables</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec6" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toEqual%27%20matcher%20should%20work%20for%20objects">should work for objects</a></li>
+</ul>
+</ul>
+<ul class="specs">
+<li id="spec-spec7" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toMatch%27%20matcher%20is%20for%20regular%20expressions">The 'toMatch' matcher is for regular expressions</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec8" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeDefined%27%20matcher%20compares%20against%20%60undefined%60">The 'toBeDefined' matcher compares against `undefined`</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec9" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%60toBeUndefined%60%20matcher%20compares%20against%20%60undefined%60">The `toBeUndefined` matcher compares against `undefined`</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec10" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeNull%27%20matcher%20compares%20against%20null">The 'toBeNull' matcher compares against null</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec11" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeTruthy%27%20matcher%20is%20for%20boolean%20casting%20testing">The 'toBeTruthy' matcher is for boolean casting testing</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec12" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeFalsy%27%20matcher%20is%20for%20boolean%20casting%20testing">The 'toBeFalsy' matcher is for boolean casting testing</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec13" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toContain%27%20matcher%20is%20for%20finding%20an%20item%20in%20an%20Array">The 'toContain' matcher is for finding an item in an Array</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec14" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeLessThan%27%20matcher%20is%20for%20mathematical%20comparisons">The 'toBeLessThan' matcher is for mathematical comparisons</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec15" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeGreaterThan%27%20matcher%20is%20for%20mathematical%20comparisons">The 'toBeGreaterThan' matcher is for mathematical comparisons</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec16" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toBeCloseTo%27%20matcher%20is%20for%20precision%20math%20comparison">The 'toBeCloseTo' matcher is for precision math comparison</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec17" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toThrow%27%20matcher%20is%20for%20testing%20if%20a%20function%20throws%20an%20exception">The 'toThrow' matcher is for testing if a function throws an exception</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec18" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Included%20matchers%3A%20The%20%27toThrowError%27%20matcher%20is%20for%20testing%20a%20specific%20thrown%20exception">The 'toThrowError' matcher is for testing a specific thrown exception</a></li>
+</ul>
+</ul>
+<ul id="suite-suite6" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec">A spec</a></li>
+<ul class="specs">
+<li id="spec-spec19" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20is%20just%20a%20function%2C%20so%20it%20can%20contain%20any%20code">is just a function, so it can contain any code</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec20" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20can%20have%20more%20than%20one%20expectation">can have more than one expectation</a></li>
+</ul>
+</ul>
+<ul id="suite-suite7" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20using%20beforeEach%20and%20afterEach">A spec using beforeEach and afterEach</a></li>
+<ul class="specs">
+<li id="spec-spec21" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20using%20beforeEach%20and%20afterEach%20is%20just%20a%20function%2C%20so%20it%20can%20contain%20any%20code">is just a function, so it can contain any code</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec22" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20using%20beforeEach%20and%20afterEach%20can%20have%20more%20than%20one%20expectation">can have more than one expectation</a></li>
+</ul>
+</ul>
+<ul id="suite-suite8" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20using%20beforeAll%20and%20afterAll">A spec using beforeAll and afterAll</a></li>
+<ul class="specs">
+<li id="spec-spec23" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20using%20beforeAll%20and%20afterAll%20sets%20the%20initial%20value%20of%20foo%20before%20specs%20run">sets the initial value of foo before specs run</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec24" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20using%20beforeAll%20and%20afterAll%20does%20not%20reset%20foo%20between%20specs">does not reset foo between specs</a></li>
+</ul>
+</ul>
+<ul id="suite-suite9" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec">A spec</a></li>
+<ul class="specs">
+<li id="spec-spec25" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20can%20use%20the%20%60this%60%20to%20share%20state">can use the `this` to share state</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec26" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20prevents%20test%20pollution%20by%20having%20an%20empty%20%60this%60%20created%20for%20the%20next%20spec">prevents test pollution by having an empty `this` created for the next spec</a></li>
+</ul>
+</ul>
+<ul id="suite-suite10" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec">A spec</a></li>
+<ul class="specs">
+<li id="spec-spec27" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20is%20just%20a%20function%2C%20so%20it%20can%20contain%20any%20code">is just a function, so it can contain any code</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec28" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20can%20have%20more%20than%20one%20expectation">can have more than one expectation</a></li>
+</ul>
+<ul id="suite-suite11" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20nested%20inside%20a%20second%20describe">nested inside a second describe</a></li>
+<ul class="specs">
+<li id="spec-spec29" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20nested%20inside%20a%20second%20describe%20can%20reference%20both%20scopes%20as%20needed">can reference both scopes as needed</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite12" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec">A spec</a></li>
+<ul class="specs">
+<li id="spec-spec30" class="disabled"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spec%20is%20just%20a%20function%2C%20so%20it%20can%20contain%20any%20code">is just a function, so it can contain any code</a></li>
+</ul>
+</ul>
+<ul id="suite-suite13" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Pending%20specs">Pending specs</a></li>
+<ul class="specs">
+<li id="spec-spec31" class="disabled"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Pending%20specs%20can%20be%20declared%20%27xit%27">can be declared 'xit'</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec32" class="disabled"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Pending%20specs%20can%20be%20declared%20with%20%27it%27%20but%20without%20a%20function">can be declared with 'it' but without a function</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec33" class="pending"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Pending%20specs%20can%20be%20declared%20by%20calling%20%27pending%27%20in%20the%20spec%20body">can be declared by calling 'pending' in the spec body PENDING WITH MESSAGE: this is why it is pending</a></li>
+</ul>
+</ul>
+<ul id="suite-suite14" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy">A spy</a></li>
+<ul class="specs">
+<li id="spec-spec34" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20that%20the%20spy%20was%20called">tracks that the spy was called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec35" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20all%20the%20arguments%20of%20its%20calls">tracks all the arguments of its calls</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec36" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20stops%20all%20execution%20on%20a%20function">stops all execution on a function</a></li>
+</ul>
+</ul>
+<ul id="suite-suite15" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20call%20through">A spy, when configured to call through</a></li>
+<ul class="specs">
+<li id="spec-spec37" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20call%20through%20tracks%20that%20the%20spy%20was%20called">tracks that the spy was called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec38" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20call%20through%20should%20not%20effect%20other%20functions">should not effect other functions</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec39" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20call%20through%20when%20called%20returns%20the%20requested%20value">when called returns the requested value</a></li>
+</ul>
+</ul>
+<ul id="suite-suite16" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20fake%20a%20return%20value">A spy, when configured to fake a return value</a></li>
+<ul class="specs">
+<li id="spec-spec40" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20fake%20a%20return%20value%20tracks%20that%20the%20spy%20was%20called">tracks that the spy was called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec41" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20fake%20a%20return%20value%20should%20not%20effect%20other%20functions">should not effect other functions</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec42" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20fake%20a%20return%20value%20when%20called%20returns%20the%20requested%20value">when called returns the requested value</a></li>
+</ul>
+</ul>
+<ul id="suite-suite17" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20with%20an%20alternate%20implementation">A spy, when configured with an alternate implementation</a></li>
+<ul class="specs">
+<li id="spec-spec43" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20with%20an%20alternate%20implementation%20tracks%20that%20the%20spy%20was%20called">tracks that the spy was called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec44" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20with%20an%20alternate%20implementation%20should%20not%20effect%20other%20functions">should not effect other functions</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec45" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20with%20an%20alternate%20implementation%20when%20called%20returns%20the%20requested%20value">when called returns the requested value</a></li>
+</ul>
+</ul>
+<ul id="suite-suite18" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20throw%20an%20error">A spy, when configured to throw an error</a></li>
+<ul class="specs">
+<li id="spec-spec46" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20configured%20to%20throw%20an%20error%20throws%20the%20value">throws the value</a></li>
+</ul>
+</ul>
+<ul id="suite-suite19" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy">A spy</a></li>
+<ul class="specs">
+<li id="spec-spec47" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20can%20call%20through%20and%20then%20stub%20in%20the%20same%20spec">can call through and then stub in the same spec</a></li>
+</ul>
+</ul>
+<ul id="suite-suite20" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy">A spy</a></li>
+<ul class="specs">
+<li id="spec-spec48" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20if%20it%20was%20called%20at%20all">tracks if it was called at all</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec49" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20the%20number%20of%20times%20it%20was%20called">tracks the number of times it was called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec50" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20the%20arguments%20of%20each%20call">tracks the arguments of each call</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec51" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20the%20arguments%20of%20all%20calls">tracks the arguments of all calls</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec52" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20can%20provide%20the%20context%20and%20arguments%20to%20all%20calls">can provide the context and arguments to all calls</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec53" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20has%20a%20shortcut%20to%20the%20most%20recent%20call">has a shortcut to the most recent call</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec54" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20has%20a%20shortcut%20to%20the%20first%20call">has a shortcut to the first call</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec55" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20tracks%20the%20context">tracks the context</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec56" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%20can%20be%20reset">can be reset</a></li>
+</ul>
+</ul>
+<ul id="suite-suite21" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20created%20manually">A spy, when created manually</a></li>
+<ul class="specs">
+<li id="spec-spec57" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20created%20manually%20is%20named%2C%20which%20helps%20in%20error%20reporting">is named, which helps in error reporting</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec58" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20created%20manually%20tracks%20that%20the%20spy%20was%20called">tracks that the spy was called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec59" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20created%20manually%20tracks%20its%20number%20of%20calls">tracks its number of calls</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec60" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20created%20manually%20tracks%20all%20the%20arguments%20of%20its%20calls">tracks all the arguments of its calls</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec61" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=A%20spy%2C%20when%20created%20manually%20allows%20access%20to%20the%20most%20recent%20call">allows access to the most recent call</a></li>
+</ul>
+</ul>
+<ul id="suite-suite22" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Multiple%20spies%2C%20when%20created%20manually">Multiple spies, when created manually</a></li>
+<ul class="specs">
+<li id="spec-spec62" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Multiple%20spies%2C%20when%20created%20manually%20creates%20spies%20for%20each%20requested%20function">creates spies for each requested function</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec63" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Multiple%20spies%2C%20when%20created%20manually%20tracks%20that%20the%20spies%20were%20called">tracks that the spies were called</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec64" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Multiple%20spies%2C%20when%20created%20manually%20tracks%20all%20the%20arguments%20of%20its%20calls">tracks all the arguments of its calls</a></li>
+</ul>
+</ul>
+<ul id="suite-suite23" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.any">jasmine.any</a></li>
+<ul class="specs">
+<li id="spec-spec65" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.any%20matches%20any%20value">matches any value</a></li>
+</ul>
+<ul id="suite-suite24" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.any%20when%20used%20with%20a%20spy">when used with a spy</a></li>
+<ul class="specs">
+<li id="spec-spec66" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.any%20when%20used%20with%20a%20spy%20is%20useful%20for%20comparing%20arguments">is useful for comparing arguments</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite25" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.anything">jasmine.anything</a></li>
+<ul class="specs">
+<li id="spec-spec67" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.anything%20matches%20anything">matches anything</a></li>
+</ul>
+<ul id="suite-suite26" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.anything%20when%20used%20with%20a%20spy">when used with a spy</a></li>
+<ul class="specs">
+<li id="spec-spec68" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.anything%20when%20used%20with%20a%20spy%20is%20useful%20when%20the%20argument%20can%20be%20ignored">is useful when the argument can be ignored</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite27" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.objectContaining">jasmine.objectContaining</a></li>
+<ul class="specs">
+<li id="spec-spec69" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.objectContaining%20matches%20objects%20with%20the%20expect%20key%2Fvalue%20pairs">matches objects with the expect key/value pairs</a></li>
+</ul>
+<ul id="suite-suite28" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.objectContaining%20when%20used%20with%20a%20spy">when used with a spy</a></li>
+<ul class="specs">
+<li id="spec-spec70" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.objectContaining%20when%20used%20with%20a%20spy%20is%20useful%20for%20comparing%20arguments">is useful for comparing arguments</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite29" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.arrayContaining">jasmine.arrayContaining</a></li>
+<ul class="specs">
+<li id="spec-spec71" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.arrayContaining%20matches%20arrays%20with%20some%20of%20the%20values">matches arrays with some of the values</a></li>
+</ul>
+<ul id="suite-suite30" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.arrayContaining%20when%20used%20with%20a%20spy">when used with a spy</a></li>
+<ul class="specs">
+<li id="spec-spec72" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.arrayContaining%20when%20used%20with%20a%20spy%20is%20useful%20when%20comparing%20arguments">is useful when comparing arguments</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite31" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.stringMatching">jasmine.stringMatching</a></li>
+<ul class="specs">
+<li id="spec-spec73" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.stringMatching%20matches%20as%20a%20regexp">matches as a regexp</a></li>
+</ul>
+<ul id="suite-suite32" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.stringMatching%20when%20used%20with%20a%20spy">when used with a spy</a></li>
+<ul class="specs">
+<li id="spec-spec74" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=jasmine.stringMatching%20when%20used%20with%20a%20spy%20is%20useful%20for%20comparing%20arguments">is useful for comparing arguments</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite33" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=custom%20asymmetry">custom asymmetry</a></li>
+<ul class="specs">
+<li id="spec-spec75" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=custom%20asymmetry%20dives%20in%20deep">dives in deep</a></li>
+</ul>
+<ul id="suite-suite34" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=custom%20asymmetry%20when%20used%20with%20a%20spy">when used with a spy</a></li>
+<ul class="specs">
+<li id="spec-spec76" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=custom%20asymmetry%20when%20used%20with%20a%20spy%20is%20useful%20for%20comparing%20arguments">is useful for comparing arguments</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite35" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Manually%20ticking%20the%20Jasmine%20Clock">Manually ticking the Jasmine Clock</a></li>
+<ul class="specs">
+<li id="spec-spec77" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Manually%20ticking%20the%20Jasmine%20Clock%20causes%20a%20timeout%20to%20be%20called%20synchronously">causes a timeout to be called synchronously</a></li>
+</ul>
+<ul class="specs">
+<li id="spec-spec78" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Manually%20ticking%20the%20Jasmine%20Clock%20causes%20an%20interval%20to%20be%20called%20synchronously">causes an interval to be called synchronously</a></li>
+</ul>
+<ul id="suite-suite36" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Manually%20ticking%20the%20Jasmine%20Clock%20Mocking%20the%20Date%20object">Mocking the Date object</a></li>
+<ul class="specs">
+<li id="spec-spec79" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Manually%20ticking%20the%20Jasmine%20Clock%20Mocking%20the%20Date%20object%20mocks%20the%20Date%20object%20and%20sets%20it%20to%20a%20given%20time">mocks the Date object and sets it to a given time</a></li>
+</ul>
+</ul>
+</ul>
+<ul id="suite-suite37" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Asynchronous%20specs">Asynchronous specs</a></li>
+<ul class="specs">
+<li id="spec-spec80" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Asynchronous%20specs%20should%20support%20async%20execution%20of%20test%20preparation%20and%20expectations">should support async execution of test preparation and expectations</a></li>
+</ul>
+<ul id="suite-suite38" class="suite">
+<li class="suite-detail"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Asynchronous%20specs%20long%20asynchronous%20specs">long asynchronous specs</a></li>
+<ul class="specs">
+<li id="spec-spec81" class="passed"><a href="http://jasmine.github.io/2.3/introduction.html?spec=Asynchronous%20specs%20long%20asynchronous%20specs%20takes%20a%20long%20time">SPEC HAS NO EXPECTATIONS takes a long time</a></li>
+</ul>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
