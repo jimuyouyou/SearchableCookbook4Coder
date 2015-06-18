@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', 'template', 'helpers', 'events', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe']
+		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort']
 	};
 	</script>
 </head>
@@ -341,6 +341,10 @@ Posts.update({
 }, {
   $set: {content: "Tomorrow will be a great day."}
 });					
+			
+PlayersList.update(selectedPlayer, {$inc: {score: 5} });
+
+PlayersList.update(selectedPlayer, {$set: {score: 5} });
 				</xmp>
 			</td>
 		</tr>
@@ -573,27 +577,96 @@ if (Meteor.isServer) {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Sort</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+return PlayersList.find({}, {sort: {score: -1} })
+return PlayersList.find({}, {sort: {score: 1} })	
+return PlayersList.find({}, {sort: {score: -1, name: 1}})				
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>event</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<form action="">
+	<input type="text" name="playerName">
+	<input type="submit" value="Add Player">
+</form>
+
+'submit form': function(event){
+  		event.preventDefault();
+  		var playerNameVar = event.target.playerName.value;
+  		console.log("form submitted: " + playerNameVar);
+  	},						
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Meteor.methods call</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Client:
+Template.addPlayerForm.events({
+		'submit form': function(event) {
+			event.preventDefault();
+			var playerNameVar = event.target.playerName.value;
+
+			Meteor.call('insertPlayerData', playerNameVar);
+		},
+	});
+
+Server:
+Meteor.methods({
+		"sendLogMessage": function() {
+			console.log("loging in methods");
+		},
+		'insertPlayerData': function(playerNameVar) {
+			var currentUserId = Meteor.userId();
+			PlayersList.insert({
+				name: playerNameVar,
+				score: 0,
+				createdBy: currentUserId
+			});
+		},
+	});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>secure remove</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+if (Meteor.isServer) {
+	// console.log("hello server");
+	Meteor.publish("thePlayers", function() {
+		return PlayersList.find({
+			createdBy: this.userId
+		});
+	});
+
+	Meteor.methods({
+		"sendLogMessage": function() {
+			console.log("loging in methods");
+		},
+		'insertPlayerData': function(playerNameVar) {
+			var currentUserId = Meteor.userId();
+			PlayersList.insert({
+				name: playerNameVar,
+				score: 0,
+				createdBy: currentUserId
+			});
+		},
+		'removePlayerData': function(selectedPlayer) {
+			PlayersList.remove({
+				_id: selectedPlayer,
+				createdBy: Meteor.userId()
+			});
+		},
+	});
+}					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
