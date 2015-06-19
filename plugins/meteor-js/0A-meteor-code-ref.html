@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort']
+		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort', 'router']
 	};
 	</script>
 </head>
@@ -670,15 +670,27 @@ if (Meteor.isServer) {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>router</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Router.configure({
+	layoutTemplate: 'layout'
+});
+
+Router.route('/', {
+	name: 'postsList'
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Tracker.autorun</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Tracker.autorun(function() {
+  alert(Session.get('message'));
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
