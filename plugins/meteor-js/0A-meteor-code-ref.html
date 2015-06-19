@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort', 'router']
+		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort', 'router', 'hook']
 	};
 	</script>
 </head>
@@ -694,27 +694,72 @@ Tracker.autorun(function() {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>observe</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Posts.find().observe({
+  added: function(post) {
+    // when 'added' callback fires, add HTML element
+    $('ul').append('<li id="' + post._id + '">' + post.title + '</li>');
+  },
+  changed: function(post) {
+    // when 'changed' callback fires, modify HTML element's text
+    $('ul li#' + post._id).text(post.title);
+  },
+  removed: function(post) {
+    // when 'removed' callback fires, remove HTML element
+    $('ul li#' + post._id).remove();
+  }
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Router.go e.target</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Template.postSubmit.events({
+  'submit form': function(e) {
+    e.preventDefault();
+
+    var post = {
+      url: $(e.target).find('[name=url]').val(),
+      title: $(e.target).find('[name=title]').val()
+    };
+
+    post._id = Posts.insert(post);
+    Router.go('postPage', post);
+  }
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Router hook</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var requireLogin = function() {
+	if (!Meteor.user()) {
+		this.render('accessDenied');
+	} else {
+		this.next();
+	}
+}
+
+Router.onBeforeAction('dataNotFound', {
+	only: 'postPage'
+});
+
+Router.onBeforeAction(requireLogin, {
+	only: 'postSubmit'
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>if currentUser</td>
 			<td>
-				<xmp></xmp>
+{{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>{{/if}}
 			</td>
 		</tr>
 		<tr>
