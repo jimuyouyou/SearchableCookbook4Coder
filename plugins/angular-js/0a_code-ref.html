@@ -62,6 +62,14 @@ $scope.name = 'World';
 			<td>function</td>
 			<td>
 				<xmp>
+
+<div ng-repeat="sector in fl.blogSectors">
+	<div class="selected-filter">
+		<span class="selected-filter-title">{{sector}}</span>
+		<span class="selected-filter-delete" ng-click="clearThisFilterChecked(sector)"></span>
+	</div>
+</div>
+
 var HelloCtrl = function ($scope) {
 	$scope.getName = function() {
 		return $scope.name;
@@ -76,6 +84,13 @@ var HelloCtrl = function ($scope) {
 			<td>ng-repeat</td>
 			<td>
 				<xmp>
+<div ng-repeat="sector in fl.blogSectors">
+	<div class="selected-filter">
+		<span class="selected-filter-title">{{sector}}</span>
+		<span class="selected-filter-delete" ng-click="clearThisFilterChecked(sector)"></span>
+	</div>
+</div>
+
 <ul ng-controller="WorldCtrl">
 	<li ng-repeat="country in countries">
 	{{country.name}} has population of {{country.population}}
@@ -1785,27 +1800,76 @@ config(['$routeProvider',
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>filter</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+angular.module('equityApp').filter('msgEISEligible', function() {
+		return function(input) {
+			return (input != undefined && $.parseJSON(input)) ? 'Yes' : 'No';
+		}
+	});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>$http post</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$scope.blogsLoading = $http.post('/getAllblogsFiltered')
+			.success(function(data, status, headers, config) {
+				$scope.blogs = $filter('orderObjectBy')(data, 'list_position'); // all blogs by default
+			})
+			.error(function(data, status, headers, config) {
+				console.log("NG Error get all blog!");
+			});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>hash scope model</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$scope.sf = {'username': 'michael', 'isNew': true};
+var dVar = 'isNew';					
+$scope.sf[dVar] = false;					
+$scope.sf.dVar = false; // both equals
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>angular.element</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$scope.clearThisFilterChecked = function(sector) {
+			angular.element(':checked').each(function() {
+				if (angular.element(this).attr('value') == sector) {
+					angular.element(this).attr("checked", false);
+				}
+			});
+
+			$scope.getblogesFiltered();
+		};
+
+$scope.consturctFilters = function() {
+			// get all selected sectors into array
+			var blogSectors = [];
+			angular.element('#sectorDiv :checked').each(function() {
+				blogSectors.push($(this).val());
+			});
+			$scope.fl.blogSectors = blogSectors;
+
+			$scope.filters = {
+				blogWordMatch: $scope.fl.blogWordMatch,
+				blogSectors: $scope.fl.blogSectors,
+				blogGrowthStage: $scope.fl.blogGrowthStage,
+				blogInvestmentRequired: parseInt($scope.fl.blogInvestmentRequired),
+				blogEquityOffered: parseInt($scope.fl.blogEquityOffered),
+				blogInvestorsSoFar: parseInt($scope.fl.blogInvestorsSoFar),
+				blogInvestmentSoFar: parseInt($scope.fl.blogInvestmentSoFar),
+				blogEISEligible: $scope.fl.blogEISEligible,
+			};
+		};							
+				</xmp>
 			</td>
 		</tr>
 		<tr>
@@ -1898,7 +1962,7 @@ config(['$routeProvider',
 <script src='../../lib/table_search.js'></script>
 <script type="text/javascript">
 var cfg = {
-	labels: ['ng ', 'form', 'filter', 'validat', 'custom'] 
+	labels: ['ng ', 'repeat', 'if', 'form', 'filter', 'validat', 'custom', 'function', 'directive', 'provider', 'factory', 'service', 'watch', 'promise', 'location', 'window', 'timeout', 'http', 'jsonp', 'html', 'pagination', 'option', 'route', 'ng-href'] 
 };
 </script>
 </html>
