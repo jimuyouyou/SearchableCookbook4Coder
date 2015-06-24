@@ -28,7 +28,15 @@ form validation: http://www.oschina.net/translate/angularjs-form-validation
 <h1>Hello, {{name}}!</h1>
 </body>
 
-<form ng-init="user.hash='13513516'">					
+<form ng-init="user.hash='13513516'">		
+
+<body ng-app ng-init="thing = {name : 'World'}">
+<h1>Hello, {{thing.name}}</h1>
+<div ng-controller="HelloCtrl">
+Say hello to: <input type="text" ng-model="thing.name">
+<h2>Hello, {{thing.name}}!</h2>
+</div>
+</body>			
 				</xmp>
 			</td>
 		</tr>
@@ -1873,9 +1881,14 @@ $scope.consturctFilters = function() {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>locationChangeSuccess $on</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+$scope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl){
+//react on the location change here
+//for example, update breadcrumbs based on the newUrl
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
@@ -1962,7 +1975,7 @@ $scope.consturctFilters = function() {
 <script src='../../lib/table_search.js'></script>
 <script type="text/javascript">
 var cfg = {
-	labels: ['ng ', 'repeat', 'if', 'form', 'filter', 'validat', 'custom', 'function', 'directive', 'provider', 'factory', 'service', 'watch', 'promise', 'location', 'window', 'timeout', 'http', 'jsonp', 'html', 'pagination', 'option', 'route', 'ng-href'] 
+	labels: ['ng ', 'repeat', 'if', 'form', 'filter', 'validat', 'custom', 'function', 'directive', 'provider', 'factory', 'service', 'watch', 'promise', 'location', 'window', 'timeout', 'http', 'jsonp', 'html', 'pagination', 'option', 'route', 'ng-href', 'locationChangeSuccess'] 
 };
 </script>
 </html>
