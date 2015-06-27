@@ -763,9 +763,44 @@ Router.onBeforeAction(requireLogin, {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>JSON REST Asset File Router</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+meteor add peerlibrary:xml2js
+
+RestAPI = {
+	getXml2Json: function(fileName) {
+		var xml = Assets.getText(fileName);
+		var ps = Meteor.wrapAsync(xml2js.parseString);
+		var result = ps(xml, {explicitArray: false});
+		return result;
+	},
+};					
+	
+Router.route('/getXml2Json', function() {
+	var result = RestAPI.getXml2Json('compinfo.xml');
+	this.response.end(EJSON.stringify(result));
+}, {
+	where: 'server'
+});
+
+Template.hello.helpers({
+    counter: function() {
+      return Session.get('counter');
+    },
+    xml: function() {
+      $.get('/getXml2Json', {},
+        function(data, result) {
+          var xml = EJSON.parse(data);
+          var xt = new Xml2Table({
+            data: xml.root.hris.row
+          });
+          xt.horizontalDisplay();
+        }
+      );
+    },
+  });
+				</xmp>
 			</td>
 		</tr>
 		<tr>
