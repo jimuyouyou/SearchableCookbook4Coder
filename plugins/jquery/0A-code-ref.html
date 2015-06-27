@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>0A-code-ref.html</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['selector', 'noConflict', 'events', 'fade', 'slide', 'animate', 'append', 'remove', 'css', 'Dimensions', 'dom', 'ajax', 'date']
+	};
+	</script>
+</head>
+<body>
+	<p>url: http://www.w3schools.com/jquery/ <p>
+
+	<table>
+		<tr>
+			<td>document</td>
+			<td>
+				<xmp>
+$(document).ready(function() {
+	$("button").click(function() {
+		$("p").hide();
+	});
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>selector</td>
+			<td>
+				<xmp>
+element:
+$("p") 
+$("p.intro") p with class="intro"
+$("p#demo") p with id="demo"
+
+property:
+$("[href]") all with prop href
+$("[href='#']") all with prop href = '#'
+$("[href!='#']") all with prop href != '#'
+$("[href$='.jpg']") all with prop href and end with '.jpg'
+
+css:
+$("p").css("background-color","red");
+
+advanced:
+*	$("*")	all
+$(".intro.demo") class="intro" and class="demo"
+ 	 	 
+:first	$("p:first")	
+:last	$("p:last")	
+:even	$("tr:even")
+:odd	$("tr:odd")	
+ 	 	 
+:eq(index)	$("ul li:eq(3)")
+:gt(no)	$("ul li:gt(3)")
+:lt(no)	$("ul li:lt(3)")
+:not(selector)	$("input:not(:empty)")	all non-empty input
+ 	 	 
+:header	$(":header")	all <h1> - <h6>
+:animated	$(":animated") 	all animations
+ 	 	 
+:contains(text)	$(":contains('W3School')")	
+:empty	$(":empty")	all without children
+:hidden	$("p:hidden")	
+:visible	$("table:visible")	
+ 	 	 
+s1,s2,s3	$("th,td,.intro")	
+ 	 	 
+[attribute]	$("[href]")	
+[attribute=value]	$("[href='#']")	
+[attribute!=value]	$("[href!='#']")	
+[attribute$=value]	$("[href$='.jpg']")	
+ 	 	 
+:input	$(":input")	all input
+:text	$(":text")	type="text" input
+:password	$(":password")	type="password" <input>
+:radio	$(":radio")	type="radio"  <input>
+:checkbox	$(":checkbox")	type="checkbox" <input>
+:submit	$(":submit")	type="submit" <input>
+:reset	$(":reset")	type="reset" <input>
+:button	$(":button")	type="button" <input>
+:image	$(":image")	type="image" <input>
+:file	$(":file")	type="file" <input>
+ 	 	 
+:enabled	$(":enabled")	enabled input
+:disabled	$(":disabled")	disabled input
+:selected	$(":selected")	selected input
+:checked	$(":checked")	checked input
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>noConflict</td>
+			<td>
+				<xmp>
+var jq=jQuery.noConflict();
+jq.show();		
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>events</td>
+			<td>
+				<xmp>
+click	
+keypress
+submit	
+load
+dblclick	
+keydown	
+change	
+resize
+mouseenter	
+keyup	
+focus	
+scroll
+mouseleave	 	
+blur	
+unload
+
+$("p").click(function(){
+    $(this).hide();
+});
+
+http://www.w3schools.com/jquery/jquery_ref_events.asp					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>hide show</td>
+			<td>
+				<xmp>
+$(selector).hide(speed,callback);
+$(selector).show(speed,callback);
+
+$("button").click(function(){
+    $("p").hide(1000);
+});
+
+$(selector).toggle(speed,callback);
+The optional speed parameter can take the following values: "slow", "fast", or milliseconds.					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>fade</td>
+			<td>
+				<xmp>
+$(selector).fadeIn(speed,callback);
+$(selector).fadeOut(speed,callback);
+$(selector).fadeToggle(speed,callback);
+$(selector).fadeTo(speed,opacity,callback);
+
+
+$("button").click(function(){
+    $("#div1").fadeIn();
+    $("#div2").fadeIn("slow");
+    $("#div3").fadeIn(3000);
+});
+
+$("button").click(function(){
+    $("#div1").fadeOut();
+    $("#div2").fadeOut("slow");
+    $("#div3").fadeOut(3000);
+});
+
+$("button").click(function(){
+    $("#div1").fadeToggle();
+    $("#div2").fadeToggle("slow");
+    $("#div3").fadeToggle(3000);
+});
+
+$("button").click(function(){
+    $("#div1").fadeTo("slow", 0.15);
+    $("#div2").fadeTo("slow", 0.4);
+    $("#div3").fadeTo("slow", 0.7);
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>slide</td>
+			<td>
+				<xmp>
+$(selector).slideDown(speed,callback);
+$(selector).slideUp(speed,callback);
+$(selector).slideToggle(speed,callback);
+
+$("#flip").click(function(){
+    $("#panel").slideDown();
+});
+
+$("#flip").click(function(){
+    $("#panel").slideUp();
+});
+
+$("#flip").click(function(){
+    $("#panel").slideToggle();
+});
+					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>animate</td>
+			<td>
+				<xmp>
+$(selector).animate({params},speed,callback);
+The required params parameter defines the CSS properties to be animated.
+
+$("button").click(function(){
+    $("div").animate({left: '250px'});
+});
+
+$("button").click(function(){
+    $("div").animate({
+        left: '250px',
+        opacity: '0.5',
+        height: '150px',
+        width: '150px'
+    });
+}); 
+
+It is also possible to define relative values (the value is then relative to the element's current value). This is done by putting += or -= in front of the value:
+$("button").click(function(){
+    $("div").animate({
+        left: '250px',
+        height: '+=150px',
+        width: '+=150px'
+    });
+});
+
+jQuery animate() - Uses Queue Functionality
+$("button").click(function(){
+    var div = $("div");
+    div.animate({height: '300px', opacity: '0.4'}, "slow");
+    div.animate({width: '300px', opacity: '0.8'}, "slow");
+    div.animate({height: '100px', opacity: '0.4'}, "slow");
+    div.animate({width: '100px', opacity: '0.8'}, "slow");
+}); 					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>text html val attr</td>
+			<td>
+				<xmp>
+text() - Sets or returns the text content of selected elements
+html() - Sets or returns the content of selected elements (including HTML markup)
+val() - Sets or returns the value of form fields		
+
+$("button").click(function(){
+    alert($("#w3s").attr("href"));
+});			
+
+$("#btn1").click(function(){
+    $("#test1").text("Hello world!");
+});
+$("#btn2").click(function(){
+    $("#test2").html("<b>Hello world!</b>");
+});
+$("#btn3").click(function(){
+    $("#test3").val("Dolly Duck");
+});
+
+$("button").click(function(){
+    $("#w3s").attr("href", "http://www.w3schools.com/jquery");
+});
+
+$("button").click(function(){
+    $("#w3s").attr({
+        "href" : "http://www.w3schools.com/jquery",
+        "title" : "W3Schools jQuery Tutorial"
+    });
+});
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>append prepend after before</td>
+			<td>
+				<xmp>
+append() - Inserts content at the end of the selected elements
+prepend() - Inserts content at the beginning of the selected elements
+after() - Inserts content after the selected elements
+before() - Inserts content before the selected elements
+
+$("p").append("Some appended text.");
+$("p").prepend("Some prepended text.");
+$("p").append(txt1, txt2, txt3);         // Append the new elements 
+
+$("img").after("Some text after");
+$("img").before("Some text before");
+$("img").after(txt1, txt2, txt3);          // Insert new elements after <img>					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>remove</td>
+			<td>
+				<xmp>
+remove() - Removes the selected element (and its child elements)
+empty() - Removes the child elements from the selected element
+
+$("#div1").remove();
+$("#div1").empty();
+$("p").remove(".test"); // all <p> elements with class="test"
+$("p").remove(".test, .demo"); // removes all <p> elements with class="test" and class="demo"					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>css</td>
+			<td>
+				<xmp>
+$("h1, h2, p").addClass("blue");
+$("#div1").addClass("important blue");
+
+$("h1, h2, p").removeClass("blue");
+$("h1, h2, p").toggleClass("blue");
+
+$("p").css("background-color");
+$("p").css("background-color", "yellow");
+$("p").css({
+	"background-color": "yellow",
+	"font-size": "200%"
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Dimensions</td>
+			<td>
+<img src="lib/img_jquerydim.gif" alt="">				
+				<xmp>
+txt += "Width: " + $("#div1").width() + "</br>";
+txt += "Height: " + $("#div1").height();
+txt += "Inner width: " + $("#div1").innerWidth() + "</br>";
+txt += "Inner height: " + $("#div1").innerHeight();
+txt += "Outer width: " + $("#div1").outerWidth() + "</br>";
+txt += "Outer height: " + $("#div1").outerHeight();
+txt += "Outer width (+margin): " + $("#div1").outerWidth(true) + "</br>";
+txt += "Outer height (+margin): " + $("#div1").outerHeight(true);
+txt += "Document width/height: " + $(document).width();
+txt += "x" + $(document).height() + "\n";
+txt += "Window width/height: " + $(window).width();
+txt += "x" + $(window).height();
+
+$("#div1").width(500).height(500);
+
+url: http://www.w3schools.com/jquery/jquery_dimensions.asp
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>dom</td>
+			<td>
+				<xmp>
+ $("span").parent(); // returns the direct parent element of the selected element.
+ $("span").parents(); // returns all ancestors of all <span> elements
+ $("span").parents("ul"); // all <span> elements that are <ul> elements
+ $("span").parentsUntil("div"); // all ancestor elements between a <span> and a <div> element
+
+ $("div").children(); // all elements that are direct children of each <div> elements
+ $("div").children("p.1"); // returns all <p> elements with the class name "1", that are direct children of <div>
+ $("div").find("span"); // all <span> elements that are descendants of <div>
+ $("div").find("*"); // all descendants of <div>
+
+ $("h2").siblings(); // all sibling elements of <h2>:
+ $("h2").siblings("p"); // all sibling elements of <h2> that are <p> elements:
+ $("h2").next(); //  the next sibling of <h2>
+ $("h2").nextAll(); // returns all next sibling elements of <h2>:
+ $("h2").nextUntil("h6"); // all sibling elements between a <h2> and a <h6> element:
+ prev(), prevAll() and prevUntil() methods work just like the methods above but with reverse functionality
+
+ $("div p").first(); // first <p> element inside the first <div> element
+ $("div p").last(); // last <p> element inside the last <div> element:
+ $("p").eq(1); // selects the second <p> element (index number 1):
+ $("p").filter(".intro"); // returns all <p> elements with class name "intro":
+ $("p").not(".intro"); // returns all <p> elements that do not have class name "intro":					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>ajax</td>
+			<td>
+				<xmp>
+$(selector).load(URL, data, callback);
+The required URL parameter specifies the URL you wish to load.
+The optional data parameter specifies a set of querystring key / value pairs to send along with the request.
+The optional callback parameter is the name of a
+
+function to be executed after the load() method is completed.
+
+$("#div1").load("demo_test.txt");
+$("#div1").load("demo_test.txt #p1"); // loads the content of the element with id="p1", inside the file "demo_test.txt", into a specific <div> element:
+$("#div1").load("demo_test.txt", function(responseTxt, statusTxt, xhr) {
+	if (statusTxt == "success")
+		alert("External content loaded successfully!");
+	if (statusTxt == "error")
+		alert("Error: " + xhr.status + ": " + xhr.statusText);
+});
+
+$.get(URL, callback);
+$.get("demo_test.asp", function(data, status) {
+	alert("Data: " + data + "\nStatus: " + status);
+});
+
+$.post(URL, data, callback);
+$("button").click(function() {
+	$.post("demo_test_post.asp", {
+			name: "Donald Duck",
+			city: "Duckburg"
+		},
+		function(data, status) {
+			alert("Data: " + data + "\nStatus: " + status);
+		});
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+
+	
+</body>
+</html>

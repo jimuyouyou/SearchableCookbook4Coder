@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>oA-code-ref.html</title>
+	<link rel="stylesheet" href="../../css/main.css">
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script type="text/javascript">
+	var cfg = {
+		labels: ['export', 'sync', 'function', 'mysql', 'event', 'listener', 'flow', 'serial', 'stream', 'sqlite', 'mysql', 'PostgreSQL', 'redis', 'Mongoose', 'mongodb', 'assert', 'file'] 
+	};
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>exports</td>
+			<td>
+				<xmp>
+return exports object:					
+var canadianDollar = 0.91;
+function roundTwoDecimals(amount) {
+return Math.round(amount * 100) / 100;
+}
+exports.canadianToUS = function(canadian) {
+return roundTwoDecimals(canadian * canadianDollar);
+}
+exports.USToCanadian = function(us) {
+return roundTwoDecimals(us / canadianDollar);
+}					
+
+---------------------------------
+var currency = require('./currency');
+console.log('50 Canadian dollars equals this amount of US dollars:');
+console.log(currency.canadianToUS(50));
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp>
+return class:
+Currency.prototype.canadianToUS = function(canadian) {
+return this.roundTwoDecimals(canadian * this.canadianDollar);
+}
+Currency.prototype.USToCanadian = function(us) {
+return this.roundTwoDecimals(us / this.canadianDollar);
+}
+exports = Currency;
+
+---------------------------------					
+var Currency = require('./currency')
+, canadianDollar = 0.91;
+currency = new Currency(canadianDollar);
+console.log(currency.canadianToUS(50));
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>asyncFunction</td>
+			<td>
+				<xmp>
+function asyncFunction(callback) {
+	setTimeout(function() {
+		callback()
+	}, 200);
+}
+var color = 'blue';
+(function(color) {
+	asyncFunction(function() {
+		console.log('The color is ' + color);
+	})
+})(color);
+color = 'green';					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>callback-mysql</td>
+			<td>
+				<xmp>
+var http = require('http'),
+	mysql = require('mysql');
+var client = mysql.createClient({
+	user: 'myuser',
+});
+client.useDatabase('blog');
+
+http.createServer(function(req, res) {
+	if (req.url == '/') {
+		client.query("SELECT * FROM posts ORDER BY timestamp DESC LIMIT 5",
+			function(err, results, fields) {
+				if (err) throw err;
+				var output = '<html><head></head><body>' +
+					'<h1>Latest Posts</h1>' +
+					'<ul>';
+				for (var index in results) {
+					output += '<li>' + results[index].title + '</li>';
+				}
+				output += '</ul></body></html>';
+				res.writeHead(200, {
+					'Content-Type': 'text/html'
+				});
+				res.end(output);
+			}
+		);
+	}
+}).listen(8000, "127.0.0.1");				
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>nesting functions</td>
+			<td>
+				<xmp>
+someAsyncFunction('data', function(text) {
+	anotherAsyncFunction(text, function(text) {
+		yetAnotherAsyncFunction(text, function(text) {
+			console.log(text);
+		});
+	});
+});
+
+traditional way of handling nesting logic:
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+function handleResult(text) {
+	console.log(text);
+}
+
+function innerLogic(text) {
+	yetAnotherAsyncFunction(text, handleResult);
+}
+
+function outerLogic(text) {
+	anotherAsyncFunction(text, innerLogic);
+}
+someAsyncFunction('data', outerLogic);					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Event listener</td>
+			<td>
+				<xmp>
+// events
+var events = require('events');
+var channel = new events.EventEmitter();
+channel.on('join', function() {
+	console.log("Welcome!");
+});
+
+channel.emit('join');	
+
+
+// remove listener
+channel.removeListener('broadcast', this.subscriptions[id]);
+channel.removeAllListeners('broadcast');
+
+
+// error
+var events = require('events');
+var myEmitter = new events.EventEmitter();
+myEmitter.on('error', function(err) {
+	console.log('ERROR: ' + err.message);
+});
+myEmitter.emit('error', new Error('Something is wrong.'));
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>listener</td>
+			<td>
+				<xmp>
+channel.on('join', function(id, client) {
+var welcome = "Welcome!\n" + 'Guests online: ' + this.listeners('broadcast').length;
+client.write(welcome + "\n");
+
+channel.setMaxListeners(50);					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>EXTENDING THE EVENT EMITTER</td>
+			<td>
+				<xmp>
+function Watcher(watchDir, processedDir) {
+	this.watchDir = watchDir;
+	this.processedDir = processedDir;
+}
+
+var events = require('events');
+Watcher.prototype = new events.EventEmitter();
+
+var fs = require('fs'),
+	watchDir = './watch',
+	processedDir = './done';
+Watcher.prototype.watch = function() {
+	var watcher = this;
+	fs.readdir(this.watchDir, function(err, files) {
+		if (err) throw err;
+		for (index in files) {
+			watcher.emit('process', files[index]);
+		}
+	})
+}
+Watcher.prototype.start = function() {
+	var watcher = this;
+	fs.watchFile(watchDir, function() {
+		watcher.watch();
+	});
+}
+
+var watcher = new Watcher(watchDir, processedDir);
+watcher.on('process', function process(file) {
+	var watchFile = this.watchDir + '/' + file;
+	var processedFile = this.processedDir + '/' + file.toLowerCase();
+	fs.rename(watchFile, processedFile, function(err) {
+		if (err) throw err;
+	});
+});
+
+watcher.start();
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>serial - parallel flow control</td>
+			<td>
+				<xmp>
+callback:
+	setTimeout(function() {
+		console.log('I execute first.');
+		setTimeout(function() {
+			console.log('I execute next.');
+			setTimeout(function() {
+				console.log('I execute last.');
+			}, 100);
+		}, 500);
+	}, 1000);
+
+serial_control_with_tool.js: serial control using a community - created add - on:
+	var flow = require('nimble');
+flow.series([
+	function(callback) {
+		setTimeout(function() {
+			console.log('I execute first.');
+			callback();
+		}, 1000);
+	},
+	function(callback) {
+		setTimeout(function() {
+			console.log('I execute next.');
+			callback();
+		}, 500);
+	},
+	function(callback) {
+		setTimeout(function() {
+			console.log('I execute last.');
+			callback();
+		}, 100);
+	}
+]);			
+
+parellel in nimble:
+var flow = require('nimble'),
+	exec = require('child_process').exec;
+
+function downloadNodeVersion(version, destination, callback) {
+	Download Node
+	var url = 'http://nodejs.org/dist/node-v' + version + '.tar.gz';
+	source code
+	for a
+	var filepath = destination + '/' + version + '.tgz';
+	exec('wget ' + url + ' -O ' + filepath, callback);
+}
+
+flow.series([
+	function(callback) {
+		tasks in sequence
+		flow.parallel([
+			Execute downloads
+
+			function(callback) { in parallel
+				console.log('Downloading Node v0.4.6...');
+				downloadNodeVersion('0.4.6', '/tmp', callback);
+			},
+			function(callback) {
+				console.log('Downloading Node v0.4.7...');
+				downloadNodeVersion('0.4.7', '/tmp', callback);
+			}
+		], callback);
+	},
+	function(callback) {
+		console.log('Creating archive of downloaded files...');
+		exec(
+			Create archive flile 'tar cvf node_distros.tar /tmp/0.4.6.tgz /tmp/0.4.7.tgz',
+			function(error, stdout, stderr) {
+				console.log('All done!');
+				callback();
+			}
+		);
+	}
+]);		
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>stream pipe</td>
+			<td>
+				<xmp>
+var server = http.createServer(function(req, res) {
+	var url = parse(req.url);
+	var path = join(root, url.pathname);
+	var stream = fs.createReadStream(path);
+	stream.pipe(res);
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>querystring</td>
+			<td>
+				<xmp>
+var qs = require('querystring');
+
+function add(req, res) {
+	var body = '';
+	req.setEncoding('utf8');
+	req.on('data', function(chunk) {
+		body += chunk
+	});
+	req.on('end', function() {
+		var obj = qs.parse(body);
+		items.push(obj.item);
+		show(res);
+	});
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>sqlite</td>
+			<td>
+				<xmp>
+npm install sqlite
+
+var sqlite = require('sqlite')
+, db = new sqlite.Database();
+
+db.open('timetrack.sqlite', function(err) {
+	if (err) throw err;
+	db.execute(
+		"CREATE TABLE IF NOT EXISTS work (" + "id INTEGER PRIMARY KEY, " + "hours REAL DEFAULT 0, " + "date TEXT, " + "archived INTEGER DEFAULT 0, " + "description TEXT)",
+		function(err) {
+			if (err) throw err;
+			console.log('Server started...');
+			server.listen(3000, '127.0.0.1');
+		}
+	);
+});
+
+db.execute(
+	"INSERT INTO work (hours, date, description) " +
+	" VALUES (?, ?, ?)", [work.hours, work.date, work.description],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+db.execute(
+	"DELETE FROM work WHERE id=?", [work.id],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+db.execute(
+	"UPDATE work SET archived=1 WHERE id=?", [work.id],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+var query = "SELECT * FROM work " +
+	"WHERE archived=? " +
+	"ORDER BY date DESC";
+var archiveValue = (showArchived) ? 1 : 0;
+db.execute(
+	query, [archiveValue],
+	function(err, rows) {
+		if (err) throw err;
+		html = (showArchived) ? '' : '<a href="/archived">Archived Work</a><br/>';
+		html += exports.workHitlistHtml(rows);
+		html += exports.workFormHtml();
+		exports.sendHtml(res, html);
+	}
+);
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>mysql</td>
+			<td>
+				<xmp>
+npm install mysql
+
+var http = require('http'),
+	work = require('./lib/timetrack'),
+	mysql = require('mysql');
+var db = mysql.createClient({
+	user: 'myuser',
+	password: 'mypassword',
+});
+db.useDatabase('timetrack');
+
+db.query(
+	"CREATE TABLE IF NOT EXISTS work (" + "id INT(10) NOT NULL AUTO_INCREMENT, " + "hours DECIMAL(5,2) DEFAULT 0, " + "date DATE, " + "archived INT(1) DEFAULT 0, " + "description LONGTEXT," + "PRIMARY KEY(id))",
+	function(err) {
+		if (err) throw err;
+		console.log('Server started...');
+		server.listen(300, '127.0.0.1');
+	}
+);
+
+db.query(
+	"INSERT INTO work (hours, date, description) " +
+	" VALUES (?, ?, ?)", [work.hours, work.date, work.description],
+	function(err) {
+		if (err) throw err;
+		exports.show(db, res);
+	}
+);
+
+db.query(
+	"INSERT INTO users " +
+	"(name, age) VALUES (?, ?)", ['Rico', 23],
+	function(err, result) {
+		if (err) throw err;
+		console.log('New row ID is ' + result.insertId + '.');
+	}
+);
+
+db.query(
+	"SELECT * FROM users",
+	function(err, results, fields) {
+		if (err) throw err;
+		for (var index in results) {
+			console.log(results[index].name);
+		}
+		client.end();
+	}
+);
+
+db.end();					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>PostgreSQL</td>
+			<td>
+				<xmp>
+npm install pg
+
+var pg = require('pg');
+var conString = "tcp://myuser:mypassword@localhost:5432/mydatabase";
+var client = new pg.Client(conString);
+client.connect();
+
+client.query(
+	'INSERT INTO users ' +
+	"(name) VALUES ('Mike')"
+);
+
+client.query(
+	"INSERT INTO users " +
+	"(name, age) VALUES ($1, $2)", ['Mike', 39]
+);
+
+var query = client.query(
+	"SELECT * FROM users WHERE age > $1", [40]
+);
+query.on('row', function(row) {
+	Handle
+	return of a
+	console.log(row.name)
+	row
+});
+query.on('end', function() {
+	Handle query
+	client.end();
+	completion
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>redis</td>
+			<td>
+				<xmp>
+npm install redis
+npm install hiredis
+npm rebuild hiredis
+
+var redis = require('redis'),
+	client = redis.createClient(6379, '127.0.0.1');
+client.on('error', function(err) {
+	console.log('Error ' + err);
+});
+
+client.set('color', 'red', redis.print);
+var keyValue = client.get('color', function(err, value) {
+	if (err) throw err;
+	console.log('Got: ' + value);
+});
+
+client.hset('camping', 'shelter', '2-person tent', redis.print);
+client.hset('camping', 'cooking', 'campstove', redis.print);
+client.hget('camping', 'cooking', function(err, value) {
+	console.log('Will be cooking with: ' + value);
+});
+client.hkeys('camping', function(err, keys) {
+	if (err) throw err;
+	keys.forEach(function(key, i) {
+		console.log(' ' + key);
+	});
+});
+
+client.lpush('tasks', 'Paint the bikeshed red.', redis.print);
+client.lpush('tasks', 'Paint the bikeshed green.', redis.print);
+client.lrange('tasks', 0, -1, function(err, items) {
+	if (err) throw err;
+	items.forEach(function(item, i) {
+		console.log(' ' + item);
+	});
+});
+
+client.sadd('ip_addresses', '204.10.37.96', redis.print);
+client.sadd('ip_addresses', '204.10.37.96', redis.print);
+client.sadd('ip_addresses', '72.32.231.8', redis.print);
+client.smembers('ip_addresses', function(err, members) {
+	if (err) throw err;
+	console.log(members);
+});
+
+var redis = require('redis'),
+	clientA = redis.createClient(),
+	clientB = redis.createClient();
+clientA.on('message', function(channel, message) {
+	console.log('Client A got message from channel %s: %s',
+		channel,
+		message
+	);
+});
+clientA.on('subscribe', function(channel, count) {
+	clientB.publish('main_chat_room', 'Hello world!');
+});
+clientA.subscribe('main_chat_room');					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>mongodb</td>
+			<td>
+				<xmp>
+npm install mongodb
+
+var mongodb = require('mongodb'),
+	server = new mongodb.Server('127.0.0.1', 27017, {});
+var client = new mongodb.Db('mtest', server);
+
+client.open(function(err) {
+	client.collection('test_insert', function(err, collection) {
+		if (err) throw err;
+		console.log('We are now able to perform queries.');
+
+		collection.insert({
+			a: 2
+		}, {
+			safe: true
+		}, function(err, documents) {
+			if (err) throw err;
+			console.log('Document ID is: ' + documents[0]._id);
+		});
+
+		var _id = new client.bson_serializer
+			.ObjectID('4e650d344ac74b5a01000001');
+		collection.update({
+				_id: _id
+			}, {
+				$set: {
+					a: 3
+				}
+			}, {
+				safe: true
+			},
+			function(err) {
+				if (err) throw err;
+			}
+		);
+
+		collection.find({
+			a: 2
+		}).toArray(function(err, results) {
+			if (err) throw err;
+			console.log(results);
+		});
+
+		var _id = new client
+			.bson_serializer
+			.ObjectID('4e6513f0730d319501000001');
+		collection.remove({
+			_id: _id
+		}, {
+			safe: true
+		}, function(err) {
+			if (err) throw err;
+		});
+	});
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Mongoose</td>
+			<td>
+				<xmp>
+npm install mongoose
+
+var mongoose = require('mongoose'),
+	db = mongoose.connect('mongodb://localhost/tasks');
+
+mongoose.disconnect();
+
+var Schema = mongoose.Schema;
+var Tasks = new Schema({
+	project: String,
+	description: String
+});
+mongoose.model('Task', Tasks);
+
+var Task = mongoose.model('Task');
+var task = new Task();
+task.project = 'Bikeshed';
+task.description = 'Paint the bikeshed red.';
+task.save(function(err) {
+	if (err) throw err;
+	console.log('Task saved.');
+});
+
+var Task = mongoose.model('Task');
+Task.find({
+	'project': 'Bikeshed'
+}).each(function(err, task) {
+	if (task != null) {
+		console.log('ID:' + task._id);
+		console.log(task.description);
+	}
+});
+
+var Task = mongoose.model('Task');
+Task.update({
+		_id: '4e65b793d0cf5ca508000001'
+	}, {
+		description: 'Paint the bikeshed green.'
+	}, {
+		multi: false
+	},
+	function(err, rows_updated) {
+		if (err) throw err;
+		console.log('Updated.');
+	}
+);
+
+var Task = mongoose.model('Task');
+Task.findById('4e65b3dce1592f7d08000001', function(err, task) {
+	task.remove();
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>assert</td>
+			<td>
+				<xmp>
+var assert = require('assert');
+
+assert.equal(
+	todos.length,
+	0,
+	'Failure: there should be no todos after deleting them'
+);
+
+assert.notEqual(
+	todos.length,
+	0,
+	'Failure: there should be one todo'
+);
+
+In addition to equal and notEqual functionality, the assert module offers strict versions of the above called: strictEqual and strictNotEqual.
+These use the strict equality operator("===") rather than the more permissive "==".
+
+For the comparison of objects, the assert module offers deepEqual and notDeepEqual.
+
+assert.ok(
+	unfinished,
+	'Failure: todos should be unfinished'
+);					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>Expresso</td>
+			<td>
+				npm install -g expresso
+			</td>
+		</tr>
+		<tr>
+			<td>nodeunit</td>
+			<td>
+				<xmp>
+git clone https://github.com/caolan/nodeunit.git
+	cd nodeunit
+make browser
+
+exports.testPony = function(test) {
+	test.expect(2);
+	if (false) {
+		test.ok(false, 'This should not have passed.');
+	}
+	test.ok(true, 'This should have passed.');
+	test.done();
+}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>connect</td>
+			<td>
+				<xmp>
+npm install connect		
+
+function logger(req, res, next) {
+	console.log('%s %s', req.method, req.url);
+	next();
+}
+
+function hello(req, res) {
+	res.setHeader('Content-Type', 'text/plain');
+	res.end('hello world');
+}
+
+var http = require('http');
+var connect = require('connect');
+var app = connect();
+app.use(logger).use(hello);
+
+var app = connect()
+	.use(logger)
+	.use('/admin', restrict)
+	.use('/admin', admin)
+	.use(hello);
+	
+http.createServer(app).listen(3000);			
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>file</td>
+			<td>
+				<xmp>
+Currently there are 3 ways to write a file:
+1. fs.write(fd, buffer, offset, length, position, [callback])
+You need to wait for the callback to ensure that the buffer is written to disk. It's not buffered.
+var path = 'public/uploads/file.txt',
+buffer = new Buffer("some content\n");
+fs.open(path, 'w', function(err, fd) {
+    if (err) {
+        throw 'error opening file: ' + err;
+    }
+
+    fs.write(fd, buffer, 0, buffer.length, null, function(err) {
+        if (err) throw 'error writing file: ' + err;
+        fs.close(fd, function() {
+            console.log('file written');
+        })
+    });
+});
+
+2. fs.writeFile(filename, data, [encoding], [callback])
+All data must be stored at the same time; you cannot perform sequential writes.
+var fs = require('fs');
+fs.writeFile("/tmp/test", "Hey there!", function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
+
+3. fs.createWriteStream(path, [options])
+Creates a WriteStream, which is convenient because you don't need to wait for a callback. But again, it's not buffered.
+var fs = require('fs');
+var stream = fs.createWriteStream("my_file.txt");
+stream.once('open', function(fd) {
+  stream.write("My first row\n");
+  stream.write("My second row\n");
+  stream.end();
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

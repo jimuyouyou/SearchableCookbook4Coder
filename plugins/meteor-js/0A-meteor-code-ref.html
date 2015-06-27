@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', 'template', 'helpers', 'events', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe']
+		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort', 'router', 'hook']
 	};
 	</script>
 </head>
@@ -341,6 +341,10 @@ Posts.update({
 }, {
   $set: {content: "Tomorrow will be a great day."}
 });					
+			
+PlayersList.update(selectedPlayer, {$inc: {score: 5} });
+
+PlayersList.update(selectedPlayer, {$set: {score: 5} });
 				</xmp>
 			</td>
 		</tr>
@@ -573,69 +577,230 @@ if (Meteor.isServer) {
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Sort</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+return PlayersList.find({}, {sort: {score: -1} })
+return PlayersList.find({}, {sort: {score: 1} })	
+return PlayersList.find({}, {sort: {score: -1, name: 1}})				
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>event</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<form action="">
+	<input type="text" name="playerName">
+	<input type="submit" value="Add Player">
+</form>
+
+'submit form': function(event){
+  		event.preventDefault();
+  		var playerNameVar = event.target.playerName.value;
+  		console.log("form submitted: " + playerNameVar);
+  	},						
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Meteor.methods call</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Client:
+Template.addPlayerForm.events({
+		'submit form': function(event) {
+			event.preventDefault();
+			var playerNameVar = event.target.playerName.value;
+
+			Meteor.call('insertPlayerData', playerNameVar);
+		},
+	});
+
+Server:
+Meteor.methods({
+		"sendLogMessage": function() {
+			console.log("loging in methods");
+		},
+		'insertPlayerData': function(playerNameVar) {
+			var currentUserId = Meteor.userId();
+			PlayersList.insert({
+				name: playerNameVar,
+				score: 0,
+				createdBy: currentUserId
+			});
+		},
+	});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>secure remove</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+if (Meteor.isServer) {
+	// console.log("hello server");
+	Meteor.publish("thePlayers", function() {
+		return PlayersList.find({
+			createdBy: this.userId
+		});
+	});
+
+	Meteor.methods({
+		"sendLogMessage": function() {
+			console.log("loging in methods");
+		},
+		'insertPlayerData': function(playerNameVar) {
+			var currentUserId = Meteor.userId();
+			PlayersList.insert({
+				name: playerNameVar,
+				score: 0,
+				createdBy: currentUserId
+			});
+		},
+		'removePlayerData': function(selectedPlayer) {
+			PlayersList.remove({
+				_id: selectedPlayer,
+				createdBy: Meteor.userId()
+			});
+		},
+	});
+}					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>router</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Router.configure({
+	layoutTemplate: 'layout'
+});
+
+Router.route('/', {
+	name: 'postsList'
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Tracker.autorun</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Tracker.autorun(function() {
+  alert(Session.get('message'));
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>observe</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Posts.find().observe({
+  added: function(post) {
+    // when 'added' callback fires, add HTML element
+    $('ul').append('<li id="' + post._id + '">' + post.title + '</li>');
+  },
+  changed: function(post) {
+    // when 'changed' callback fires, modify HTML element's text
+    $('ul li#' + post._id).text(post.title);
+  },
+  removed: function(post) {
+    // when 'removed' callback fires, remove HTML element
+    $('ul li#' + post._id).remove();
+  }
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Router.go e.target</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Template.postSubmit.events({
+  'submit form': function(e) {
+    e.preventDefault();
+
+    var post = {
+      url: $(e.target).find('[name=url]').val(),
+      title: $(e.target).find('[name=title]').val()
+    };
+
+    post._id = Posts.insert(post);
+    Router.go('postPage', post);
+  }
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>Router hook</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+var requireLogin = function() {
+	if (!Meteor.user()) {
+		this.render('accessDenied');
+	} else {
+		this.next();
+	}
+}
+
+Router.onBeforeAction('dataNotFound', {
+	only: 'postPage'
+});
+
+Router.onBeforeAction(requireLogin, {
+	only: 'postSubmit'
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>if currentUser</td>
 			<td>
-				<xmp></xmp>
+{{#if currentUser}}<li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>{{/if}}
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>JSON REST Asset File Router</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+meteor add peerlibrary:xml2js
+
+RestAPI = {
+	getXml2Json: function(fileName) {
+		var xml = Assets.getText(fileName);
+		var ps = Meteor.wrapAsync(xml2js.parseString);
+		var result = ps(xml, {explicitArray: false});
+		return result;
+	},
+};					
+	
+Router.route('/getXml2Json', function() {
+	var result = RestAPI.getXml2Json('compinfo.xml');
+	this.response.end(EJSON.stringify(result));
+}, {
+	where: 'server'
+});
+
+Template.hello.helpers({
+    counter: function() {
+      return Session.get('counter');
+    },
+    xml: function() {
+      $.get('/getXml2Json', {},
+        function(data, result) {
+          var xml = EJSON.parse(data);
+          var xt = new Xml2Table({
+            data: xml.root.hris.row
+          });
+          xt.horizontalDisplay();
+        }
+      );
+    },
+  });
+				</xmp>
 			</td>
 		</tr>
 		<tr>
