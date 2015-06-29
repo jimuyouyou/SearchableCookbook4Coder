@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>system-version.html</title>
+</head>
+<body>
+	<div>1、# uname －a&nbsp;&nbsp; （Linux查看版本当前操作系统内核信息）</div>
+<div>&nbsp;</div>
+<div>　　Linux localhost.localdomain 2.4.20-8 #1 Thu Mar 13 17:54:28 EST 2003 i686 athlon i386 GNU/Linux</div>
+<div>&nbsp;</div>
+<div>　　2、# cat /proc/version （Linux查看当前操作系统版本信息）</div>
+<div>&nbsp;</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Linux version 2.4.20-8 (bhcompile@porky.devel.redhat.com)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (gcc version 3.2.2 20030222 (Red Hat Linux 3.2.2-5)) #1 Thu Mar 13 17:54:28 EST 2003</div>
+<div>&nbsp;</div>
+<div>　　3、# cat /etc/issue&nbsp; 或cat /etc/redhat-release（Linux查看版本当前操作系统发行版信息）</div>
+<div>&nbsp;</div>
+<div>　　Red Hat Linux release 9 (Shrike)<br /><br /></div>
+<div>　　4、# cat /proc/cpuinfo （Linux查看cpu相关信息，包括型号、主频、内核信息等）</div>
+<div>&nbsp;</div>
+<div>　　processor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : 0<br />&nbsp;&nbsp;&nbsp;&nbsp; vendor_id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; : AuthenticAMD<br />　　cpu family&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; : 15<br />　　model&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; : 1<br />　　model name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : AMD A4-3300M APU with Radeon(tm) HD Graphics<br />　　stepping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : 0<br />　　cpu MHz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : 1896.236<br />　　cache size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 1024 KB<br />　　fdiv_bug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : no<br />　　hlt_bug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : no<br />　　f00f_bug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : no<br />　　coma_bug&nbsp; &nbsp; &nbsp; : no<br />　　fpu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; : yes<br />　　fpu_exception&nbsp;&nbsp; : yes<br />　　cpuid level&nbsp;&nbsp;&nbsp; &nbsp; : 6<br />　　wp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; : yes<br />　　flags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sse sse2 syscall mmxext lm 3dnowext 3dnow<br />　　bogomips&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 3774.87</div>
+<div>&nbsp;</div>
+<div>　　5、# getconf LONG_BIT&nbsp; （Linux查看版本说明当前CPU运行在32bit模式下， 但不代表CPU不支持64bit）</div>
+<div>&nbsp;</div>
+<div>　　32</div>
+<div>&nbsp;</div>
+<div>　　6、# lsb_release -a</div>
+</body>
+</html>
