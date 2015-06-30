@@ -10,7 +10,7 @@
 <body>
 	<table>
 		<tr>
-			<td>iptables</td>
+			<td>iptables - centos</td>
 			<td>
 <pre>
 /sbin/iptables -I INPUT -p tcp --dport 3010 -j ACCEPT
@@ -34,8 +34,13 @@
 			</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
+			<td>ubuntu</td>
+			<td>
+				<pre>
+sudo apt-get install authbind
+sudo touch /etc/authbind/byport/80					
+				</pre>
+			</td>
 		</tr>
 		<tr>
 			<td></td>

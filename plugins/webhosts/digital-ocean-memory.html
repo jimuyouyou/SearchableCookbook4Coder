@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>digital-ocean-memory.html</title>
+</head>
+<body>
+	url: http://stackoverflow.com/questions/25817347/meteor-is-crashing-on-the-smallest-digitalocean-droplet-out-of-memory-kill-pro
+	<p></p>
+	<div class="post-text">
+<p>The memory issue stems from using DigitalOcean's $5 Droplet. To solve the problem, I <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-12-04" rel="nofollow">added swap</a> to the server, as explained in detail below.</p>
+<p>Create and enable the swap file using the dd command :</p>
+<pre><code>sudo dd if=/dev/zero of=/swapfile bs=1024 count=256k
+</code></pre>
+<p>&ldquo;of=/swapfile&rdquo; designates the file&rsquo;s name. In this case the name is swapfile.</p>
+<p>Next prepare the swap file by creating a linux swap area:</p>
+<pre><code>sudo mkswap /swapfile
+</code></pre>
+<p>The results display:</p>
+<pre><code>Setting up swapspace version 1, size = 262140 KiB
+no label, UUID=103c4545-5fc5-47f3-a8b3-dfbdb64fd7eb
+</code></pre>
+<p>Finish up by activating the swap file:</p>
+<pre><code>sudo swapon /swapfile
+</code></pre>
+<p>You will then be able to see the new swap file when you view the swap summary.</p>
+<pre><code>swapon -s
+Filename                Type        Size    Used    Priority
+/swapfile                               file        262140  0   -1
+</code></pre>
+<p>This file will last on the virtual private server until the machine reboots. You can ensure that the swap is permanent by adding it to the fstab file.</p>
+<p>Open up the file:</p>
+<pre><code>sudo nano /etc/fstab
+</code></pre>
+<p>Paste in the following line:</p>
+<pre><code> /swapfile       none    swap    sw      0       0 
+</code></pre>
+<p>Swappiness in the file should be set to 10. Skipping this step may cause both poor performance, whereas setting it to 10 will cause swap to act as an emergency buffer, preventing out-of-memory crashes.</p>
+<p>You can do this with the following commands:</p>
+<pre><code>echo 10 | sudo tee /proc/sys/vm/swappiness
+echo vm.swappiness = 10 | sudo tee -a /etc/sysctl.conf
+To prevent the file from being world-readable, you should set up the correct permissions on the swap file:
+
+sudo chown root:root /swapfile 
+sudo chmod 0600 /swapfile
+</code></pre>
+</div>
+</body>
+</html>
