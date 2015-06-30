@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>digital-ocean.html</title>
+</head>
+<body>
+	url: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-host-name-with-digitalocean
+<p></p>
+	<h1 class="content-title">How To Set Up a Host Name with DigitalOcean</h1>
+<p><span class="meta-section tags"> <span class="meta-label">Tags: </span> <span class="meta-value"><a class="" href="https://www.digitalocean.com/community/tags/dns?type=tutorials">DNS</a>, <a class="" href="https://www.digitalocean.com/community/tags/digitalocean?type=tutorials">DigitalOcean</a></span> </span></p>
+<div class="tutorial-series-container collapsed">
+<div class="section-content">
+<h2 class="tutorial-series-heading">Tutorial Series</h2>
+<div class="tutorial-series-toggle">This tutorial is part 3 of 7 in the series: <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-host-name-with-digitalocean#tutorial_series_6" data-reveal="fast">An Introduction to Managing DNS</a></div>
+</div>
+</div>
+<div class="content-body tutorial-content">
+<p>DigitalOcean&rsquo;s DNS allows you to easily set up your hostname from the DigitalOcean control panel.</p>
+<div data-unique="setup">&nbsp;</div>
+<h2>Setup</h2>
+<p>Before you get started, you do need to have the following:</p>
+<ul>
+<li>A Droplet (virtual private server) from DigitalOcean. If you don&rsquo;t have one, you can <a href="https://www.digitalocean.com/registrations/new">register</a> and set one up in under a minute</li>
+<li>A Registered Domain Name. As of yet, you cannot register a domain through DigitalOcean.</li>
+</ul>
+<div data-unique="step-one&mdash;look-up-information-with-whois">&nbsp;</div>
+<h2 id="step-one">Step One&mdash;Look Up Information with WHOIS</h2>
+<p>The first thing you need to do to set up your host name is to change your domain name server to point to the DigitalOcean name servers. You can do this through your domain registrar&rsquo;s website. If you do not remember where you registered your name, you can look it up using &ldquo;WHOIS&rdquo;, a protocol that displays a site's identifying information, such as the IP address and registration details.</p>
+<p>Open up the command line and type:</p>
+<pre>whois <em>example.com</em></pre>
+<p>WHOIS will display all of the details associated with the site, includng the Technical Contact which includes your domain registrar.</p>
+<div data-unique="step-two&mdash;change-your-domain-server">&nbsp;</div>
+<h2 id="step-two">Step Two&mdash;Change Your Domain Server</h2>
+<p>Access the control panel of your domain registrar and find the fields called &ldquo;Domain Name Server.&rdquo; The forms for my domain registrar looked like <a href="https://assets.digitalocean.com/tutorial_images/GAyTV.png">this</a></p>
+<p>Point your name servers to DigitalOcean and fill in three Domain Name Server fields. Once done, save your changes and exit.</p>
+<p><strong>The DigitalOcean domain servers are</strong></p>
+<ul>
+<li><strong>ns1.digitalocean.com</strong></li>
+<li><strong>ns2.digitalocean.com</strong></li>
+<li><strong>ns3.digitalocean.com</strong></li>
+</ul>
+<p>You can verify that the new name servers are registered by running WHOIS again; the output should include the updated information:</p>
+<pre>Domain Name: EXAMPLE.COM
+   Registrar: ENOM, INC.
+   Whois Server: whois.enom.com
+   Referral URL: http://www.enom.com
+   Name Server: NS1.DIGITALOCEAN.COM
+   Name Server: NS2.DIGITALOCEAN.COM
+   Name Server: NS3.DIGITALOCEAN.COM
+   Status: ok</pre>
+<p>Although the name servers are visible through WHOIS, it may take an hour or two for the changes to be reflected on your site.</p>
+<div data-unique="step-three&mdash;configure-your-domain">&nbsp;</div>
+<h2 id="step-three">Step Three&mdash;Configure your Domain</h2>
+<p>Now we need move into the DigitalOcean control panel.</p>
+<p>Within the DNS section, click on Add Domain, and fill in the the domain name field and IP address of the server you want to connect it to on the subsequent page. Note: The domain name does not have a www at the beginning.</p>
+<img src="https://assets.digitalocean.com/tutorial_images/OhfgpYV.png?1" alt="add a domain" />
+<p>You will reach a page where you can enter all of your site details. To make a new hostname, you only need to fill in the A record. If you are using an IPv6 address, you should enter it into the AAAA record.</p>
+<p><strong id="a-records">A Records</strong>: Use this space to enter in the IP address of the droplet that you want to host your domain name on and the host name itself, a name prepended to your domain name. For example:</p>
+<pre>test.example.com</pre>
+<p>To accomplish this, create a new hostname with the word "test" in the hostname field. Your screen should look like this:</p>
+<img src="https://assets.digitalocean.com/tutorial_images/gm9S6AV.png?1" alt="domain name" />
+<p>Save by clicking "Add new A record"</p>
+<p>You can also connect your IP to a domain name with nothing before it (this should also occur by default when you add a domain):</p>
+<pre>http://example.com</pre>
+<p>To accomplish this, create a new hostname with the symbol "@' in the hostname field. Your screen should look like this:</p>
+<img src="https://assets.digitalocean.com/tutorial_images/Vs3IPGH.png?1" alt="domain name" />
+<p>You can save by pressing enter after making the required changes on the line.</p>
+<p><strong id="a-records">AAAA Records</strong>: Use this space to enter in the IPv6 address of the droplet that you want to host your domain name on and the host name itself, a name prepended to your domain name or you can also connect your IP to a domain name with nothing before it. To accomplish this, create a new hostname with the symbol "@' in the hostname field. Your screen should look like this:</p>
+For example:
+<p>&nbsp;</p>
+<img src="https://assets.digitalocean.com/articles/dns/AAAA_record.png" alt="domain name" />
+<p>Save by clicking "Create"</p>
+<p><a name="cname"></a><strong id="cname-records">CNAME Records</strong>: The CNAME record works as an alias of the A Record, pointing a subdomain to an A record&mdash; if an A Record&rsquo;s IP address changes, the CNAME will follow to the new address. To prepend www to your URL, click on &ldquo;Add a new CNAME record&rdquo; and fill out the 2 fields.</p>
+<p>Your screen should look like this:</p>
+<img src="https://assets.digitalocean.com/tutorial_images/QQKFU7X.png?1" alt=" CNAME records " />
+<p>You can also set up a catchall or wildcard CNAME record that will direct any subdomain to the designated A record (for example, if a visitor accidentally types in wwww instead of www). This can be accomplish with an asterisk in the CNAME name field.</p>
+<p>Your screen should look like this:</p>
+<img src="https://assets.digitalocean.com/tutorial_images/o9kjCEE.png?1" alt="catch all CNAME records " />
+<p>If you need to set up a mail server on your domain, you can do so in the MX Records.</p>
+<p><strong id="mx-records">MX Records</strong>: The MX Records fields should be filled in with the hostname and priority of your mail server, a value designating the order in which the mail servers should be attempted to be reached. Records always end with a <strong>"."</strong>A generic MX record looks something like this: mail1.example.com.</p>
+<p>Below is an example of MX records set up for a domain that uses google mail servers (note the period at the end of each record):</p>
+<img src="https://assets.digitalocean.com/tutorial_images/5rNNqUp.png?1" alt="Google MX records" />
+<div data-unique="finish-up">&nbsp;</div>
+<h2>Finish Up</h2>
+<p>Once you have filled in all of the required fields, your information will take a while to propagate, and the Name Server information will be automatically filled in. Your domain name name should be up and supported in a few hours.</p>
+<p>You can confirm, after some time has passed, that the new host name has been registered by pinging it:</p>
+<pre>ping test.example.com</pre>
+<p>You should see something like:</p>
+<pre># ping test.example.com
+PING test.example.com (12.34.56.789) 56(84) bytes of data.
+64 bytes from 12.34.56.789: icmp_req=1 ttl=63 time=1.47 ms
+64 bytes from 12.34.56.789: icmp_req=2 ttl=63 time=0.674 ms</pre>
+<p>You should also be able to access the site in the browser.</p>
+<div data-unique="see-more">&nbsp;</div>
+<h2>See More</h2>
+<p>If you have any issues or questions, feel free to reach to us on the <a href="https://www.digitalocean.com/community/questions">Forum</a> or by submitting a <a href="https://www.digitalocean.com/support"> Support Ticket</a>. Additionally, you can visit our <a href="https://www.digitalocean.com/community/articles/dns-tips-and-tricks">DNS Tips and Tricks</a> page for more information on the DNS capabilities.</p>
+</div>
+</body>
+</html>
