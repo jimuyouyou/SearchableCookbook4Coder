@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iron-router.html</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['create', '']
+	};
+	</script>
+</head>
+<body>
+	<p>https://github.com/eventedmind/iron-router/blob/master/examples</p>
+
+	<p>https://github.com/EventedMind/class-using-iron-router</p>
+
+
+	<table>
+		<tr>
+			<td>dynamic</td>
+			<td>
+				<xmp>
+{{> yield }}
+					
+Router.route('/', function(){
+	var isLoggedIn = Session.get('isLoggedIn');
+
+	if(isLoggedIn)
+		this.render('Home');
+	else 
+		this.render('Login');
+})					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>dynamic</td>
+			<td>
+				<xmp>
+<a href="/blog/1">1i</a>
+<a href="/blog/2?q1=h1&q2=h2">2i</a>
+<a href="/blog/3">3i</a>
+
+<template name="Article">todolist</template>
+
+Router.route('blog/:_id', function(){
+	console.dir(this.params._id);
+	console.log(this.params.query.q1);
+
+	this.layout('Layout');
+	this.render('Article');
+});					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td>links</td>
+			<td>
+				<xmp>
+{{#each articles}}
+	<a href="/blog/{{id}}">{{title}}</a>
+	
+	<a href="{{ pathFor 'article.show' query='q1=h1' hash='hashfrag'}}">{{title}}</a>
+	
+	<a href="{{ urlFor 'article.show' query='q1=h1' hash='hashfrag'}}">{{title}}</a>
+	
+	{{#linkTo route='article.show' query='q1=h1' hash='hashfrag'}}
+		<div>{{title}}</div>
+	{{/linkTo}}
+{{/each}}					
+				</xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<xmp></xmp>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
