@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', '']
+		labels: ['dynamic', 'link', 'render', 'yield']
 	};
 	</script>
 </head>
@@ -17,6 +17,8 @@
 	<p>https://github.com/eventedmind/iron-router/blob/master/examples</p>
 
 	<p>https://github.com/EventedMind/class-using-iron-router</p>
+
+<p>https://github.com/EventedMind/class-using-iron-router</p>
 
 
 	<table>
@@ -76,15 +78,143 @@ Router.route('blog/:_id', function(){
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>render data</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<template name="Article">
+{{#with }}
+	<h1>{{title}}</h1>
+{{/with}}
+</template>					
+
+this.layout('Layout', {data: function(){
+	return Articles.findOne({_id, this.params.id});
+	return {title: 'Sample', author: 'Author'};
+}});
+
+this.render('Article', {data: function(){
+	return Articles.findOne({_id, this.params.id});
+	return {title: 'Sample', author: 'Author'};
+}});
+
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>yield contentFor</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+<head>
+  <title>Routing App</title>
+</head>
+
+<body>
+</body>
+
+<template name="Layout">
+  <div class="login">
+    {{> loginButtons}}
+  </div>
+
+  <div class="container">
+    <div id="new-article">
+      {{#linkTo route="article.new"}}
+        New Article
+      {{/linkTo}}
+    </div>
+
+    <ul class="breadcrumb">
+      {{> yield "breadcrumbs"}}
+    </ul>
+
+    <div class="content">
+      {{> yield}}
+    </div>
+  </div>
+</template>
+
+<template name="Blog">
+  {{#contentFor "breadcrumbs"}}
+    <li>
+      {{#linkTo route="home"}}
+        Home
+      {{/linkTo}}
+    </li>
+  {{/contentFor}}
+
+  <h1>Blog</h1>
+
+  <ul>
+    {{#each articles}}
+      <li>
+        {{#linkTo route='article.show' query='q=search+string' hash='frashfrag'}}
+          <div>
+            {{title}}
+          </div>
+        {{/linkTo}}
+      </li>
+    {{/each}}
+  </ul>
+</template>
+
+<template name="Article">
+  {{#contentFor "breadcrumbs"}}
+    <li>
+      {{#linkTo route="home"}}
+        Home
+      {{/linkTo}}
+    </li>
+    <li>
+      <span class="divider">/</span>
+    </li>
+    <li>
+      {{title}}
+    </li>
+  {{/contentFor}}
+
+  <h1>
+    {{title}}
+  </h1>
+
+  <div>
+    {{author}}
+  </div>
+
+  <p>
+    {{body}}
+  </p>
+</template>
+
+<template name="ArticleNew">
+  {{#contentFor "breadcrumbs"}}
+    <li>
+      {{#linkTo route="home"}}
+        Home
+      {{/linkTo}}
+    </li>
+    <li><span class="divider">/</span></li>
+    <li>
+      New Article
+    </li>
+  {{/contentFor}}
+
+  <form id="new-article">
+    <div class="field">
+      <input type="text" name="title" placeholder="Title">
+    </div>
+    <div class="field">
+      <textarea name="body" placeholder="Body..."></textarea>
+    </div>
+    <div class="form-actions">
+      <input class="btn" type="submit" value="Save">
+    </div>
+  </form>
+</template>
+
+<template name="Loading">
+  Hang tight I'm loading...
+</template>					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
