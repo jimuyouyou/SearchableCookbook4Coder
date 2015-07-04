@@ -218,15 +218,35 @@ this.render('Article', {data: function(){
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>config layout</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Router.configure({
+	layoutTemplate: 'Layout'	
+});		
+
+Router.route('/', {
+	name: 'home',
+	template: 'Blog',
+	action: function(){
+		this.layout('Layout2');
+		this.render('Blog');
+	}
+});		
+				</xmp>
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>json</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Router.use(Router.bodyParser.json());
+
+Router.route('/webhooks/stripe', {name: 'webhooks.stripe', where: 'server'}).post(function(){
+	var json = this.request.body;
+	this.response.end("You posted" + JSON.stringify(json) + "\n");
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>
