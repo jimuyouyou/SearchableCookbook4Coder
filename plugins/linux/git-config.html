@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>git-config.html</title>
+</head>
+<body>
+	<p>url: http://alvinalexander.com/git/git-show-change-username-email-address</p>
+	
+	<h1 class="title">How to show or change your Git username or email address</h1>
+<div class="node node-blog node-odd ">
+<div class="dd-page">
+<div class="submitted">By Alvin Alexander. Last updated: Feb 21, 2013</div>
+<div class="content">
+<p>Git user FAQ: How do I show or change my Git username (or email address)?</p>
+<h2>How to show your Git username</h2>
+<p>There are several ways to show your Git username. One way is with the "git config" command, like this:</p>
+<pre>git config user.name
+</pre>
+<p>which in my case returns:</p>
+<pre>Alvin Alexander
+</pre>
+<p>Another way to show your Git username is with this git config command:</p>
+<pre>git config --list
+</pre>
+<p>which returns this output:</p>
+<pre>user.name=Alvin Alexander
+user.email=[omitted]
+merge.tool=vimdiff
+</pre>
+<p>Finally, you can also see your Git username in the Git configuration file in your HOME directory on Unix systems, i.e., this file:</p>
+<pre>~/.gitconfig
+</pre>
+<p>My file on this new test system looks like this:</p>
+<pre>[user]
+        name = Alvin J. Alexander
+        email = [omitted]
+[merge]
+        tool = vimdiff
+</pre>
+<p>It's important to note that this is your "global" Git username. You can also have a different username on a per-project basis, but I haven't done that yet.</p>
+<div class="btf-ad rtecenter"><ins id="aswift_1_expand" style="display: inline-table; border: none; height: 90px; margin: 0; padding: 0; position: relative; visibility: visible; width: 728px; background-color: transparent;"><ins id="aswift_1_anchor" style="display: block; border: none; height: 90px; margin: 0; padding: 0; position: relative; visibility: visible; width: 728px; background-color: transparent;"><iframe id="aswift_1" style="left: 0; position: absolute; top: 0;" name="aswift_1" width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen="allowfullscreen"></iframe></ins></ins></div>
+<h2>How to change your Git username</h2>
+<p>You can change your Git username like this:</p>
+<pre>git config --global user.name "Alvin J. Alexander"
+</pre>
+<p>You can probably also just edit the Git config file in your HOME directory and change it there:</p>
+<pre>vi ~/.gitconfig
+</pre>
+<p>I just did that on my test system, and it seems to work fine.</p>
+<p>It's important to note that this is your "global" username. You can also have a different username on a per-project basis, but I haven't had to do that yet. I just looked it up, and in theory you can change your Git username on a per-project basis like this, without the "--global" option:</p>
+<pre>git config user.name "Alvin J. Alexander"
+</pre>
+<h2>How to change your Git email address</h2>
+<p>While I'm in the Git username neighborhood, I'll also add that you can view your Git email address like this:</p>
+<pre>git config user.email
+</pre>
+<p>And you can change your Git email address like this:</p>
+<pre>git config --global user.email [your email address here]
+</pre>
+<p>Finally, you can also see your password by viewing the Git config file in your HOME directory:</p>
+<pre>more ~/.gitconfig
+</pre>
+</div>
+</div>
+</div>
+
+</body>
+</html>
