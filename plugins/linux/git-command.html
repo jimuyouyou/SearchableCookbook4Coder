@@ -85,8 +85,31 @@ git push -u origin master
 			</xmp></td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
+			<td>git clone</td>
+			<td><pre>
+git clone --depth=1 git@github.com:atom/atom.git 
+git fetch --unshallow
+			</pre></td>
+		</tr>
+		<tr>
+			<td>git tag</td>
+			<td>list all tags</td>
+		</tr>
+		<tr>
+			<td>git tag -l 'v1.8.5*'</td>
+			<td>list tags starts with v1.8.5</td>
+		</tr>
+		<tr>
+			<td>git tag -a v1.4 -m 'my version 1.4'</td>
+			<td>create tag</td>
+		</tr>
+		<tr>
+			<td>git tag v1.4-lw</td>
+			<td>light way of creating tag</td>
+		</tr>
+		<tr>
+			<td>git show v1.2</td>
+			<td>show tag information</td>
 		</tr>
 		<tr>
 			<td></td>

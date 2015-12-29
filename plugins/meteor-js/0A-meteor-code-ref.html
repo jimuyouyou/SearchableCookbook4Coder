@@ -9,7 +9,7 @@
 	<script src='../../lib/table_search.js'></script>
 	<script>
 	var cfg = {
-		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort', 'router', 'hook']
+		labels: ['create', 'template', 'helpers', 'event', 'each', 'session', 'Tracker', 'Collection', 'find', 'insert', 'update', 'remove', 'secure', 'allow', 'deny', 'account', 'publish', 'user', 'method', 'error', 'call', 'startup', 'subscribe', 'sort', 'router', 'hook', 'timeout']
 	};
 	</script>
 </head>
@@ -52,8 +52,13 @@
 		<tr>
 			<td>meteor run</td>
 			<td>
-				meteor run
+				meteor run <br>
+				sudo meteor --port 80
 			</td>
+		</tr>
+		<tr>
+			<td>run silently and permanently</td>
+			<td>nohup meteor &</td>
 		</tr>
 		<tr>
 			<td>template</td>
@@ -804,9 +809,16 @@ Template.hello.helpers({
 			</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td>timeout render</td>
 			<td>
-				<xmp></xmp>
+				<xmp>
+Template.error.onRendered(function() {
+	var error = this.data;
+	Meteor.setTimeout(function() {
+		Errors.remove(error._id);
+	}, 3000);
+});					
+				</xmp>
 			</td>
 		</tr>
 		<tr>

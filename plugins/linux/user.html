@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>user.html</title>
+</head>
+<body>
+	url: http://www.tecmint.com/add-users-in-linux/
+
+	<pre>
+		useradd -d /home/mqin mqin
+		passwd mqin
+		chown mqin /home/mqin
+		cat /etc/passwd | grep mqin
+
+		sudo usermod -a -G sudo mqin
+	</pre>
+</body>
+</html>

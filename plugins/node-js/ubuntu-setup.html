@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ubuntu-setup.html</title>
+</head>
+<body>
+	url: https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server
+	<p></p>
+
+	<h1 class="content-title">How To Install Node.js on an Ubuntu 14.04 server</h1>
+<p><span class="meta-section tags"> <span class="meta-label">Tags: </span> <span class="meta-value"><a class="" href="https://www.digitalocean.com/community/tags/node-js?type=tutorials">Node.js</a></span> </span> <span class="meta-section tags"> <span class="meta-label">Distribution: </span> <span class="meta-value"><a class="" href="https://www.digitalocean.com/community/tags/ubuntu?type=tutorials">Ubuntu</a></span> </span></p>
+<div class="content-body tutorial-content">
+<h3 id="introduction">Introduction</h3>
+<p>Node.js is a Javascript platform for server-side programming that allows users to build network applications quickly. By leveraging Javascript on both the front-end and the back-end, development can be more consistent and be designed within the same system.</p>
+<p>In this guide, we'll show you how to get started with Node.js on an Ubuntu 14.04 server.</p>
+<p>If you are looking to set up a production Node.js environment, check out this link: <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-14-04">How To Set Up a Node.js Application for Production</a>.</p>
+<div data-unique="how-to-install-the-distro-stable-version">&nbsp;</div>
+<h2 id="how-to-install-the-distro-stable-version">How To Install the Distro-Stable Version</h2>
+<p>Ubuntu 14.04 contains a version of Node.js in its default repositories that can be used to easily provide a consistent experience across multiple servers. The version in the repositories is 0.10.25. This will not be the latest version, but it should be quite stable.</p>
+<p>In order to get this version, we just have to use the <code>apt</code> package manager. We should refresh our local package index prior and then install from the repositories:</p>
+<pre class="code-pre "><code>sudo apt-get update
+sudo apt-get install nodejs
+</code></pre>
+<p>If the package in the repositories suits your needs, this is all that you need to do to get set up with Node.js. In most cases, you'll also want to also install <code>npm</code>, which is the Node.js package manager. You can do this by typing:</p>
+<pre class="code-pre "><code>sudo apt-get install npm
+</code></pre>
+<p>This will allow you to easily install modules and packages to use with Node.js.</p>
+<p>Because of a conflict with another package, the executable from the Ubuntu repositories is called <code>nodejs</code> instead of <code>node</code>. Keep this in mind as you are running software.</p>
+<p>Below, we'll discuss some more flexible methods of installation.</p>
+<div data-unique="how-to-install-using-a-ppa">&nbsp;</div>
+<h2 id="how-to-install-using-a-ppa">How To Install Using a PPA</h2>
+<p>An alternative that can get you a more recent version of Node.js is to add a PPA (personal package archive) maintained by NodeSource. This will probably have more up-to-date versions of Node.js than the official Ubuntu repositories.</p>
+<p>First, you need to install the PPA in order to get access to its contents:</p>
+<pre class="code-pre "><code>curl -sL https://deb.nodesource.com/setup | sudo bash -
+</code></pre>
+<p>The PPA will be added to your configuration and your local package cache will be updated automatically. After running the setup script from nodesource, you can install the Node.js package in the same way that you did above:</p>
+<pre class="code-pre "><code>sudo apt-get install nodejs
+</code></pre>
+<p>The <code>nodejs</code> package contains the <code>nodejs</code> binary as well as <code>npm</code>, so you don't need to install <code>npm</code> separately. However, in order for some <code>npm</code> packages to work (such as those that require building from source), you will need to install the <code>build-essentials</code> package:</p>
+<pre class="code-pre "><code>sudo apt-get install build-essential
+</code></pre>
+<div data-unique="how-to-install-using-nvm">&nbsp;</div>
+<h2 id="how-to-install-using-nvm">How To Install Using NVM</h2>
+<p>An alternative to installing Node.js through <code>apt</code> is to use a specially designed tool called <code>nvm</code>, which stands for "Node.js version manager".</p>
+<p>Using nvm, you can install multiple, self-contained versions of Node.js which will allow you to control your environment easier. It will give you on-demand access to the newest versions of Node.js, but will also allow you to target previous releases that your app may depend on.</p>
+<p>To start off, we'll need to get the software packages from our Ubuntu repositories that will allow us to build source packages. The nvm script will leverage these tools to build the necessary components:</p>
+<pre class="code-pre "><code>sudo apt-get update
+sudo apt-get install build-essential libssl-dev
+</code></pre>
+<p>Once the prerequisite packages are installed, you can pull down the nvm installation script from the <a href="https://github.com/creationix/nvm">project's GitHub page</a>. The version number may be different, but in general, you can download and install it with the following syntax:</p>
+<pre>curl https://raw.githubusercontent.com/creationix/nvm/<span class="highlight">v0.16.1</span>/install.sh | sh
+</pre>
+<p>This will download the script and run it. It will install the software into a subdirectory of your home directory at <code>~/.nvm</code>. It will also add the necessary lines to your <code>~/.profile</code> file to use the file.</p>
+<p>To gain access to the nvm functionality, you'll need to log out and log back in again, or you can source the <code>~/.profile</code> file so that your current session knows about the changes:</p>
+<pre class="code-pre "><code>source ~/.profile
+</code></pre>
+<p>Now that you have nvm installed, you can install isolated Node.js versions.</p>
+<p>To find out the versions of Node.js that are available for installation, you can type:</p>
+<pre class="code-pre "><code>nvm ls-remote
+</code></pre>
+<pre class="code-pre "><code>. . .
+ v0.11.6
+ v0.11.7
+ v0.11.8
+ v0.11.9
+v0.11.10
+v0.11.11
+v0.11.12
+v0.11.13
+</code></pre>
+<p>As you can see, the newest version at the time of this writing is v0.11.13. You can install that by typing:</p>
+<pre class="code-pre "><code>nvm install 0.11.13
+</code></pre>
+<p>Usually, nvm will switch to use the most recently installed version. You can explicitly tell nvm to use the version we just downloaded by typing:</p>
+<pre class="code-pre "><code>nvm use 0.11.13
+</code></pre>
+<p>When you install Node.js using nvm, the executable is called <code>node</code>. You can see the version currently being used by the shell by typing:</p>
+<pre class="code-pre "><code>node -v
+</code></pre>
+<pre class="code-pre "><code>v.0.11.13
+</code></pre>
+<p>If you have multiple Node.js versions, you can see what is installed by typing:</p>
+<pre class="code-pre "><code>nvm ls
+</code></pre>
+<p>If you wish to default one of the versions, you can type:</p>
+<pre class="code-pre "><code>nvm alias default 0.11.13
+</code></pre>
+<p>This version will be automatically selected when a new session spawns. You can also reference it by the alias like this:</p>
+<pre class="code-pre "><code>nvm use default
+</code></pre>
+<p>Each version of Node.js will keep track of its own packages and has <code>npm</code> available to manage these.</p>
+<p>You can have <code>npm</code> install packages to the Node.js project's <code>./node_modules</code> directory by using the normal format:</p>
+<pre>npm install <span class="highlight">express</span>
+</pre>
+<p>If you'd like to install it globally (available to the other projects using the same Node.js version), you can add the <code>-g</code> flag:</p>
+<pre>npm install -g <span class="highlight">express</span>
+</pre>
+<p>This will install the package in:</p>
+<pre>~/.nvm/<span class="highlight">node_version</span>/lib/node_modules/<span class="highlight">package_name</span>
+</pre>
+<p>Installing globally will let you run the commands from the command line, but you'll have to use link the package into your local sphere to require it from within a program:</p>
+<pre>npm link <span class="highlight">express</span>
+</pre>
+<p>You can learn more about the options available to you with nvm by typing:</p>
+<pre class="code-pre "><code>nvm help
+</code></pre>
+<div data-unique="conclusion">&nbsp;</div>
+<h2 id="conclusion">Conclusion</h2>
+<p>As you can see, there are a quite a few ways to get up and running with Node.js on your Ubuntu 14.04 server. Your circumstances will dictate which of the above methods is the best idea for your circumstance. While the packaged version in Ubuntu's repository is the easiest, the <code>nvm</code> method is definitely much more flexible.</p>
+</div>
+</body>
+</html>

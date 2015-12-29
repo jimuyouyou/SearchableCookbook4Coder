@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vim commands</title>
+	<link rel="stylesheet" href="../../css/main.css"> 
+	<script src='../../lib/jquery-1.8.0.min.js'></script>
+	<script src='../../lib/pCfg.js'></script>
+	<script src='../../lib/table_search.js'></script>
+	<script>
+	var cfg = {
+		labels: ['move', 'copy', 'cut', 'paste', 'visual' ]
+	};
+	</script>
+</head>
+<body>
+	<h2>Common command for vim/vi</h2>
+url: http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
+ http://blog.csdn.net/arganzheng/article/details/6260690
+	<table>
+		<tr>
+			<td>move</td>
+            <td>hjkl h-left, j-down, k-up, l-right</td>
+			<td></td>
+		</tr>
+        <tr>
+            <td>move to document, line, word positions</td>
+            <td><pre>
+ctrl + f: page down
+ctrl + b: page up
+
+gg: move to home of file
+G: move to end of file
+19G: move to the 19th lines of file
+
+0: move to home of line
+$: move to end of line
+
+^: move to first character of line
+g_: move to last character of line
+
+t.: move to .            
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>copy, cut and paste</td>
+            <td><pre>
+y: copy
+d: cut or delete
+p: paste
+P: paste before this line
+
+yy: copy current line
+dd: cut or delete current line
+3yy: copy 3 lines
+7dd: cut or delete 7 lines
+
+x: delete current character
+dw: delete current word
+cw: delete current word and go to insert mode
+
+d0: delete to start of line
+d$: delete to end of line
+y0: copy to start of line
+y$: copy to end of line
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>visual commands</td>
+            <td><pre>
+>: tab to left
+<: tab to right
+y: copy marked text
+d: delete marked text
+~: switch case
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>visual block mode</td>
+                <td><pre>
+0 + (ctrl+v) + (ctrl+d) + I//[ESC]: insert // for selected lines             
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>editing insert</td>
+            <td><pre>
+u: undo
+.: repeat last command
+
+i: insert before
+I: insert before home of current line
+a: insert after
+A: insert after end of current line
+
+100ihelloworld: insert 100 helloworld
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>search replace</td>
+            <td><pre>
+/: search - n for next, N for previous
+s/old/new/g: replace all old with new in current line
+g/old/new/: replace all old with new in file
+            </pre></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>others</td>
+            <td><pre>
+ctrl + p: code completion
+v: enter visual mode for selection 
+
+ddp: move current line content to next line
+ddkP: move current line content to before previous line
+<pre></td>
+            <td></td>
+        </tr>
+	</table>
+
+</body>
+</html>
