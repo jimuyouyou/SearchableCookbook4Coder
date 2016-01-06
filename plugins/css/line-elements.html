@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>line-elements</title>
+	<style>
+dl {margin: 10px auto; width: 90%; background-color: silver;}
+dd {color: blue;}
+
+.center {margin: 10px auto; width: 90%; background-color: silver;}
+.left, .middle, .right {border-right: 1px solid green;}
+label {color: green; display: inline-block;}
+
+/*line1*/
+#line1 {position: relative;}
+#line1 .left {position: absolute; width: 210px;}
+#line1 .middle {position: absolute; top: 0; left: 220px; width: 315px;}
+#line1 .right {margin-left: 550px; padding-top: 1px;}
+
+/*line2*/
+#line2 .left, #line2 .middle, #line2 .right {display: inline-block; vertical-align: top;}
+#line2 .left {width: 210px;}
+#line2 .middle {width: 315px;}
+#line2 .right {width: calc(100% - 540px)}
+
+/*line3*/
+#line3 {overflow: hidden;}
+#line3 .left, #line3 .middle, #line3 .right {float: left;}
+#line3 .left {width: 210px;}
+#line3 .middle {width: 315px;}
+#line3 .right {width: calc(100% - 540px)}
+
+/*line4*/
+#line4 {display: table;}
+#line4 .left, #line4 .middle, #line4 .right {display: table-cell;}
+#line4 .left {width: 210px;}
+#line4 .middle {width: 315px;}
+#line4 .right {}
+
+/*line5*/
+#line5 {display: table; border-collapse: collapse;}
+#line5 .row {display: table-row;}
+#line5 .cell {display: table-cell; border: 1px solid green;}
+#line5 div.cell:nth-child(3n+1):hover {color: red;}
+#line5 div.cell:nth-child(3n+2):hover {color: purple;}
+#line5 div.cell:nth-child(3n+3):hover {color: blue;}
+
+	</style>
+</head>
+<body>
+	<dl>
+		<dd>1***. position absolute does not need to specify width for last block</dd>
+		<dd>2***. inline-block needs width for all blocks</dd>
+		<dd>3***. float:left needs width for all blocks</dd>
+		<dd>4*****. display:table table-cell does not need to specify width for last block</dd>
+		<dd>5. table-div layout with column group hover effect</dd>
+	</dl>
+
+	<div id="line1" class="center">
+		<div class="left"><h3>1. left div</h3> <label>position absolute with margin-left</label></div>
+		<div class="middle">
+			<h3>middle div</h3>
+			<button>left: position absolute</button>
+			<button>middle: position absolute</button>
+			<input type="text" value="right: margin-left"/>
+		</div>
+		<div class="right">
+			<h3>right div</h3>
+			<label>padding-top: 1px;</label>
+			<button>right conent is fluid1</button>
+			<button>right conent is fluid2</button>
+			<button>right conent is fluid3</button>
+			<button>right conent is fluid4</button>
+			<button>right conent is fluid5</button>
+			<input type="text" value="f text 1"/>
+			<input type="text" value="fluid text 2"/>
+			<input type="text" value="fluid text 3"/>
+			<input type="text" value="fluid text 4"/>
+			<input type="text" value="fluid text 5"/>
+		</div>
+	</div>
+
+	<div id="line2" class="center">
+		<div class="left"><h3>2. left div</h3> <label>inline block for all(left-middle-right)  <br/>vertical-align: top; </label></div>
+		<div class="middle">
+			<h3>middle div</h3>
+			<button>left: inline-block</button>
+			<button>middle: inline-block</button>
+			<input type="text" value="right: inline-block"/>
+		</div>
+		<div class="right">
+			<h3>right div</h3>
+			<label>#line2 .right {width: calc(100% - 540px)}</label>
+			<button>right conent is fluid1</button>
+			<button>right conent is fluid2</button>
+			<button>right conent is fluid3</button>
+			<button>right conent is fluid4</button>
+			<button>right conent is fluid5</button>
+			<input type="text" value="f text 1"/>
+			<input type="text" value="fluid text 2"/>
+			<input type="text" value="fluid text 3"/>
+			<input type="text" value="fluid text 4"/>
+			<input type="text" value="fluid text 5"/>
+		</div>
+	</div>
+	
+	<div id="line3" class="center">
+		<div class="left"><h3>3. left div</h3> <label>float for all(left-middle-right) <br/>overflow:hidden in parent/clear:both as a new child to synchronize the height</label></div>
+		<div class="middle">
+			<h3>middle div</h3>
+			<button>left: float:left</button>
+			<button>middle: float:left</button>
+			<input type="text" value="right: float:left"/>
+		</div>
+		<div class="right">
+			<h3>right div</h3>
+			<label>#line3 .right {width: calc(100% - 540px)}</label>
+			<button>right conent is fluid1</button>
+			<button>right conent is fluid2</button>
+			<button>right conent is fluid3</button>
+			<button>right conent is fluid4</button>
+			<button>right conent is fluid5</button>
+			<input type="text" value="f text 1"/>
+			<input type="text" value="fluid text 2"/>
+			<input type="text" value="fluid text 3"/>
+			<input type="text" value="fluid text 4"/>
+			<input type="text" value="fluid text 5"/>
+		</div>
+	</div>
+	
+	<div id="line4" class="center">
+		<div class="left"><h3>4. left div</h3> <label>parent: display:table, child: display:table-cell</label></div>
+		<div class="middle">
+			<h3>middle div</h3>
+			<button>left: display: table-cell;</button>
+			<button>middle: display: table-cell;</button>
+			<input type="text" value="right: display: table-cell;"/>
+		</div>
+		<div class="right">
+			<h3>right div</h3>
+			<label>no need to specify width for last block</label>
+			<button>right conent is fluid1</button>
+			<button>right conent is fluid2</button>
+			<button>right conent is fluid3</button>
+			<button>right conent is fluid4</button>
+			<button>right conent is fluid5</button>
+			<input type="text" value="f text 1"/>
+			<input type="text" value="fluid text 2"/>
+			<input type="text" value="fluid text 3"/>
+			<input type="text" value="fluid text 4"/>
+			<input type="text" value="fluid text 5"/>
+		</div>
+	</div>
+	
+	<div id="line5" class="center">
+		<div class="row">
+			<div class="cell">name</div>
+			<div class="cell">age</div>
+			<div class="cell">sex</div>
+		</div>
+		<div class="row">
+			<div class="cell">zhangsan</div>
+			<div class="cell">15</div>
+			<div class="cell">male</div>
+		</div>
+		<div class="row">
+			<div class="cell">lina</div>
+			<div class="cell">20</div>
+			<div class="cell">female</div>
+		</div>
+		<div class="row">
+			<div class="cell">david</div>
+			<div class="cell">28</div>
+			<div class="cell">female</div>
+		</div>
+	</div>
+</body>
+</html>
